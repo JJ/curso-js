@@ -11,7 +11,7 @@ var options = {
 };
 
 
-var req = https.request(options, function(res) {
+var req = https.get('https://api.github.com/users/'+user, function(res) {
 			   res.setEncoding('utf8');
 			   res.on('data', function (datos_JSON) {
 				      var datos=JSON.parse(datos_JSON);
