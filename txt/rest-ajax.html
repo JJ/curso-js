@@ -221,8 +221,8 @@ Vary: Accept-Encoding
 <p> Y lo
       único que hacemos con la respuesta es imprimirla, tal cual, pero
       lo mejor sería extraer información útil de la misma, como ocurre
-      en <a href="http://geneura.ugr.es/%7Ejmerelo/asignaturas/AAP/code/perl/t3-twitter-v2.pl">la siguiente versión del
-	programa</a>:</p>
+      en <a href="https://github.com/JJ/curso-js/blob/13e25e97315e58a84f268349ba61b650e7a097e3/code/github-get.js">este
+      programa en node.js</a>:</p>
 <code class="ejemplo">#<span class="hl opt">!/</span>usr<span class="hl opt">/</span>bin<span class="hl opt">/</span>node
 
 <span class="hl kwa">var</span> https <span class="hl opt">=</span> <span class="hl kwd">require</span><span class="hl opt">(</span><span class="hl str">'https'</span><span class="hl opt">);</span>
@@ -244,21 +244,24 @@ Vary: Accept-Encoding
 				  <span class="hl opt">});</span>
 		       <span class="hl opt">});</span>
 req<span class="hl opt">.</span><span class="hl kwd">end</span><span class="hl opt">();</span></code>
-<p>muy similar al anterior, salvo que usamos un módulo conocido de XML
-      para extraer dos pedazos de información: el mensaje que
-      efectivamente se postea, y el ID que ha recibido. Por cierto,
-      que si se incluyen letras con acentos y ñ y cosas así en el
-      mensaje, se cortará justamente por ese carácter por alguna razón
-      ignota. Otro cambio es que no ignoramos la respuesta, sino que
-      tenemos en cuenta si se ha podido hacer correctamente
-      (<code>is_success</code>) y, solo en ese caso procesamos el
-      contenido en XML de la respuesta y lo imprimimos. El resultado
-      podría ser algo así:</p>
-<code class="ejemplo">mellizo:~/txt/docencia/AAP/Temario/code/perl$
-      <span class="user">./t3-twitter-v2.pl "Llegamos al final del apartado 3.2"</span>
-El mensaje Llegamos al final del apartado 3.2 ha recibido el ID 63492392
-mellizo:~/txt/docencia/AAP/Temario/code/perl$ <span class="user">./t3-twitter-v2.pl "Llegamos al final del apartado 3.2"</span>
-401 Unauthorized at ./t3-twitter-v2.pl line 16.</code>
+<p>Este programa descarga información de un usuario en JSON y la
+  procesa. Toma el usuario que se pase por la línea de órdenes, o bien
+  usa <code>JJ</code> por defecto, dando un resultado así</p>
+<code class='ejemplo'>jmerelo@penny:~/txt/docencia/cursos/JavaScript$  <span class='user'>node code/github-get.js</span> 
+Login: JJ
+Nombre: Juan Julián Merelo Guervós</code>
+
+<p>El programa hace una petición GET al API de GitHub y del objeto en
+  JSON devuelto extrae (tras su conversión en un objeto JS
+  con <code>JSON.parse</code> un par de variables del mismo y las
+  imprime. El objeto contiene muchas más cosas que no nos
+  interesan. El <a href='http://nodejs.org/api/https.html#https_https_request_options_callback'>módulo <code>https</code> </a>
+  usado es muy similar al <code>http</code>, salvo por el protocolo
+  usado. La petición que se está usando es la forma más general, pero
+  se puede usar directamente <code>get</code> <a href='https://github.com/JJ/curso-js/blob/master/code/github-get.js'>de esta forma</a>: <code>var
+  req = https.get('https://api.github.com/users/'+user,
+  function(res) </code> con exactamente el mismo resultado.
+
 
 <p>La idea de REST desde el punto de vista del servidor es usar el URL
       para representar recursos, y las propias órdenes de HTTP para
