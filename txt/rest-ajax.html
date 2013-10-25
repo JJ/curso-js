@@ -3,9 +3,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
     <meta http-equiv="Content-Language" content="es">
     <meta name="generator" content="XEmacs + HTML::Mason + mod_perl">
-    <title>Arquitecturas de Altas Prestaciones:Taller 2. Trabajando con REST</title>
+    <title> Trabajando con REST</title>
     <meta name="AUTHOR" content="Juan Julián Merelo Guervós">
-    <meta name="keywords" content="XML, XSLT, SOAP, XML-RPC, SOA, REST">
+    <meta name="keywords" content="XML, XSLT, SOAP, XML-RPC, SOA,
+				   REST, node.js">
     <meta name="description" content="REST y ejemplos">
     <link href='http://fonts.googleapis.com/css?family=Arvo|Source+Code+Pro' rel='stylesheet' type='text/css'>
   </head>
@@ -159,7 +160,7 @@ una llamada a otro procedimiento.</p>
       usaremos <a href='http://developer.github.com/v3/'>otro
       interfaz, el de GitHub</a>, para hacer pruebas. Por ejemplo,
       esta petición te dará todas las <em>organizaciones</em> a las que
-      pertenece el usuario <a href='http://github.com/JJ'>JJ</a:></p>
+      pertenece el usuario <a href='http://github.com/JJ'>JJ</a>:</p>
 <code class="ejemplo">bash$ <span class="user">curl -i https://api.github.com/users/JJ/orgs</span>
 </code>
 
@@ -260,7 +261,7 @@ Nombre: Juan Julián Merelo Guervós</code>
   usado. La petición que se está usando es la forma más general, pero
   se puede usar directamente <code>get</code> <a href='https://github.com/JJ/curso-js/blob/master/code/github-get.js'>de esta forma</a>: <code>var
   req = https.get('https://api.github.com/users/'+user,
-  function(res) </code> con exactamente el mismo resultado.
+    function(res) </code> con exactamente el mismo resultado.</p>
 
 
 <p>La idea de REST desde el punto de vista del servidor es usar el URL
@@ -333,6 +334,8 @@ del servidor; por ejemplo, en Apache podríamos usar la siguiente
       la izquierda incluye palabras (\w+) y números (\d+), y en la
       expresión de la derecha aparecen, por orden, representados por
       <code>$n</code>.</p>
+
+<p>El hecho de que sea tan complicado diseñar interfaces REST con recursos, como los CGIs, que no están preparados para ello hace que existan marcos de aplicaciones, como los que veremos a continuación, en los que todo esto se hace de una forma mucho más simple, trabajando directamente con las rutas REST</p>
 
 <h2>Interfaces REST simples con express</h2>
 
