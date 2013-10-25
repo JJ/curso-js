@@ -154,40 +154,96 @@ una llamada a otro procedimiento.</p>
       transmite a todo el que quiera escucharlo las líneas de estado
       (mensajes de menos de 200 caracteres). El <a href="https://dev.twitter.com/docs">API de Twitter</a> es
       RESTful, y está bastante bien diseñada. Para usarla es necesario
-      darse de alta, claro, aunque hay peticiones que no necesitan
-      autenticación, como esta:</p>
-<code class="ejemplo">jmerelo@amy:~/txt/docencia/AAP/Temario$ <span class="user">curl http://search.twitter.com/search.json?q=aapugr</span>
+      darse de alta; desde la versión 1.1 del interfaz todas las
+      peticiones necesitan autenticación. Así que
+      usaremos <a href='http://developer.github.com/v3/'>otro
+      interfaz, el de GitHub</a>, para hacer pruebas. Por ejemplo,
+      esta petición te dará todas las <em>organizaciones</em> a las que
+      pertenece el usuario <a href='http://github.com/JJ'>JJ</a:></p>
+<code class="ejemplo">bash$ <span class="user">curl -i https://api.github.com/users/JJ/orgs</span>
 </code>
 
 <p>Para llevar a cabo este ejemplo hay que instalar <code>curl</code>, un
   programa que en una primera aproximación es simplemente un
-  descargador de web pero que en segunda se puede usar como un
-  completo cliente REST. 
-    </p>
+  descargador de páginas web pero que en segunda se puede usar como un
+  completo cliente REST; en este caso <code>-i</code> te incluye las
+  cabeceras en la salida, con lo que producirá algo de este
+  estilo </p>
+<code class='ejemplo'>HTTP/1.1 200 OK
+Server: GitHub.com
+Date: Fri, 25 Oct 2013 16:58:26 GMT
+Content-Type: application/json; charset=utf-8
+Status: 200 OK
+X-RateLimit-Limit: 60
+X-RateLimit-Remaining: 57
+X-RateLimit-Reset: 1382723596
+Cache-Control: public, max-age=60, s-maxage=60
+ETag: "86e56765000470d5120c565f2d669ec5"
+Vary: Accept
+X-GitHub-Media-Type: github.beta
+X-Content-Type-Options: nosniff
+Content-Length: 1050
+Access-Control-Allow-Credentials: true
+Access-Control-Expose-Headers: ETag, Link, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes
+Access-Control-Allow-Origin: *
+X-GitHub-Request-Id: 533BCE5D:1FA3:25A831A1:526AA332
+Vary: Accept-Encoding
+
+[
+  {
+    "login": "openkratio",
+    "id": 2310256,
+    "url": "https://api.github.com/orgs/openkratio",
+    "repos_url": "https://api.github.com/orgs/openkratio/repos",
+    "events_url": "https://api.github.com/orgs/openkratio/events",
+    "members_url": "https://api.github.com/orgs/openkratio/members{/member}",
+    "public_members_url": "https://api.github.com/orgs/openkratio/public_members{/member}",
+    "avatar_url": "https://1.gravatar.com/avatar/da65290f54a587ec04cd35bb85d072ad?d=https%3A%2F%2Fidenticons.github.com%2F95a0686b2cd65a0d12a9cdf6ee9001ca.png&r=x"
+  },
+  {
+    "login": "CANUBE",
+    "id": 3839808,
+    "url": "https://api.github.com/orgs/CANUBE",
+    "repos_url": "https://api.github.com/orgs/CANUBE/repos",
+    "events_url": "https://api.github.com/orgs/CANUBE/events",
+    "members_url": "https://api.github.com/orgs/CANUBE/members{/member}",
+    "public_members_url": "https://api.github.com/orgs/CANUBE/public_members{/member}",
+    "avatar_url": "https://identicons.github.com/6fb6b5f6fdd67839b9ff438ffa975d08.png"
+  }
+  ]</code>
 
 <p>Casi todos los servicios web incluyen alguna forma de
-      autentificación, y en este caso, tratándose de un servicio
-      RESTful, una de las formas de hacerlo es incluirlo en el propio
-      URL, en la forma habitual: <code>usuario:clave@host</code>. Y lo
+      autentificación; una de las formas de hacerlo es incluirlo en el propio
+      URL, en la forma habitual: <code>usuario:clave@host</code>; en
+      este caso no es necesario y en la mayoría de los API REST se usa
+      ya autentificación OAuth en alguna de sus formas.</p>
+
+<p> Y lo
       único que hacemos con la respuesta es imprimirla, tal cual, pero
       lo mejor sería extraer información útil de la misma, como ocurre
       en <a href="http://geneura.ugr.es/%7Ejmerelo/asignaturas/AAP/code/perl/t3-twitter-v2.pl">la siguiente versión del
 	programa</a>:</p>
-<code class="ejemplo">use LWP::UserAgent;
-use HTTP::Request::Common qw(POST GET);
-use XML::Simple;
+<code class="ejemplo">#<span class="hl opt">!/</span>usr<span class="hl opt">/</span>bin<span class="hl opt">/</span>node
 
-my $status = shift;
-my $ua = LWP::UserAgent-&gt;new();
-my $req = POST 'http://aap_ugr:aeiou@twitter.com/statuses/update.xml', 
-  [ status =&gt; $status ];
-my $res = $ua-&gt;request($req);
-if ($res-&gt;is_success) {
-  my $respuesta=XMLin($res-&gt;content);
-  print "El mensaje ", $respuesta-&gt;{'text'}, " ha recibido el ID ", $respuesta-&gt;{'id'}, "\n";
-}else {
-  die $response-&gt;status_line;
-}</code>
+<span class="hl kwa">var</span> https <span class="hl opt">=</span> <span class="hl kwd">require</span><span class="hl opt">(</span><span class="hl str">'https'</span><span class="hl opt">);</span>
+
+<span class="hl kwa">var</span> user <span class="hl opt">=</span>process<span class="hl opt">.</span>argv<span class="hl kwc">[2]</span>?process<span class="hl opt">.</span>argv<span class="hl kwc">[2]</span><span class="hl opt">:</span><span class="hl str">'JJ'</span><span class="hl opt">;</span>
+
+<span class="hl kwa">var</span> options <span class="hl opt">= {</span>
+    host<span class="hl opt">:</span> <span class="hl str">'api.github.com'</span><span class="hl opt">,</span>
+    path<span class="hl opt">:</span> <span class="hl str">'/users/'</span><span class="hl opt">+</span>user<span class="hl opt">,</span>
+    method<span class="hl opt">:</span> <span class="hl str">'GET'</span>
+<span class="hl opt">};</span>
+
+
+<span class="hl kwa">var</span> req <span class="hl opt">=</span> https<span class="hl opt">.</span><span class="hl kwd">request</span><span class="hl opt">(</span>options<span class="hl opt">,</span> <span class="hl kwa">function</span><span class="hl opt">(</span>res<span class="hl opt">) {</span>
+			   res<span class="hl opt">.</span><span class="hl kwd">setEncoding</span><span class="hl opt">(</span><span class="hl str">'utf8'</span><span class="hl opt">);</span>
+			   res<span class="hl opt">.</span><span class="hl kwd">on</span><span class="hl opt">(</span><span class="hl str">'data'</span><span class="hl opt">,</span> <span class="hl kwa">function</span> <span class="hl opt">(</span>datos_JSON<span class="hl opt">) {</span>
+				      <span class="hl kwa">var</span> datos<span class="hl opt">=</span>JSON<span class="hl opt">.</span><span class="hl kwd">parse</span><span class="hl opt">(</span>datos_JSON<span class="hl opt">);</span>
+				      console<span class="hl opt">.</span><span class="hl kwd">log</span><span class="hl opt">(</span><span class="hl str">'Login: '</span> <span class="hl opt">+</span> datos<span class="hl opt">.</span>login<span class="hl opt">+</span> <span class="hl str">&quot;</span><span class="hl esc">\n</span><span class="hl str">Nombre: &quot;</span> <span class="hl opt">+</span> datos<span class="hl opt">.</span>name <span class="hl opt">+</span> <span class="hl str">&quot;</span><span class="hl esc">\n</span><span class="hl str">&quot;</span><span class="hl opt">);</span>
+				  <span class="hl opt">});</span>
+		       <span class="hl opt">});</span>
+req<span class="hl opt">.</span><span class="hl kwd">end</span><span class="hl opt">();</span></code>
 <p>muy similar al anterior, salvo que usamos un módulo conocido de XML
       para extraer dos pedazos de información: el mensaje que
       efectivamente se postea, y el ID que ha recibido. Por cierto,
@@ -203,10 +259,6 @@ if ($res-&gt;is_success) {
 El mensaje Llegamos al final del apartado 3.2 ha recibido el ID 63492392
 mellizo:~/txt/docencia/AAP/Temario/code/perl$ <span class="user">./t3-twitter-v2.pl "Llegamos al final del apartado 3.2"</span>
 401 Unauthorized at ./t3-twitter-v2.pl line 16.</code>
-
-
-
-
 
 <p>La idea de REST desde el punto de vista del servidor es usar el URL
       para representar recursos, y las propias órdenes de HTTP para
