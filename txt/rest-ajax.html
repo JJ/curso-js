@@ -244,7 +244,10 @@ Vary: Accept-Encoding
 				      console<span class="hl opt">.</span><span class="hl kwd">log</span><span class="hl opt">(</span><span class="hl str">'Login: '</span> <span class="hl opt">+</span> datos<span class="hl opt">.</span>login<span class="hl opt">+</span> <span class="hl str">&quot;</span><span class="hl esc">\n</span><span class="hl str">Nombre: &quot;</span> <span class="hl opt">+</span> datos<span class="hl opt">.</span>name <span class="hl opt">+</span> <span class="hl str">&quot;</span><span class="hl esc">\n</span><span class="hl str">&quot;</span><span class="hl opt">);</span>
 				  <span class="hl opt">});</span>
 		       <span class="hl opt">});</span>
-req<span class="hl opt">.</span><span class="hl kwd">end</span><span class="hl opt">();</span></code>
+req<span class="hl opt">.</span><span class="hl
+					     kwd">end</span><span class="hl
+									 opt">();</span></code>
+
 <p>Este programa descarga información de un usuario en JSON y la
   procesa. Toma el usuario que se pase por la línea de órdenes, o bien
   usa <code>JJ</code> por defecto, dando un resultado así</p>
@@ -437,7 +440,7 @@ app<span class="hl opt">.</span><span class="hl kwd">post</span><span class="hl 
 app<span class="hl opt">.</span><span class="hl kwd">listen</span><span class="hl opt">(</span>puerto<span class="hl opt">);</span>
 console<span class="hl opt">.</span><span class="hl kwd">log</span><span class="hl opt">(</span><span class="hl str">'Server running at http://127.0.0.1:'</span><span class="hl opt">+</span>puerto<span class="hl opt">+</span><span class="hl str">'/'</span><span class="hl opt">);</span>
 </code>
-<p>Este <a href="http://geneura.ugr.es/%7Ejmerelo/asignaturas/AAP/code/js/express-count.js%27">programa (express-count.js)</a> introduce otras dos órdenes REST: PUT, que, como recordamos,
+<p>Este <a href="https://github.com/JJ/curso-js/tree/master/code/express-count.js%27">programa (express-count.js)</a> introduce otras dos órdenes REST: PUT, que, como recordamos,
   sirve para crear nuevos recurso y es idempotente (se puede usar
   varias veces con el mismo resultado), y además POST. Esa orden la vamos a usar para
   crear contadores a los que posteriormente accederemos con get. PUT
@@ -520,7 +523,7 @@ process<span class="hl sym">.</span>argv<span class="hl sym">.</span><span class
 
 
 <p>Con lo visto hasta ahora ya podemos intentar hacer un programa cliente con
-      otro servidor en Ajax. En <a href="http://geneura.ugr.es/%7Ejmerelo/asignaturas/AAP/AAP-Taller-1.mhtml">algún tema anterior</a> hemos introducido
+      otro servidor en Ajax. En algún tema anterior hemos introducido
       la J de Javascript; también hemos visto como trabajar con JSON
       desde el servidor,
       que sería la X, y nos falta la A. A se refiere a Asíncrono, y se
@@ -547,7 +550,7 @@ process<span class="hl sym">.</span>argv<span class="hl sym">.</span><span class
   descargado desde <code>dominio.com</code>. Por eso es importante que el sistema
   que tenga el API REST sea capaz también de servir las páginas; es lo
   que vamos a hacer en el siguiente ejemplo. Necesitaremos tres
-  ficheros para ejecutar el programa. El primero es el <a href="http://geneura.ugr.es/%7Ejmerelo/asignaturas/AAP/code/js/count-server.js">servidor en node.js</a>: 
+  ficheros para ejecutar el programa. El primero es el <a href="https://github.com/JJ/curso-js/tree/master/code/count-server.js">servidor en node.js</a>: 
 <code class="ejemplo"><span class="hl kwa">var</span> fs <span class="hl opt">=</span> <span class="hl kwd">require</span><span class="hl opt">(</span><span class="hl str">'fs'</span><span class="hl opt">);</span>
 <span class="hl kwa">var</span> express<span class="hl opt">=</span><span class="hl kwd">require</span><span class="hl opt">(</span><span class="hl str">'express'</span><span class="hl opt">);</span>
 <span class="hl kwa">var</span> app <span class="hl opt">=</span> express<span class="hl opt">.</span><span class="hl kwd">createServer</span><span class="hl opt">();</span>
@@ -606,7 +609,7 @@ en
   JS. Ojo, este tipo de órdenes son un potencial hueco de
   seguridad. Lo dejamos así por simplicidad, no porque sea la forma adecuada que debería tener una aplicación en producción.</p>
 
-  <p>La <a href="http://geneura.ugr.es/%7Ejmerelo/asignaturas/AAP/code/js/sumar_formulario.html">página web</a> incluye
+  <p>La <a href="https://github.com/JJ/curso-js/tree/master/code/sumar_formulario.html">página web</a> incluye
     lo mínimo necesario: el script JS incluido y un formulario para
     solicitar el nombre del contador que se va a incrementar. El URL
     del formulario incluye el "camino" ficticio al que responderá el
@@ -655,13 +658,13 @@ en
 <p>En realidad, es mucho más fácil hacerlo con
   JQuery. En <a href="http://codeko.com/docs/oslgr/intro_jquery/ajax2.php">esta
     web de Codeko</a> muestran como funcionan las órdenes
-  básicas. El <a href="http://geneura.ugr.es/%7Ejmerelo/asignaturas/AAP/code/js/formulario-jquery.html">formulario
+  básicas. El <a href="https://github.com/JJ/curso-js/tree/master/code/formulario-jquery.html">formulario
     sería bastante similar</a>, aunque hemos tenido
-  que <a href="http://geneura.ugr.es/%7Ejmerelo/asignaturas/AAP/code/js/count-server-var.js">modificar el servidor para
+  que <a href="https://github.com/JJ/curso-js/tree/master/code/count-server-var.js">modificar el servidor para
     que muestre diferentes páginas principales</a>. El principal
   cambio será, obviamente, en el código usado para la solicitud Ajax,
   que usará jQuery en vez de JS
-  puro. <a href="http://geneura.ugr.es/%7Ejmerelo/asignaturas/AAP/code/js/cuenta-jquery.js">Helo aquí</a>:</p>
+  puro. <a href="https://github.com/JJ/curso-js/tree/master/code/cuenta-jquery.js">Helo aquí</a>:</p>
 <code class="ejemplo">$<span class="hl opt">(</span>document<span class="hl opt">).</span><span class="hl kwd">ready</span><span class="hl opt">(</span><span class="hl kwa">function</span><span class="hl opt">() {</span>
 	$<span class="hl opt">(</span><span class="hl str">"#formulario"</span><span class="hl opt">).</span><span class="hl kwd">change</span><span class="hl opt">(</span><span class="hl kwa">function</span><span class="hl opt">(){</span>
 		$<span class="hl opt">.</span><span class="hl kwd">get</span><span class="hl opt">(</span><span class="hl str">'/contador/'</span><span class="hl opt">+</span>$<span class="hl opt">(</span><span class="hl str">'#contador'</span><span class="hl opt">).</span><span class="hl kwd">val</span><span class="hl opt">(),</span> <span class="hl kwa">function</span><span class="hl opt">(</span> data<span class="hl opt">) {</span>
