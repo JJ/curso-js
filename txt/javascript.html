@@ -164,7 +164,7 @@ pre.hl	{ color:#000000; background-color:#e0eaee; font-size:10pt; font-family:'C
       instalado por defecto junto con el entorno, se denomina <code>gjs</code> y
       está basado en SpiderMonkey y tiene la ventaja de que está
       integrado con todas las librerías de Gnome, de forma que se
-  pueden hacer programas tales como <a href='code/js/g.js'>este</a>
+  pueden hacer programas tales como <a href='https://github.com/JJ/curso-js/tree/master/code/g.js'>este</a>
       sin necesidad de instalar ningún  módulo adicional. Éste
   intérprete es el que usa desde <code>lg</code> (<em>looking glass</em>), una
       consola de depuración de Gnome al estilo de la consola del
@@ -196,7 +196,7 @@ Hola, Mundo</code></p>
 
 <p>Para ejecutarlo desde el navegador habrá que hacer una poca más de
       historia, pero tampoco tanto. Lo vemos en <a
-	href='code/js/hola-js.html'>este ejemplo (darle a ver fuente
+	href='https://github.com/JJ/curso-js/tree/master/code/hola-js.html'>este ejemplo (darle a ver fuente
 	para ver el código)</a> donde se incluye el programa en JS de
       esta forma:</p>
 <code class='ejemplo'>&lt;script type='text/javascript' src='hola.js'>&lt;/script></code>
@@ -204,11 +204,11 @@ Hola, Mundo</code></p>
 <p>El problema es que, en este caso, la orden <code>print</code> se
       interpreta como impresión por impresora, y habrá que cambiarla
       por otra que signifique lo mismo, escribir en el dispositivo de
-      salida que se esté <a href='code/js/hola-js-2.html'>usando</a>:</p>
+      salida que se esté <a href='https://github.com/JJ/curso-js/tree/master/code/hola-js-2.html'>usando</a>:</p>
 <code class='ejemplo'>document.writeln('Hola, Mundo')</code>
 
 <p>Lo que también se puede escribir directamente <a
-	href='code/js/hola-js-3.html'>así</a>:</p>
+	href='https://github.com/JJ/curso-js/tree/master/code/hola-js-3.html'>así</a>:</p>
 <code class='ejemplo'>&lt;script
       type='text/javascript'>document.writeln('Hola, Mundo')&lt;/script></code>
 
@@ -224,7 +224,7 @@ Hola, Mundo</code></p>
 
 <p>Vistas ya las mil y una formas de escribir cosas en la pantalla,
       procedamos a temas más escabrosos, como lo que viene siendo
-      hacer algo <em>realmente</em>. Por ejemplo, un bucle que cree una tabla HTML, como se hace en el siguiente <a href='code/js/tabla.js'>programilla</a>:</p>
+      hacer algo <em>realmente</em>. Por ejemplo, un bucle que cree una tabla HTML, como se hace en el siguiente <a href='https://github.com/JJ/curso-js/tree/master/code/tabla.js'>programilla</a>:</p>
 <code class='ejemplo'>var tabla="table";
 var celda="td";
 var fila="tr";
@@ -280,7 +280,7 @@ print ("&lt;/"+tabla+">");
       concatenación de cadenas, y poco más. El resto es como el C, o
       el Java. De hecho, se pueden usar los bucles clásicos con
       comparación e incremento, como se muestra en <a
-	href='code/js/tabla1.js'><code>tabla1.js</code></a>:</p>
+	href='https://github.com/JJ/curso-js/tree/master/code/tabla1.js'><code>tabla1.js</code></a>:</p>
 <code class='ejemplo'>for (i=1; i&lt;=3; i++ ) {
   print( "&lt;"+fila+">");
   for ( j=1; j&lt;=3; j++  ) {
@@ -291,7 +291,7 @@ print ("&lt;/"+tabla+">");
     </code>
 
 <p>Aunque queda un poco torpe tanto &lt;>... vamos a reducir un
-      poco el programa, haciéndolo <a href='code/js/tabla2.js'>más
+      poco el programa, haciéndolo <a href='https://github.com/JJ/curso-js/tree/master/code/tabla2.js'>más
 	elegante </a> (aunque más largo: no se puede tener todo):</p>
 
 <code class='ejemplo'>
@@ -356,7 +356,7 @@ function celda( contenido ) {
       peculiar; en realidad, de casi todas las características de un
       lenguaje orientado a objetos, solo tiene los objetos, e incluso
       estos son un tanto peculiares. Por eso no es exactamente <em>dirigido a objetos</em> u <em>orientado a objetos</em>. Las características las veremos en el siguiente <a
-	href='code/js/quiniela.js'>programa</a>, que podría servir
+	href='https://github.com/JJ/curso-js/tree/master/code/quiniela.js'>programa</a>, que podría servir
       para hacer quinielas.</p>
 <code class='ejemplo'>
 var equipos= new Array('Madrid', 'Barça', 'Atleti', 'Geta', 'Betis', 'Depor', 'Sevilla', 'Graná');
@@ -437,7 +437,7 @@ Partido 3: Sevilla - Geta</code>
 
 <p>Añadir métodos de clase se hace más o menos de la misma forma, que
       no es muy ortodoxa, pero es la que hay. Lo veremos en <a
-	href='code/js/quiniela2.js'>el siguiente programa</a>, del que
+	href='https://github.com/JJ/curso-js/tree/master/code/quiniela2.js'>el siguiente programa</a>, del que
     sacamos el fragmento más interesante:</p>
 <code class='ejemplo'>
    // Definición de la clase Partido
@@ -508,7 +508,7 @@ print $matrizAsociativa{'variable'};</code>
 devolvería <code>Valor</code>. </p>
 
 <p>Las usaremos en el <a
-	href='code/js/liga.js'>siguiente programa</a>, que genera
+	href='https://github.com/JJ/curso-js/tree/master/code/liga.js'>siguiente programa</a>, que genera
       aleatoriamente diez jornadas de una liga, y asigna puntuación
       según los resultados:</p>
 <code class='ejemplo'<span class="hl kwd">load</span><span class="hl opt">(</span><span class="hl str">'Partido.js'</span><span class="hl opt">);</span>
@@ -592,7 +592,7 @@ devolvería <code>Valor</code>. </p>
       resultado de la quiniela. Se usa la construcción <code>if... else if
       ... else</code>, que funciona de la forma habitual, aunque también
       podríamos haber usado <code>switch</code>, como en <a
-	href='code/js/liga2.js'>el siguiente programa</a>, que en lo
+	href='https://github.com/JJ/curso-js/tree/master/code/liga2.js'>el siguiente programa</a>, que en lo
       único que cambia es en estas líneas:</p>
 <code class='ejemplo'>    switch (resultado) {
     case '1':
@@ -704,7 +704,7 @@ En este caso, <code>split</code> es un método de la clase String, y lo estamos
       intérprete Rhino (en vez de SpiderMonkey, que es el que hemos
       venido usando), podemos usar clases de Java directamente, lo que
       complica terriblemente el programa, pero <a
-	href='code/js/lee_quiniela.js'>ahí está, de todas
+	href='https://github.com/JJ/curso-js/tree/master/code/lee_quiniela.js'>ahí está, de todas
 	formas</a>:</p>
 <code class='ejemplo'><span class="slc">// ejecutar con rhino lee_quiniela.js &lt;argumento&gt;</span>
 <span class="kwd">load</span><span class="sym">(</span><span class="str">'Partido.js'</span><span class="sym">);</span>
@@ -777,7 +777,7 @@ En este caso, <code>split</code> es un método de la clase String, y lo estamos
 
 <p>La otra diferencia es también cómo se ejecuta el fichero: 
 <code class='ejemplo'>rhino lee_quiniela.js quiniela.datos</code>
-para ejecutarlo sobre el <a href='code/js/quiniela.datos'>fichero
+para ejecutarlo sobre el <a href='https://github.com/JJ/curso-js/tree/master/code/quiniela.datos'>fichero
 	<code>quiniela.datos</code></a>, que dará el resultado siguiente:
 <code class='ejemplo'>Elche: 1
 Atleti: 3
@@ -861,9 +861,9 @@ Que parece más raro de la cuenta, pero que, con un poco de código, se
 
 <p>Y JSON, precisamente, es uno de los formatos de intercambio, el más
       simple, el que se usa en AJAX, y un modo de acceder también a
-      servicios web como <em>geonames</em>. Lo hacemos en <a href='code/js/json-geonames.html'>el
+      servicios web como <em>geonames</em>. Lo hacemos en <a href='https://github.com/JJ/curso-js/tree/master/code/json-geonames.html'>el
 	siguiente ejemplo: <code>json-geonames.html</code></a>, del que extraemos
-    el <a href='code/js/geonames_call.js'>código en JS (fichero <code>geonames_call.js</code>)</a></p>
+    el <a href='https://github.com/JJ/curso-js/tree/master/code/geonames_call.js'>código en JS (fichero <code>geonames_call.js</code>)</a></p>
 <code class='ejemplo'><span class="slc">// this function will be called by our JSON callback</span>
 <span class="slc">// the parameter jData will contain an array with geonames objects</span>
 <span class="kwa">function</span> <span class="kwd">getLocation</span><span class="sym">(</span>jData<span class="sym">) {</span>
@@ -898,7 +898,7 @@ Que parece más raro de la cuenta, pero que, con un poco de código, se
 
 <p>Este ejemplo es un poco complicado, sobre todo, por el mecanismo
       que usa para hacer la llamada, y que está contenido en el
-      fichero <a href='code/js/jsr_class.js'><code>jsr_class.js</code>, que
+      fichero <a href='https://github.com/JJ/curso-js/tree/master/code/jsr_class.js'><code>jsr_class.js</code>, que
 	contiene la clase <code>JSONscriptRequest</code></a>, que será la que
       usemos para construirla llamada. La mecánica es la siguiente:
       cada vez que se introduce un nombre de un pueblo o ciudad de
@@ -937,7 +937,7 @@ Que parece más raro de la cuenta, pero que, con un poco de código, se
 <p>Vamos a verlo a verlo a continuación, usando nuestra conocida
   quiniela; usaremos una función para imprimir el resultado de la
   quiniela, de forma que se pueda ver la salida de varias formas
-  diferentes. En <a href='code/js/Nuevo_partido.js'>el siguiente
+  diferentes. En <a href='https://github.com/JJ/curso-js/tree/master/code/Nuevo_partido.js'>el siguiente
     módulo hacemos uso de esta funcionalidad</a>: </p>
 
 <code class='ejemplo'>
@@ -977,7 +977,7 @@ Que parece más raro de la cuenta, pero que, con un poco de código, se
   comportamiento de un objeto: asignamos un comportamieento por
   omisión, pero si es necesario podemos cambiar <em>desde fuera</em>
   el comportamiento de esa clase simplemente asignándole un valor
-  nuevo. De hecho, esto es lo que vamos a hacer en el <a href='code/js/liga3.js'>programa
+  nuevo. De hecho, esto es lo que vamos a hacer en el <a href='https://github.com/JJ/curso-js/tree/master/code/liga3.js'>programa
     siguiente (<code>liga3.js</code>)</a>: </p>
 
 
@@ -1075,7 +1075,7 @@ Que parece más raro de la cuenta, pero que, con un poco de código, se
   node.js). Vamos a ver cómo adaptaríamos alguna de las cosas hechas a
   este estándar, por ejemplo, cambiando esto sobre la clase
   Nuevo_partido.js creada anteriormente (la
-  llamamos <a href='code/js/Un_Partido.js'>Un_Partido</a>).</p> 
+  llamamos <a href='https://github.com/JJ/curso-js/tree/master/codeUn_Partido.js'>Un_Partido</a>).</p> 
 <code class='ejemplo'>exports<span class="hl opt">.</span>Un_Partido <span class="hl opt">=</span> <span class="hl kwa">function</span> <span class="hl opt">(</span>local<span class="hl opt">,</span>visitante<span class="hl opt">,</span>resultado<span class="hl opt">) {</span>
     <span class="hl kwa">this</span><span class="hl opt">.</span>local <span class="hl opt">=</span> local<span class="hl opt">;</span>
     <span class="hl kwa">this</span><span class="hl opt">.</span>visitante<span class="hl opt">=</span>visitante<span class="hl opt">;</span>
@@ -1092,7 +1092,7 @@ Que parece más raro de la cuenta, pero que, con un poco de código, se
   ser atributos de ese objeto, no hace falta que lo definamos de la
   misma forma. Al llamarlo también habrá un pequeño cambio. Mientras
   que antes teníamos que hacer un eval sobre lo cargado, ahora basta
-  con (<a href='code/js/usa_partido.js'>programa
+  con (<a href='https://github.com/JJ/curso-js/tree/master/codeusa_partido.js'>programa
   usa_partido.js</a>):</p>
 <code class='ejemplo'><span class="hl kwa">var</span> un_partido <span class="hl opt">=</span> <span class="hl kwd">require</span><span class="hl opt">(</span><span class="hl str">'./Un_Partido.js'</span><span class="hl opt">);</span>
 
