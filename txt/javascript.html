@@ -823,19 +823,19 @@ nombres completos e incluso como implementar intervaces de Java. </p>
       tal como se ha visto en el apartado anterior, todo es un objeto
       en JS, se puede usar esta notación para asignar valores
       prácticamente a cualquier cosa. Vamos a usar una vez más el
-      intérprete en modo interactivo para ver un ejemplo:
+      intérprete en modo interactivo para ver un ejemplo:</p>
 <code class='ejemplo'><strong>js> var objeto = { Madrid : 25, Atleti: 33, Ponferradina: 44 };</strong>
 <strong>js> for (i in objeto) { print( i + " : "+ objeto[i] )};</strong>
 Madrid : 25
 Atleti : 33
 Ponferradina : 44
-      </code>
+</code>
 
-Más fácil no puede ser. Se le asigna valor a un objeto con el formato
+<p>Más fácil no puede ser. Se le asigna valor a un objeto con el formato
       clave : valor (con coma al final), de la misma forma que se
       haría a un array asociativo. Además, se pueden crear objetos
       sobre la marcha y asignárselos a una variable cuyo valor se cree
-      también sobre la marcha:
+  también sobre la marcha:</p>
 <code class='ejemplo'><strong>js> eval("var objeto2 = { Madrid : 25, Atleti: 33, Ponferradina: 44 }");</strong>
 <strong>js> for (i in objeto2) { print( i + " : "+ objeto[i] )};</strong>
 Madrid : 25
@@ -850,8 +850,7 @@ Madrid : 25
 Atleti : 33
 Ponferradina : [object Object]</code>
 Que parece más raro de la cuenta, pero que, con un poco de código, se
-      podría también imprimir.
-</p>
+      podría también imprimir.</p>
 
 <p>Y JSON, precisamente, es uno de los formatos de intercambio, el más
       simple, el que se usa en AJAX, y un modo de acceder también a
