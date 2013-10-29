@@ -469,11 +469,7 @@ function toString() {
 
 
 
-
-
-
-
-<h2><a name='T1:t1:hash'> Matrices asociativas </a> <a href='#T1:t1:hash' style='font-size:small'>#</a></h2>
+<h2>Matrices asociativas </h2>
 
 
 
@@ -511,7 +507,7 @@ devolvería <code>Valor</code>. </p>
 	href='https://github.com/JJ/curso-js/tree/master/code/liga.js'>siguiente programa</a>, que genera
       aleatoriamente diez jornadas de una liga, y asigna puntuación
       según los resultados:</p>
-<code class='ejemplo'<span class="hl kwd">load</span><span class="hl opt">(</span><span class="hl str">'Partido.js'</span><span class="hl opt">);</span>
+<code class='ejemplo'><span class="hl kwd">load</span><span class="hl opt">(</span><span class="hl str">'Partido.js'</span><span class="hl opt">);</span>
 
 <span class="hl kwa">var</span> equipos<span class="hl opt">=</span> <span class="hl kwa">new</span> <span class="hl kwd">Array</span><span class="hl opt">(</span><span class="hl str">'Madrid'</span><span class="hl opt">,</span> <span class="hl str">'Barça'</span><span class="hl opt">,</span> <span class="hl str">'Atleti'</span><span class="hl opt">,</span> <span class="hl str">'Geta'</span><span class="hl opt">,</span> <span class="hl str">'Betis'</span><span class="hl opt">,</span> <span class="hl str">'Depor'</span><span class="hl opt">,</span> <span class="hl str">'Sevilla'</span><span class="hl opt">,</span> <span class="hl str">'Graná'</span><span class="hl opt">);</span>
 
@@ -560,7 +556,6 @@ devolvería <code>Valor</code>. </p>
 <span class="hl kwa">for</span> <span class="hl opt">(</span> <span class="hl kwa">var</span> i <span class="hl kwa">in</span> resultados <span class="hl opt">) {</span>
   <span class="hl kwd">print</span><span class="hl opt">(</span> i <span class="hl opt">+</span> <span class="hl str">&quot;: &quot;</span> <span class="hl opt">+</span> resultados<span class="hl kwc">[i]</span><span class="hl opt">)</span>
  <span class="hl opt">}</span>
-</pre>
 </code>
 
 <p>En parte, este programa es similar a los anteriores: la parte que
@@ -616,7 +611,7 @@ devolvería <code>Valor</code>. </p>
 
 
 
-<h2><a name='T1:t1:manejando_objetos'> Manejando Objetos </a> <a href='#T1:t1:manejando_objetos' style='font-size:small'>#</a></h2>
+<h2> Manejando Objetos </h2>
 
 
 
@@ -706,54 +701,54 @@ En este caso, <code>split</code> es un método de la clase String, y lo estamos
       complica terriblemente el programa, pero <a
 	href='https://github.com/JJ/curso-js/tree/master/code/lee_quiniela.js'>ahí está, de todas
 	formas</a>:</p>
-<code class='ejemplo'><span class="slc">// ejecutar con rhino lee_quiniela.js &lt;argumento&gt;</span>
-<span class="kwd">load</span><span class="sym">(</span><span class="str">'Partido.js'</span><span class="sym">);</span>
-<span class="kwa">var</span> FileReader <span class="sym">=</span> java<span class="sym">.</span>io<span class="sym">.</span>FileReader<span class="sym">;</span>
-<span class="kwa">var</span> BufferedReader <span class="sym">=</span>java<span class="sym">.</span>io<span class="sym">.</span>BufferedReader<span class="sym">;</span>
+<code class='ejemplo'><span class="hl slc">// ejecutar con rhino lee_quiniela.js &lt;argumento&gt;</span>
+<span class="hl kwd">load</span><span class="hl opt">(</span><span class="hl str">'Partido.js'</span><span class="hl opt">);</span>
+<span class="hl kwa">var</span> FileReader <span class="hl opt">=</span> java<span class="hl opt">.</span>io<span class="hl opt">.</span>FileReader<span class="hl opt">;</span>
+<span class="hl kwa">var</span> BufferedReader <span class="hl opt">=</span>java<span class="hl opt">.</span>io<span class="hl opt">.</span>BufferedReader<span class="hl opt">;</span>
 
-<span class="kwa">var</span> file_name <span class="sym">=</span> arguments<span class="sym">[</span><span class="num">0</span><span class="sym">];</span>
+<span class="hl kwa">var</span> file_name <span class="hl opt">=</span> arguments<span class="hl kwc">[0]</span><span class="hl opt">;</span>
 
-<span class="kwa">var</span> f <span class="sym">=</span> <span class="kwa">new</span> <span class="kwd">FileReader</span><span class="sym">(</span>file_name<span class="sym">);</span>
-<span class="kwa">var</span> br <span class="sym">=</span> <span class="kwa">new</span> <span class="kwd">BufferedReader</span><span class="sym">(</span> f <span class="sym">);</span>
-<span class="kwa">var</span> resultados<span class="sym">=</span> <span class="kwa">new</span> <span class="kwc">Array</span><span class="sym">;</span>
-<span class="kwa">var</span> line <span class="sym">=</span> <span class="kwa">new</span> <span class="kwc">String</span><span class="sym">;</span>
-<span class="kwa">while</span> <span class="sym">((</span>line <span class="sym">=</span> br<span class="sym">.</span><span class="kwd">readLine</span><span class="sym">()) !=</span> <span class="kwa">null</span><span class="sym">) {</span>
-  <span class="kwa">var</span> estaLinea <span class="sym">=</span> <span class="kwa">new</span> <span class="kwc">String</span><span class="sym">(</span> line <span class="sym">);</span>
-  <span class="kwa">var</span> resultado  <span class="sym">=</span> estaLinea<span class="sym">.</span><span class="kwc">split</span><span class="sym">(</span><span class="str">&quot; &quot;</span><span class="sym">);</span>
-  <span class="kwa">switch</span> <span class="sym">(</span>resultado<span class="sym">[</span><span class="num">2</span><span class="sym">]) {</span>
-    <span class="kwa">case</span> <span class="str">'1'</span><span class="sym">:</span>
-      <span class="kwa">if</span> <span class="sym">(</span> resultados<span class="sym">[</span>resultado<span class="sym">[</span><span class="num">0</span><span class="sym">]] ) {</span>
-	resultados<span class="sym">[</span>resultado<span class="sym">[</span><span class="num">0</span><span class="sym">]]+=</span><span class="num">3</span><span class="sym">;</span>
-      <span class="sym">}</span> <span class="kwa">else</span> <span class="sym">{</span>
-	resultados<span class="sym">[</span>resultado<span class="sym">[</span><span class="num">0</span><span class="sym">]]=</span><span class="num">3</span><span class="sym">;</span>
-      <span class="sym">}</span>
-      <span class="kwa">break</span><span class="sym">;</span>
-    <span class="kwa">case</span> <span class="str">'x'</span><span class="sym">:</span>
-      <span class="kwa">if</span> <span class="sym">(</span> resultados<span class="sym">[</span>resultado<span class="sym">[</span><span class="num">0</span><span class="sym">]] ) {</span>
-	resultados<span class="sym">[</span>resultado<span class="sym">[</span><span class="num">0</span><span class="sym">]]+=</span><span class="num">1</span><span class="sym">;</span>
-      <span class="sym">}</span> <span class="kwa">else</span> <span class="sym">{</span>
-	resultados<span class="sym">[</span>resultado<span class="sym">[</span><span class="num">0</span><span class="sym">]]=</span><span class="num">1</span><span class="sym">;</span>
-      <span class="sym">}</span>
-      <span class="kwa">if</span> <span class="sym">(</span> resultados<span class="sym">[</span>resultado<span class="sym">[</span><span class="num">1</span><span class="sym">]] ) {</span>
-	resultados<span class="sym">[</span>resultado<span class="sym">[</span><span class="num">1</span><span class="sym">]]+=</span><span class="num">1</span><span class="sym">;</span>
-      <span class="sym">}</span> <span class="kwa">else</span> <span class="sym">{</span>
-	resultados<span class="sym">[</span>resultado<span class="sym">[</span><span class="num">1</span><span class="sym">]]=</span><span class="num">1</span><span class="sym">;</span>
-      <span class="sym">}</span>
-      <span class="kwa">break</span><span class="sym">;</span>
-    <span class="kwa">default</span><span class="sym">:</span>
-       <span class="kwa">if</span> <span class="sym">(</span> resultados<span class="sym">[</span>resultado<span class="sym">[</span><span class="num">1</span><span class="sym">]] ) {</span>
-	resultados<span class="sym">[</span>resultado<span class="sym">[</span><span class="num">1</span><span class="sym">]]+=</span><span class="num">3</span><span class="sym">;</span>
-      <span class="sym">}</span> <span class="kwa">else</span> <span class="sym">{</span>
-	resultados<span class="sym">[</span>resultado<span class="sym">[</span><span class="num">1</span><span class="sym">]]=</span><span class="num">3</span><span class="sym">;</span>
-      <span class="sym">}</span>
-      <span class="kwa">break</span>
-  <span class="sym">}</span>
- <span class="sym">}</span>
+<span class="hl kwa">var</span> f <span class="hl opt">=</span> <span class="hl kwa">new</span> <span class="hl kwd">FileReader</span><span class="hl opt">(</span>file_name<span class="hl opt">);</span>
+<span class="hl kwa">var</span> br <span class="hl opt">=</span> <span class="hl kwa">new</span> <span class="hl kwd">BufferedReader</span><span class="hl opt">(</span> f <span class="hl opt">);</span>
+<span class="hl kwa">var</span> resultados<span class="hl opt">=</span> <span class="hl kwa">new</span> Array<span class="hl opt">;</span>
+<span class="hl kwa">var</span> line <span class="hl opt">=</span> <span class="hl kwa">new</span> String<span class="hl opt">;</span>
+<span class="hl kwa">while</span> <span class="hl opt">((</span>line <span class="hl opt">=</span> br<span class="hl opt">.</span><span class="hl kwd">readLine</span><span class="hl opt">()) !=</span> <span class="hl kwa">null</span><span class="hl opt">) {</span>
+  <span class="hl kwa">var</span> estaLinea <span class="hl opt">=</span> <span class="hl kwa">new</span> <span class="hl kwd">String</span><span class="hl opt">(</span> line <span class="hl opt">);</span>
+  <span class="hl kwa">var</span> resultado  <span class="hl opt">=</span> estaLinea<span class="hl opt">.</span><span class="hl kwd">split</span><span class="hl opt">(</span><span class="hl str">&quot; &quot;</span><span class="hl opt">);</span>
+  <span class="hl kwa">switch</span> <span class="hl opt">(</span>resultado<span class="hl kwc">[2]</span><span class="hl opt">) {</span>
+    <span class="hl kwa">case</span> <span class="hl str">'1'</span><span class="hl opt">:</span>
+      <span class="hl kwa">if</span> <span class="hl opt">(</span> resultados<span class="hl opt">[</span>resultado<span class="hl kwc">[0]</span><span class="hl opt">] ) {</span>
+	resultados<span class="hl opt">[</span>resultado<span class="hl kwc">[0]</span><span class="hl opt">]+=</span><span class="hl num">3</span><span class="hl opt">;</span>
+      <span class="hl opt">}</span> <span class="hl kwa">else</span> <span class="hl opt">{</span>
+	resultados<span class="hl opt">[</span>resultado<span class="hl kwc">[0]</span><span class="hl opt">]=</span><span class="hl num">3</span><span class="hl opt">;</span>
+      <span class="hl opt">}</span>
+      <span class="hl kwa">break</span><span class="hl opt">;</span>
+    <span class="hl kwa">case</span> <span class="hl str">'x'</span><span class="hl opt">:</span>
+      <span class="hl kwa">if</span> <span class="hl opt">(</span> resultados<span class="hl opt">[</span>resultado<span class="hl kwc">[0]</span><span class="hl opt">] ) {</span>
+	resultados<span class="hl opt">[</span>resultado<span class="hl kwc">[0]</span><span class="hl opt">]+=</span><span class="hl num">1</span><span class="hl opt">;</span>
+      <span class="hl opt">}</span> <span class="hl kwa">else</span> <span class="hl opt">{</span>
+	resultados<span class="hl opt">[</span>resultado<span class="hl kwc">[0]</span><span class="hl opt">]=</span><span class="hl num">1</span><span class="hl opt">;</span>
+      <span class="hl opt">}</span>
+      <span class="hl kwa">if</span> <span class="hl opt">(</span> resultados<span class="hl opt">[</span>resultado<span class="hl kwc">[1]</span><span class="hl opt">] ) {</span>
+	resultados<span class="hl opt">[</span>resultado<span class="hl kwc">[1]</span><span class="hl opt">]+=</span><span class="hl num">1</span><span class="hl opt">;</span>
+      <span class="hl opt">}</span> <span class="hl kwa">else</span> <span class="hl opt">{</span>
+	resultados<span class="hl opt">[</span>resultado<span class="hl kwc">[1]</span><span class="hl opt">]=</span><span class="hl num">1</span><span class="hl opt">;</span>
+      <span class="hl opt">}</span>
+      <span class="hl kwa">break</span><span class="hl opt">;</span>
+    <span class="hl kwa">default</span><span class="hl opt">:</span>
+       <span class="hl kwa">if</span> <span class="hl opt">(</span> resultados<span class="hl opt">[</span>resultado<span class="hl kwc">[1]</span><span class="hl opt">] ) {</span>
+	resultados<span class="hl opt">[</span>resultado<span class="hl kwc">[1]</span><span class="hl opt">]+=</span><span class="hl num">3</span><span class="hl opt">;</span>
+      <span class="hl opt">}</span> <span class="hl kwa">else</span> <span class="hl opt">{</span>
+	resultados<span class="hl opt">[</span>resultado<span class="hl kwc">[1]</span><span class="hl opt">]=</span><span class="hl num">3</span><span class="hl opt">;</span>
+      <span class="hl opt">}</span>
+      <span class="hl kwa">break</span>
+  <span class="hl opt">}</span>
+ <span class="hl opt">}</span>
 
-<span class="kwa">for</span> <span class="sym">(</span> <span class="kwa">var</span> i <span class="kwa">in</span> resultados <span class="sym">) {</span>
-  <span class="kwc">print</span><span class="sym">(</span> i <span class="sym">+</span> <span class="str">&quot;: &quot;</span> <span class="sym">+</span> resultados<span class="sym">[</span>i<span class="sym">])</span>
-    <span class="sym">}</span><!--HTML generated by highlight 2.4.8, http://www.andre-simon.de/-->
-  </code>
+<span class="hl kwa">for</span> <span class="hl opt">(</span> <span class="hl kwa">var</span> i <span class="hl kwa">in</span> resultados <span class="hl opt">) {</span>
+  <span class="hl kwd">print</span><span class="hl opt">(</span> i <span class="hl opt">+</span> <span class="hl str">&quot;: &quot;</span> <span class="hl opt">+</span> resultados<span class="hl kwc">[i]</span><span class="hl opt">)</span>
+    <span class="hl opt">}</span> </code>
+
 <p>El programa es bastante similar al anterior, pero lee de fichero en
       vez de generar los resultados aleatoriamente. Y lo lee
       aproximadamente de la misma forma a como se haría en Java. Por
@@ -816,8 +811,7 @@ nombres completos e incluso como implementar intervaces de Java. </p>
 
 
 
-<h2><a name='T1:t1:json'> Objetos para el
-    camino </a> <a href='#T1:t1:json' style='font-size:small'>#</a></h2>
+<h2> Objetos para el camino </h2>
 
 
 
@@ -864,46 +858,47 @@ Que parece más raro de la cuenta, pero que, con un poco de código, se
       servicios web como <em>geonames</em>. Lo hacemos en <a href='https://github.com/JJ/curso-js/tree/master/code/json-geonames.html'>el
 	siguiente ejemplo: <code>json-geonames.html</code></a>, del que extraemos
     el <a href='https://github.com/JJ/curso-js/tree/master/code/geonames_call.js'>código en JS (fichero <code>geonames_call.js</code>)</a></p>
-<code class='ejemplo'><span class="slc">// this function will be called by our JSON callback</span>
-<span class="slc">// the parameter jData will contain an array with geonames objects</span>
-<span class="kwa">function</span> <span class="kwd">getLocation</span><span class="sym">(</span>jData<span class="sym">) {</span>
-  <span class="kwa">if</span> <span class="sym">(</span>jData <span class="sym">==</span> <span class="kwa">null</span><span class="sym">) {</span>
-    <span class="slc">// There was a problem parsing search results</span>
-    <span class="kwa">return</span><span class="sym">;</span>
-  <span class="sym">}</span>
+<code class='ejemplo'><span class="hl slc">// this function will be called by our JSON callback</span>
+<span class="hl slc">// the parameter jData will contain an array with geonames objects</span>
+<span class="hl kwa">function</span> <span class="hl kwd">getLocation</span><span class="hl opt">(</span>jData<span class="hl opt">) {</span>
+  <span class="hl kwa">if</span> <span class="hl opt">(</span>jData <span class="hl opt">==</span> <span class="hl kwa">null</span><span class="hl opt">) {</span>
+    <span class="hl slc">// There was a problem parsing search results</span>
+    <span class="hl kwa">return</span><span class="hl opt">;</span>
+  <span class="hl opt">}</span>
 
-  <span class="kwa">var</span> html <span class="sym">=</span> <span class="str">''</span><span class="sym">;</span>
-  <span class="kwa">var</span> geonames <span class="sym">=</span> jData<span class="sym">.</span>geonames<span class="sym">;</span>
-  <span class="kwa">for</span> <span class="sym">(</span>i<span class="sym">=</span><span class="num">0</span><span class="sym">;</span>i<span class="sym">&lt;</span> geonames<span class="sym">.</span><span class="kwc">length</span><span class="sym">;</span>i<span class="sym">++) {</span>
-     <span class="kwa">var</span> <span class="kwc">name</span> <span class="sym">=</span> geonames<span class="sym">[</span>i<span class="sym">];</span>
-     <span class="slc">// we create a simple html list with the geonames objects</span>
-     <span class="slc">// the link will call the center() javascript method with lat/lng as parameter</span>
-     html <span class="sym">=</span> <span class="kwc">name</span><span class="sym">.</span><span class="kwc">name</span><span class="sym">+</span> <span class="str">&quot; Latitud: &quot;</span> <span class="sym">+</span> <span class="kwc">name</span><span class="sym">.</span>lat <span class="sym">+</span><span class="str">', longitud: '</span> <span class="sym">+</span> <span class="kwc">name</span><span class="sym">.</span>lng<span class="sym">;</span>
-  <span class="sym">}</span>
-  <span class="kwc">document</span><span class="sym">.</span><span class="kwc">getElementById</span><span class="sym">(</span><span class="str">'resultDiv'</span><span class="sym">).</span><span class="kwc">innerHTML</span> <span class="sym">=</span> html<span class="sym">;</span>
-<span class="sym">}</span>
+  <span class="hl kwa">var</span> html <span class="hl opt">=</span> <span class="hl str">'&lt;ul&gt;'</span><span class="hl opt">;</span>
+  <span class="hl kwa">var</span> geonames <span class="hl opt">=</span> jData<span class="hl opt">.</span>geonames<span class="hl opt">;</span>
+  <span class="hl kwa">for</span> <span class="hl opt">(</span>i<span class="hl opt">=</span><span class="hl num">0</span><span class="hl opt">;</span>i<span class="hl opt">&lt;</span> geonames<span class="hl opt">.</span>length<span class="hl opt">;</span>i<span class="hl opt">++) {</span>
+     <span class="hl kwa">var</span> name <span class="hl opt">=</span> geonames<span class="hl kwc">[i]</span><span class="hl opt">;</span>
+     <span class="hl slc">// we create a simple html list with the geonames objects</span>
+     <span class="hl slc">// the link will call the center() javascript method with lat/lng as parameter</span>
+     html <span class="hl opt">=</span> html<span class="hl opt">+</span><span class="hl str">&quot;&lt;li&gt;&lt;em&gt;&quot;</span><span class="hl opt">+</span>name<span class="hl opt">.</span>name<span class="hl opt">+</span> <span class="hl str">&quot;&lt;/em&gt; - Latitud: &quot;</span> <span class="hl opt">+</span> name<span class="hl opt">.</span>lat <span class="hl opt">+</span><span class="hl str">', longitud: '</span> <span class="hl opt">+</span> name<span class="hl opt">.</span>lng<span class="hl opt">+</span> <span class="hl str">&quot;&lt;/li&gt;&quot;</span><span class="hl opt">;</span>
+  <span class="hl opt">}</span>
+  html<span class="hl opt">+=</span><span class="hl str">&quot;&lt;/ul&gt;&quot;</span><span class="hl opt">;</span>
+  document<span class="hl opt">.</span><span class="hl kwd">getElementById</span><span class="hl opt">(</span><span class="hl str">'resultDiv'</span><span class="hl opt">).</span>innerHTML <span class="hl opt">=</span> html<span class="hl opt">;</span>
+<span class="hl opt">}</span>
 
-<span class="slc">// calls the geonames JSON webservice with the search term</span>
-<span class="kwa">function</span> <span class="kwc">search</span><span class="sym">() {</span>
-  request <span class="sym">=</span> <span class="str">'http://ws.geonames.org/searchJSON?country=ES&amp;q='</span> <span class="sym">+</span>  <span class="kwd">encodeURIComponent</span><span class="sym">(</span><span class="kwc">document</span><span class="sym">.</span><span class="kwc">getElementById</span><span class="sym">(</span><span class="str">'q'</span><span class="sym">).</span><span class="kwc">value</span><span class="sym">)  +</span> <span class="str">'&amp;maxRows=10&amp;callback=getLocation'</span><span class="sym">;</span>
+<span class="hl slc">// calls the geonames JSON webservice with the search term</span>
+<span class="hl kwa">function</span> <span class="hl kwd">search</span><span class="hl opt">() {</span>
+  request <span class="hl opt">=</span> <span class="hl str">'http://ws.geonames.org/searchJSON?country=ES&amp;q='</span> <span class="hl opt">+</span>  <span class="hl kwd">encodeURIComponent</span><span class="hl opt">(</span>document<span class="hl opt">.</span><span class="hl kwd">getElementById</span><span class="hl opt">(</span><span class="hl str">'q'</span><span class="hl opt">).</span>value<span class="hl opt">)  +</span> <span class="hl str">'&amp;maxRows=10&amp;callback=getLocation'</span><span class="hl opt">;</span>
 
-  <span class="slc">// Create a new script object</span>
-  <span class="slc">// Implementación en jsr_class.js</span>
-  aObj <span class="sym">=</span> <span class="kwa">new</span> <span class="kwd">JSONscriptRequest</span><span class="sym">(</span>request<span class="sym">);</span>
-  <span class="slc">// Build the script tag</span>
-  aObj<span class="sym">.</span><span class="kwd">buildScriptTag</span><span class="sym">();</span>
-  <span class="slc">// Execute (add) the script tag</span>
-  aObj<span class="sym">.</span><span class="kwd">addScriptTag</span><span class="sym">();</span>
-<span class="sym">}</span></code>
+  <span class="hl slc">// Create a new script object</span>
+  <span class="hl slc">// Implementación en jsr_class.js</span>
+  aObj <span class="hl opt">=</span> <span class="hl kwa">new</span> <span class="hl kwd">JSONscriptRequest</span><span class="hl opt">(</span>request<span class="hl opt">);</span>
+  <span class="hl slc">// Build the script tag</span>
+  aObj<span class="hl opt">.</span><span class="hl kwd">buildScriptTag</span><span class="hl opt">();</span>
+  <span class="hl slc">// Execute (add) the script tag</span>
+  aObj<span class="hl opt">.</span><span class="hl kwd">addScriptTag</span><span class="hl opt">();</span>
+<span class="hl opt">}</span></code>
 
 <p>Este ejemplo es un poco complicado, sobre todo, por el mecanismo
       que usa para hacer la llamada, y que está contenido en el
       fichero <a href='https://github.com/JJ/curso-js/tree/master/code/jsr_class.js'><code>jsr_class.js</code>, que
 	contiene la clase <code>JSONscriptRequest</code></a>, que será la que
-      usemos para construirla llamada. La mecánica es la siguiente:
+      usemos para construir la llamada. La mecánica es la siguiente:
       cada vez que se introduce un nombre de un pueblo o ciudad de
       España, se genera un evento, y se llama a la función
-      <code>search</code>. Esta función hace construye una petición, dentro de la
+      <code>search</code>. Esta función  construye una petición, dentro de la
       cual está incluido <code>callback=getLocation</code>. El truco
       es que esa petición genera un <em>callback</em> tal que cuando se
       recibe la respuesta se llama a la función <code>getLocation</code>
@@ -916,10 +911,7 @@ Que parece más raro de la cuenta, pero que, con un poco de código, se
   sin necesidad de hacer ningún tipo de parsing.</p>
 
 
-
-
-
-<h2><a name='T1:t1:fobjs'> Funciones como objetos </a> <a href='#T1:t1:fobjs' style='font-size:small'>#</a></h2>
+<h2> Funciones como objetos </h2>
 
 
 
@@ -940,8 +932,7 @@ Que parece más raro de la cuenta, pero que, con un poco de código, se
   diferentes. En <a href='https://github.com/JJ/curso-js/tree/master/code/Nuevo_partido.js'>el siguiente
     módulo hacemos uso de esta funcionalidad</a>: </p>
 
-<code class='ejemplo'>
-<pre class="hl"><span class="hl slc">// Definición de la clase Partido</span>
+<code class='ejemplo'>// Definición de la clase Partido
 <span class="hl kwa">function</span> <span class="hl kwd">Nuevo_partido</span><span class="hl opt">(</span>local<span class="hl opt">,</span>visitante<span class="hl opt">) {</span>
     <span class="hl kwa">this</span><span class="hl opt">.</span>local <span class="hl opt">=</span> local<span class="hl opt">;</span>
     <span class="hl kwa">this</span><span class="hl opt">.</span>visitante<span class="hl opt">=</span>visitante<span class="hl opt">;</span>
@@ -968,7 +959,6 @@ Que parece más raro de la cuenta, pero que, con un poco de código, se
 <span class="hl kwa">function</span> <span class="hl kwd">set_to_string</span> <span class="hl opt">(</span> impresor <span class="hl opt">) {</span>
     <span class="hl kwa">this</span><span class="hl opt">.</span>impresor <span class="hl opt">=</span> impresor<span class="hl opt">;</span>
 <span class="hl opt">}</span>
-</pre>
 </code>
 
 <p>En esta clase la principal diferencia es que usamos el método
@@ -981,7 +971,7 @@ Que parece más raro de la cuenta, pero que, con un poco de código, se
     siguiente (<code>liga3.js</code>)</a>: </p>
 
 
-<code class='ejemplo'><pre class="hl">#<span class="hl opt">!/</span>usr<span class="hl opt">/</span>bin<span class="hl opt">/</span>smjs
+<code class='ejemplo'>#<span class="hl opt">!/</span>usr<span class="hl opt">/</span>bin<span class="hl opt">/</span>smjs
 
 <span class="hl kwd">load</span><span class="hl opt">(</span><span class="hl str">'Nuevo_partido.js'</span><span class="hl opt">);</span>
 
@@ -1038,9 +1028,7 @@ Que parece más raro de la cuenta, pero que, con un poco de código, se
 
 <span class="hl kwa">for</span> <span class="hl opt">(</span> <span class="hl kwa">var</span> i <span class="hl kwa">in</span> resultados <span class="hl opt">) {</span>
   <span class="hl kwd">print</span><span class="hl opt">(</span> i <span class="hl opt">+</span> <span class="hl str">&quot;: &quot;</span> <span class="hl opt">+</span> resultados<span class="hl kwc">[i]</span><span class="hl opt">)</span>
-<span class="hl opt">}</span>
-</pre>
-</code>
+<span class="hl opt">}</span></code>
 
 <p>La parte nueva de este programa está en en la línea 9, donde se
   define la variable <code>imprime</code>. Se define una función <em>sin
@@ -1110,10 +1098,6 @@ console<span class="hl opt">.</span><span class="hl kwd">log</span><span class="
 
 
 
-
-
-
-
 <p>A diferencia de casi todos los lenguajes de scripting, no hay un
   modo estándar de instalar módulos Javascript, aunque algunos
   intérpretes (notablemente Node.js, del que hablaremos luego) sí lo
@@ -1128,7 +1112,7 @@ console<span class="hl opt">.</span><span class="hl kwd">log</span><span class="
   el módulo mientras que otro se concentra en la forma de
   empaquetarlo. </p>
 
-<h2><a name='T1:t1:odds'> Para finalizar </a> <a href='#T1:t1:odds' style='font-size:small'>#</a></h2>
+<h2> Para finalizar</h2>
 
 
 
