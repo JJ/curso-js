@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name                AAP-Nav
 // @namespace           http://geneura.org/projects/greasemonkey
-// @description         Navegación por las secciones de AAP
+// @description         NavegaciÃ³n por las secciones de AAP
 // @include             http://geneura.ugr.es/~jmerelo/asignaturas/*
 // ==/UserScript==
 
-GM_log('Entrando AAP-Nav');
+GM_log('Entrando en AAP-Nav');
 var h2 = document.getElementsByTagName('h2');
 var a_nodes = new Array;
 var anchors = new Array;
@@ -15,8 +15,6 @@ for ( var secs = 0; secs < h2.length; secs ++ ) {
   anchors[secs] = thisA[0].getAttribute('name');
   GM_log('Anchor ' + secs + " " + anchors[secs]);
 }
-
-
 
 for ( var secs = 0; secs < h2.length; secs ++ ) {
   var span = document.createElement('span');
