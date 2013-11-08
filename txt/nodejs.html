@@ -265,21 +265,33 @@ paralelo.</p>
   <a href="https://github.com/JJ/curso-js/blob/master/code/request.js">request.js</a>, que pide la línea
   temporal pública de Twitter:</p>
 
-<code class="ejemplo"><span class="hl kwa">var</span> request <span class="hl sym">=</span> <span class="hl kwd">require</span><span class="hl sym">(</span><span class="hl str">'request'</span><span class="hl sym">);</span>
-<span class="hl kwa">var</span> url <span class="hl sym">=</span><span class="hl str">'https://stream.twitter.com/1.1/statuses/sample.json'</span><span class="hl sym">;</span>
-<span class="hl kwd">request</span><span class="hl sym">(</span>url<span class="hl sym">,</span> <span class="hl kwa">function</span> <span class="hl sym">(</span>error<span class="hl sym">,</span> response<span class="hl sym">,</span> body<span class="hl sym">) {</span>
-  <span class="hl kwa">if</span> <span class="hl sym">(!</span>error <span class="hl sym">&amp;&amp;</span> response<span class="hl sym">.</span>statusCode <span class="hl sym">==</span> <span class="hl num">200</span><span class="hl sym">) {</span>
-      console<span class="hl sym">.</span><span class="hl kwd">log</span><span class="hl sym">(</span>JSON<span class="hl sym">.</span><span class="hl kwd">parse</span><span class="hl sym">(</span>body<span class="hl sym">));</span>
-  <span class="hl sym">}</span> <span class="hl kwa">else</span> <span class="hl sym">{</span>
-      console<span class="hl sym">.</span><span class="hl kwd">log</span><span class="hl sym">(</span>error<span class="hl sym">);</span>
-  <span class="hl sym">}</span>
-<span class="hl sym">})</span>
+<code class='ejemplo'>#<span class="hl opt">!/</span>usr<span class="hl opt">/</span>bin<span class="hl opt">/</span>node
+
+<span class="hl kwa">var</span> https <span class="hl opt">=</span> <span class="hl kwd">require</span><span class="hl opt">(</span><span class="hl str">'https'</span><span class="hl opt">);</span>
+
+<span class="hl kwa">var</span> user <span class="hl opt">=</span>process<span class="hl opt">.</span>argv<span class="hl kwc">[2]</span>?process<span class="hl opt">.</span>argv<span class="hl kwc">[2]</span><span class="hl opt">:</span><span class="hl str">'JJ'</span><span class="hl opt">;</span>
+
+<span class="hl kwa">var</span> options <span class="hl opt">= {</span>
+    host<span class="hl opt">:</span> <span class="hl str">'api.github.com'</span><span class="hl opt">,</span>
+    path<span class="hl opt">:</span> <span class="hl str">'/users/'</span><span class="hl opt">+</span>user<span class="hl opt">,</span>
+    method<span class="hl opt">:</span> <span class="hl str">'GET'</span>
+<span class="hl opt">};</span>
+
+
+<span class="hl kwa">var</span> req <span class="hl opt">=</span> https<span class="hl opt">.</span><span class="hl kwd">get</span><span class="hl opt">(</span><span class="hl str">'https://api.github.com/users/'</span><span class="hl opt">+</span>user<span class="hl opt">,</span> <span class="hl kwa">function</span><span class="hl opt">(</span>res<span class="hl opt">) {</span>
+			   res<span class="hl opt">.</span><span class="hl kwd">setEncoding</span><span class="hl opt">(</span><span class="hl str">'utf8'</span><span class="hl opt">);</span>
+			   res<span class="hl opt">.</span><span class="hl kwd">on</span><span class="hl opt">(</span><span class="hl str">'data'</span><span class="hl opt">,</span> <span class="hl kwa">function</span> <span class="hl opt">(</span>datos_JSON<span class="hl opt">) {</span>
+				      <span class="hl kwa">var</span> datos<span class="hl opt">=</span>JSON<span class="hl opt">.</span><span class="hl kwd">parse</span><span class="hl opt">(</span>datos_JSON<span class="hl opt">);</span>
+				      console<span class="hl opt">.</span><span class="hl kwd">log</span><span class="hl opt">(</span><span class="hl str">'Login: '</span> <span class="hl opt">+</span> datos<span class="hl opt">.</span>login<span class="hl opt">+</span> <span class="hl str">&quot;</span><span class="hl esc">\n</span><span class="hl str">Nombre: &quot;</span> <span class="hl opt">+</span> datos<span class="hl opt">.</span>name <span class="hl opt">+</span> <span class="hl str">&quot;</span><span class="hl esc">\n</span><span class="hl str">&quot;</span><span class="hl opt">);</span>
+				  <span class="hl opt">});</span>
+		       <span class="hl opt">});</span>
+req<span class="hl opt">.</span><span class="hl kwd">end</span><span class="hl opt">();</span>
 </code>
 
-<p>Usamos la librería recién instalada para descargarnos la línea
-  temporal de <a href="https://twitter.com/">Twitter</a>, usando la
-  librería llamada <code>JSON</code>, que se instala con Node. La forma de
-  habitual es la asíncrona habitual en Node: se hace la petición y se
+<P>Usamos la librería recién instalada para descargarnos información
+  de un usuario de <a href='https://GitHub.com'>GitHub</a>, usando la
+  librería llamada $JSON$, que se instala con Node. La forma de
+  petición es la asíncrona habitual en Node: se hace la petición y se
   le pasa la función a la que hay que llamar cuando se reciba la
   respuesta, como en el caso anterior de apertura de un fichero. A la
   función se la llama con tres parámetros: o bien <code>err</code>, en caso de
@@ -365,7 +377,7 @@ console<span class="hl opt">.</span><span class="hl kwd">log</span><span class="
   lenguajes. Sin embargo, se puede usar Javascript de muchas maneras
   diferentes: <a href="http://www.silkjs.net/">SilkJS</a>, por ejemplo, es
   un intérprete de JS que incluye también un servidor web;
-  o <a href="http://code.google.com/p/v8cgi/">V8 CGI</a> es un sistema
+  o <a href='http://code.google.com/p/teajs/'>TeaJS</a> es un sistema
   para crear CGIs basado en el intérprete rápido de JS de Google. Por
   no introducir más herramientas, no los vamos a ver aquí, pero
   conviene tener en cuenta que existen este tipo de soluciones que
