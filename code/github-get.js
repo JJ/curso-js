@@ -7,7 +7,8 @@ var user =process.argv[2]?process.argv[2]:'JJ';
 var options = {
     host: 'api.github.com',
     path: '/users/'+user,
-    method: 'GET'
+    method: 'GET',
+    headers: {'user-agent': 'PruebaNode'}
 };
 
 
