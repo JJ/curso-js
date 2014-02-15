@@ -2439,7 +2439,7 @@ del servidor; por ejemplo, en Apache podríamos usar la siguiente
 <p>Tras la instalación, el programa que hemos visto más arriba se
   transforma en el siguiente:</p>
 <code class="ejemplo"><span class="hl kwa">var</span> express<span class="hl opt">=</span><span class="hl kwd">require</span><span class="hl opt">(</span><span class="hl str">'express'</span><span class="hl opt">);</span>
-<span class="hl kwa">var</span> app <span class="hl opt">=</span> express<span class="hl opt">.</span><span class="hl kwd">createServer</span><span class="hl opt">();</span>
+<span class="hl kwa">var</span> app <span class="hl opt">=</span> express<span class="hl opt">();</span>
 
 app<span class="hl opt">.</span><span class="hl kwd">get</span><span class="hl opt">(</span><span class="hl str">'/'</span><span class="hl opt">,</span> <span class="hl kwa">function</span> <span class="hl opt">(</span>req<span class="hl opt">,</span> res<span class="hl opt">) {</span>   
 	res<span class="hl opt">.</span><span class="hl kwd">send</span><span class="hl opt">(</span><span class="hl str">'Portada'</span><span class="hl opt">);</span>
@@ -2490,7 +2490,7 @@ console<span class="hl opt">.</span><span class="hl kwd">log</span><span class="
   queremos tener diferentes contadores podríamos usar el <a href="http://geneura.ugr.es/%7Ejmerelo/asignaturas/AAP/ejemplos/express-count.js">programa
     siguiente</a>:</p>
 <code class="ejemplo"><span class="hl kwa">var</span> express<span class="hl opt">=</span><span class="hl kwd">require</span><span class="hl opt">(</span><span class="hl str">'express'</span><span class="hl opt">);</span>
-<span class="hl kwa">var</span> app <span class="hl opt">=</span> express<span class="hl opt">.</span><span class="hl kwd">createServer</span><span class="hl opt">();</span>
+<span class="hl kwa">var</span> app <span class="hl opt">=</span> express<span class="hl opt">();</span>
 <span class="hl kwa">var</span> contadores <span class="hl opt">=</span> <span class="hl kwa">new</span> Array<span class="hl opt">;</span>
 <span class="hl kwa">var</span> puerto<span class="hl opt">=</span>process<span class="hl opt">.</span>argv<span class="hl kwc">[2]</span>?process<span class="hl opt">.</span>argv<span class="hl kwc">[2]</span><span class="hl opt">:</span><span class="hl num">8080</span><span class="hl opt">;</span>
 
@@ -2628,7 +2628,7 @@ process<span class="hl sym">.</span>argv<span class="hl sym">.</span><span class
   ficheros para ejecutar el programa. El primero es el <a href="https://github.com/JJ/curso-js/tree/master/code/count-server.js">servidor en node.js</a>: 
 <code class="ejemplo"><span class="hl kwa">var</span> fs <span class="hl opt">=</span> <span class="hl kwd">require</span><span class="hl opt">(</span><span class="hl str">'fs'</span><span class="hl opt">);</span>
 <span class="hl kwa">var</span> express<span class="hl opt">=</span><span class="hl kwd">require</span><span class="hl opt">(</span><span class="hl str">'express'</span><span class="hl opt">);</span>
-<span class="hl kwa">var</span> app <span class="hl opt">=</span> express<span class="hl opt">.</span><span class="hl kwd">createServer</span><span class="hl opt">();</span>
+<span class="hl kwa">var</span> app <span class="hl opt">=</span> express<span class="hl opt">();</span>
 <span class="hl kwa">var</span> contadores <span class="hl opt">=</span> <span class="hl kwa">new</span> Array<span class="hl opt">;</span>
 <span class="hl kwa">var</span> portada <span class="hl opt">=</span> fs<span class="hl opt">.</span><span class="hl kwd">readFileSync</span><span class="hl opt">(</span><span class="hl str">'sumar_formulario.html'</span><span class="hl opt">,</span><span class="hl str">'utf8'</span><span class="hl opt">);</span>
 

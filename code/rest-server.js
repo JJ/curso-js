@@ -1,6 +1,6 @@
 var puerto=process.argv[2]?process.argv[2]:8080;
 var express=require('express'); 
-var app = express.createServer(); 
+var app = express(); 
 app.get('/', function (req, res) { 
     res.send('Portada'); 
 }); 

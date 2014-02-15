@@ -1,5 +1,5 @@
 var express=require('express');
-var app = express.createServer();
+var app = express();
 var contadores = new Array;
 var puerto=process.argv[2]?process.argv[2]:8080;
 

@@ -1,7 +1,7 @@
 
 var fs = require('fs');
 var express=require('express');
-var app = express.createServer();
+var app = express();
 var contadores = new Array;
 var portada = fs.readFileSync('sumar_formulario.html','utf8');
 
