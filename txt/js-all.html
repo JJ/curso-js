@@ -75,7 +75,7 @@ pre.hl	{ color:#000000; background-color:#e0eaee; font-size:10pt; font-family:'C
       de programación tiene una ventaja frente a otros lenguajes
       de programación . Está <em>en todas 
       partes</em>. No hay ordenador sin navegador, ni hay navegador sin
-      Javascript (salvo en móviles y algunos PDAs). Se puede ejecutar
+      Javascript. Se puede ejecutar
       hasta en el navegador Opera que viene con la Wii; desde la
       madurez de <a href='http://nodejs.org'>node.js</a>, es el único
       lenguaje que permite ejecutar aplicaciones en cliente y
@@ -90,7 +90,7 @@ pre.hl	{ color:#000000; background-color:#e0eaee; font-size:10pt; font-family:'C
       usar para añadir funcionalidad a una aplicación. Muchas
       aplicaciones complejas, como <a
 	href='http://gmail.com'>GMail</a> o <a
-	href='http://docs.google.com'>Google docs</a> dependen de
+	href='http://drive.google.com'>Google Apps</a> dependen de
       estos objetos para crear aplicaciones en la web que se comporten
       como si se ejecutaran en un sistema operativo nativo; a estas
       aplicaciones se les ha denominado últimamente <em>Rich
@@ -1299,13 +1299,13 @@ Como se ve, el nodo <code>P</code> sigue al nodo <code>script</code>, es decir, 
 
 
 
-<h2><a name='TJ:t1:greasemonkey'> Usando GreaseMonkey </a> <a href='#TJ:t1:greasemonkey' style='font-size:small'>#</a></h2>
-
-
+<h2><a name='TJ:t1:greasemonkey'> Usando GreaseMonkey </a> 
 
 <p>No se sabe porqué los temas de JS tienen tanta relación con los
       primates, pero el hecho es que <a
-	href='http://greasespot.com'>GreaseMonkey</a> es un <em>plugin</em>
+	href='http://greasespot.com'>GreaseMonkey</a>
+  (o <a href='http://tampermonkey.net/'>TamperMonkey</a>, su
+      equivalente en Chrome, Chromium y Opera) es un <em>plugin</em>
       para los navegadores <a href='http://mozilla.org'>Mozilla</a>
       que permite instalar en el navegador programillas JS específicos
       de una página o grupo de páginas. Para trabajar con él, lo
@@ -1359,7 +1359,7 @@ for ( var secs = 0; secs < h2.length; secs ++ ) {
   }
   a_nodes[secs].parentNode.insertBefore(span,a_nodes[secs]);
 }
-    </code>
+</code>
 
 <p>Este programa añade unas flechitas de navegación a los apuntes de
       esta asignatura, de forma que se pueda pasar de cada sección a
@@ -1402,9 +1402,14 @@ for ( var secs = 0; secs < h2.length; secs ++ ) {
       verlo en este mismo tutorial.</p>
 
 <p>Además, hace uso de algunas funciones propias de GM:
-      <CODE>GM_log</code>, que escribe en la consola de
+      <code>GM_log</code>, que escribe en la consola de
       Javascript. Muy útil para depurarlo, inútil en producción; pero
-      si abres la consola de JS verás los mensajes que ha usado</p>.
+      si abres la consola de JS verás los mensajes que ha usado.</p>
+
+<p>Para usarlo con TamperMonkey, hay que
+  marcar <a href='http://tampermonkey.net/#features'>las opciones de
+  compatibilidad con GreaseMonkey y Firefox, aunque también trata de
+    detectar las opciones necesarias automáticamente.</a>
 
 
 
