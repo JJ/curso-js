@@ -102,7 +102,7 @@ pre.hl	{ color:#000000; background-color:#e0eaee; font-size:10pt; font-family:'C
       cliente-servidor) como por los objetos que suele tener el mismo,
       crear una aplicación cliente-servidor es casi trivial y ha dado
       lugar a un estilo de programación denominado <a href='http://es.wikipedia.org/wiki/AJAX'>AJAX</a>, que se
-      verá más adelante en esta misma asignatura.</p> 
+      verá más adelante.</p> 
 
 <p>Para ejecutar Javascript no hace falta más que un navegador, pero
       también hay entornos para trabajar con él de forma autónoma, tal
@@ -1403,8 +1403,8 @@ for ( var secs = 0; secs < h2.length; secs ++ ) {
 }
 </code>
 
-<p>Este programa añade unas flechitas de navegación a los apuntes de
-      esta asignatura, de forma que se pueda pasar de cada sección a
+<p>Este programa añade unas flechitas de navegación a una página que
+  incluya cabeceras <code>h2</code> de forma que se pueda pasar de cada sección a
       la anterior a la siguiente (de ahí lo de aap-nav). Tiene dos
       partes: la primera parte halla las etiquetas de navegación, y la
       segunda las inserta. Tres partes, de hecho, si incluimos las
@@ -1417,10 +1417,12 @@ for ( var secs = 0; secs < h2.length; secs ++ ) {
 
 <p>El cuarto apartado es el más importante. Es un patrón de las
       páginas en las que va a funcionar el script. Éste no tendría
-      sentido fuera de las páginas de las asignaturas que imparto, así
+      sentido fuera de las páginas de la asignatura en la que estaban
+      incluidos originalmente estos apuntes, así
       que incluimos en el mismo simplemente a las que hay en ese
       directorio. Cuando el navegador cargue alguna página con ese
-      patrón, GM lo detectará y cargará el script.</p>
+      patrón, GM lo detectará y cargará el script; para que trabaje
+      sobre otro conjunto de páginas habrá que poner el patrón correspondiente.</p>
 
 <p>El programa en sí hace uso de los elementos explicados en la
       sección anterior: extrae del documento los títulos de capítulo
@@ -1497,7 +1499,7 @@ newdocument.write(contenido);
 <p>Las hojas de estilo <a href='http://es.wikipedia.org/wiki/CSS'>CSS</a> son una especificación de la
   apariencia de elementos tanto HTML como XML que permiten asignar
   parámetros de presentación específico a cada elemento o a grupos de
-  ellos. No es el objetivo de esta asignatura enseñarlas, pero su
+  ellos. No es el objetivo de este manual enseñarlas, pero su
   utilidad va más allá de la mera apariencia, permitiendo designar
   (usando IDs) y agrupar (usando <em>clases</em>) elementos o grupos de los
   mismos. Cuando hemos hablado anteriormente de seleccionar un solo
@@ -2099,7 +2101,7 @@ console<span class="hl opt">.</span><span class="hl kwd">log</span><span class="
   <a href="http://nodester.com/">Nodester</a> permiten publicar de
   forma gratuita aplicaciones web hechas con node.js. Pueden ser
   bastante útiles para crear prototipos o para hacer pruebas, incluso
-  para alojar prácticas de alguna asignatura.</p>
+  para alojar prácticas de alguna asignatura o curso.</p>
 
 
 <h2>Para finalizar </h2>
@@ -2959,11 +2961,10 @@ programa.
 <div class='licencia'>Este material
   está <a href='http://curso-sobre.berlios.de/gfdles/'>disponible bajo
     los términos de la licencia GNU FDL</a>. Si observas algún error
-  en la página, te agradeceremos que nos hagas llegar un informe de
-  error por correo electrónico (dirección abajo) o, si estás dado de
-  alta en la asignatura, a través
-  del <a href='http://code.google.com/p/aap-etsiit-ugr/issues/entry'>sistema
-  de tickets de la misma</a>.  </div>
+  en este manual, te agradeceremos que nos hagas llegar un informe de
+  error por correo electrónico (dirección abajo) o a través
+  del <a href='https://github.com/JJ/curso-js/issues/'>sistema
+  de tickets del mismo</a>.  </div>
 
 <div style='float:right'>
   <a href="http://validator.w3.org/check?uri=referer"><img
