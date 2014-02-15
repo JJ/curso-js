@@ -1,3 +1,3 @@
-#!/usr/bin/smjs
+#!/usr/bin/js
 
 print( 'Hola, Mundo' );

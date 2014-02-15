@@ -8,10 +8,10 @@ const GLib = imports.gi.GLib;
 Gtk.init(null, 0);
 
 let mwindow = new Gtk.Window ({type : Gtk.WindowType.TOPLEVEL});
-let label = new Gtk.Label ({label : "Hello World"});
+let label = new Gtk.Label ({label : "Hola k ase"});
 
 // Set the window title
-mwindow.title = "Hello World!";
+mwindow.title = "Hola k ase";
 mwindow.connect ("destroy", function(){Gtk.main_quit()});
 
 // Add the label

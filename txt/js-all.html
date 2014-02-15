@@ -97,7 +97,7 @@ pre.hl	{ color:#000000; background-color:#e0eaee; font-size:10pt; font-family:'C
     Internet Applications</em>.</p>
 
 <p>Además, a diferencia de otros lenguajes, es muy fácil crear una
-      aplicación distribuida con Javascript. Tanto por su integración
+      aplicación distribuida o cliente/servidor con Javascript. Tanto por su integración
       con el navegador (parte inseparable de la web, una arquitectura
       cliente-servidor) como por los objetos que suele tener el mismo,
       crear una aplicación cliente-servidor es casi trivial y ha dado
@@ -107,12 +107,23 @@ pre.hl	{ color:#000000; background-color:#e0eaee; font-size:10pt; font-family:'C
 <p>Para ejecutar Javascript no hace falta más que un navegador, pero
       también hay entornos para trabajar con él de forma autónoma, tal
       como el <a
-	href='https://developer.mozilla.org/en-US/'>Mozilla SpiderMonkey</a> y el <a href='https://developer.mozilla.org/en-US/docs/Rhino'>Rhino</a>, éste último basado en
-      Java. Conviene instalar alguno de ellos para poder ejecutar los
+	href='https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey'>Mozilla SpiderMonkey</a> y el <a href='https://developer.mozilla.org/en-US/docs/Rhino'>Rhino</a>, éste último basado en
+      Java; <a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Shells'>hay
+    una lista de intérpretes completa que se puede usar</a>. Conviene instalar alguno de ellos para poder ejecutar los
       programas de ejemplo; por ejemplo, para instalar el primero
       habrá que ejecutar (desde la consola de administrador o
       superusuario):</p>
-<div class='ejemplo'>bash% apt-get install smjs</div>
+<div class='ejemplo'>bash% apt-get install js</div>
+o
+<div class='ejemplo'>bash% apt-get install rhino</div>
+
+<p>Hay algunas diferencias entre los intérpretes, sobre todo en
+  cualquier función que tenga que ver con la entrada/salida. Conviene
+  consultar la página de manual del intérprete para ver cómo se hace
+  específicamente en cada caso; en general, los ejemplos que se
+  incluyen aquí funcionan correctamente en <code>js</code>
+  o <code>rhino</code>.</p>
+
 <p>En cuanto a los navegadores, puede que
       haga falta activar Javascript para que lo entiendan. Por
       ejemplo, en Firefox hay que activarlo usando Edit ->
@@ -124,7 +135,7 @@ pre.hl	{ color:#000000; background-color:#e0eaee; font-size:10pt; font-family:'C
 <div class='aclara'>Si usas Eclipse, puede que te venga bien el <a
 	href='http://www.eclipse.org/webtools/jsdt/'>plugin
 	JSDT</a>. Igual al atento lector le funciona
-	correctamente. Por otro lado, el <code>xemacs</code> va de lujo. NetBeans
+	correctamente. Por otro lado, el <code>emacs</code> va de lujo. NetBeans
 	tiene
 	también <a href='http://netbeans.org/kb/docs/ide/javascript-editor.html'>soporte
     para JavaScript</a>, simplemente seleccionando este lenguaje para
@@ -156,14 +167,18 @@ pre.hl	{ color:#000000; background-color:#e0eaee; font-size:10pt; font-family:'C
       puedes instalar bajándote los fuentes y compilando, el que está
       disponible en los repositorios es uno llamado sólo <code>js</code>,
       aparentemente el SpiderMonkey. Para instalarlo, escribir <code>yum install js</code>. Para los ejemplos que vienen en este tema,
-      sustituir <code>#!/usr/bin/smjs</code> por <code>#!/usr/bin/js</code>. El Gnome Shell
+      sustituir <code>#!/usr/bin/smjs</code>
+      por <code>#!/usr/bin/js</code> (o, en general, por el camino en
+      el que se haya instalado). El Gnome Shell
       (incluido en la versión 3.0 de Gnome) incluye también un
       intérprete de JavaScript como lenguaje nativo, y con él se
       pueden desarrollar pequeños applets. Este intérprete, que está
-      instalado por defecto junto con el entorno, se denomina <code>gjs</code> y
+      instalado por defecto junto con el entorno, se denomina <code>gjs</code>,
       está basado en SpiderMonkey y tiene la ventaja de que está
       integrado con todas las librerías de Gnome, de forma que se
-  pueden hacer programas tales como <a href='https://github.com/JJ/curso-js/tree/master/code/g.js'>este</a>
+  pueden hacer programas tales
+      como <a href='https://github.com/JJ/curso-js/tree/master/code/g.js'>este,
+      que crea una ventana con un botón</a>
       sin necesidad de instalar ningún  módulo adicional. Éste
   intérprete es el que usa desde <code>lg</code> (<em>looking glass</em>), una
       consola de depuración de Gnome al estilo de la consola del
@@ -184,13 +199,35 @@ pre.hl	{ color:#000000; background-color:#e0eaee; font-size:10pt; font-family:'C
 
 
 
-<code class='ejemplo'>#!/usr/bin/smjs
+<code class='ejemplo'>#!/usr/bin/js
 print( 'Hola, Mundo' );</code>
 
 <p>En realidad, el JS es bastante parecido al C, y, para el caso,
-      también al Java. Este programa producirá:
-<code class='ejemplo'>jmerelo@vega:~/txt/docencia/AAP/Temario$ code/js/hola.js
+      también al Java. Este programa producirá (siempre que lo hagamos
+  ejecutable con <code>chmod +x hola.js</code> previamente):
+<code class='ejemplo'>jmerelo@vega:~/txt/docencia/AAP/Temario$ ./hola.js
 Hola, Mundo</code></p>
+
+<p>Podemos probar con diferentes intérpretes que tengamos
+  instalados.</p>
+<code class='ejemplo'>jmerelo@penny:~/code$ gjs hola.js 
+Hola, Mundo
+jmerelo@penny:~/code$ rhino hola.js 
+Hola, Mundo
+jmerelo@penny:~/code$ js hola.js 
+Hola, Mundo
+</code>
+
+<p><strong>Ojo</strong>: en node.js habría que
+  cambiar <code>print</code> por <code>console.log</code>, o tendremos
+  un error. Con <code>kjs</code> habrá que ejecutarlo también
+  directamente desde la línea de órdenes; con un fichero da un error
+  y no he encontrado ningún manual específico sobre él, así que no
+  aconsejo usar esa versión de JS. Por
+  otro lado, <a href='https://github.com/JJ/curso-js/tree/master/code/hola-g.js'>este
+    programa, <code>hola-g.js</code>, sería equivalente para el
+    intérprete <code>gjs</code> que viene con Gnome</a>.</p>
+
 
 <p>Para ejecutarlo desde el navegador habrá que hacer una poca más de
       historia, pero tampoco tanto. Lo vemos en <a
@@ -215,7 +252,7 @@ Hola, Mundo</code></p>
   los nombres de los comandos.</p>
 
 
-<h2><a name='T1:t1:control'> Estructuras de control </a> <a href='#T1:t1:control' style='font-size:small'>#</a></h2>
+<h2><a name='T1:t1:control'> Estructuras de control en JavaScript </a>
 
 
 
@@ -621,7 +658,7 @@ devolvería <code>Valor</code>. </p>
       asociativas como los objetos se representan internamente de la
       misma forma, y te puedes referir a ellos de diferentes
       maneras. Vamos a usar el depurador interactivo para verlo,
-      ejecutando simplemente <code>rhino</code>, <code>smjs</code> o <code>kjs</code> en la línea de
+      ejecutando simplemente <code>rhino</code>, <code>rhino</code> o <code>kjs</code> en la línea de
       comandos. Una vez hecho, tecleamos las siguientes órdenes:
 <code class='ejemplo'><strong>js> foo = new Array</strong>
 
@@ -971,7 +1008,7 @@ Que parece más raro de la cuenta, pero que, con un poco de código, se
     siguiente (<code>liga3.js</code>)</a>: </p>
 
 
-<code class='ejemplo'>#<span class="hl opt">!/</span>usr<span class="hl opt">/</span>bin<span class="hl opt">/</span>smjs
+<code class='ejemplo'>#<span class="hl opt">!/</span>usr<span class="hl opt">/</span>bin<span class="hl opt">/</span>js
 
 <span class="hl kwd">load</span><span class="hl opt">(</span><span class="hl str">'Nuevo_partido.js'</span><span class="hl opt">);</span>
 
@@ -1030,7 +1067,12 @@ Que parece más raro de la cuenta, pero que, con un poco de código, se
   <span class="hl kwd">print</span><span class="hl opt">(</span> i <span class="hl opt">+</span> <span class="hl str">&quot;: &quot;</span> <span class="hl opt">+</span> resultados<span class="hl kwc">[i]</span><span class="hl opt">)</span>
 <span class="hl opt">}</span></code>
 
-<p>La parte nueva de este programa está en en la línea 9, donde se
+<p>Como en todos los scripts, habrá que tener en cuenta que la primera
+  línea, <code>#!/usr/bin/js</code>, tendrá que sustituirse por el
+  intérprete de JavaScript que usemos
+  (<code>rhino</code>, <code>gjs</code>, <code>node</code> o el que
+  sea; en este último caso es probable que la línea
+  sea <code>/usr/bin/local/node</code>). La parte nueva de este programa está en en la línea 9, donde se
   define la variable <code>imprime</code>. Se define una función <em>sin
     nombre</em> (lo que se suele denominar un <em>closure</em> o
   función anónima) a la que podemos acceder mediante la variable que
