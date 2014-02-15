@@ -1628,7 +1628,7 @@ style='border:dashed'<span class="hl
 	  <li>Conocer node.js y saber sus conceptos fundamentales.</li> 
 
 	  <li>Aprender los conceptos básicos de los servicios web basados en 
-REST, la representación de datos usada y cómo implementarlos en node.js</li> 
+<a href='#REST'>REST</a>, la representación de datos usada y cómo implementarlos en node.js</li> 
 	  
 	  <li>Realizar prototipos rápidos de cliente y servidor de servicio web usando node.js</li>
 
@@ -1827,7 +1827,7 @@ paralelo.</p>
   primera vez, creará un directorio <code>node_modules</code>, dentro del cual
   habrá un directorio <code>request</code>. </p>
 
-<p>Con <code>request</code> podemos codificar todo tipo de peticiones REST. A un
+<p>Con <code>request</code> podemos codificar todo tipo de peticiones <a href='#REST'>REST</a>. A un
   nivel muy básico se puede usar de la forma siguiente, en el programa
   <a href="https://github.com/JJ/curso-js/blob/master/code/github-get.js"><code>github-get.js</code></a>,
   que pide información sobre un usuario en GitHub:</p>
@@ -1876,10 +1876,6 @@ req<span class="hl opt">.</span><span class="hl kwd">end</span><span class="hl o
   un 201, tendríamos que interpretar la respuesta de otra forma.</p>
 
 
-
-
-
-
 <h2>Usando un servidor web</h2>
 
 
@@ -1897,7 +1893,7 @@ req<span class="hl opt">.</span><span class="hl kwd">end</span><span class="hl o
   usar otras opciones como el <a href="http://nginx.org/">nginx</a>, un
   servidor web de altas prestaciones que se puede isntalar, además, en
   todo tipo de plataformas (aunque este último no puede ejecutar, de
-  forma directa, los CGIs de los que hablamos en este apartado). Tanto uno como otro están disponibles en
+  forma directa, los <a href='#CGI'>CGIs</a> de los que hablamos en este apartado). Tanto uno como otro están disponibles en
     los repositorios de las distribuciones Linux más comunes. </p>
 
   <p>Un servidor web se instala como un servicio (es decir, un
@@ -1945,7 +1941,7 @@ console<span class="hl opt">.</span><span class="hl kwd">log</span><span class="
   diferentes: <a href="http://www.silkjs.net/">SilkJS</a>, por ejemplo, es
   un intérprete de JS que incluye también un servidor web;
   o <a href='http://code.google.com/p/teajs/'>TeaJS</a> es un sistema
-  para crear CGIs basado en el intérprete rápido de JS de Google. Por
+  para crear <a href='#CGI'>CGIs</a> basado en el intérprete rápido de JS de Google. Por
   no introducir más herramientas, no los vamos a ver aquí, pero
   conviene tener en cuenta que existen este tipo de soluciones que
   pueden convivir en un servidor como Apache o NGINX con otros
@@ -2011,7 +2007,7 @@ console<span class="hl opt">.</span><span class="hl kwd">log</span><span class="
   use (PUT, GET o la que sea). Esto lo veremos un poco más adelante.</p>
 
 
-<p>A partir de ahí se puede construir un mínimo interfaz REST para
+<p>A partir de ahí se puede construir un mínimo interfaz <a href='#REST'>REST</a> para
   responder a una serie de peticiones. La idea básica es que las
   funciones a las que tendremos que llamar estarán indentificadas por
   el URL que se use para pedirlas. Por ejemplo, el
@@ -2241,7 +2237,7 @@ una llamada a otro procedimiento.</p>
 <p>Para llevar a cabo este ejemplo hay que instalar <code>curl</code>, un
   programa que en una primera aproximación es simplemente un
   descargador de páginas web pero que en segunda se puede usar como un
-  completo cliente REST; en este caso <code>-i</code> te incluye las
+  completo cliente <a href='#REST'>REST</a>; en este caso <code>-i</code> te incluye las
   cabeceras en la salida, con lo que producirá algo de este
   estilo </p>
 <code class='ejemplo'>HTTP/1.1 200 OK
@@ -2341,7 +2337,7 @@ Nombre: Juan Julián Merelo Guervós</code>
     function(res) </code> con exactamente el mismo resultado.</p>
 
 
-<p>La idea de REST desde el punto de vista del servidor es usar el URL
+<p>La idea de <a href='#REST'>REST</a> desde el punto de vista del servidor es usar el URL
       para representar recursos, y las propias órdenes de HTTP para
       ejercitar acciones sobre ese recursos. En general, <code>GET</code> servirá
       para transferir la representación de un recurso del cliente al
@@ -2391,14 +2387,14 @@ Nombre: Juan Julián Merelo Guervós</code>
       correctamente, y con un error HTTP si no.</p>
 
 <p>El principal problema con este diseño RESTful es hacerlo en la
-      práctica. Como se ha visto a la hora de programar CGIs, en
+      práctica. Como se ha visto a la hora de programar <a href='#CGI'>CGIs</a>, en
       general el camino a un recurso es tortuoso, y la forma como se
       pasan los parámetros tiene un montón de &amp; e signos =. Así
       que hay que <em>limpiar</em> el URL de alguna forma. Dependiendo de la
       implementación del servidor, quizás se puede hacer directamente;
       por ejemplo, en caso de que se trate de un <code>.war</code> en
       un contenedor de servlets, ya se encarga directamente; sin
-      embargo. Algunos CGIs también permiten interpretar directamente
+      embargo. Algunos <a href='#CGI'>CGIs</a> también permiten interpretar directamente
       el URL. Pero otra forma de hacerlo es usar <a href="http://httpd.apache.org/docs/2.2/mod/mod_rewrite.html"><code>mod_rewrite</code></a>, que permite reescribir los URLs, de forma que la petición cambia de forma antes de servirse la petición. Estos <em>cambios</em> toman la forma de directivas
 del servidor; por ejemplo, en Apache podríamos usar la siguiente
       (dentro del fichero <code>httpd.conf</code> o el fichero de
@@ -2412,7 +2408,7 @@ del servidor; por ejemplo, en Apache podríamos usar la siguiente
       expresión de la derecha aparecen, por orden, representados por
       <code>$n</code>.</p>
 
-<p>El hecho de que sea tan complicado diseñar interfaces REST con recursos, como los CGIs, que no están preparados para ello hace que existan marcos de aplicaciones, como los que veremos a continuación, en los que todo esto se hace de una forma mucho más simple, trabajando directamente con las rutas REST</p>
+<p>El hecho de que sea tan complicado diseñar interfaces REST con recursos, como los <a href='#CGI'>CGIs</a>, que no están preparados para ello hace que existan marcos de aplicaciones, como los que veremos a continuación, en los que todo esto se hace de una forma mucho más simple, trabajando directamente con las rutas REST</p>
 
 <h2>Interfaces REST simples con express</h2>
 
@@ -2811,7 +2807,7 @@ en
 
 
 
-<p>Nosotros iremos a <a href="http://geneura.ugr.es/%7Ejmerelo/asignaturas/AAP/AAP-CouchDB.mhtml">aprender el uso de
+<p>Se puede ir a <a href="http://geneura.ugr.es/%7Ejmerelo/asignaturas/AAP/AAP-CouchDB.mhtml">aprender el uso de
     un sistema de almacenamiento de objetos llamado CouchDB</a>, pero
     el tema de diseño de sistemas con node.js y jquery en el cliente
     puede ir mucho más allá, usando, por
@@ -2843,6 +2839,29 @@ en
       Web Services Cookbook</a> también es bastante útil en este
   sentido. </p>
 
+
+<h2>Glosario</h2>
+
+<h3 name='CGI'>CGI</h3>
+
+En el contexto de la web, <a href='http://www.w3.org/CGI/'>CGI</a>
+significa <em>Common Gateway Interface</em>, o interfaz de enlace
+común; es un método para ejecutar programas desde un servidor web que
+consiste en codificar las entradas al programa en entrada estándar
+(como si los leyera desde teclado) y en variables de entorno (como si
+desde la línea de comandos definiéramos una serie de variables) y
+entregar la salida por entrada estándar. El servidor web ejecuta el
+programa, definiendo variables de entorno y proporcionándole la
+entrada, y recibe la salida que envía al quien ha solicitado el URL.
+
+<h3 name='REST'>REST</h3>
+
+<a href='http://es.wikipedia.org/wiki/Representational_State_Transfer'>REST</a>
+significa transferencia de estado que representa algo (por no traducir
+representacional, que suena fatal). Es una convención para el diseño
+de APIs que consiste en usar los verbos del protocolo HTTP y su
+significado estricto para llevar a cabo todas las operaciones de un
+programa. 
 
 <br clear='all'>
 
