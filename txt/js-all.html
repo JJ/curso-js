@@ -10,9 +10,6 @@
     <meta name="keywords" content="Computación distribuida, computación paralela, p2p, overlay, grid, evaluación de prestaciones, javascript">
     <meta name="description" content="Introducción rápida al lenguaje Javascript">
   <link href='http://fonts.googleapis.com/css?family=Arvo|Source+Code+Pro' rel='stylesheet' type='text/css'>
-  </head>
-<body>
-
 <style type="text/css" media="all">
 body { font-family: 'Arvo', serif; }
 
@@ -51,7 +48,10 @@ pre.hl	{ color:#000000; background-color:#e0eaee; font-size:10pt; font-family:'C
 .hl.kwc { color:#000000; font-weight:bold; }
 .hl.kwd { color:#010181; }
 
-</style>
+  </style></head>
+<body>
+
+
 
 <h1>Introducción al lenguaje de programación Javascript</h1>
 
@@ -72,8 +72,7 @@ pre.hl	{ color:#000000; background-color:#e0eaee; font-size:10pt; font-family:'C
 <h2>¿Javascript? Pero si es muy fácil</h2>
 
 <p>Fuera de ser solamente un lenguaje para el navegador, <a href='http://es.wikipedia.org/wiki/Javascript'>Javascript</a>  tiene una ventaja frente a otros lenguajes
-      de programación tiene una ventaja frente a otros lenguajes
-      de programación . Está <em>en todas 
+      de programación Está <em>en todas 
       partes</em>. No hay ordenador sin navegador, ni hay navegador sin
       Javascript. Se puede ejecutar
       hasta en el navegador Opera que viene con la Wii; desde la
@@ -252,13 +251,16 @@ Hola, Mundo
   los nombres de los comandos.</p>
 
 
-<h2><a name='T1:t1:control'> Estructuras de control en JavaScript </a>
+<h2><a name='T1:t1:control'> Estructuras de control en JavaScript </a></h2>
 
 
 
 <p>Vistas ya las mil y una formas de escribir cosas en la pantalla,
       procedamos a temas más escabrosos, como lo que viene siendo
-      hacer algo <em>realmente</em>. Por ejemplo, un bucle que cree una tabla HTML, como se hace en el siguiente <a href='https://github.com/JJ/curso-js/tree/master/code/tabla.js'>programilla</a>:</p>
+      hacer algo <em>realmente</em>. Por ejemplo, un bucle que cree
+      una tabla HTML, como se hace en el
+      siguiente <a href='https://github.com/JJ/curso-js/tree/master/code/tabla.js'>programilla</a>:</p>
+
 <code class='ejemplo'>var tabla="table";
 var celda="td";
 var fila="tr";
@@ -879,15 +881,15 @@ Ponferradina : 44
 Madrid : 25
 Atleti : 33
 Ponferradina : 44</code>
-donde usamos <code>eval</code>, que interpreta una expresión en Javascript como
+<p>donde usamos <code>eval</code>, que interpreta una expresión en Javascript como
       si del propio intérprete se tratara. Las expresiones se pueden
-      anidar, para dar lugar a objetos más complejos
+  anidar, para dar lugar a objetos más complejos</p>
 <code class='ejemplo'><strong>js> eval("var objeto2 = { Madrid : 25, Atleti: 33, Ponferradina: { casa: 33, fuera: 44} }");</strong>
 <strong>js> for (i in objeto2) { print( i + " : "+ objeto2[i] )};</strong>
 Madrid : 25
 Atleti : 33
 Ponferradina : [object Object]</code>
-Que parece más raro de la cuenta, pero que, con un poco de código, se
+<p>Que parece más raro de la cuenta, pero que, con un poco de código, se
       podría también imprimir.</p>
 
 <p>Y JSON, precisamente, es uno de los formatos de intercambio, el más
@@ -1341,7 +1343,7 @@ Como se ve, el nodo <code>P</code> sigue al nodo <code>script</code>, es decir, 
 
 
 
-<h2><a name='TJ:t1:greasemonkey'> Usando GreaseMonkey </a> 
+<h2><a name='TJ:t1:greasemonkey'> Usando GreaseMonkey </a></h2>
 
 <p>No se sabe porqué los temas de JS tienen tanta relación con los
       primates, pero el hecho es que <a
@@ -2930,7 +2932,7 @@ excelencia ha sido <a href='http://httpd.apache.org'>Apache</a>, pero
 
 <h3 name='PaaS'>PaaS</h3>
 
-<a herf='http://es.wikipedia.org/wiki/PaaS#Plataforma_como_servicio'>Platform
+<a href='http://es.wikipedia.org/wiki/PaaS#Plataforma_como_servicio'>Platform
   as a Service, o Plataforma como Servicio</a>, es un producto que
   integra una máquina virtual provisionada con una serie de
   aplicaciones de tal forma que sólo hay que subir el código que usa
@@ -2963,7 +2965,7 @@ programa.
     los términos de la licencia GNU FDL</a>. Si observas algún error
   en este manual, te agradeceremos que nos hagas llegar un informe de
   error por correo electrónico (dirección abajo) o a través
-  del <a href='https://github.com/JJ/curso-js/issues/'>sistema
+  del <a href='https://goto-ligithub.com/JJ/curso-js/issues/'>sistema
   de tickets del mismo</a>.  </div>
 
 <div style='float:right'>
@@ -2972,8 +2974,9 @@ programa.
 							 alt="Valid HTML 4.01 Transitional" height="31" width="88"></a>
 </div>
     
-<p>    <address><a href="mailto:jj (at) merelo.net">Juan
-      J. Merelo</a></address> </p>
+<p><address><a href="mailto:jj (at) merelo.net">Juan
+      J. Merelo</a></address></p>
+
   </body>
 </html>
 
