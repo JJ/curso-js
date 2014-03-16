@@ -1156,7 +1156,7 @@ console<span class="hl opt">.</span><span class="hl kwd">log</span><span class="
   el módulo mientras que otro se concentra en la forma de
   empaquetarlo. </p>
 
-<h2> Para finalizar</h2>
+<h3> Para finalizar</h3>
 
 <p>Cualquiera de los recursos que listo ahí abajo pueden resultar
       útiles para ampliar información sobre JavaScript. Quizás también
@@ -1168,7 +1168,7 @@ console<span class="hl opt">.</span><span class="hl kwd">log</span><span class="
       Java, aunque pueda que el JS generado necesite algún retoque
       adicional. </p>
 
-<h2><a name='T1:t1:agra'> Agradecimientos </a> <a href='#T1:t1:agra' style='font-size:small'>#</a></h2>
+<h3><a name='T1:t1:agra'> Agradecimientos </a> </h3>
 
 <p>Agradezco a los <a
 	href='http://barrapunto.com/comments.pl?sid=69179'>comentaristas</a>
@@ -1179,7 +1179,7 @@ console<span class="hl opt">.</span><span class="hl kwd">log</span><span class="
 	Javier Espigares por la lectura y comentarios sobre las
 	versiones previas de este tema y el anterior.</p>  
 
-<h2><a name='T1:t1:biblio'> Bibliografía </a> <a href='#T1:t1:biblio' style='font-size:small'>#</a></h2>
+<h3><a name='T1:t1:biblio'> Bibliografía </a> <a href='#T1:t1:biblio' style='font-size:small'>#</a></h3>
 
 
 
@@ -1206,7 +1206,6 @@ console<span class="hl opt">.</span><span class="hl kwd">log</span><span class="
 
 
 <h1>JavaScript en el navegador y JQuery</h1>
-
 
 
 
@@ -1275,11 +1274,6 @@ La estructura es la que cabe esperar: hay un nodo raíz, etiquetado
 <span class="hl kwa">&lt;p&gt;&lt;input</span> type='text' name='color' value='Color (in inglis)' onChange='setColor(value)' <span class="hl kwa">/&gt;&lt;/p&gt;</span>
 
 <span class="hl kwa">&lt;div</span> id='color'<span class="hl kwa">&gt;</span><span class="hl kwd">&amp;nbsp;&amp;nbsp;</span><span class="hl kwa">&lt;/div&gt;</span>
-
-
-      
-
-
     <span class="hl kwa">&lt;hr&gt;</span>
     <span class="hl kwa">&lt;address&gt;&lt;a</span> <span class="hl kwb">href</span>=<span class="hl str">&quot;mailto:jmerelo&#64;localhost.localdomain&quot;</span><span class="hl kwa">&gt;</span>Juan J. Merelo<span class="hl kwa">&lt;/a&gt;&lt;/address&gt;</span>
 <span class="hl com">&lt;!-- Created: Wed Feb 21 18:45:35 CET 2007 --&gt;</span>
@@ -1674,13 +1668,11 @@ style='border:dashed'<span class="hl
 
 
 <div class="objetivos"> <ul>
-	  
 
 	  <li>Conocer node.js y saber sus conceptos fundamentales.</li> 
 
 	  <li>Aprender los conceptos básicos de los servicios web basados en 
 <a href='#REST'>REST</a>, la representación de datos usada y cómo implementarlos en node.js</li> 
-	  
 	  <li>Realizar prototipos rápidos de cliente y servidor de servicio web usando node.js</li>
 
       </ul>
@@ -1693,9 +1685,10 @@ style='border:dashed'<span class="hl
 
 <p>La aceptación de JS como un lenguaje de programación procede del hecho
   de su incorporación en diferentes herramientas de propósito general, 
-  sobre todo a partir de haberlo desgajado del navegador en
+  sobre todo a partir de haberlo desgajado del navegador en e
+  introducido en
   herramientas como las que hemos comentado anteriormente. Una de tales
-  herramientas es <a href="http://nodejs.org/">Node.js</a>, un sistema
+  herramientas es <a href="http://nodejs.org/">Node.js</a>, un marco
   para programación de eventos asíncrono que usa como base JS. Se puede usar
   directamente como intérprete de JS (tal como hemos
   hecho <a href="http://geneura.ugr.es/%7Ejmerelo/tutoriales/servicios-web">en este otro tutorial</a>), salvo por el hecho de que
@@ -1707,7 +1700,7 @@ style='border:dashed'<span class="hl
   dentro del mundo JS, puesto que es la misma forma de trabajar que
   tiene <a href="http://geneura.ugr.es/%7Ejmerelo/asignaturas/AAP/AAP-Javascript-2.mhtml">JQuery</a>.</p>
 
-<p>En todo caso, node.js convierte JS en un lenguaje de propósito
+<p>En todo caso, node.js incluye una serie de bibliotecas básicas que convierten JS en un lenguaje de propósito
   general, algo que le falta a otros intérpretes como Rhino, que
   necesita usar librerías de Java para poder hacer cosas básicas como
   abrir ficheros. Empecemos pues, por el principio: instalar node.js,
@@ -1717,6 +1710,28 @@ style='border:dashed'<span class="hl
   web</a>. Conviene usar este último método, porque es un lenguaje en
   evolución constante, de forma que los repositorios de Linux van
   siempre un poco por detrás. </p>
+
+<div class='aclara'><p>No hace falta instalar node.js para empezar a
+  usarlo. Algunos PaaS como <a href='http://heroku.com'>Heroku</a> te
+  proporcionan tanto una serie de herramientas para prototipar y
+  publicar aplicaciones basadas en node.js como una línea de órdenes
+    de la que usarla directamente.</p>
+
+<p>Por otro lado, otra opción conveniente
+  es <a href='https://gist.github.com/isaacs/579814'>instalar <code>nave</code></a>,
+  un entorno virtual que permite trabajar simultáneamente con
+  diferentes versiones de node y, sobre todo, tener la última versión,
+  más allá de la que proporcione la distribución. </p>
+
+  <p>Finalmente, en una máquina <em>limpia</em> que use Linux (lo que
+  debería ser obvio, Windows automáticamente ensucia la máquina en la
+  que se instala) se pueden
+    seguir <a href='https://gist.github.com/JJ/8459799'>estas
+  instrucciones</a> para instalar los prerrequisitos y la última
+    versión de node.</p>
+
+</div>
+
 
 <p>Seguimos haciendo nuestro primer programa, 
   un <a href="https://github.com/JJ/curso-js/blob/master/code/guenas.js">programa simple (guenas.js)</a>
@@ -1730,7 +1745,8 @@ console<span class="hl sym">.</span><span class="hl kwd">log</span><span class="
 <p>La primera línea es exclusivamente para sistemas Linux (que son,
   por otro lado, los únicos serios para desarrollo de software); en ella
   habrá que poner el camino completo al intérprete de node; este es
-  una opción, como <code>/usr/local/bin/node</code>; con ella y
+  una opción, como <code>/usr/local/bin/node</code>
+  u <code>/usr/bin/env node</code> en el caso de usar <code>nave</code>; con ella y
   haciendo ejecutable el fichero con <code>chmod +x node.js</code>
   podemos ejecutarlo y obtener el siguiente resultado</p>
 <code class="ejemplo">jmerelo@penny:~/servicios-web/ejemplos$  <span class="user">./guenas.js </span>
@@ -1745,7 +1761,27 @@ console<span class="hl sym">.</span><span class="hl kwd">log</span><span class="
   de instancia <code>hola</code>, o visto de otro modo, el valor <code>mundo</code> a la
   clave <code>hola</code>. <code>console.log</code> imprime la cadena en la salida,
   escribiendo directamente (y además en JSON) el valor de la
-  misma. </p>
+  misma. <code>console</code> es un objeto que forma parte de
+  la <a href='http://nodejs.org/api/stdio.html '>librería estándar de
+    entrada salida de node</a>. Equivale a la <em>consola</em> o el
+  terminal, permitiendo enviar información a la misma
+  con <code>log</code> y con otras órdenes como <code>error</code>; la
+  diferencia es que en el primer caso se escribe en salida estándar y
+  en el segundo en salida de error estándar (no se capturaría en una
+  redirección de salida, por ejemplo). <code>console.log</code> puede
+  usar
+  también <a href='http://nodejs.org/api/stdio.html#stdio_console_log_data'>formatos
+    como la orden <code>printf</code> de C</a>, es decir,</p>
+    <code class='ejemplo'>console.log('Respuesta: %s', saludo.hola
+    )</code>
+<p>como hacemos
+  en <a href='https://github.com/JJ/curso-js/blob/master/code/guenas-nave.js'>este
+    programa</a>. El objeto <code>console</code> existe en la mayoría
+  de los navegadores modernos y especialmente en Chrome/Chromium, pero
+  el resultado saldrá por la <em>consola</em> del navegador que forma
+  parte de las herramientas del mismo; se le denomina <em>herramientas
+    de desarrollador</em> o <em>consola de JavaScript</em>.
+</p>
 
 
 <p>Sin embargo, node.js no es un intérprete habitual, tiene una forma
@@ -1755,7 +1791,7 @@ console<span class="hl sym">.</span><span class="hl kwd">log</span><span class="
 
 <code class="ejemplo">#<span class="hl sym">!/</span>usr<span class="hl sym">/</span>local<span class="hl sym">/</span>bin<span class="hl sym">/</span>node
 
-fs <span class="hl sym">=</span> <span class="hl kwd">require</span><span class="hl sym">(</span><span class="hl str">'fs'</span><span class="hl sym">);</span>
+var fs <span class="hl sym">=</span> <span class="hl kwd">require</span><span class="hl sym">(</span><span class="hl str">'fs'</span><span class="hl sym">);</span>
 fs<span class="hl sym">.</span><span class="hl kwd">readFile</span><span class="hl sym">(</span><span class="hl str">'quiniela.datos'</span><span class="hl sym">,</span> <span class="hl str">'utf8'</span><span class="hl sym">,</span> 
 	    <span class="hl kwa">function</span><span class="hl sym">(</span>err<span class="hl sym">,</span>datos<span class="hl sym">) {</span>
 		<span class="hl kwa">if</span> <span class="hl sym">(</span>err<span class="hl sym">) {</span>
@@ -1799,7 +1835,8 @@ de lo que tarde <code>haz_a</code>, <code>haz_c</code> podría ejecutarse antes q
 <code>haz_b</code>. En general, la secuencia de las líneas no tiene por qué ser
 la secuencia de ejecución de las funciones, eso es precisamente lo que
 significa la asincronía. Eso no quiere decir que no se pueda usar como
-cualquier otro lenguaje, sólo que hay que tener cuidado. Y, por otro
+cualquier otro lenguaje, sólo que hay que tener cuidado y usar
+patrones de programación específicos. Y, por otro
 lado, permite responder muy rápidamente a eventos sin bloquear la
 operación; cada evento inicia una hebra y se van procesando en
 paralelo.</p>
@@ -1807,7 +1844,11 @@ paralelo.</p>
 <p>Vamos a la orden específica: efectivamente, con <code>readFile</code> leemos
   el fichero. Los dos primeros 
   argumentos son el nombre del fichero y, a continuación, la
-  codificación, que es obligatorio usar. Y continuación el <em>callback</em>
+  codificación, que es obligatorio usar (bueno, más o
+  menos: <a href='http://nodejs.org/api/fs.html#fs_fs_readfile_filename_options_callback'>si
+  no se da la codificación, te devuelve un buffer, no el contenido del
+    fichero</a>).
+ Y continuación el <em>callback</em>
   del que hemos hablado: una función que se ejecuta cuando se
   termine; se trata de una función anónima tal como las que hemos
   visto en apartados anteriores. El hecho de que se ejecute asíncronamente quiere decir que

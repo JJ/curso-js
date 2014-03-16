@@ -1,6 +1,6 @@
 #!/usr/local/bin/node
 
-fs = require('fs');
+var fs = require('fs');
 fs.readFile('quiniela.datos', 'utf8', 
 	    function(err,datos) {
 		if (err) {
