@@ -56,6 +56,8 @@ pre.hl	{ color:#000000; background-color:#e0eaee; font-size:10pt; font-family:'C
 <h1>Introducción al lenguaje de programación Javascript</h1>
 
 
+<h2>¿Javascript? Pero si es muy fácil</h2>
+
 <div class='objetivos'> <ul>
 	  
 	  <li>Aprender qué es Javascript</li> 
@@ -68,8 +70,6 @@ pre.hl	{ color:#000000; background-color:#e0eaee; font-size:10pt; font-family:'C
 
       </ul>
 </div>  
-
-<h2>¿Javascript? Pero si es muy fácil</h2>
 
 <p>Fuera de ser solamente un lenguaje para el navegador, <a href='http://es.wikipedia.org/wiki/Javascript'>Javascript</a>  tiene una ventaja frente a otros lenguajes
       de programación Está <em>en todas 
@@ -194,8 +194,7 @@ o
     mucho más... </p>
 
 
-<h2>Primer programa en Javascript</h2>
-
+<h3>Primer programa en Javascript</h3>
 
 
 <code class='ejemplo'>#!/usr/bin/js
@@ -251,7 +250,7 @@ Hola, Mundo
   los nombres de los comandos.</p>
 
 
-<h2><a name='T1:t1:control'> Estructuras de control en JavaScript </a></h2>
+<h3><a name='T1:t1:control'> Estructuras de control en JavaScript </a></h3>
 
 
 
@@ -386,10 +385,7 @@ function celda( contenido ) {
 
 
 
-
-
-<h2><a name='T1:t2:clases'> Clases y objetos en Javascript </a> <a href='#T1:t2:clases' style='font-size:small'>#</a></h2>
-
+<h3><a name='T1:t2:clases'> Clases y objetos en Javascript </a></h3>
 
 
 <p>Javascript es un lenguaje basado en objetos, aunque un tanto
@@ -509,7 +505,7 @@ function toString() {
 
 
 
-<h2>Matrices asociativas </h2>
+<h3>Matrices asociativas </h3>
 
 
 
@@ -647,11 +643,7 @@ devolvería <code>Valor</code>. </p>
 
 
 
-
-
-
-
-<h2> Manejando Objetos </h2>
+<h3> Manejando Objetos </h3>
 
 
 
@@ -851,8 +843,7 @@ nombres completos e incluso como implementar interfaces de Java. </p>
 
 
 
-<h2> Objetos para el camino </h2>
-
+<h3> Objetos para el camino: JSON </h3>
 
 
 <p>Lo interesante de los objetos en JS es que hay una forma muy fácil
@@ -950,8 +941,7 @@ Ponferradina : [object Object]</code>
   sin necesidad de hacer ningún tipo de parsing.</p>
 
 
-<h2> Funciones como objetos </h2>
-
+<h3> Funciones como objetos </h3>
 
 
 <p>Las funciones son objetos de pleno derecho en JavaScript. Se puede
@@ -1086,8 +1076,7 @@ Ponferradina : [object Object]</code>
 
 
 
-<h2><a name='T1:t1:common'> CommonJS, una
-    infraestructura común para carga de módulos </a> <a href='#T1:t1:common' style='font-size:small'>#</a></h2>
+<h3><a name='T1:t1:common'> CommonJS, una infraestructura común para carga de módulos </a> </h3>
 
 
 
@@ -1139,7 +1128,6 @@ console<span class="hl opt">.</span><span class="hl kwd">log</span><span class="
   con <code>new un_partido.Un_Partido</code>. A partir de ahí el
   objeto generado se comporta exactamente igual que cualquier otro
   objeto, como podemos ver usando console. 
-
 
 
 <p>A diferencia de casi todos los lenguajes de scripting, no hay un
@@ -1205,7 +1193,7 @@ console<span class="hl opt">.</span><span class="hl kwd">log</span><span class="
 	de Javascript de Víctor Rivas Santos</a>. </p> 
 
 
-<h1>JavaScript en el navegador y JQuery</h1>
+<h2 name='jquery'>JavaScript en el navegador y JQuery</h2>
 
 
 
@@ -1217,11 +1205,10 @@ console<span class="hl opt">.</span><span class="hl kwd">log</span><span class="
       </ul>
 </div>  
 
-<h2><a name='TJ:t1:DOM'> El modelo de objetos </a> <a href='#TJ:t1:DOM' style='font-size:small'>#</a></h2>
+<h3><a name='TJ:t1:DOM'> El modelo de objetos </a></h3>
 
 
-
-  <p>En realidad es difícil encontrar un enfoque como el de <a href='AAP-Taller-1.mhtml'>este tema</a>,
+  <p>Ya no es tan difícil encontrar un enfoque como el de este curso,
       centrado en JS como lenguaje y no como un chisme más dentro del
       navegador. Eventualmente, habrá que tratar con esto, así que
       este momento es tan bueno como cualquier otro. En realidad, la
@@ -1337,7 +1324,7 @@ Como se ve, el nodo <code>P</code> sigue al nodo <code>script</code>, es decir, 
 
 
 
-<h2><a name='TJ:t1:greasemonkey'> Usando GreaseMonkey </a></h2>
+<h3><a name='TJ:t1:greasemonkey'> Usando GreaseMonkey </a></h3>
 
 <p>No se sabe porqué los temas de JS tienen tanta relación con los
       primates, pero el hecho es que <a
@@ -1453,8 +1440,7 @@ for ( var secs = 0; secs < h2.length; secs ++ ) {
 
 
 
-<h2><a name='TJ:tj:wins'> Trabajando con otras
-  ventanas </a> <a href='#TJ:tj:wins' style='font-size:small'>#</a></h2>
+<h3><a name='TJ:tj:wins'> Trabajando con otras ventanas </a></h3>
 
 
 
@@ -1488,8 +1474,7 @@ newdocument.write(contenido);
   en <a href='http://www.htmlgoodies.com/beyond/javascript/javascript-dynamic-document-creation-in-new-windows.html'>este mini-tutorial</a>.</p>
 
 
-<h2><a name='TJ:tj:selectores'> Selectores </a> <a href='#TJ:tj:selectores' style='font-size:small'>#</a></h2>
-
+<h3><a name='TJ:tj:selectores'> Selectores </a></h3>
 
 
 <p>Las hojas de estilo <a href='http://es.wikipedia.org/wiki/CSS'>CSS</a> son una especificación de la
@@ -1506,8 +1491,7 @@ newdocument.write(contenido);
 
 <p>La <a href='http://www.w3.org/TR/CSS2/selector.html'>sintaxis más
     general está especificada por la W3</a> y se puede observar en
-    cualquier hoja de estilo, por ejemplo <a href='AAP.css'>la de esta
-    misma página</a>. De esta,
+    cualquier hoja de estilo. De esta,
     extraemos <a href='http://net.tutsplus.com/tutorials/html-css-techniques/the-30-css-selectors-you-must-memorize/'>los
     30 selectores que se deben memorizar</a>, principalmente <code>#</code> que
     se refiere a un id específico (por ejemplo, <code>#ej.1.1</code>
@@ -1515,7 +1499,7 @@ newdocument.write(contenido);
     y <code>.</code> que se refiere a una clase; <code>.ej</code> por ejemplo seleccionaría
   todos los div declarados así: <code>div class='ej'</code>.</p>
 
-<h2><a name='TJ:tj:eventos'> Eventos </a> <a href='#TJ:tj:eventos' style='font-size:small'>#</a></h2>
+<h3><a name='TJ:tj:eventos'> Eventos </a> </h3>
 
 
 
@@ -1572,9 +1556,7 @@ tenerla.<span class="hl kwa">&lt;/p&gt;</span></code>
   carga la página</p>
 
 
-
-<h2><a name='TJ:tj:jq'> JQuery: Introducción </a> <a href='#TJ:tj:jq' style='font-size:small'>#</a></h2>
-
+<h3><a name='TJ:tj:jq'> JQuery: Introducción </a> <a href='#TJ:tj:jq' style='font-size:small'>#</a></h3>
 
 
   <p><a href='http://jquery.com'>JQuery</a> es una librería en
@@ -1662,9 +1644,7 @@ style='border:dashed'<span class="hl
   el id <code>#cambiando</code>. </p>
 
 
-<h1>Introducción a node.js</h1>
-
-
+<h2 name='nodejs'>Introducción a node.js</h2>
 
 
 <div class="objetivos"> <ul>
@@ -1679,7 +1659,7 @@ style='border:dashed'<span class="hl
 </div>  
 
 
-<h2> Node.js, un intérprete asíncrono para JS</h2>
+<h3> Node.js, un intérprete asíncrono para JS</h3>
 
 
 
@@ -1698,7 +1678,7 @@ style='border:dashed'<span class="hl
   <em>callback</em>, es decir, de una función a la que se llama una vez que se
   complete la acción que se ha solicitado. No es que sea algo extraño
   dentro del mundo JS, puesto que es la misma forma de trabajar que
-  tiene <a href="http://geneura.ugr.es/%7Ejmerelo/asignaturas/AAP/AAP-Javascript-2.mhtml">JQuery</a>.</p>
+  tiene <a href="#jquery">JQuery</a>.</p>
 
 <p>En todo caso, node.js incluye una serie de bibliotecas básicas que convierten JS en un lenguaje de propósito
   general, algo que le falta a otros intérpretes como Rhino, que
@@ -1812,7 +1792,7 @@ fs<span class="hl sym">.</span><span class="hl kwd">readFile</span><span class="
   primera línea, que no hace falta en Windows (aunque se tendrá que
   ejecutar desde línea de órdenes poniendo explícitamente node
   fichero.js).  En la segunda vemos que se carga una librería usando 
-  <code>require</code>, el <a href="http://geneura.ugr.es/%7Ejmerelo/asignaturas/AAP/AAP-Taller-1.mhtml#T1:t1:common">mecanismo
+  <code>require</code>, el <a href="T1:t1:common">mecanismo
   común</a> para cargar un módulo y evaluarlo, que,
   además, crea un objeto que se puede usar; lo usamos más adelante
   para leer un fichero. <a href="http://nodejs.org/api/fs.html"><code>fs</code> se refiere a <em>filesystem</em></a>, o
@@ -1886,7 +1866,7 @@ paralelo.</p>
 
 
 
-<h2><code>npm</code>, instalación de módulos en Node</h2>
+<h3><code>npm</code>, instalación de módulos en Node</h3>
 
 
 
@@ -1937,8 +1917,7 @@ paralelo.</p>
     method<span class="hl opt">:</span> <span class="hl str">'GET'</span>
 <span class="hl opt">};</span>
 
-
-<span class="hl kwa">var</span> req <span class="hl opt">=</span> https<span class="hl opt">.</span><span class="hl kwd">get</span><span class="hl opt">(</span><span class="hl str">'https://api.github.com/users/'</span><span class="hl opt">+</span>user<span class="hl opt">,</span> <span class="hl kwa">function</span><span class="hl opt">(</span>res<span class="hl opt">) {</span>
+<span class="hl kwa">var</span> req <span class="hl opt">=</span> https<span class="hl opt">.</span><span class="hl kwd">get</span><span class="hl opt">(</span>options,</span> <span class="hl kwa">function</span><span class="hl opt">(</span>res<span class="hl opt">) {</span>
 			   res<span class="hl opt">.</span><span class="hl kwd">setEncoding</span><span class="hl opt">(</span><span class="hl str">'utf8'</span><span class="hl opt">);</span>
 			   res<span class="hl opt">.</span><span class="hl kwd">on</span><span class="hl opt">(</span><span class="hl str">'data'</span><span class="hl opt">,</span> <span class="hl kwa">function</span> <span class="hl opt">(</span>datos_JSON<span class="hl opt">) {</span>
 				      <span class="hl kwa">var</span> datos<span class="hl opt">=</span>JSON<span class="hl opt">.</span><span class="hl kwd">parse</span><span class="hl opt">(</span>datos_JSON<span class="hl opt">);</span>
@@ -1969,11 +1948,10 @@ req<span class="hl opt">.</span><span class="hl kwd">end</span><span class="hl o
   un 201, tendríamos que interpretar la respuesta de otra forma.</p>
 
 
-<h2>Usando un servidor web</h2>
+<h3>Usando un servidor web</h3>
 
 
-
-<p>Para escribir posibles respuestas a una petición web hay que
+<p>Para enviar respuestas a una petición web hay que
   hacerlo desde un servidor. La  tendencia moderna es hacerlo desde un
   entorno integrado, sin embargo los servidores web multifunción
   permiten tanto ofrecer páginas web estáticas como webs dinámicas, y
@@ -2040,8 +2018,7 @@ console<span class="hl opt">.</span><span class="hl kwd">log</span><span class="
   pueden convivir en un servidor como Apache o NGINX con otros
   lenguajes como Ruby o Perl.</p>
 
-<h2>node.js como servidor</h2>
-
+<h3>node.js como servidor</h3>
 
 
 <p>Crear un servidor web con node.js es tan simple que viene
@@ -2147,8 +2124,7 @@ console<span class="hl opt">.</span><span class="hl kwd">log</span><span class="
   para alojar prácticas de alguna asignatura o curso.</p>
 
 
-<h2>Para finalizar </h2>
-
+<h3>Para finalizar </h3>
 
 
 <p>Hay muchas más cosas que se pueden hacer con Node. Por ejemplo, un
@@ -2176,7 +2152,7 @@ console<span class="hl opt">.</span><span class="hl kwd">log</span><span class="
   es un recurso imprescindible. Recuerda que tu karma aumentará
   también cuando contestes preguntas.</p>
 
-<h2> Agradecimientos </h2>
+<h3> Agradecimientos </h3>
 
 
 
@@ -2185,7 +2161,7 @@ console<span class="hl opt">.</span><span class="hl kwd">log</span><span class="
   especialmente <a href="http://twitter.com/danielribes">@danielribes</a>,
   sugerencias sobre este material. </p> 
 
-<h2>Bibliografía</h2>
+<h3>Bibliografía</h3>
 
 
 
@@ -2215,9 +2191,7 @@ console<span class="hl opt">.</span><span class="hl kwd">log</span><span class="
     cualquier otro recomendado, a esta alturas hay una cantidad
     ingente de bibliografía sobre node.js). </p>
 
-<h1>Trabajando con REST y AJAX </h1>
-
-
+<h2>Trabajando con REST y AJAX </h2>
 
 
 <div class="objetivos"> <ul>
@@ -2232,7 +2206,7 @@ console<span class="hl opt">.</span><span class="hl kwd">log</span><span class="
       </ul>
 </div>  
 
-<h2>Introducción al interfaz REST </h2>
+<h3>Introducción al interfaz REST </h3>
 
 
 
@@ -2253,7 +2227,7 @@ console<span class="hl opt">.</span><span class="hl kwd">log</span><span class="
   fácil como crear una cadena; de hecho, se pueden usar desde la línea
   de órdenes</p> 
 
-<h2> El protocolo HTTP y sus múltiples posibilidades </h2>
+<h3> El protocolo HTTP y sus múltiples posibilidades </h3>
 
 
 
@@ -2503,8 +2477,7 @@ del servidor; por ejemplo, en Apache podríamos usar la siguiente
 
 <p>El hecho de que sea tan complicado diseñar interfaces REST con recursos, como los <a href='#CGI'>CGIs</a>, que no están preparados para ello hace que existan marcos de aplicaciones, como los que veremos a continuación, en los que todo esto se hace de una forma mucho más simple, trabajando directamente con las rutas REST</p>
 
-<h2>Interfaces REST simples con express</h2>
-
+<h3>Interfaces REST simples con express</h3>
 
 
 <p>Para diseñar interfaces REST de forma bastante simple, hay un
@@ -2515,7 +2488,7 @@ del servidor; por ejemplo, en Apache podríamos usar la siguiente
 <p>Pero primero hay que instalarlo. Node.js tiene un sistema de
   gestión de módulos bastante simple
   llamado <a href="http://npmjs.org/">npm</a>
-  que <a href="http://geneura.ugr.es/%7Ejmerelo/asignaturas/AAP/AAP-nodejs.mhtml">hemos visto en el tema anterior</a>. Tras seguir las
+  que <a href="#nodejs">hemos visto en el tema anterior</a>. Tras seguir las
   instrucciones en el sitio para instalarlo (o, en el caso de ubuntu,
   instalarlo desde Synaptic o con apt-get), vamos al directorio en el
   que vayamos a crear el programa y escribimos</p>
@@ -2568,14 +2541,11 @@ console<span class="hl opt">.</span><span class="hl kwd">log</span><span class="
   adaptarla a nuestras necesidades particulares. </p>
 
 
-
-
-
 <p>El acceso a los parámetros de la llamada y la realización de
   diferentes actividades según el mismo se denomina enrutado. En
   express se pueden definir los parámetros de forma bastante simple,
   usando marcadores precedidos por <code>:</code>. Por ejemplo, si
-  queremos tener diferentes contadores podríamos usar el <a href="http://geneura.ugr.es/%7Ejmerelo/asignaturas/AAP/ejemplos/express-count.js">programa
+  queremos tener diferentes contadores podríamos usar el <a href="https://github.com/JJ/curso-js/blob/master/code/express-count.js">programa
     siguiente</a>:</p>
 <code class="ejemplo"><span class="hl kwa">var</span> express<span class="hl opt">=</span><span class="hl kwd">require</span><span class="hl opt">(</span><span class="hl str">'express'</span><span class="hl opt">);</span>
 <span class="hl kwa">var</span> app <span class="hl opt">=</span> express<span class="hl opt">();</span>
@@ -2619,8 +2589,7 @@ para lo que previamente habrá que haber instalado <code>curl</code>,
 
 
 
-<h2>Clientes REST</h2>
-
+<h3>Clientes REST</h3>
 
 
 <p>Tampoco es complicado escribir con node.js un cliente REST. Se
@@ -2672,7 +2641,7 @@ process<span class="hl sym">.</span>argv<span class="hl sym">.</span><span class
   simplemente te dice cual ha sido la respuesta y la imprime.</p>
 
 
-<h2> Usando Ajax</h2>
+<h3> Usando Ajax</h3>
 
 
 
@@ -2855,7 +2824,7 @@ en
   mecanismo nativo. </p>
 
 
-<h2> Más allá del Ajax </h2>
+<h3> Más allá del Ajax </h3>
 
  
 
@@ -2896,8 +2865,7 @@ en
     tutorial</a> que  muestra como llevar a cabo un chat en tiempo
   real usando node.js.</p>
 
-<h2> A dónde ir desde aquí</h2>
-
+<h3> A dónde ir desde aquí</h3>
 
 
 <p>Se puede ir a <a href="http://geneura.ugr.es/%7Ejmerelo/asignaturas/AAP/AAP-CouchDB.mhtml">aprender el uso de
@@ -2916,8 +2884,7 @@ en
   más simple de hacer las cosas y posiblemente hay software libre
   para solucionarlo.</p>
 
-<h2> Bibliografía y enlaces</h2>
-
+<h3> Bibliografía y enlaces</h3>
 
 
 <p>En general, REST se considera, de forma amplia, dentro de los
@@ -2997,26 +2964,9 @@ programa.
 
 <a href='#API'>API</a> diseñada siguiendo las convenciones <a href='#REST'>REST</a>. 
 
+<h2>Licencia</h2>
 
-
-<br clear='all'>
-
-<div class='licencia'>Este material
-  está <a href='http://curso-sobre.berlios.de/gfdles/'>disponible bajo
-    los términos de la licencia GNU FDL</a>. Si observas algún error
-  en este manual, te agradeceremos que nos hagas llegar un informe de
-  error por correo electrónico (dirección abajo) o a través
-  del <a href='https://goto-ligithub.com/JJ/curso-js/issues/'>sistema
-  de tickets del mismo</a>.  </div>
-
-<div style='float:right'>
-  <a href="http://validator.w3.org/check?uri=referer"><img
-							 src="http://www.w3.org/Icons/valid-html401"
-							 alt="Valid HTML 4.01 Transitional" height="31" width="88"></a>
-</div>
-    
-<p><address><a href="mailto:jj (at) merelo.net">Juan
-      J. Merelo</a></address></p>
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Licencia Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Introducción a JavaScript</span> por <a xmlns:cc="http://creativecommons.org/ns#" href="http://amzn.to/1gzEaMD" property="cc:attributionName" rel="cc:attributionURL">JJ Merelo</a> se distribuye bajo una <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Licencia Creative Commons Atribución-CompartirIgual 4.0 Internacional</a>.<br />Basada en una obra en <a xmlns:dct="http://purl.org/dc/terms/" href="http://github.com/JJ/curso-js" rel="dct:source">http://github.com/JJ/curso-js</a>.
 
   </body>
 </html>
