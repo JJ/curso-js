@@ -1,5 +1,5 @@
 #!/usr/bin/env node
 
 var saludo = new Object;
-saludo.hola = 'mundo';
-console.log( "Saludando al %s", saludo.hola );
+saludo.hola = 'otro mundo';
+console.log( "Saludando al " + saludo.hola );

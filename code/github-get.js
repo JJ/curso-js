@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 var https = require('https');
 
@@ -8,15 +8,16 @@ var options = {
     host: 'api.github.com',
     path: '/users/'+user,
     method: 'GET',
-    headers: {'user-agent': 'PruebaNode'}
+    headers: {'User-Agent': 'Prueba-Node-App'}
 };
 
 
-var req = https.get('https://api.github.com/users/'+user, function(res) {
+var req = https.get(options, function(res) {
 			   res.setEncoding('utf8');
 			   res.on('data', function (datos_JSON) {
-				      var datos=JSON.parse(datos_JSON);
-				      console.log('Login: ' + datos.login+ "\nNombre: " + datos.name + "\n");
-				  });
-		       });
+			       console.log(datos_JSON);
+			       var datos=JSON.parse(datos_JSON);
+			       console.log('Login: ' + datos.login+ "\nNombre: " + datos.name + "\n");
+			   });
+});
 req.end();

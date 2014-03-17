@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var http=require('http'); 
 var puerto=process.argv[2]?process.argv[2]:8080;
 http.createServer(function (req, res) { 
