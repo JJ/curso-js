@@ -1,4 +1,4 @@
-#!/usr/bin/smjs
+#!/usr/bin/js24
 
 var tabla="table";
 var celda="td";
@@ -6,10 +6,10 @@ var fila="tr";
 var matriz = [1,2,3];
 print( "<"+tabla+">");
 for (i in matriz ) {
-  print( "<"+fila+">");
+  print( "\t<"+fila+">");
   for ( j in matriz ) {
-    print ("<"+celda+">"+matriz[i]*matriz[j]+"</"+celda+">");
+    print ("\t\t<"+celda+">"+matriz[i]*matriz[j]+"</"+celda+">");
   }
-  print ("</"+fila+">\n");
+  print ("\t</"+fila+">\n");
  }
 print ("</"+tabla+">");

@@ -86,8 +86,7 @@ background-color:lightGray;
       servidor, así que se ha convertido en uno de los lenguajes más
       útiles para desarrollo en Internet.</p>
 
-<p>Esto se debe, en parte a que ha sido definido como un <a href='https://es.wikipedia.org/wiki/ECMAScript'>estándar
-    ECMA (denominado ECMAScript)</a>  lo que da lugar a muchas implementaciones diferentes, que
+<p>Esto se debe, en parte a que ha sido definido como un <a href='https://es.wikipedia.org/wiki/ECMAScript'>estándar ECMA (denominado ECMAScript)</a>  lo que da lugar a muchas implementaciones diferentes, que
       son, además, independientes del fabricante. Y, por otro lado,
       también suele usar un conjunto de objetos estándar (que no son
       estrictamente parte de un lenguaje) que se pueden
@@ -118,8 +117,11 @@ background-color:lightGray;
       habrá que ejecutar (desde la consola de administrador o
       superusuario):</p>
 <div class='ejemplo'>bash% apt-get install js</div>
-o
+<p>(que no funcionará en las últimas versiones de ubuntu, como la 14.04) o</p>
 <div class='ejemplo'>bash% apt-get install rhino</div>
+<p>o </p>
+<div class='ejemplo'>bash% apt-get install libmozjs-24-bin</div>
+<p>que instalará Spidermonkey en el fichero <code>js24</code></p>
 
 <p>Hay algunas diferencias entre los intérpretes, sobre todo en
   cualquier función que tenga que ver con la entrada/salida. Conviene
