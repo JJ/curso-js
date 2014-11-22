@@ -2451,7 +2451,7 @@ Nombre: Juan Julián Merelo Guervós</code>
       jornada tiene 15 partidos. Supongamos que se conocen los
       partidos de antemano, y que sólo se pueden proponer resultados
       por parte de un usuario. Se podría diseñar el interfaz de la
-      forma siguiente. </p>
+      forma siguiente: </p>
 
 <ul><li>Quiniela de una jornada: <code>http://jost.com/quiniela/jornada/[número de
 	  jornada]</code></li>
@@ -2466,7 +2466,7 @@ Nombre: Juan Julián Merelo Guervós</code>
 	<code>http://jost.com/resultados/jornada/22/usuario/foobar</code></li>
     </ul>
 
-<p>Las operaciones vienen dadas por el diseño del interfaz. Por
+<p>Las operaciones HTTP que se van a usar vienen determinadas por el diseño del interfaz. Por
       ejemplo, para proponer un resultado determinado habría que hacer
       una petición POST con dos parámetros: el nombre de usuario y el
       resultado propuesto. El servidor responderá con un mensaje
@@ -2495,7 +2495,11 @@ del servidor; por ejemplo, en Apache podríamos usar la siguiente
       expresión de la derecha aparecen, por orden, representados por
       <code>$n</code>.</p>
 
-<p>El hecho de que sea tan complicado diseñar interfaces REST con recursos, como los <a href='#CGI'>CGIs</a>, que no están preparados para ello hace que existan marcos de aplicaciones, como los que veremos a continuación, en los que todo esto se hace de una forma mucho más simple, trabajando directamente con las rutas REST</p>
+<p>El hecho de que sea tan complicado diseñar interfaces REST con
+  recursos, como los <a href='#CGI'>CGIs</a>, que no están preparados
+  para ello hace que existan marcos de aplicaciones, como los que
+  veremos a continuación, en los que todo esto se hace de una forma
+  mucho más simple, trabajando directamente con las rutas REST.</p> 
 
 <h3>Interfaces REST simples con express</h3>
 
