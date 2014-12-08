@@ -13,11 +13,11 @@ var options = {
 
 
 var req = https.get(options, function(res) {
-			   res.setEncoding('utf8');
-			   res.on('data', function (datos_JSON) {
-			       console.log(datos_JSON);
-			       var datos=JSON.parse(datos_JSON);
-			       console.log('Login: ' + datos.login+ "\nNombre: " + datos.name + "\n");
-			   });
+    res.setEncoding('utf8');
+    res.on('data', function (datos_JSON) {
+	console.log(datos_JSON);
+	var datos=JSON.parse(datos_JSON);
+	console.log('Login: ' + datos.login+ "\nNombre: " + datos.name + "\n");
+    });
 });
 req.end();
