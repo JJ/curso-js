@@ -180,26 +180,24 @@ nombres de los comandos.
 Vistas ya las mil y una formas de escribir cosas en la pantalla,
 procedamos a temas más escabrosos, como lo que viene siendo hacer algo
 *realmente*. Por ejemplo, un bucle que cree una tabla HTML, como se hace
-en el siguiente
-[programilla](https://github.com/JJ/curso-js/tree/master/code/tabla.js):
+en el siguiente [programilla](https://github.com/JJ/curso-js/tree/master/code/tabla.js):
 
-```
-#!/usr/bin/js24
+	#!/usr/bin/js24
 
-var tabla="table";
-var celda="td";
-var fila="tr";
-var matriz = [1,2,3];
-print( "<"+tabla+">");
-for (i in matriz ) {
-  print( "\t<"+fila+">");
-  for ( j in matriz ) {
-    print ("\t\t<"+celda+">"+matriz[i]*matriz[j]+"</"+celda+">");
-  }
-  print ("\t</"+fila+">\n");
- }
-print ("</"+tabla+">");`
-```{.ejemplo}
+	var tabla="table";
+	var celda="td";
+	var fila="tr";
+	var matriz = [1,2,3];
+	print( "<"+tabla+">");
+	for (i in matriz ) {
+	  print( "\t<"+fila+">");
+	  for ( j in matriz ) {
+	    print ("\t\t<"+celda+">"+matriz[i]*matriz[j]+"</"+celda+">");
+	  }
+	  print ("\t</"+fila+">\n");
+	 }
+	print ("</"+tabla+">");`
+
 
 Este programa tiene dos bucles anidados, que imprimen un producto dentro
 de una tabla. La salida será tal que así (ver el fuente para la
@@ -227,10 +225,15 @@ haremos un bucle que recorra la matriz, usando un *iterador* `i`, que en
 este caso se comporta como una variable de bucle de las de toda la vida.
 Usamos el `+` para concatenación de cadenas, y poco más. El resto es
 como el C, o el Java. De hecho, se pueden usar los bucles clásicos con
-comparación e incremento, como se muestra en
-[`tabla1.js`](https://github.com/JJ/curso-js/tree/master/code/tabla1.js):
+comparación e incremento, como se muestra en [`tabla1.js`](https://github.com/JJ/curso-js/tree/master/code/tabla1.js):
 
-`for (i=1; i<=3; i++ ) {   print( "<"+fila+">");   for ( j=1; j<=3; j++  ) {     print ("<"+celda+">"+i*j+"</"+celda+">");   }   print ("</"+fila+">\n");  }     `{.ejemplo}
+	for (i=1; i<=3; i++ ) {   
+		print( "<"+fila+">");   
+		for ( j=1; j<=3; j++  ) {     
+			print ("<"+celda+">"+i*j+"</"+celda+">");   
+		}   
+		print ("</"+fila+">\n");  
+	}
 
 Aunque queda un poco torpe tanto \<\>... vamos a reducir un poco el
 programa, haciéndolo [más
