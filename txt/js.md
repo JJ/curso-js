@@ -226,7 +226,7 @@ este caso se comporta como una variable de bucle de las de toda la vida.
 Usamos el `+` para concatenación de cadenas, y poco más. El resto es
 como el C, o el Java. De hecho, se pueden usar los bucles clásicos con
 comparación e incremento, como se muestra en [`tabla1.js`](https://github.com/JJ/curso-js/tree/master/code/tabla1.js):
-
+```
 	for (i=1; i<=3; i++ ) {   
 		print( "<"+fila+">");   
 		for ( j=1; j<=3; j++  ) {     
@@ -234,7 +234,7 @@ comparación e incremento, como se muestra en [`tabla1.js`](https://github.com/J
 		}   
 		print ("</"+fila+">\n");  
 	}
-
+```{.ejemplo}
 Aunque queda un poco torpe tanto \<\>... vamos a reducir un poco el
 programa, haciéndolo [más
 elegante](https://github.com/JJ/curso-js/tree/master/code/tabla2.js)
