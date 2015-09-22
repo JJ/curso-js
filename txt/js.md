@@ -181,7 +181,7 @@ Vistas ya las mil y una formas de escribir cosas en la pantalla,
 procedamos a temas más escabrosos, como lo que viene siendo hacer algo
 *realmente*. Por ejemplo, un bucle que cree una tabla HTML, como se hace
 en el siguiente [programilla](https://github.com/JJ/curso-js/tree/master/code/tabla.js):
-```	
+
 	#!/usr/bin/js24
 
 	var tabla="table";
@@ -197,7 +197,7 @@ en el siguiente [programilla](https://github.com/JJ/curso-js/tree/master/code/ta
 	  print ("\t</"+fila+">\n");
 	 }
 	print ("</"+tabla+">");`
-```{.ejemplo}
+
 
 Este programa tiene dos bucles anidados, que imprimen un producto dentro
 de una tabla. La salida será tal que así (ver el fuente para la
