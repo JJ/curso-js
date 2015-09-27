@@ -1,7 +1,7 @@
-¿JavaScript? Pero si es muy fácil
----------------------------------
+# ¿JavaScript? Pero si es muy fácil
 
-###Objetivos de este capítulo
+
+##Objetivos de este capítulo
 -   Aprender qué es JavaScript
 -   Aprender la sintaxis de JavaScript
 -   Usar objetos y clases en JavaScript
@@ -128,7 +128,7 @@ También se puede instalar como cliente y servidor JavaScript
 [node.js](http://nodejs.org), un procesador de bucles de eventos que es
 también intérprete en JavaScript. Y mucho más...
 
-### Primer programa en JavaScript
+## Primer programa en JavaScript
 
 ~~~~~~
 #!/usr/bin/js
@@ -196,7 +196,7 @@ Sublime Text o Notepad++; también con los entornos integrados, que te
 ofrecerán ventajas adicionales como completar las variables y los
 nombres de los comandos.
 
-### Estructuras de control en JavaScript
+## Estructuras de control en JavaScript
 
 Vistas ya las mil y una formas de escribir cosas en la pantalla,
 procedamos a temas más escabrosos, como lo que viene siendo hacer algo
@@ -318,7 +318,7 @@ se haya cargado todavía, con lo que no estará disponible. Una vez más,
 la programación distribuida no es totalmente igual a la programación en
 otros lenguajes.
 
-### Clases y objetos en JavaScript
+## Clases y objetos en JavaScript
 
 JavaScript es un lenguaje basado en objetos, aunque un tanto peculiar;
 en realidad, de casi todas las características de un lenguaje orientado
@@ -435,7 +435,7 @@ una función que cambia el valor de la variable igual que la variable,
 porque entonces nos liamos. Y como ya hemos visto antes como se llama a
 los métodos de instancia, pues listos. No se hable más.
 
-### Matrices asociativas
+## Matrices asociativas
 
 Pero hay más matrices, aparte de las lineales: JS, como muchos otros
 lenguajes, permite trabajar con *matrices asociativas* (también llamadas
@@ -539,7 +539,7 @@ switch (resultado) {
 y que viene a ser como el anterior, pero con `case`s en vez de `if`s.
 Vamos, tres cuartos de lo mismo.
 
-### Manejando Objetos
+## Manejando Objetos
 
 En realidad, todo en JavaScript es un objeto, y especialmente los
 vectores: tanto los vectores tradicionales como las matrices asociativas
@@ -715,7 +715,7 @@ resulta que necesita ejecutarse dentro del navegador, porque usa objetos
 del mismo (como `document`, por ejemplo). Así que la dejaremos para más
 adelante.
 
-### Objetos para el camino: JSON
+## Objetos para el camino: JSON
 
 Lo interesante de los objetos en JS es que hay una forma muy fácil de
 *serializarlos* (es decir, convertirlos en texto u otro formato de forma
@@ -815,7 +815,7 @@ Por eso, en el bucle dentro de la función `getLocation` se trabaja
 directamente con los datos obtenidos sin necesidad de hacer ningún tipo
 de parsing.
 
-### Funciones como objetos
+## Funciones como objetos
 
 Las funciones son objetos de pleno derecho en JavaScript. Se puede crear
 una función como cualquier otro objeto, y de hecho ya hemos visto algo
@@ -948,7 +948,7 @@ sintaxis es que las funciones son variables de pleno derecho, que
 podemos usar como parámetros de otras funciones; esto se usará de forma
 extensiva cuando veamos jQuery y node.js.
 
-### CommonJS, una infraestructura común para carga de módulos
+## CommonJS, una infraestructura común para carga de módulos
 
 Uno de los problemas de JS es que, al haber sido desarrollado
 principalmente para trabajar en el navegador, carece de una serie de
@@ -1032,7 +1032,7 @@ diferentes](http://requirejs.org/docs/commonjs.html), uno se concentra
 en la forma de cargar el módulo mientras que otro se concentra en la
 forma de empaquetarlo.
 
-### Para finalizar
+## Para finalizar
 
 Cualquiera de los recursos que listo ahí abajo pueden resultar útiles
 para ampliar información sobre JavaScript. Quizás también pueda ser
@@ -1043,7 +1043,7 @@ Toolkit](http://code.google.com/webtoolkit/) permite desarrollar en AJAX
 programando sólo en Java, aunque pueda que el JS generado necesite algún
 retoque adicional. Por supuesto, también es conveniente que se continúe con el siguiente capítulo. 
 
-### Agradecimientos
+## Agradecimientos
 
 Agradezco a los
 [comentaristas](http://barrapunto.com/comments.pl?sid=69179) de [los
@@ -1052,7 +1052,7 @@ diferentes anuncios](http://barrapunto.com/comments.pl?sid=68032) que
 sus comentarios y sugerencias. También a Javier Espigares por la lectura
 y comentarios sobre las versiones previas de este texto.
 
-### Bibliografía [\#](#T1:t1:biblio)
+## Bibliografía [\#](#T1:t1:biblio)
 
 Hay dos libros fundamentales para aprender JS, aunque están muy
 enfocados a JS en el navegador:[*JavaScript: The Definitive Guide*, el

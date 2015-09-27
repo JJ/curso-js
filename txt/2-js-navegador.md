@@ -1,12 +1,12 @@
-JavaScript en el navegador y JQuery {name="jquery"}
------------------------------------
+#JavaScript en el navegador y JQuery {name="jquery"}
 
-###Objetivos de este capítulo
+
+##Objetivos de este capítulo
 
 -   Trabajar con JavaScript en el navegador
 -   Usar librerías populares de JavaScript en ese contexto
 
-### El modelo de objetos del documento
+## El modelo de objetos del documento
 
 Ya no es tan difícil encontrar un enfoque como el de este curso,
 centrado en JS como lenguaje y no como un chisme más dentro del
@@ -109,7 +109,7 @@ otro, el elemento `resultado1` que teníamos preparado al efecto.
 efectivamente, sustituimos parte del contenido de la página
 dinámicamente. ¿No es una maravilla?
 
-### Usando GreaseMonkey
+## Usando GreaseMonkey
 
 No se sabe porqué los temas de JS tienen tanta relación con los
 primates, pero el hecho es que [GreaseMonkey](http://greasespot.com) (o
@@ -221,7 +221,7 @@ compatibilidad con GreaseMonkey y
 Firefox](http://tampermonkey.net/#features), aunque también trata de
 detectar las opciones necesarias automáticamente.
 
-### Trabajando con otras ventanas
+## Trabajando con otras ventanas
 
 Una de las características específicas del DOM es la posibilidad de
 trabajar con otras ventanas, creando contenido y presentándolo en las
@@ -264,7 +264,7 @@ el URL directamente pasándoselo como parámetro a `open`) pero demuestra
 las posibilidades del mismo, que también se pueden ver en [este
 mini-tutorial](http://www.htmlgoodies.com/beyond/javascript/javascript-dynamic-document-creation-in-new-windows.html). 
 
-### Selectores
+## Selectores
 
 Las hojas de estilo [CSS](http://es.wikipedia.org/wiki/CSS) son una
 especificación de la apariencia de elementos tanto HTML como XML que
@@ -288,7 +288,7 @@ principalmente `#` que se refiere a un id específico (por ejemplo,
 que se refiere a una clase; `.ej` por ejemplo seleccionaría todos los
 div declarados así: `div class='ej'`.
 
-### Eventos
+## Eventos
 
 Para entender bien el uso de JavaScript en el navegador es conveniente
 introducir el concepto de eventos. Se trata simplemente de señales
@@ -344,7 +344,7 @@ ejemplo](https://github.com/JJ/curso-js/blob/master/code/onload.html)
 El uso de evento está hacia el final del código, donde usamos `alert`
 que se activa tras el evento `load`, es decir, cuando se carga la página
 
-### JQuery: Introducción [\#](#TJ:tj:jq)
+## JQuery: Introducción [\#](#TJ:tj:jq)
 
 [JQuery](http://jquery.com) es una librería en JavaScript que está
 diseñada principalmente para simplificar la creación de programas y
@@ -449,6 +449,6 @@ del `div` definido más abajo vacío y posteriormente con el contenido que
 se le añade en la última línea del script, que usa como selector el
 equivalente a un elemento con el id `#cambiando`.
 
-### Bibliografía
+## Bibliografía
 
 La mejor bibliografía está en inglés: [jQuery fundamentals](http://jqfundamentals.com/), por ejemplo, es un libro gratuito. [Arquitectura de la aplicación web](https://es.coursera.org/course/webapplications) es un curso gratuito de Coursera que incluye una parte de jQuery. 
