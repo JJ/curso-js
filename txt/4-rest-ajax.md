@@ -96,7 +96,7 @@ de GitHub](http://developer.github.com/v3/), para hacer pruebas. Por
 ejemplo, esta petición te dará todas las *organizaciones* a las que
 pertenece el usuario [JJ](http://github.com/JJ):
 
-`bash$ curl -i https://api.github.com/users/JJ/orgs`{.ejemplo}
+    bash$ curl -i https://api.github.com/users/JJ/orgs
 
 Para llevar a cabo este ejemplo hay que instalar `curl`, un programa que
 en una primera aproximación es simplemente un descargador de páginas web
@@ -104,7 +104,69 @@ pero que en segunda se puede usar como un completo cliente
 [REST](#REST); en este caso `-i` te incluye las cabeceras en la salida,
 con lo que producirá algo de este estilo
 
-`HTTP/1.1 200 OK Server: GitHub.com Date: Fri, 25 Oct 2013 16:58:26 GMT Content-Type: application/json; charset=utf-8 Status: 200 OK X-RateLimit-Limit: 60 X-RateLimit-Remaining: 57 X-RateLimit-Reset: 1382723596 Cache-Control: public, max-age=60, s-maxage=60 ETag: "86e56765000470d5120c565f2d669ec5" Vary: Accept X-GitHub-Media-Type: github.beta X-Content-Type-Options: nosniff Content-Length: 1050 Access-Control-Allow-Credentials: true Access-Control-Expose-Headers: ETag, Link, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes Access-Control-Allow-Origin: * X-GitHub-Request-Id: 533BCE5D:1FA3:25A831A1:526AA332 Vary: Accept-Encoding  [   {     "login": "openkratio",     "id": 2310256,     "url": "https://api.github.com/orgs/openkratio",     "repos_url": "https://api.github.com/orgs/openkratio/repos",     "events_url": "https://api.github.com/orgs/openkratio/events",     "members_url": "https://api.github.com/orgs/openkratio/members{/member}",     "public_members_url": "https://api.github.com/orgs/openkratio/public_members{/member}",     "avatar_url": "https://1.gravatar.com/avatar/da65290f54a587ec04cd35bb85d072ad?d=https%3A%2F%2Fidenticons.github.com%2F95a0686b2cd65a0d12a9cdf6ee9001ca.png&r=x"   },   {     "login": "CANUBE",     "id": 3839808,     "url": "https://api.github.com/orgs/CANUBE",     "repos_url": "https://api.github.com/orgs/CANUBE/repos",     "events_url": "https://api.github.com/orgs/CANUBE/events",     "members_url": "https://api.github.com/orgs/CANUBE/members{/member}",     "public_members_url": "https://api.github.com/orgs/CANUBE/public_members{/member}",     "avatar_url": "https://identicons.github.com/6fb6b5f6fdd67839b9ff438ffa975d08.png"   }   ]`{.ejemplo}
+~~~~~
+HTTP/1.1 200 OK
+Server: GitHub.com
+Date: Sun, 27 Sep 2015 10:37:52 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 1572
+Status: 200 OK
+X-RateLimit-Limit: 60
+X-RateLimit-Remaining: 59
+X-RateLimit-Reset: 1443353872
+Cache-Control: public, max-age=60, s-maxage=60
+ETag: "5730bce87980897ab7fea5d3851e4fbb"
+Vary: Accept
+X-GitHub-Media-Type: github.v3
+X-XSS-Protection: 1; mode=block
+X-Frame-Options: deny
+Content-Security-Policy: default-src 'none'
+Access-Control-Allow-Credentials: true
+Access-Control-Expose-Headers: ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+Access-Control-Allow-Origin: *
+X-GitHub-Request-Id: 5121A912:10752:2CFC37B:5607C700
+Strict-Transport-Security: max-age=31536000; includeSubdomains; preload
+X-Content-Type-Options: nosniff
+Vary: Accept-Encoding
+X-Served-By: 065b43cd9674091fec48a221b420fbb3
+
+[
+  {
+    "login": "openkratio",
+    "id": 2310256,
+    "url": "https://api.github.com/orgs/openkratio",
+    "repos_url": "https://api.github.com/orgs/openkratio/repos",
+    "events_url": "https://api.github.com/orgs/openkratio/events",
+    "members_url": "https://api.github.com/orgs/openkratio/members{/member}",
+    "public_members_url": "https://api.github.com/orgs/openkratio/public_members{/member}",
+    "avatar_url": "https://avatars.githubusercontent.com/u/2310256?v=3",
+    "description": "OpenGov & OpenData Organization"
+  },
+  {
+    "login": "CANUBE",
+    "id": 3839808,
+    "url": "https://api.github.com/orgs/CANUBE",
+    "repos_url": "https://api.github.com/orgs/CANUBE/repos",
+    "events_url": "https://api.github.com/orgs/CANUBE/events",
+    "members_url": "https://api.github.com/orgs/CANUBE/members{/member}",
+    "public_members_url": "https://api.github.com/orgs/CANUBE/public_members{/member}",
+    "avatar_url": "https://avatars.githubusercontent.com/u/3839808?v=3",
+    "description": null
+  },
+  {
+    "login": "MusesProject",
+    "id": 6651546,
+    "url": "https://api.github.com/orgs/MusesProject",
+    "repos_url": "https://api.github.com/orgs/MusesProject/repos",
+    "events_url": "https://api.github.com/orgs/MusesProject/events",
+    "members_url": "https://api.github.com/orgs/MusesProject/members{/member}",
+    "public_members_url": "https://api.github.com/orgs/MusesProject/public_members{/member}",
+    "avatar_url": "https://avatars.githubusercontent.com/u/6651546?v=3",
+    "description": "Muses project is funded by the EU"
+  }
+]
+
+~~~~~
 
 Casi todos los servicios web incluyen alguna forma de autenticación; una
 de las formas de hacerlo es incluirlo en el propio URL, en la forma
@@ -117,13 +179,37 @@ mejor sería extraer información útil de la misma, como ocurre en [este
 programa en
 node.js](https://github.com/JJ/curso-js/blob/13e25e97315e58a84f268349ba61b650e7a097e3/code/github-get.js):
 
-`#!/usr/bin/node  var https = require('https');  var user =process.argv[2]?process.argv[2]:'JJ';  var options = {     host: 'api.github.com',     path: '/users/'+user,     method: 'GET' };   var req = https.request(options, function(res) {                res.setEncoding('utf8');                res.on('data', function (datos_JSON) {                       var datos=JSON.parse(datos_JSON);                       console.log('Login: ' + datos.login+ "\nNombre: " + datos.name + "\n");                   });                }); req.end();`{.ejemplo}
+~~~~~javascript
+#!/usr/bin/env node
+
+var https = require('https');
+
+var user =process.argv[2]?process.argv[2]:'JJ';
+
+var options = {
+    host: 'api.github.com',
+    path: '/users/'+user,
+    method: 'GET',
+    headers: {'User-Agent': 'Prueba-Node-App'}
+};
+
+
+var req = https.get(options, function(res) {
+    res.setEncoding('utf8');
+    res.on('data', function (datos_JSON) {
+	console.log(datos_JSON);
+	var datos=JSON.parse(datos_JSON);
+	console.log('Login: ' + datos.login+ "\nNombre: " + datos.name + "\n");
+    });
+});
+req.end();
+~~~~~
 
 Este programa descarga información de un usuario en JSON y la procesa.
 Toma el usuario que se pase por la línea de órdenes, o bien usa `JJ` por
 defecto, dando un resultado así
 
-`jmerelo@penny:~/txt/docencia/cursos/JavaScript$  node code/github-get.js  Login: JJ Nombre: Juan Julián Merelo Guervós`{.ejemplo}
+    jmerelo@penny:~/txt/docencia/cursos/JavaScript$  node code/github-get.js  Login: JJ Nombre: Juan Julián Merelo Guervós`
 
 El programa hace una petición GET al [API](#API) de GitHub y del objeto
 en JSON devuelto extrae (tras su conversión en un objeto JS con
@@ -134,7 +220,9 @@ usado es muy similar al `http`, salvo por el protocolo usado. La
 petición que se está usando es la forma más general, pero se puede usar
 directamente `get` [de esta
 forma](https://github.com/JJ/curso-js/blob/master/code/github-get.js):
-`var   req = https.get('https://api.github.com/users/'+user,     function(res) `
+
+    var   req = https.get('https://api.github.com/users/'+user,     function(res) 
+
 con exactamente el mismo resultado.
 
 La idea de [REST](#REST) desde el punto de vista del servidor es usar el
@@ -196,8 +284,7 @@ directivas del servidor; por ejemplo, en Apache podríamos usar la
 siguiente (dentro del fichero `httpd.conf` o el fichero de configuración
 de un directorio en particular, `.htaccess`:
 
-RewriteRule \^quiniela/(\\w+)/(\\d+)/(\\w+)/(\\d+)\$
-/\~jmerelo/REST/quiniela.cgi?\$1=\$2&\$3=\$4 [L]
+    RewriteRule \^quiniela/(\\w+)/(\\d+)/(\\w+)/(\\d+)\$ /\~jmerelo/REST/quiniela.cgi?\$1=\$2&\$3=\$4 [L]
 
 Parece un poco complicada, pero no lo es. Para empezar, se cambiará la
 expresión regular de la izquierda por la de la derecha. La de la
@@ -233,7 +320,20 @@ que se esté trabajando
 Tras la instalación, el programa que hemos visto más arriba se
 transforma en el siguiente:
 
-`var express=require('express'); var app = express();  app.get('/', function (req, res) {        res.send('Portada'); });  app.get('/proc', function (req, res) {        res.send('No es la portada'); });  app.listen(8080); console.log('Server running at http://127.0.0.1:8080/');`{.ejemplo}
+~~~~~javascript
+var puerto=process.argv[2]?process.argv[2]:8080;
+var express=require('express'); 
+var app = express(); 
+app.get('/', function (req, res) { 
+    res.send('Portada'); 
+}); 
+app.get('/proc', function (req, res) { 
+    res.send('No es la portada'); 
+}); 
+
+app.listen(puerto); 
+console.log('Servidor en http://127.0.0.1:'+puerto+'/');
+~~~~~
 
 Para empezar, `express` nos evita todas las molestias de tener que
 procesar nosotros la línea de órdenes: directamente escribimos una
@@ -253,7 +353,7 @@ se devuelve, encargándose `send` del mismo.
 Con el mismo `express` se pueden generar aplicaciones no tan básicas
 ejecutándolo de la forma siguiente:
 
-`node_modules/express/bin/express prueba-rest`{.ejemplo}
+    node_modules/express/bin/express prueba-rest
 
 Se indica el camino completo a la aplicación binaria, que sería el
 puesto. Con esto se genera un directorio prueba-rest. Cambiándoos al
@@ -269,7 +369,33 @@ precedidos por `:`. Por ejemplo, si queremos tener diferentes contadores
 podríamos usar el [programa
 siguiente](https://github.com/JJ/curso-js/blob/master/code/express-count.js):
 
-`var express=require('express'); var app = express(); var contadores = new Array; var puerto=process.argv[2]?process.argv[2]:8080;  app.get('/', function (req, res) {        res.send('Portada'); });  app.put('/contador/:id', function( req,res ) {     contadores[req.params.id] = 0;     res.send( { creado: req.params.id } ); });  app.get('/contador/:id', function (req, res) {        res.send( "{ "+req.params.id+": "+ contadores[req.params.id] + "}"  ); });  app.post('/contador/:id', function (req, res) {        contadores[req.params.id]++;     res.send( "{ "+req.params.id+": "+ contadores[req.params.id] + "}"  ); });  app.listen(puerto); console.log('Server running at http://127.0.0.1:'+puerto+'/');`{.ejemplo}
+~~~~~javascript
+var express=require('express');
+var app = express();
+var contadores = new Array;
+var puerto=process.argv[2]?process.argv[2]:8080;
+
+app.get('/', function (req, res) {   
+	res.send('Portada');
+});
+
+app.put('/contador/:id', function( req,res ) {
+    contadores[req.params.id] = 0;
+    res.send( { creado: req.params.id } );
+});
+
+app.get('/contador/:id', function (req, res) {   
+    res.send( "{ "+req.params.id+": "+ contadores[req.params.id] + "}"  );
+});
+
+app.post('/contador/:id', function (req, res) {   
+    contadores[req.params.id]++;
+    res.send( "{ "+req.params.id+": "+ contadores[req.params.id] + "}"  );
+});
+
+app.listen(puerto);
+console.log('Server running at http://127.0.0.1:'+puerto+'/');
+~~~~~
 
 Este [programa
 (express-count.js)](https://github.com/JJ/curso-js/tree/master/code/express-count.js%27)
@@ -296,7 +422,18 @@ misma forma que hemos visto anteriormente con `npm`. Una vez instalada,
 se puede escribir un cliente como este al utilísimo crea-contadores
 anterior.
 
-`#!/usr/local/bin/node  var rest = require('restler'); var url = 'http://127.0.0.1:8080/contador/'; process.argv.forEach(function (val, index, array) {     if ( index > 1 ) {     rest.put( url + val ).on('complete', function( data ) {         console.log( data );     } );     } });`{.ejemplo}
+~~~~~javascript
+
+var rest = require('restler'); 
+var url = 'http://127.0.0.1:8080/contador/'; 
+process.argv.forEach(function (val, index, array) { 
+    if ( index > 1 ) { 
+	rest.put( url + val ).on('complete', function( data ) { 
+	    console.log( data ); 
+	} ); 
+    } 
+});
+~~~~~
 
 El cliente es bastante simple, y lo que hace es crear tantos contadores
 como argumentos le pasamos por la línea de órdenes. Tras definir un par
@@ -361,7 +498,49 @@ a `dominio.com` desde páginas que te hayas descargado desde
 vamos a hacer en el siguiente ejemplo. Necesitaremos tres ficheros para
 ejecutar el programa. El primero es el [servidor en
 node.js](https://github.com/JJ/curso-js/tree/master/code/count-server.js):
-`var fs = require('fs'); var express=require('express'); var app = express(); var contadores = new Array; var portada = fs.readFileSync('sumar_formulario.html','utf8');  app.get('/', function (req, res) {      res.send(portada); });  app.get('/js/:page', function (req, res) {      var js = fs.readFileSync(req.params.page);     res.contentType('text/javascript');     res.send(js); });  app.put('/contador/:id', function( req,res ) {     contadores[req.params.id] = 0;     res.send('Creado contador '+ req.params.id ); });  app.post('/contador/:id', function (req, res) {        contadores[req.params.id]++;     res.contentType('application/json');     res.send( { resultado:  contadores[req.params.id] } );     console.log( { 'Post':  contadores} ); });  app.get('/contador/:id', function (req, res) {        res.contentType('application/json');     res.send( "{ 'resultado': " + contadores[req.params.id] + "}\n" ); });   app.get('/suma/:id1/:id2', function (req, res) {        res.send( { resultado: contadores[req.params.id1] +  contadores[req.params.id2]} ); });  app.listen(8080); console.log('Server running at http://127.0.0.1:8080/');`{.ejemplo}
+
+~~~~~javascript
+var fs = require('fs');
+var express=require('express');
+var app = express();
+var contadores = new Array;
+var portada = fs.readFileSync('sumar_formulario.html','utf8');
+
+app.get('/', function (req, res) { 
+    res.send(portada);
+});
+
+app.get('/js/:page', function (req, res) { 
+    var js = fs.readFileSync(req.params.page);
+    res.contentType('text/javascript');
+    res.send(js);
+});
+
+app.put('/contador/:id', function( req,res ) {
+    contadores[req.params.id] = 0;
+    res.send('Creado contador '+ req.params.id );
+});
+
+app.post('/contador/:id', function (req, res) {   
+    contadores[req.params.id]++;
+    res.contentType('application/json');
+    res.send( { resultado:  contadores[req.params.id] } );
+    console.log( { 'Post':  contadores} );
+});
+
+app.get('/contador/:id', function (req, res) {   
+    res.contentType('application/json');
+    res.send( "{ 'resultado': " + contadores[req.params.id] + "}\n" );
+});
+
+
+app.get('/suma/:id1/:id2', function (req, res) {   
+    res.send( { resultado: contadores[req.params.id1] +  contadores[req.params.id2]} );
+});
+
+app.listen(8080);
+console.log('Server running at http://127.0.0.1:8080/');
+~~~~~
 
 Este código es similar al que hemos usado anteriormente, salvo que
 respondemos a más comandos REST: GET, PUT y POST. PUT crea el contador,
@@ -385,7 +564,29 @@ solicitar el nombre del contador que se va a incrementar. El URL del
 formulario incluye el "camino" ficticio al que responderá el servidor
 REST, que incluye `js`. Ese fichero, precisamente, es el que vemos aquí:
 
-`function cuenta() {   request = new XMLHttpRequest();   var contador=document.getElementById('contador').value;   var peticion_str = '/contador/'+contador;   request.open('POST', peticion_str , true);   request.onreadystatechange= escribe_resultado ;   request.send(null); }  function escribe_resultado(){   if ( request.readyState == 4 ) {     if ( request.status == 200 ) {     var json;     eval ( 'json = '+ request.responseText );     console.log(json);     document.getElementById('Resultado').innerHTML= 'Resultado = '+          json.resultado     }   } }`{.ejemplo}
+~~~~~javascript
+var request;
+function cuenta() {
+  request = new XMLHttpRequest();
+  var contador=document.getElementById('contador').value;
+  var peticion_str = '/contador/'+contador;
+  request.open('POST', peticion_str , true);
+  request.onreadystatechange= escribe_resultado ;
+  request.send(null);
+}
+
+function escribe_resultado(){
+  if ( request.readyState == 4 ) {
+    if ( request.status == 200 ) {
+	var json;
+	eval ( 'json = '+ request.responseText );
+	console.log(json);
+	document.getElementById('Resultado').innerHTML= 'Resultado = '+ 
+	    json.resultado
+    }
+  }
+}
+~~~~~
 
 Por lo pronto vemos cómo funciona en JS "clásico", para entender un poco
 mejor el mecanismo que sigue. Luego más adelante veremos que en JQuery
@@ -414,7 +615,16 @@ El principal cambio será, obviamente, en el código usado para la
 solicitud Ajax, que usará jQuery en vez de JS puro. [Helo
 aquí](https://github.com/JJ/curso-js/tree/master/code/cuenta-jquery.js):
 
-`$(document).ready(function() {     $("#formulario").change(function(){         $.get('/contador/'+$('#contador').val(), function( data) {               $('#Resultado').html('Resultado '+ data.resultado);               });     });     } ); `{.ejemplo}
+~~~~~javascript
+$(document).ready(function() {
+	$("#formulario").change(function(){
+		$.get('/contador/'+$('#contador').val(), function( data) {
+			  $('#Resultado').html('Resultado '+ data.resultado);
+		      });
+	});
+} );  	      
+~~~~~
+
 
 Este pequeño programa tiene todo lo compacto y críptico a lo que nos
 tiene acostumbrados jQuery. Como es habitual, se ejecuta sólo cuando se
