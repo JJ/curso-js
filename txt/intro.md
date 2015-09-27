@@ -130,26 +130,26 @@ también intérprete en JavaScript. Y mucho más...
 
 ### Primer programa en JavaScript
 
-```
+~~~~~~
 #!/usr/bin/js
 print( 'Hola, Mundo' );
-```{.ejemplo}
+~~~~~~
 
 En realidad, el JS es bastante parecido al C, y, para el caso, también
 al Java. Este programa producirá (siempre que lo hagamos ejecutable con
 `chmod +x hola.js` previamente):
-`jmerelo@vega:~/txt/docencia/AAP/Temario$ ./hola.js Hola, Mundo`{.ejemplo}
+`jmerelo@vega:~/txt/docencia/AAP/Temario$ ./hola.js Hola, Mundo`
 
 Podemos probar con diferentes intérpretes que tengamos instalados.
 
-```
+~~~~~~
 jmerelo@penny:~/code$ gjs hola.js
 Hola, Mundo
 jmerelo@penny:~/code$ rhino hola.js
 Hola, Mundo
 jmerelo@penny:~/code$ js hola.js
 Hola, Mundo
-```{.ejemplo}
+~~~~~~
 
 **Ojo**: en node.js habría que cambiar `print` por `console.log`, o
 tendremos un error. Con `kjs` habrá que ejecutarlo también directamente
@@ -165,19 +165,19 @@ fuente para ver el
 código)](https://github.com/JJ/curso-js/tree/master/code/hola-js.html)
 donde se incluye el programa en JS de esta forma:
 
-`<script type='text/javascript' src='hola.js'></script>`{.ejemplo}
+`<script type='text/javascript' src='hola.js'></script>`
 
 El problema es que, en este caso, la orden `print` se interpreta como
 impresión por impresora, y habrá que cambiarla por otra que signifique
 lo mismo, escribir en el dispositivo de salida que se esté
 [usando](https://github.com/JJ/curso-js/tree/master/code/hola-js-2.html):
 
-`document.writeln('Hola, Mundo')`{.ejemplo}
+`document.writeln('Hola, Mundo')`
 
 Lo que también se puede escribir directamente
 [así](https://github.com/JJ/curso-js/tree/master/code/hola-js-3.html):
 
-`<script  type='text/javascript'>document.writeln('Hola, Mundo')</script>`{.ejemplo}
+`<script  type='text/javascript'>document.writeln('Hola, Mundo')</script>`
 
 Estos programas se pueden usar con cualquier editor de texto, Emacs,
 Sublime Text o Notepad++; también con los entornos integrados, que te
@@ -192,7 +192,7 @@ procedamos a temas más escabrosos, como lo que viene siendo hacer algo
 en el siguiente
 [programilla](https://github.com/JJ/curso-js/tree/master/code/tabla.js):
 
-```javascript
+~~~~~~javascript
 #!/usr/bin/js24
 
 var tabla="table";
@@ -208,7 +208,7 @@ for (i in matriz ) {
   print ("\t</"+fila+">\n");
  }
 print ("</"+tabla+">");`
-```{.ejemplo}
+~~~~~~
 
 Este programa tiene dos bucles anidados, que imprimen un producto dentro
 de una tabla. La salida será tal que así (ver el fuente para la
@@ -239,7 +239,7 @@ como el C, o el Java. De hecho, se pueden usar los bucles clásicos con
 comparación e incremento, como se muestra en
 [`tabla1.js`](https://github.com/JJ/curso-js/tree/master/code/tabla1.js):
 
-```javascript
+~~~~~~javascript
 var tabla="table";
 var celda="td";
 var fila="tr";
@@ -252,14 +252,14 @@ for (i=1; i<=3; i++ ) {
     print ("</"+fila+">\n");
 }
 print ("</"+tabla+">");
-```{.ejemplo}
+~~~~~~
 
 Aunque queda un poco torpe tanto \<\>... vamos a reducir un poco el
 programa, haciéndolo [más
 elegante](https://github.com/JJ/curso-js/tree/master/code/tabla2.js)
 (aunque más largo: no se puede tener todo):
 
-```javascript
+~~~~~~javascript
 var matriz = [1,2,3];
 print( marca('table'));
 for (i in matriz ) {
@@ -282,7 +282,7 @@ function finmarca( m ) {
 function celda( contenido ) {
   return marca("td")+contenido+finmarca("td");
 }
-```{.ejemplo}
+~~~~~~
 
 La principal diferencia con respecto al anterior es el **uso de
 funciones**. Las funciones en JS tienen una estructura bastante clásica:
@@ -316,7 +316,7 @@ a objetos*. Las características las veremos en el siguiente
 [programa](https://github.com/JJ/curso-js/tree/master/code/quiniela.js),
 que podría servir para hacer quinielas.
 
-```js
+~~~~~~javascript
 // Definición de la clase Partido
 function Partido(local,visitante) {
   this.local = local;
@@ -337,7 +337,7 @@ for ( i=0; i < midsize ; i++ ) {
 for ( i in quiniela ) {
   print( "Partido " + (parseInt(i)+1)+": " + quiniela[i].local + " - " + quiniela[i].visitante);
 }
-```{.ejemplo}
+~~~~~~
 
 Con lo primero que nos enfrentamos es con una nueva forma de definir una
 matriz o `Array`: ya que sabemos que JS es OO, pues usamos una forma OO
@@ -345,7 +345,7 @@ de definirlo, mediante la orden `new`, que, como en Java y en C++, crea
 un nuevo objeto llamando al *constructor* del mismo. En este caso le
 pasamos directamente los elementos que constituyen el vector o *array*,
 pero podríamos haberle pasado el tamaño de esta forma:
-`var myArray = new Array(33);`{.ejemplo} Los objetos así creados son
+`var myArray = new Array(33);` Los objetos así creados son
 objetos de pleno derecho, y se puede acceder a sus propiedades con
 métodos usando también una sintaxis clásica: el puntito `.` tras el
 nombre de la variable. Por ejemplo, `myArray.length` devolvería el
@@ -371,7 +371,7 @@ moleste mientras generamos el resto de la quiniela.
 
 Y el objeto lo creamos mediante una clásica llamada:
 
-` quiniela[i] = new Partido( equipo1, equipo2 );`{.ejemplo}
+` quiniela[i] = new Partido( equipo1, equipo2 );`
 
 Más adelante usamos un bucle `in` para escribir los valores de cada uno
 de los partidos; las variables no están encapsuladas, así que se puede
@@ -385,14 +385,14 @@ Y el resultado, aleatorio por supuesto, será algo así como esto :
 `Partido 0: Graná - Atleti
 Partido 1: Madrid - Depor
 Partido 2: Betis - Barça
-Partido 3: Sevilla - Geta`{.ejemplo}
+Partido 3: Sevilla - Geta`
 
 Añadir métodos de clase se hace más o menos de la misma forma, que no es
 muy ortodoxa, pero es la que hay. Lo veremos en [el siguiente
 programa](https://github.com/JJ/curso-js/tree/master/code/quiniela2.js),
 del que sacamos el fragmento más interesante:
 
-```js
+~~~~~~javascript
 // Definición de la clase Partido
 function Partido(local,visitante) {
   this.local = local;
@@ -410,7 +410,7 @@ function setResultado( esteResultado ) {
 function toString() {
     return "Partido " + i + ": " + quiniela[i].local + " - " + quiniela[i].visitante + " = "+ this.resultado;
 }
-```{.ejemplo}
+~~~~~~
 
 Añadimos un par de funciones, y para que *pertenezcan* a la clase, hala,
 con un `this` por aquí y un `this` por allá, solucionado. Es de buen
@@ -447,7 +447,7 @@ usada para indexarlos, que se suele denominar *clave* (*key*). Casi
 todos los lenguajes de programación tienen alguna forma de usar estas
 matrices asociativas. Por ejemplo, en Perl:
 `my %matrizAsociativa; # % para matrices asociativas
-$matrizAsociativa{'variable'}='Valor'; # { para las claves print $matrizAsociativa{'variable'};`{.ejemplo}
+$matrizAsociativa{'variable'}='Valor'; # { para las claves print $matrizAsociativa{'variable'};`
 devolvería `Valor`.
 
 Las usaremos en el [siguiente
@@ -455,7 +455,7 @@ programa](https://github.com/JJ/curso-js/tree/master/code/liga.js), que
 genera aleatoriamente diez jornadas de una liga, y asigna puntuación
 según los resultados:
 
-```js
+~~~~~~javascript
 load('Partido.js');
 
 var equipos= new Array('Madrid', 'Barça', 'Atleti', 'Geta', 'Betis', 'Depor', 'Sevilla', 'Graná');
@@ -475,7 +475,7 @@ function jornada( estosEquipos ) {
   }
   return quiniela;
 }
-```{.ejemplo}
+~~~~~~
 
 En parte, este programa es similar a los anteriores: la parte que
 generaba cada jornada está ahora en una función, que devuelve un `array`
@@ -492,7 +492,7 @@ Esta variable es una matriz asociativa que contendrá la puntuación de
 los equipos, y estará indexada por el nombre del equipo. Se declara
 igual que los demás arrays, y, para inicializarlo, vamos extrayendo los
 valores del vector de equipos, y usándolos como clave:
-`resultados[equipos[i]]=0;`{.ejemplo} `equipos[i]` valdrá sucesivamente
+`resultados[equipos[i]]=0;` `equipos[i]` valdrá sucesivamente
 Barça, Graná... y así se irán inicializando a 0 los valores
 correspondientes. Si no se inicializan, la primera vez que se usa una
 variable tiene el valor `NaN`, con el que no se puede hacer nada. Es así
@@ -506,7 +506,7 @@ funciona de la forma habitual, aunque también podríamos haber usado
 programa](https://github.com/JJ/curso-js/tree/master/code/liga2.js), que
 en lo único que cambia es en estas líneas:
 
-```
+~~~~~~
 switch (resultado) {
     case '1':
       resultados[local]+=3;
@@ -518,7 +518,7 @@ switch (resultado) {
     default:
       resultados[visitante]+=3;
     }
-```{.ejemplo}
+~~~~~~
 
 y que viene a ser como el anterior, pero con `case`s en vez de `if`s.
 Vamos, tres cuartos de lo mismo.
@@ -539,7 +539,7 @@ js> foo['dos'] = 'Dos' Dos
 js> foo.dos Dos
 js> foo['cero'] Cero
 js> for ( i in foo) { print(foo[i]);}
-Cero Uno Dos`{.ejemplo}
+Cero Uno Dos`
 Hay que teclear lo que se encuentra detrás de `js>`; cada segunda línea
 es la respuesta del intérprete a nuestras órdenes. En la primera,
 creamos un vector, y le asignamos valor a tres elementos de formas
@@ -565,7 +565,7 @@ guardada en variables privadas:
 `js> function Foo( bar ) { this.bar = bar; var privada = 7;}
 js> var este_foo = new Foo( 'correquetepillo' );
 js> print(este_foo.bar) correquetepillo
-js> print(este_foo.privada) undefined`{.ejemplo}
+js> print(este_foo.privada) undefined`
 
 Es tan secreta, de hecho, que ni siquiera te dice que no existe:
 simplemente que su valor está indefinido.
@@ -575,10 +575,10 @@ que se pueden instanciar, que corresponderían a la librería estándar (o
 librería estándar de clases) en otros lenguajes. Una de ellas ya la
 hemos visto: la clase `Array`. Otra es la clase `String`, que se usa
 para manejar cadenas alfanuméricas, chorros de 0s y 1s.
-`js> var cadena = new String("1"); js> print(cadena + 1) 11       `{.ejemplo}
+`js> var cadena = new String("1"); js> print(cadena + 1) 11       `
 La clase `String` tiene una serie de métodos que permiten hacer lo
 habitual con las cadenas: encadenarlas, dividirlas, y buscar cosas.
-`js> var nombres = "Pedro, Lucas, Juan".split(", "); js> print(nombres[0]) Pedro`{.ejemplo}
+`js> var nombres = "Pedro, Lucas, Juan".split(", "); js> print(nombres[0]) Pedro`
 En este caso, `split` es un método de la clase String, y lo estamos
 aplicando directamente sobre la cadena `"Pedro, Lucas, Juan"`, que, de
 por si, es un objeto de esa clase. `split` divide la cadena usando los
@@ -595,7 +595,8 @@ Java directamente, lo que complica terriblemente el programa, pero [ahí
 está, de todas
 formas](https://github.com/JJ/curso-js/tree/master/code/lee_quiniela.js):
 
-```js
+~~~~~~javascript
+
 // ejecutar con rhino lee_quiniela.js <argumento>
 load('Partido.js');
 var FileReader = java.io.FileReader;
@@ -644,7 +645,8 @@ while ((line = br.readLine()) != null) {
 for ( var i in resultados ) {
     print( i + ": " + resultados[i])
 }
-```{.ejemplo}
+
+~~~~~~
 
 El programa es bastante similar al anterior, pero lee de fichero en vez
 de generar los resultados aleatoriamente. Y lo lee aproximadamente de la
@@ -666,11 +668,11 @@ cualquier cosa, incluso una clase. Así acortamos el nombre, y parecen
 más de javascrí.
 
 La otra diferencia es también cómo se ejecuta el fichero:
-`rhino lee_quiniela.js quiniela.datos`{.ejemplo} para ejecutarlo sobre
+`rhino lee_quiniela.js quiniela.datos` para ejecutarlo sobre
 el [fichero
 `quiniela.datos`](https://github.com/JJ/curso-js/tree/master/code/quiniela.datos),
 que dará el resultado siguiente:
-`Elche: 1 Atleti: 3 Cai: 1 Athleti: 6 Bar~a: 1 Madrid: 2 H~rcules: 1`{.ejemplo}
+`Elche: 1 Atleti: 3 Cai: 1 Athleti: 6 Bar~a: 1 Madrid: 2 H~rcules: 1`
 Queda con esto más o menos claro que para ir donde nadie ha ido antes
 con JS, hay que meterse un poco en Java. Pero no siempre. Tenéis alguna
 información más en [este tutorial de
@@ -706,20 +708,20 @@ es un objeto en JS, se puede usar esta notación para asignar valores
 prácticamente a cualquier cosa. Vamos a usar una vez más el intérprete
 en modo interactivo para ver un ejemplo:
 
-`js> var objeto = { Madrid : 25, Atleti: 33, Ponferradina: 44 }; js> for (i in objeto) { print( i + " : "+ objeto[i] )}; Madrid : 25 Atleti : 33 Ponferradina : 44`{.ejemplo}
+`js> var objeto = { Madrid : 25, Atleti: 33, Ponferradina: 44 }; js> for (i in objeto) { print( i + " : "+ objeto[i] )}; Madrid : 25 Atleti : 33 Ponferradina : 44`
 
 Más fácil no puede ser. Se le asigna valor a un objeto con el formato
 clave : valor (con coma al final), de la misma forma que se haría a un
 array asociativo. Además, se pueden crear objetos sobre la marcha y
 asignárselos a una variable cuyo valor se cree también sobre la marcha:
 
-`js> eval("var objeto2 = { Madrid : 25, Atleti: 33, Ponferradina: 44 }"); js> for (i in objeto2) { print( i + " : "+ objeto[i] )}; Madrid : 25 Atleti : 33 Ponferradina : 44`{.ejemplo}
+`js> eval("var objeto2 = { Madrid : 25, Atleti: 33, Ponferradina: 44 }"); js> for (i in objeto2) { print( i + " : "+ objeto[i] )}; Madrid : 25 Atleti : 33 Ponferradina : 44`
 
 donde usamos `eval`, que interpreta una expresión en JavaScript como si
 del propio intérprete se tratara. Las expresiones se pueden anidar, para
 dar lugar a objetos más complejos
 
-`js> eval("var objeto2 = { Madrid : 25, Atleti: 33, Ponferradina: { casa: 33, fuera: 44} }"); js> for (i in objeto2) { print( i + " : "+ objeto2[i] )}; Madrid : 25 Atleti : 33 Ponferradina : [object Object]`{.ejemplo}
+`js> eval("var objeto2 = { Madrid : 25, Atleti: 33, Ponferradina: { casa: 33, fuera: 44} }"); js> for (i in objeto2) { print( i + " : "+ objeto2[i] )}; Madrid : 25 Atleti : 33 Ponferradina : [object Object]`
 
 Que parece más raro de la cuenta, pero que, con un poco de código, se
 podría también imprimir.
@@ -731,7 +733,41 @@ web como *geonames*. Lo hacemos en [el siguiente ejemplo:
 del que extraemos el [código en JS (fichero
 `geonames_call.js`)](https://github.com/JJ/curso-js/tree/master/code/geonames_call.js)
 
-`// this function will be called by our JSON callback // the parameter jData will contain an array with geonames objects function getLocation(jData) {   if (jData == null) {     // There was a problem parsing search results     return;   }    var html = '<ul>';   var geonames = jData.geonames;   for (i=0;i< geonames.length;i++) {      var name = geonames[i];      // we create a simple html list with the geonames objects      // the link will call the center() javascript method with lat/lng as parameter      html = html+"<li><em>"+name.name+ "</em> - Latitud: " + name.lat +', longitud: ' + name.lng+ "</li>";   }   html+="</ul>";   document.getElementById('resultDiv').innerHTML = html; }  // calls the geonames JSON webservice with the search term function search() {   request = 'http://ws.geonames.org/searchJSON?country=ES&q=' +  encodeURIComponent(document.getElementById('q').value)  + '&maxRows=10&callback=getLocation';    // Create a new script object   // Implementación en jsr_class.js   aObj = new JSONscriptRequest(request);   // Build the script tag   aObj.buildScriptTag();   // Execute (add) the script tag   aObj.addScriptTag(); }`{.ejemplo}
+~~~~~~javascript
+// this function will be called by our JSON callback
+// the parameter jData will contain an array with geonames objects
+function getLocation(jData) {
+  if (jData == null) {
+    // There was a problem parsing search results
+    return;
+  }
+
+  var html = '<ul>';
+  var geonames = jData.geonames;
+  for (i=0;i< geonames.length;i++) {
+     var name = geonames[i];
+     // we create a simple html list with the geonames objects
+     // the link will call the center() javascript method with lat/lng as parameter
+     html = html+"<li><em>"+name.name+ "</em> - Latitud: " + name.lat +', longitud: ' + name.lng+ "</li>";
+  }
+  html+="</ul>";
+  document.getElementById('resultDiv').innerHTML = html;
+}
+
+// calls the geonames JSON webservice with the search term
+function search() {
+  request = 'http://ws.geonames.org/searchJSON?country=ES&q=' +  encodeURIComponent(document.getElementById('q').value)  + '&maxRows=10&callback=getLocation';
+
+  // Create a new script object
+  // Implementación en jsr_class.js
+  aObj = new JSONscriptRequest(request);
+  // Build the script tag
+  aObj.buildScriptTag();
+  // Execute (add) the script tag
+  aObj.addScriptTag();
+}
+
+~~~~~~
 
 Este ejemplo es un poco complicado, sobre todo, por el mecanismo que usa
 para hacer la llamada, y que está contenido en el fichero
@@ -771,7 +807,35 @@ que se pueda ver la salida de varias formas diferentes. En [el siguiente
 módulo hacemos uso de esta
 funcionalidad](https://github.com/JJ/curso-js/tree/master/code/Nuevo_partido.js):
 
-`// Definición de la clase Partido function Nuevo_partido(local,visitante) {     this.local = local;     this.visitante=visitante;     this.resultado=null;     this.setResultado = setResultado;     this.toString = toString;     this.set_to_string = set_to_string;     this.impresor = _toString; }  function setResultado( esteResultado ) {     if ( esteResultado == '1' || esteResultado=='x' || esteResultado=='2' )      this.resultado = esteResultado; }  function toString() {     return this.impresor(this.local, this.visitante, this.resultado); }  function _toString( local, visitante ) {     return ": " + local + " - " + visitante + " = "+ resultado; }  function set_to_string ( impresor ) {     this.impresor = impresor; }`{.ejemplo}
+~~~~~~javascript
+// Definición de la clase Partido
+function Nuevo_partido(local,visitante, resultado) {
+    this.local = local;
+    this.visitante=visitante;
+    this.resultado=resultado;
+    this.setResultado = setResultado;
+    this.toString = toString;
+    this.set_to_string = set_to_string;
+    this.impresor = _toString;
+}
+
+function setResultado( esteResultado ) {
+    if ( esteResultado == '1' || esteResultado=='x' || esteResultado=='2' ) 
+	this.resultado = esteResultado;
+}
+
+function toString() {
+    return this.impresor(this.local, this.visitante, this.resultado);
+}
+
+function _toString( local, visitante ) {
+    return ": " + this.local + " - " + this.visitante + " = "+ this.resultado;
+}
+
+function set_to_string ( impresor ) {
+    this.impresor = impresor;
+}
+~~~~~~
 
 En esta clase la principal diferencia es que usamos el método `impresor`
 como una variable al cual le podemos asignar diferentes valores, incluso
@@ -782,7 +846,67 @@ asignándole un valor nuevo. De hecho, esto es lo que vamos a hacer en el
 [programa siguiente
 (`liga3.js`)](https://github.com/JJ/curso-js/tree/master/code/liga3.js):
 
-`#!/usr/bin/js  load('Nuevo_partido.js');  var equipos= new Array('Madrid', 'Barça', 'Atleti', 'Geta', 'Betis', 'Depor', 'Sevilla', 'Graná');  function jornada( estosEquipos ) {     var equiposAqui = new Array;     var imprime = function( local, visitante, resultado ) {      print("Impimiendo \n");     return  "- " + local + " vs. " + visitante + " resultado  "+ resultado;     };     equiposAqui = equiposAqui.concat(estosEquipos);     var midsize = equiposAqui.length/2;     var quiniela = new Array( midsize );     var unox2 = new Array( '1','x','2');     for ( var i=0; i < midsize ; i++ ) {     var equipo1 = equiposAqui.splice(Math.floor( equiposAqui.length*Math.random()) , 1);     var equipo2 = equiposAqui.splice(Math.floor( equiposAqui.length*Math.random()), 1);     quiniela[i] = new Nuevo_partido( equipo1, equipo2 );     quiniela[i].setResultado( unox2[Math.floor( 3*Math.random()) ]);     quiniela[i].set_to_string( imprime );     }     return quiniela; }  var quinielas = new Array; for ( var i = 0; i < 10; i ++ ) {   quinielas[i] = jornada( equipos );  }  var resultados= new Array; for ( var i in equipos ) {   resultados[equipos[i]]=0; }  for ( var i = 0; i < quinielas.length; i ++ ) {     for ( var j = 0;j < quinielas[i].length; j ++ ) {       var local = quinielas[i][j].local;       var visitante = quinielas[i][j].visitante;       var resultado = quinielas[i][j].resultado;       switch (resultado) {     case '1':     resultados[local]+=3;     break;     case 'x':     resultados[local]+=1;     resultados[visitante]+=1;     break;     default:     resultados[visitante]+=3;     }   } }  for ( var i in resultados ) {   print( i + ": " + resultados[i]) }`{.ejemplo}
+~~~~~~
+#!/usr/bin/smjs
+
+load('Nuevo_partido.js');
+
+var equipos= new Array('Madrid', 'Barça', 'Atleti', 'Geta', 'Betis', 'Depor', 'Sevilla', 'Graná');
+
+function jornada( estosEquipos ) {
+    var equiposAqui = new Array;
+    var imprime = function( local, visitante, resultado ) { 
+	print("Imprimiendo \n");
+	return  "- " + local + " vs. " + visitante + " resultado  "+ resultado;
+    };
+    equiposAqui = equiposAqui.concat(estosEquipos);
+    var midsize = equiposAqui.length/2;
+    var quiniela = new Array( midsize );
+    var unox2 = new Array( '1','x','2');
+    for ( var i=0; i < midsize ; i++ ) {
+	var equipo1 = equiposAqui.splice(Math.floor( equiposAqui.length*Math.random()) , 1);
+	var equipo2 = equiposAqui.splice(Math.floor( equiposAqui.length*Math.random()), 1);
+	quiniela[i] = new Nuevo_partido( equipo1, equipo2 );
+	quiniela[i].setResultado( unox2[Math.floor( 3*Math.random()) ]);
+	quiniela[i].set_to_string( imprime );
+    }
+    return quiniela;
+}
+
+var quinielas = new Array;
+for ( var i = 0; i < 10; i ++ ) {
+  quinielas[i] = jornada( equipos ); 
+}
+
+var resultados= new Array;
+for ( var i in equipos ) {
+  resultados[equipos[i]]=0;
+}
+
+for ( var i = 0; i < quinielas.length; i ++ ) {
+    for ( var j = 0;j < quinielas[i].length; j ++ ) {
+      var local = quinielas[i][j].local;
+      var visitante = quinielas[i][j].visitante;
+      var resultado = quinielas[i][j].resultado;
+      switch (resultado) {
+      case '1':
+	  resultados[local]+=3;
+	  break;
+      case 'x':
+	  resultados[local]+=1;
+	  resultados[visitante]+=1;
+	  break;
+      default:
+	  resultados[visitante]+=3;
+      }
+    }
+}
+
+for ( var i in resultados ) {
+  print( i + ": " + resultados[i])
+}
+
+~~~~~~
 
 Como en todos los scripts, habrá que tener en cuenta que la primera
 línea, `#!/usr/bin/js`, tendrá que sustituirse por el intérprete de
@@ -814,9 +938,38 @@ módulo escrito para un intérprete (Rhino, por ejemplo) pueda funcionar
 en otro (tal como node.js). Vamos a ver cómo adaptaríamos alguna de las
 cosas hechas a este estándar, por ejemplo, cambiando esto sobre la clase
 Nuevo\_partido.js creada anteriormente (la llamamos
-[Un\_Partido](https://github.com/JJ/curso-js/tree/master/codeUn_Partido.js)).
+[Un\_Partido](https://github.com/JJ/curso-js/tree/master/code/Un_Partido.js)).
 
-`exports.Un_Partido = function (local,visitante,resultado) {     this.local = local;     this.visitante=visitante;     this.resultado=resultado;     this.setResultado = setResultado;     this.toString = toString;     this.set_to_string = set_to_string;     this.impresor = _toString; }`{.ejemplo}
+~~~~~~javascript
+// Definición de la clase Nuevo_partido
+exports.Un_Partido = function (local,visitante,resultado) {
+    this.local = local;
+    this.visitante=visitante;
+    this.resultado=resultado;
+    this.setResultado = setResultado;
+    this.toString = toString;
+    this.set_to_string = set_to_string;
+    this.impresor = _toString;
+}
+
+function setResultado( esteResultado ) {
+    if ( esteResultado == '1' || esteResultado=='x' || esteResultado=='2' ) 
+	this.resultado = esteResultado;
+}
+
+function toString() {
+    return this.impresor(this.local, this.visitante, this.resultado);
+}
+
+function _toString( local, visitante, resultado ) {
+    return ": " + local + " - " + visitante + " = " + resultado;
+}
+
+function set_to_string ( impresor ) {
+    this.impresor = impresor;
+}
+
+~~~~~~
 
 El único cambio ha sido que en vez de definir la función directamente,
 se define como un atributo de `exports`. El resto, al ser atributos de
@@ -825,7 +978,11 @@ llamarlo también habrá un pequeño cambio. Mientras que antes teníamos
 que hacer un eval sobre lo cargado, ahora basta con ([programa
 usa\_partido.js](https://github.com/JJ/curso-js/tree/master/codeusa_partido.js)):
 
-`var un_partido = require('./Un_Partido.js');  var este_partido = new un_partido.Un_Partido( 'este','otro','1'); console.log('Resultado ' + este_partido.toString());`{.ejemplo}
+~~~~~~javascript
+var un_partido = require('./Un_Partido.js');
+var este_partido = new un_partido.Un_Partido( 'este','otro','1');
+console.log('Resultado ' + este_partido.toString());
+~~~~~~
 
 Este módulo ya se comporta como el resto de los módulos de Node,
 haciendo falta usar sólo require (con el camino completo) para cargarlo.
