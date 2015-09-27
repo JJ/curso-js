@@ -34,7 +34,7 @@ convierten JS en un lenguaje de propósito general, algo que le falta a
 otros intérpretes como Rhino, que necesita usar librerías de Java para
 poder hacer cosas básicas como abrir ficheros. Empecemos pues, por el
 principio: instalar node.js, lo que se puede hacer en Linux fácilmente
-con `sudo apt-get     install nodejs`, desde los repositorios, o
+con `sudo apt-get install nodejs`, desde los repositorios, o
 [descargándoselo desde su web](http://nodejs.org/download/). Conviene
 usar este último método, porque es un lenguaje en evolución constante,
 de forma que los repositorios de Linux van siempre un poco por detrás.
@@ -73,7 +73,14 @@ Seguimos haciendo nuestro primer programa, un [programa simple
 (guenas.js)](https://github.com/JJ/curso-js/blob/master/code/guenas.js)
 en `node.js` y ejecutémoslo.
 
-`#!/usr/bin/node  var saludo = new Object; saludo.hola = 'mundo'; console.log( saludo );`{.ejemplo}
+~~~~~javascript
+#!/usr/local/bin/node
+
+var saludo = new Object;
+saludo.hola = 'mundo';
+saludo.adios ='muy buenas';
+console.log( saludo );
+~~~
 
 La primera línea es exclusivamente para sistemas Linux (que son, por
 otro lado, los únicos serios para desarrollo de software); en ella habrá
@@ -82,12 +89,15 @@ como `/usr/local/bin/node` u `/usr/bin/env node` en el caso de usar
 `nave`; con ella y haciendo ejecutable el fichero con `chmod +x node.js`
 podemos ejecutarlo y obtener el siguiente resultado
 
-`jmerelo@penny:~/servicios-web/ejemplos$  ./guenas.js  { hola: 'mundo' }`{.ejemplo}
+~~~~~
+jmerelo@penny:~/servicios-web/ejemplos$  ./guenas.js
+{ hola: 'mundo' }
+~~~~~
 
 En otro entorno (o si no se quiere hacer al fichero ejecutable), con
 escribir
 
-`jmerelo@penny:~/servicios-web/ejemplos$  node guenas.js `{.ejemplo}
+    jmerelo@penny:~/servicios-web/ejemplos$  node guenas.js 
 
 es suficiente. En cualquier caso, la salida será la misma. Y la
 explicación también: definimos un objeto `saludo` en la primera línea, y
@@ -104,7 +114,7 @@ escribe en salida estándar y en el segundo en salida de error estándar
 `console.log` puede usar también [formatos como la orden `printf` de
 C](http://nodejs.org/api/stdio.html#stdio_console_log_data), es decir,
 
-`console.log('Respuesta: %s', saludo.hola     )`{.ejemplo}
+    console.log('Respuesta: %s', saludo.hola     )
 
 como hacemos en [este
 programa](https://github.com/JJ/curso-js/blob/master/code/guenas-nave.js).
@@ -120,7 +130,26 @@ como [leer un
 fichero](http://docs.nodejitsu.com/articles/file-system/how-to-read-files-in-nodejs),
 el de las quinielas que hemos usado hasta ahora.
 
-`#!/usr/local/bin/node  var fs = require('fs'); fs.readFile('quiniela.datos', 'utf8',          function(err,datos) {         if (err) {             return console.log(err);         };         var filas = datos.split("\n");         for ( var f in filas ) {             var cachos = filas[f].split(" ");             var partido = { 'local': cachos[0],                     'visitante': cachos[1],                     'resultado': cachos[2] };             console.log( partido );         }         });`{.ejemplo}
+~~~~~javascript
+#!/usr/bin/env node
+
+var fs = require('fs');
+fs.readFile('quiniela.datos', 'utf8', 
+	    function(err,datos) {
+		if (err) {
+		    return console.log(err);
+		};
+		var filas = datos.split("\n");
+		for ( var f in filas ) {
+		    var cachos = filas[f].split(" ");
+		    var partido = { 'local': cachos[0],
+				    'visitante': cachos[1],
+				    'resultado': cachos[2] };
+		    console.log( partido );
+		}
+	    }
+);
+~~~~~
 
 En este
 [programa](https://github.com/JJ/curso-js/blob/master/code/lee-quiniela.js)
@@ -182,7 +211,15 @@ El resto del programa es más o menos habitual; usamos la clase que hemos
 definido anteriormente para genera un objeto de cada tipo e imprimirlo
 usando `console.log`. El resultado será más o menos así:
 
-`{ local: 'Madrid', visitante: 'Barça', resultado: 'x' } { local: 'Atleti', visitante: 'Barça', resultado: '1' } { local: 'Athleti', visitante: 'Recre', resultado: '1' } { local: 'Depor', visitante: 'Athleti', resultado: '2' } { local: 'Elche', visitante: 'Hércules', resultado: 'x' } { local: 'Cai', visitante: 'Madrid', resultado: 'x' }   { local: 'Graná', visitante: 'Recre', resultado: '1' }`{.ejemplo}
+~~~~~
+{ local: 'Madrid', visitante: 'Barça', resultado: 'x' }
+{ local: 'Atleti', visitante: 'Barça', resultado: '1' }
+{ local: 'Athleti', visitante: 'Recre', resultado: '1' }
+{ local: 'Depor', visitante: 'Athleti', resultado: '2' }
+{ local: 'Elche', visitante: 'Hércules', resultado: 'x' }
+{ local: 'Cai', visitante: 'Madrid', resultado: 'x' }
+{ local: 'Graná', visitante: 'Recre', resultado: '1' }
+~~~~~
 
 Es decir, los datos leídos en formato JSON.
 
@@ -219,7 +256,31 @@ un nivel muy básico se puede usar de la forma siguiente, en el programa
 [`github-get.js`](https://github.com/JJ/curso-js/blob/master/code/github-get.js),
 que pide información sobre un usuario en GitHub:
 
-`#!/usr/bin/node  var https = require('https');  var user =process.argv[2]?process.argv[2]:'JJ';  var options = {     host: 'api.github.com',     path: '/users/'+user,     method: 'GET' };  var req = https.get(options, function(res) {                res.setEncoding('utf8');                res.on('data', function (datos_JSON) {                       var datos=JSON.parse(datos_JSON);                       console.log('Login: ' + datos.login+ "\nNombre: " + datos.name + "\n");                   });                }); req.end();`{.ejemplo}
+~~~~~~javascript
+#!/usr/bin/env node
+
+var https = require('https');
+
+var user =process.argv[2]?process.argv[2]:'JJ';
+
+var options = {
+    host: 'api.github.com',
+    path: '/users/'+user,
+    method: 'GET',
+    headers: {'User-Agent': 'Prueba-Node-App'}
+};
+
+
+var req = https.get(options, function(res) {
+    res.setEncoding('utf8');
+    res.on('data', function (datos_JSON) {
+	console.log(datos_JSON);
+	var datos=JSON.parse(datos_JSON);
+	console.log('Login: ' + datos.login+ "\nNombre: " + datos.name + "\n");
+    });
+});
+req.end();
+~~~~~~
 
 Usamos la librería recién instalada para descargarnos información de un
 usuario de [GitHub](https://GitHub.com), usando la librería llamada
@@ -279,32 +340,47 @@ programa con la extensión .cgi al directorio que se haya configurado
 para ello. De la forma más simple posible un CGI escrito en node.js
 podría ser el siguiente:
 
-`#!/usr/bin/node  //cabecera console.log('Content-Type: text/plain; charset=UTF-8');  //contenido var una_variable=['uno','dos',{ tres: 'tres'}]; console.log(''); console.log(una_variable);`{.ejemplo}
+~~~~~
+#!/usr/bin/node
+//cabecera
+console.log('Content-Type: text/plain; charset=UTF-8');
+//contenido
+var una_variable=['uno','dos',{ tres: 'tres'}];
+console.log('');
+console.log(una_variable);
+~~~~~~
 
 Para ejecutarlo no hay más que copiarlo a un directorio determinado con
-permisos de ejecución para otros (`chmod +x     hola-js.cgi`).La primera
+permisos de ejecución para otros (`chmod +x hola-js.cgi`).La primera
 envía una cabecera al cliente que le indica el tipo que se usa; la
 segunda parte es la que efectivamente envía el contenido, en este caso
 una variable en JSON (recordad que console.log escribe en salida
 estándar, y convierte las estructuras de datos a JSON).
 
-Node, por su naturaleza asíncrona, realmente no es el mejor sistema para
-trabajar con JavaScript en un servidor que incluya otros lenguajes. Sin
-embargo, se puede usar JavaScript de muchas maneras diferentes:
-[SilkJS](http://www.silkjs.net/), por ejemplo, es un intérprete de JS
-que incluye también un servidor web; o
-[TeaJS](http://code.google.com/p/teajs/) es un sistema para crear
-[CGIs](#CGI) basado en el intérprete rápido de JS de Google. Por no
-introducir más herramientas, no los vamos a ver aquí, pero conviene
-tener en cuenta que existen este tipo de soluciones que pueden convivir
-en un servidor como Apache o NGINX con otros lenguajes como Ruby o Perl.
+> Node, por su naturaleza asíncrona, realmente no es el mejor sistema para
+> trabajar con JavaScript en un servidor que incluya otros lenguajes. Sin
+> embargo, se puede usar JavaScript de muchas maneras diferentes:
+> [DecafJS](https://github.com/decafjs/decaf), por ejemplo, es un intérprete de JS
+> que incluye también un servidor web; o
+> [TeaJS](https://github.com/ondras/TeaJS/), que está un tanto abandonado y es un sistema para crear
+> [CGIs](#CGI) basado en el intérprete rápido de JS de Google. Por no
+> introducir más herramientas, no los vamos a ver aquí, pero conviene
+> tener en cuenta que existen este tipo de soluciones que pueden convivir
+> en un servidor como Apache o NGINX con otros lenguajes como Ruby o Perl.
 
 ## node.js como servidor
 
-Crear un servidor web con node.js es tan simple que viene directamente
-en [la página principal del mismo](http://nodejs.org/)
+Crear un servidor web con node.js es tan simple que venía directamente
+en [su página principal](http://nodejs.org/) hasta hace nada
 
-`var http=require('http'); http.createServer(function (req, res) {   res.writeHead(200, {'Content-Type': 'text/plain'});   res.end('Ahí estamos\n'); }).listen(8080, '127.0.0.1'); console.log('Server running at http://127.0.0.1:8080/');`{.ejemplo}
+~~~~~javascript
+var http=require('http');
+http.createServer(function (req, res) {
+	res.writeHead(200, {'Content-Type': 'text/plain'});
+	res.end('Ahí estamos\n');
+}).listen(8080, '127.0.0.1');
+console.log('Server running at http://127.0.0.1:8080/');
+~~~~~
 
 Este
 [programa](https://github.com/JJ/curso-js/blob/master/code/servidor.js)
@@ -333,8 +409,16 @@ usar el servidor.
 Evidentemente, si queremos crear un servidor que haga *algo* tendremos
 que usar las peticiones que se reciban para dar una respuesta variable.
 En el
-[](https://github.com/JJ/curso-js/blob/master/code/servidor-var.js)
-`var http=require('http');  http.createServer(function (req, res) {     res.writeHead(200, {'Content-Type': 'text/plain'});      res.end('Ahí estamos ' + req.url);  }).listen(8081, '127.0.0.1');  console.log('Servidor ejecutándose en http://127.0.0.1:8081/');`{.ejemplo}
+[programa](https://github.com/JJ/curso-js/blob/master/code/servidor-var.js)
+
+~~~~~javascript
+var http=require('http'); 
+http.createServer(function (req, res) {
+    res.writeHead(200, {'Content-Type': 'text/plain'}); 
+    res.end('Ahí estamos ' + req.url); 
+}).listen(8081, '127.0.0.1'); 
+console.log('Servidor ejecutándose en http://127.0.0.1:8081/');
+~~~~~
 
 La principal diferencia entre este programa y el anterior es, aparte del
 puerto usado (8081 en vez de 8080) la línea en la que escribe algo, y en
@@ -355,7 +439,24 @@ a las que tendremos que llamar estarán identificadas por el URL que se
 use para pedirlas. Por ejemplo, el programa
 [rest-minimo.js](https://github.com/JJ/curso-js/blob/master/code/rest-minimo.js)
 
-`var http=require('http');  var puerto=process.argv[2]?process.argv[2]:8080; http.createServer(function (req, res) {      res.writeHead(200, {'Content-Type': 'text/plain'});      var split_url=req.url.split("/");      if ( split_url[1] == '' ) {      res.end('Portada');      } else if ( split_url[1] == 'proc' ) {      res.end('No es la portada');      } else {      res.end('No entiendo la petición');      }  }).listen(puerto, '127.0.0.1');  console.log('Server running at http://127.0.0.1:'+puerto+'/');`{.ejemplo}
+~~~~~javascript
+#!/usr/bin/env node
+
+var http=require('http'); 
+var puerto=process.argv[2]?process.argv[2]:8080;
+http.createServer(function (req, res) { 
+    res.writeHead(200, {'Content-Type': 'text/plain'}); 
+    var split_url=req.url.split("/"); 
+    if ( split_url[1] == '' ) { 
+	res.end('Portada'); 
+    } else if ( split_url[1] == 'proc' ) { 
+	res.end('No es la portada'); 
+    } else { 
+	res.end('No entiendo la petición'); 
+    } 
+}).listen(puerto, '127.0.0.1'); 
+console.log('Server running at http://127.0.0.1:'+puerto+'/');
+~~~~~
 
 En este programa procesamos, no sólo imprimimos, la variable `req`. Es
 una estructura de datos con un montón de cosas (insertad un console.log

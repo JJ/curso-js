@@ -1,4 +1,4 @@
-#!/usr/local/bin/node
+#!/usr/bin/env node
 
 var fs = require('fs');
 fs.readFile('quiniela.datos', 'utf8', 
