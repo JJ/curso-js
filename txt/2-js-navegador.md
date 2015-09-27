@@ -94,14 +94,13 @@ escoger y trabajar con los elementos de un tipo determinado, o con un
 elemento en concreto. Por ejemplo, `getElementByTagName('h2')` devolverá
 un array con todos los elementos que tengan esa etiqueta, y
 `getElementById('ej.t1.3')` devolverá el tercer bloque de ejercicios de
-este tema, como veremos en el ejemplo siguiente (que está incluido en la
-misma página):
+este tema, como veremos en el ejemplo siguiente 
 
-`Bloque  `{.ejemplo}
-
- 
-
-`function putBloque(value) {       var ejs = document.getElementById('ej.T1.'+value);       document.getElementById('resultado1').innerHTML=ejs.textContent; }        `{.ejemplo}
+~~~~~
+function putBloque(value) {
+	var ejs = document.getElementById('ej.T1.'+value);
+	document.getElementById('resultado1').innerHTML=ejs.textContent; }
+~~~~~
 
 Un par de líneas sólo de JS: una para buscar el elemento (la primera) y
 la segunda para extraer su contenido (`textContent`) e introducirlo en
@@ -132,7 +131,46 @@ monito, podemos cargar [este programa
 (`aap-nav.user.js`)](https://github.com/JJ/curso-js/blob/master/code/aap-nav.user.js)
 que lo usa:
 
-`// ==UserScript== // @name                AAP-Nav // @namespace           http://geneura.org/projects/greasemonkey // @description         Navegación por las secciones de AAP // @include             http://geneura.ugr.es/~jmerelo/asignaturas/* // ==/UserScript==  GM_log('Entrando AAP-Nav'); var h2 = document.getElementsByTagName('h2'); var a_nodes = new Array; var anchors = new Array; for ( var secs = 0; secs < h2.length; secs ++ ) {   var thisA = h2[secs].getElementsByTagName('a');   a_nodes[secs] = thisA[0];   anchors[secs] = thisA[0].getAttribute('name');   GM_log('Anchor ' + secs + " " + anchors[secs]); }    for ( var secs = 0; secs < h2.length; secs ++ ) {   var span = document.createElement('span');   span.setAttribute('style','background:lightblue');   if ( secs > 0 ) {     var ahref = document.createElement('a');     ahref.setAttribute('href','#'+anchors[secs-1]);     var txt=document.createTextNode('^');     ahref.appendChild(txt);     span.appendChild(ahref);   }   if ( secs < h2.length -1  ) {     span.appendChild(document.createTextNode(' | '));     var ahref = document.createElement('a');     ahref.setAttribute('href','#'+anchors[secs+1]);     var txt=document.createTextNode('v');     ahref.appendChild(txt);     span.appendChild(ahref);   }   a_nodes[secs].parentNode.insertBefore(span,a_nodes[secs]); }`{.ejemplo}
+~~~~~~javascript
+// ==UserScript==
+// @name                AAP-Nav
+// @namespace           http://geneura.org/projects/greasemonkey
+// @description         Navegación por las secciones de AAP
+// @include             http://geneura.ugr.es/~jmerelo/asignaturas/*
+// ==/UserScript==
+
+GM_log('Entrando en AAP-Nav');
+var h2 = document.getElementsByTagName('h2');
+var a_nodes = new Array;
+var anchors = new Array;
+for ( var secs = 0; secs < h2.length; secs ++ ) {
+  var thisA = h2[secs].getElementsByTagName('a');
+  a_nodes[secs] = thisA[0];
+  anchors[secs] = thisA[0].getAttribute('name');
+  GM_log('Anchor ' + secs + " " + anchors[secs]);
+}
+
+for ( var secs = 0; secs < h2.length; secs ++ ) {
+  var span = document.createElement('span');
+  span.setAttribute('style','background:lightblue');
+  if ( secs > 0 ) {
+    var ahref = document.createElement('a');
+    ahref.setAttribute('href','#'+anchors[secs-1]);
+    var txt=document.createTextNode('^');
+    ahref.appendChild(txt);
+    span.appendChild(ahref);
+  }
+  if ( secs < h2.length -1  ) {
+    span.appendChild(document.createTextNode(' | '));
+    var ahref = document.createElement('a');
+    ahref.setAttribute('href','#'+anchors[secs+1]);
+    var txt=document.createTextNode('v');
+    ahref.appendChild(txt);
+    span.appendChild(ahref);
+  }
+  a_nodes[secs].parentNode.insertBefore(span,a_nodes[secs]);
+}
+~~~~~~
 
 Este programa añade unas flechitas de navegación a una página que
 incluya cabeceras `h2` de forma que se pueda pasar de cada sección a la
@@ -166,7 +204,7 @@ modo de injerto, se van metiendo los elementos unos dentro de otros
 usando `appendChild`. Y, finalmente, se insertan los elementos creados
 en el documento en la penúltima línea:
 
-a\_nodes[secs].parentNode.insertBefore(span,a\_nodes[secs]);
+    a_nodes[secs].parentNode.insertBefore(span,a_nodes[secs]);
 
 que navega desde el *ancla* hasta su padre (`parentNode`) e inserta
 antes del mismo (`insertBefore`) el `span` que hemos creado previamente.
@@ -196,13 +234,35 @@ no crear elementos nuevos en el interfaz). Por ejemplo, se hace así en
 [este
 programa](https://github.com/JJ/curso-js/blob/master/code/windowopen.html)
 
-`<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> <html> <head> <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15"> <title>Probando window.open</title> <script type='application/javascript'> var contenido = "<html><head><title>Mi ventanita</title></head><body><h1>Mi ventanita</h1></body></html"; newwindow=window.open(); newdocument=newwindow.document; newdocument.write(contenido); </script>`{.ejemplo}
+~~~~~HTML
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">
+<title>Probando window.open</title>
+<script type='application/javascript'>
+var contenido = "<html><head><title>Mi ventanita</title></head><body><h1>Mi ventanita</h1></body></html";
+newwindow=window.open();
+newdocument=newwindow.document;
+newdocument.write(contenido);
+</script>
+</head>
+<body>
+<h1>Esta es una página que abre otra ventana</h1>
+
+<p>Desbloquea las ventanas emergentes</p>
+
+<hr>
+<address></address>
+<!-- hhmts start -->Last modified: Sun Apr  7 19:49:52 CEST 2013 <!-- hhmts end -->
+</body> </html>
+~~~~~
 
 En este caso, se crea una nueva página estática usando `write` sobre el
 documento que hemos creado. No es que sea demasiado útil (se podría usar
 el URL directamente pasándoselo como parámetro a `open`) pero demuestra
 las posibilidades del mismo, que también se pueden ver en [este
-mini-tutorial](http://www.htmlgoodies.com/beyond/javascript/javascript-dynamic-document-creation-in-new-windows.html).
+mini-tutorial](http://www.htmlgoodies.com/beyond/javascript/javascript-dynamic-document-creation-in-new-windows.html). 
 
 ### Selectores
 
@@ -262,7 +322,24 @@ necesitar. El evento `load` sólo se activa desde el elemento `body`,
 como en [este
 ejemplo](https://github.com/JJ/curso-js/blob/master/code/onload.html)
 
-`<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> <html> <head> <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15"> <title>Probando onLoad</title> </head>  <body onLoad='alert("Ahora está todo cargado")'> <h1>Esta es una página que no tiene gran cosa</h1>  <p>Pero podría tenerla.</p>`{.ejemplo}
+~~~~~html
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">
+<title>Probando onLoad</title>
+</head>
+
+<body onLoad='alert("Ahora está todo cargado")'>
+<h1>Esta es una página que no tiene gran cosa</h1>
+
+<p>Pero podría tenerla.</p>
+
+<hr>
+<address></address>
+<!-- hhmts start -->Last modified: Sun Apr  7 19:49:52 CEST 2013 <!-- hhmts end -->
+</body> </html>
+~~~~~
 
 El uso de evento está hacia el final del código, donde usamos `alert`
 que se activa tras el evento `load`, es decir, cuando se carga la página
@@ -286,7 +363,29 @@ a todas sus funciones. Podemos empezar con la función `ready` en el
 [siguiente
 programa](https://github.com/JJ/curso-js/blob/master/code/ready.html):
 
-`<html> <head> <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15"> <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> <title>Probando ready de jQuery</title> </head>  <body> <h1>Esta es una página que no tiene gran cosa</h1>  <p>Pero podría tenerla.</p> <script type='text/javascript'> $(document).ready(function() {     alert('Ahora estamos listos'); }); </script>`{.ejemplo}
+~~~~~HTML
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<title>Probando ready de jQuery</title>
+</head>
+
+<body>
+<h1>Esta es una página que no tiene gran cosa</h1>
+
+<p>Pero podría tenerla.</p>
+<script type='text/javascript'>
+$(document).ready(function() {
+    alert('Ahora estamos listos');
+});
+</script>
+<address></address>
+<!-- hhmts start -->Last modified: Sun Apr  7 19:49:52 CEST 2013 <!-- hhmts end -->
+</body> 
+</html>
+~~~~~
 
 En este caso, usamos como se ha indicado antes la copia de JQuery
 proporcionada por Google, que, como cualquier otra librería JS, debe ser
@@ -307,7 +406,39 @@ sintaxis que, como hemos visto más arriba, es la misma que se usa en las
 CSS. Lo vemos en el [siguiente
 ejemplo](https://github.com/JJ/curso-js/blob/master/code/selectores.html)
 
-`<script type='text/javascript'> $(function() {     var hachedoses ='';     $("h2").each( function() {         hachedoses += this.textContent + " - ";     } );     alert(hachedoses);     $("#cambiando").html( hachedoses );  }); </script> <h2>Este es un H2</h2>  <h2>Este es otro H2</h2>  <H2>Y este, lo adivinaste, otro</H2>  <div id='cambiando' style='border:dashed'></div>`{.ejemplo}
+~~~~~HTML
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<title>Probando ready de jQuery</title>
+</head>
+
+<body>
+<h1>Esta es una página que no tiene gran cosa</h1>
+
+<p>Pero podría tenerla.</p>
+<script type='text/javascript'>
+$(function() {
+    var hachedoses ='';
+    $("h2").each( function() {
+        hachedoses += this.textContent + " - ";
+    } );
+    alert(hachedoses);
+    $("#cambiando").html( hachedoses ); 
+});
+</script>
+<h2>Este es un H2</h2>
+
+<h2>Este es otro H2</h2>
+
+<H2>Y este, lo adivinaste, otro</H2>
+
+<div id='cambiando' style='border:dashed'></div>
+</body> 
+</html>
+~~~~~
 
 En este ejemplo, primero se recorren los elementos `h2` pero en vez de
 hacerse a partir de un bucle se usa directamente el objeto generado por
@@ -317,3 +448,7 @@ elemento. Usamos el `alert` principalmente para que se vea el contenido
 del `div` definido más abajo vacío y posteriormente con el contenido que
 se le añade en la última línea del script, que usa como selector el
 equivalente a un elemento con el id `#cambiando`.
+
+### Bibliografía
+
+La mejor bibliografía está en inglés: [jQuery fundamentals](http://jqfundamentals.com/), por ejemplo, es un libro gratuito. [Arquitectura de la aplicación web](https://es.coursera.org/course/webapplications) es un curso gratuito de Coursera que incluye una parte de jQuery. 

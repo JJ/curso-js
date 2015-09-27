@@ -1041,7 +1041,7 @@ interesante usar alguna librería que facilite su uso como
 [Prototype](http://www.prototypejs.org/). También el [Google Web
 Toolkit](http://code.google.com/webtoolkit/) permite desarrollar en AJAX
 programando sólo en Java, aunque pueda que el JS generado necesite algún
-retoque adicional.
+retoque adicional. Por supuesto, también es conveniente que se continúe con el siguiente capítulo. 
 
 ### Agradecimientos
 
