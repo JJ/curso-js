@@ -138,7 +138,10 @@ print( 'Hola, Mundo' );
 En realidad, el JS es bastante parecido al C, y, para el caso, también
 al Java. Este programa producirá (siempre que lo hagamos ejecutable con
 `chmod +x hola.js` previamente):
-`jmerelo@vega:~/txt/docencia/AAP/Temario$ ./hola.js Hola, Mundo`
+
+~~~~~
+jmerelo@vega:~/txt/docencia/AAP/Temario$ ./hola.js Hola, Mundo
+~~~~~
 
 Podemos probar con diferentes intérpretes que tengamos instalados.
 
@@ -165,19 +168,28 @@ fuente para ver el
 código)](https://github.com/JJ/curso-js/tree/master/code/hola-js.html)
 donde se incluye el programa en JS de esta forma:
 
-`<script type='text/javascript' src='hola.js'></script>`
+~~~~~
+<script type='text/javascript' src='hola.js'></script>
+~~~~~
+
 
 El problema es que, en este caso, la orden `print` se interpreta como
 impresión por impresora, y habrá que cambiarla por otra que signifique
 lo mismo, escribir en el dispositivo de salida que se esté
 [usando](https://github.com/JJ/curso-js/tree/master/code/hola-js-2.html):
 
-`document.writeln('Hola, Mundo')`
+~~~~~
+document.writeln('Hola, Mundo')
+~~~~~
+
 
 Lo que también se puede escribir directamente
 [así](https://github.com/JJ/curso-js/tree/master/code/hola-js-3.html):
 
-`<script  type='text/javascript'>document.writeln('Hola, Mundo')</script>`
+~~~~~
+<script  type='text/javascript'>document.writeln('Hola, Mundo')</script>
+~~~~~
+
 
 Estos programas se pueden usar con cualquier editor de texto, Emacs,
 Sublime Text o Notepad++; también con los entornos integrados, que te
@@ -207,7 +219,7 @@ for (i in matriz ) {
   }
   print ("\t</"+fila+">\n");
  }
-print ("</"+tabla+">");`
+print ("</"+tabla+">");
 ~~~~~~
 
 Este programa tiene dos bucles anidados, que imprimen un producto dentro
@@ -371,7 +383,7 @@ moleste mientras generamos el resto de la quiniela.
 
 Y el objeto lo creamos mediante una clásica llamada:
 
-` quiniela[i] = new Partido( equipo1, equipo2 );`
+    quiniela[i] = new Partido( equipo1, equipo2 );
 
 Más adelante usamos un bucle `in` para escribir los valores de cada uno
 de los partidos; las variables no están encapsuladas, así que se puede
@@ -382,10 +394,12 @@ el `+` que lo sigue como una suma normal y no una concatenación de
 cadenas. `i+1` daría `11`, mientras que `parseInt(i)+1` dará 2.
 
 Y el resultado, aleatorio por supuesto, será algo así como esto :
-`Partido 0: Graná - Atleti
+~~~~~
+Partido 0: Graná - Atleti
 Partido 1: Madrid - Depor
 Partido 2: Betis - Barça
-Partido 3: Sevilla - Geta`
+Partido 3: Sevilla - Geta
+~~~~~
 
 Añadir métodos de clase se hace más o menos de la misma forma, que no es
 muy ortodoxa, pero es la que hay. Lo veremos en [el siguiente
@@ -446,8 +460,10 @@ forma que se accede a los valores a través de la cadena alfanumérica
 usada para indexarlos, que se suele denominar *clave* (*key*). Casi
 todos los lenguajes de programación tienen alguna forma de usar estas
 matrices asociativas. Por ejemplo, en Perl:
-`my %matrizAsociativa; # % para matrices asociativas
-$matrizAsociativa{'variable'}='Valor'; # { para las claves print $matrizAsociativa{'variable'};`
+~~~~~perl
+my %matrizAsociativa; # % para matrices asociativas
+$matrizAsociativa{'variable'}='Valor'; # { para las claves print $matrizAsociativa{'variable'};
+~~~~~
 devolvería `Valor`.
 
 Las usaremos en el [siguiente
@@ -532,14 +548,16 @@ puedes referir a ellos de diferentes maneras. Vamos a usar el depurador
 interactivo para verlo, ejecutando simplemente `rhino`, `rhino` o `kjs`
 en la línea de comandos. Una vez hecho, tecleamos las siguientes
 órdenes:
-`js> foo = new Array
+~~~~~
+js> foo = new Array
 js> foo.cero='Cero' Cero
 js> foo[1] = 'Uno' Uno
 js> foo['dos'] = 'Dos' Dos
 js> foo.dos Dos
 js> foo['cero'] Cero
 js> for ( i in foo) { print(foo[i]);}
-Cero Uno Dos`
+Cero Uno Dos
+~~~~~
 Hay que teclear lo que se encuentra detrás de `js>`; cada segunda línea
 es la respuesta del intérprete a nuestras órdenes. En la primera,
 creamos un vector, y le asignamos valor a tres elementos de formas
@@ -562,10 +580,12 @@ pero es simplemente una cuestión de convención.
 No todo va a ser público en un objeto; también pueden tener su intimidad
 guardada en variables privadas:
 
-`js> function Foo( bar ) { this.bar = bar; var privada = 7;}
+~~~~~
+js> function Foo( bar ) { this.bar = bar; var privada = 7;}
 js> var este_foo = new Foo( 'correquetepillo' );
 js> print(este_foo.bar) correquetepillo
-js> print(este_foo.privada) undefined`
+js> print(este_foo.privada) undefined
+~~~~~
 
 Es tan secreta, de hecho, que ni siquiera te dice que no existe:
 simplemente que su valor está indefinido.
@@ -596,7 +616,6 @@ está, de todas
 formas](https://github.com/JJ/curso-js/tree/master/code/lee_quiniela.js):
 
 ~~~~~~javascript
-
 // ejecutar con rhino lee_quiniela.js <argumento>
 load('Partido.js');
 var FileReader = java.io.FileReader;
@@ -708,20 +727,29 @@ es un objeto en JS, se puede usar esta notación para asignar valores
 prácticamente a cualquier cosa. Vamos a usar una vez más el intérprete
 en modo interactivo para ver un ejemplo:
 
-`js> var objeto = { Madrid : 25, Atleti: 33, Ponferradina: 44 }; js> for (i in objeto) { print( i + " : "+ objeto[i] )}; Madrid : 25 Atleti : 33 Ponferradina : 44`
+~~~~~
+js> var objeto = { Madrid : 25, Atleti: 33, Ponferradina: 44 };
+js> for (i in objeto) { print( i + " : "+ objeto[i] )}; Madrid : 25 Atleti : 33 Ponferradina : 44
+~~~~~
 
 Más fácil no puede ser. Se le asigna valor a un objeto con el formato
 clave : valor (con coma al final), de la misma forma que se haría a un
 array asociativo. Además, se pueden crear objetos sobre la marcha y
 asignárselos a una variable cuyo valor se cree también sobre la marcha:
 
-`js> eval("var objeto2 = { Madrid : 25, Atleti: 33, Ponferradina: 44 }"); js> for (i in objeto2) { print( i + " : "+ objeto[i] )}; Madrid : 25 Atleti : 33 Ponferradina : 44`
+~~~~~
+js> eval("var objeto2 = { Madrid : 25, Atleti: 33, Ponferradina: 44 }");
+js> for (i in objeto2) { print( i + " : "+ objeto[i] )}; Madrid : 25 Atleti : 33 Ponferradina : 44
+~~~~~
 
 donde usamos `eval`, que interpreta una expresión en JavaScript como si
 del propio intérprete se tratara. Las expresiones se pueden anidar, para
 dar lugar a objetos más complejos
 
-`js> eval("var objeto2 = { Madrid : 25, Atleti: 33, Ponferradina: { casa: 33, fuera: 44} }"); js> for (i in objeto2) { print( i + " : "+ objeto2[i] )}; Madrid : 25 Atleti : 33 Ponferradina : [object Object]`
+~~~~~
+js> eval("var objeto2 = { Madrid : 25, Atleti: 33, Ponferradina: { casa: 33, fuera: 44} }");
+js> for (i in objeto2) { print( i + " : "+ objeto2[i] )}; Madrid : 25 Atleti : 33 Ponferradina : [object Object]
+~~~~~
 
 Que parece más raro de la cuenta, pero que, con un poco de código, se
 podría también imprimir.
@@ -846,8 +874,8 @@ asignándole un valor nuevo. De hecho, esto es lo que vamos a hacer en el
 [programa siguiente
 (`liga3.js`)](https://github.com/JJ/curso-js/tree/master/code/liga3.js):
 
-~~~~~~
-#!/usr/bin/smjs
+~~~~~~javascript
+#!/usr/bin/env js
 
 load('Nuevo_partido.js');
 
@@ -1022,7 +1050,7 @@ Agradezco a los
 diferentes anuncios](http://barrapunto.com/comments.pl?sid=68032) que
 [publiqué en Barrapunto](http://barrapunto.com/comments.pl?sid=67899)
 sus comentarios y sugerencias. También a Javier Espigares por la lectura
-y comentarios sobre las versiones previas de este tema y el anterior.
+y comentarios sobre las versiones previas de este texto.
 
 ### Bibliografía [\#](#T1:t1:biblio)
 
