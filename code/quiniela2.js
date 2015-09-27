@@ -1,7 +1,7 @@
-#!/usr/bin/smjs
+#!/usr/bin/env js
 
 
-   // Definición de la clase Partido
+// Definición de la clase Partido
 function Partido(local,visitante) {
   this.local = local;
   this.visitante=visitante;

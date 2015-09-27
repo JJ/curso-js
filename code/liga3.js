@@ -40,17 +40,17 @@ for ( var i = 0; i < quinielas.length; i ++ ) {
       var visitante = quinielas[i][j].visitante;
       var resultado = quinielas[i][j].resultado;
       switch (resultado) {
-    case '1':
-	resultados[local]+=3;
-	break;
-    case 'x':
-	resultados[local]+=1;
-	resultados[visitante]+=1;
-	break;
-    default:
-	resultados[visitante]+=3;
+      case '1':
+	  resultados[local]+=3;
+	  break;
+      case 'x':
+	  resultados[local]+=1;
+	  resultados[visitante]+=1;
+	  break;
+      default:
+	  resultados[visitante]+=3;
+      }
     }
-  }
 }
 
 for ( var i in resultados ) {
