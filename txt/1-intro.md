@@ -100,7 +100,9 @@ correctamente en `js` o `rhino`.
 > `wscript`](http://stackoverflow.com/questions/686377/windows-command-line-javascript)
 > que, una vez más, tiene ciertas diferencias con respecto al resto de los
 > intérpretes (todo lo relacionado con I/O); en realidad se trata de
-> JScript, otra implementación del estándar ECMAscript.
+> JScript, otra implementación del estándar ECMAscript. Finalmente,
+> para instalar `kjs`, el intérprete JavaScript parte del entorno KDE,
+> tendrás que instalar todos los binarios de KDE con `sudo apt-get install kdelibs-bin`.
 
 En cuanto a los navegadores, puede que haga falta activar JavaScript
 para que lo entiendan. Por ejemplo, en Firefox hay que activarlo usando
@@ -138,7 +140,8 @@ adulto, y merece la pena estudiarlo como cualquier otro lenguaje.
 
 ## Primer programa en JavaScript
 
-Nuestro primer programa tiene dos versiones, al menos. 
+Nuestro primer programa tiene dos versiones, al menos. Empecemos por
+una de ellas
 ~~~~~~
 #!/usr/bin/js
 print( 'Hola, Mundo' );
@@ -159,20 +162,46 @@ jmerelo@penny:~/code$ gjs hola.js
 Hola, Mundo
 jmerelo@penny:~/code$ rhino hola.js
 Hola, Mundo
-jmerelo@penny:~/code$ js hola.js
+jmerelo@penny:~/code$ js24 hola.js
 Hola, Mundo
 ~~~~~~
 
-**Ojo**: en node.js habría que cambiar `print` por `console.log`, o
-tendremos un error. Con `kjs` habrá que ejecutarlo también directamente
-desde la línea de órdenes; con un fichero da un error y no he encontrado
-ningún manual específico sobre él, así que no aconsejo usar esa versión
-de JS. Por otro lado, [este programa, `hola-g.js`, sería equivalente
+Este programa tiene una [segunda versión](https://github.com/JJ/curso-js/blob/master/code/holakase.js) en node.js habría que cambiar `print` por `console.log`, o
+tendremos un error. También se puede usar directamente
+[la consola JavaScript online](http://jsconsole.com/?console.log%28%22Es%20una%20prueba%22%29)
+para ejecutarlo; `console.log` es la versión de la orden de imprimir
+que funciona en la mayoría de los intérpretes más conocidos (Node y
+los del navegador).
+
+>Con `kjs` habrá que ejecutarlo también directamente
+>desde la línea de órdenes; con un fichero da un error y no he encontrado
+>ningún manual específico sobre él, así que no aconsejo usar esa versión
+> de JS. Esto, sin embargo, parece funcionar: `kjs -e
+>'print("Hola,mundo")'`. 
+
+Por otro lado, [este programa, `hola-g.js`, sería equivalente
 para el intérprete `gjs` que viene con
 Gnome](https://github.com/JJ/curso-js/tree/master/code/hola-g.js).
 
-Para ejecutarlo desde el navegador habrá que hacer una poca más de
-historia, pero tampoco tanto. Lo vemos en [este ejemplo (darle a ver
+Para ejecutarlo desde el navegador habrá que hacer un poco más de
+historia, pero tampoco tanto. Primero, lo podemos ejecutar
+directamente. La combinación de teclas *Mayúsculas-Control-K* abre, en
+la parte baja del navegador, una consola de JavaScript. Donde aparece
+">>", se escribe simplemente `console.log("Qué bonito")` y dará como
+resultado algo así:
+
+    console.log("Qué bonito")
+	undefined
+	Qué bonito
+
+En navegadores modernos la consola también completará automáticamente
+las órdenes mostrándote todas las opciones posibles. Arriba, el
+`undefined` indica simplemente que la función `console.log` no
+devuelve ningún valor. La línea siguiente es la que muestra el
+resultado de ejecutar la orden.
+
+Segundo, podemos ejecutar JavaScript como parte de una página web. Lo
+vemos en [este ejemplo (darle a ver 
 fuente para ver el
 código)](https://github.com/JJ/curso-js/tree/master/code/hola-js.html)
 donde se incluye el programa en JS de esta forma:
@@ -180,7 +209,6 @@ donde se incluye el programa en JS de esta forma:
 ~~~~~
 <script type='text/javascript' src='hola.js'></script>
 ~~~~~
-
 
 El problema es que, en este caso, la orden `print` se interpreta como
 impresión por impresora, y habrá que cambiarla por otra que signifique
@@ -199,15 +227,15 @@ Lo que también se puede escribir directamente
 <script  type='text/javascript'>document.writeln('Hola, Mundo')</script>
 ~~~~~
 
-
-Estos programas se pueden usar con cualquier editor de texto, Emacs,
-Sublime Text o Notepad++; también con los entornos integrados, que te
+Estos programas se pueden editar con cualquier editor de texto, Emacs,
+gedit o Notepad++; también con los entornos integrados, que te
 ofrecerán ventajas adicionales como completar las variables y los
 nombres de los comandos.
 
 ## Estructuras de control en JavaScript
 
-Vistas ya las mil y una formas de escribir cosas en la pantalla,
+Vistas ya las mil y una formas de escribir cosas en la pantalla y
+ejecutar un programa con los mil y un intérpretes de javascript,
 procedamos a temas más escabrosos, como lo que viene siendo hacer algo
 *realmente*. Por ejemplo, un bucle que cree una tabla HTML, como se hace
 en el siguiente
@@ -230,6 +258,11 @@ for (i in matriz ) {
  }
 print ("</"+tabla+">");
 ~~~~~~
+
+>Como se puede ver en la primera línea, `#!/usr/bin/js24`, se está
+>usando SpiderMonkey como intérprete. Rhino y gjs usarán `print`de la
+>misma forma. Para usar node o desde la consola del navegador,
+>sustituye `print` por `console.log`
 
 Este programa tiene dos bucles anidados, que imprimen un producto dentro
 de una tabla. La salida será tal que así (ver el fuente para la
