@@ -393,13 +393,12 @@ interprete `i` como un número entero, no como una cadena, y, por tanto,
 el `+` que lo sigue como una suma normal y no una concatenación de
 cadenas. `i+1` daría `11`, mientras que `parseInt(i)+1` dará 2.
 
-Y el resultado, aleatorio por supuesto, será algo así como esto :
-~~~~~
-Partido 0: Graná - Atleti
-Partido 1: Madrid - Depor
-Partido 2: Betis - Barça
-Partido 3: Sevilla - Geta
-~~~~~
+Y el resultado, aleatorio por supuesto, será algo así como esto:
+
+    Partido 0: Graná - Atleti
+    Partido 1: Madrid - Depor
+    Partido 2: Betis - Barça
+    Partido 3: Sevilla - Geta
 
 Añadir métodos de clase se hace más o menos de la misma forma, que no es
 muy ortodoxa, pero es la que hay. Lo veremos en [el siguiente
@@ -460,10 +459,12 @@ forma que se accede a los valores a través de la cadena alfanumérica
 usada para indexarlos, que se suele denominar *clave* (*key*). Casi
 todos los lenguajes de programación tienen alguna forma de usar estas
 matrices asociativas. Por ejemplo, en Perl:
+
 ~~~~~perl
 my %matrizAsociativa; # % para matrices asociativas
 $matrizAsociativa{'variable'}='Valor'; # { para las claves print $matrizAsociativa{'variable'};
 ~~~~~
+
 devolvería `Valor`.
 
 Las usaremos en el [siguiente
@@ -545,9 +546,10 @@ En realidad, todo en JavaScript es un objeto, y especialmente los
 vectores: tanto los vectores tradicionales como las matrices asociativas
 como los objetos se representan internamente de la misma forma, y te
 puedes referir a ellos de diferentes maneras. Vamos a usar el depurador
-interactivo para verlo, ejecutando simplemente `rhino`, `rhino` o `kjs`
+interactivo para verlo, ejecutando simplemente `rhino`, o `kjs`
 en la línea de comandos. Una vez hecho, tecleamos las siguientes
 órdenes:
+
 ~~~~~
 js> foo = new Array
 js> foo.cero='Cero' Cero
@@ -558,6 +560,7 @@ js> foo['cero'] Cero
 js> for ( i in foo) { print(foo[i]);}
 Cero Uno Dos
 ~~~~~
+
 Hay que teclear lo que se encuentra detrás de `js>`; cada segunda línea
 es la respuesta del intérprete a nuestras órdenes. En la primera,
 creamos un vector, y le asignamos valor a tres elementos de formas
@@ -595,10 +598,16 @@ que se pueden instanciar, que corresponderían a la librería estándar (o
 librería estándar de clases) en otros lenguajes. Una de ellas ya la
 hemos visto: la clase `Array`. Otra es la clase `String`, que se usa
 para manejar cadenas alfanuméricas, chorros de 0s y 1s.
-`js> var cadena = new String("1"); js> print(cadena + 1) 11       `
+
+    js> var cadena = new String("1");
+    js> print(cadena + 1) 11
+	
 La clase `String` tiene una serie de métodos que permiten hacer lo
 habitual con las cadenas: encadenarlas, dividirlas, y buscar cosas.
-`js> var nombres = "Pedro, Lucas, Juan".split(", "); js> print(nombres[0]) Pedro`
+
+	js> var nombres = "Pedro, Lucas, Juan".split(", ");
+	js> print(nombres[0]) Pedro
+	
 En este caso, `split` es un método de la clase String, y lo estamos
 aplicando directamente sobre la cadena `"Pedro, Lucas, Juan"`, que, de
 por si, es un objeto de esa clase. `split` divide la cadena usando los
@@ -691,7 +700,15 @@ La otra diferencia es también cómo se ejecuta el fichero:
 el [fichero
 `quiniela.datos`](https://github.com/JJ/curso-js/tree/master/code/quiniela.datos),
 que dará el resultado siguiente:
-`Elche: 1 Atleti: 3 Cai: 1 Athleti: 6 Bar~a: 1 Madrid: 2 H~rcules: 1`
+
+	Elche: 1
+	Atleti: 3
+	Cai: 1
+	Athleti: 6
+	Bar~a: 1
+	Madrid: 2
+	H~rcules: 1
+	
 Queda con esto más o menos claro que para ir donde nadie ha ido antes
 con JS, hay que meterse un poco en Java. Pero no siempre. Tenéis alguna
 información más en [este tutorial de
@@ -1052,7 +1069,7 @@ diferentes anuncios](http://barrapunto.com/comments.pl?sid=68032) que
 sus comentarios y sugerencias. También a Javier Espigares por la lectura
 y comentarios sobre las versiones previas de este texto.
 
-## Bibliografía [\#](#T1:t1:biblio)
+## Bibliografía 
 
 Hay dos libros fundamentales para aprender JS, aunque están muy
 enfocados a JS en el navegador:[*JavaScript: The Definitive Guide*, el
