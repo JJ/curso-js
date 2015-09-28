@@ -956,7 +956,7 @@ for ( var i in resultados ) {
 Como en todos los scripts, habrá que tener en cuenta que la primera
 línea, `#!/usr/bin/js`, tendrá que sustituirse por el intérprete de
 JavaScript que usemos (`rhino`, `gjs`, `node` o el que sea; en este
-último caso es probable que la línea sea `/usr/bin/local/node`). La
+último caso es probable que la línea sea `/usr/bin/env node`). La
 parte nueva de este programa está en en la línea 9, donde se define la
 variable `imprime`. Se define una función *sin nombre* (lo que se suele
 denominar un *closure* o función anónima) a la que podemos acceder
