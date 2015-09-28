@@ -1,3 +1,3 @@
-#!/usr/bin/js24
+#!/usr/bin/js
 
 console.log( 'Hola, Mundo' );

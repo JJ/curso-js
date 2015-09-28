@@ -50,8 +50,9 @@ usar](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Shells).
 Conviene instalar alguno de ellos para poder ejecutar desde línea de
 órdenes los programas de
 ejemplo;
+
 >Aunque, como hemos dicho arriba, no te va a hacer falta más que el
->navegador para muchos de ellos
+>navegador para muchos de ellos.
 
 por ejemplo, para instalar el primero habrá que ejecutar desde
 la consola de administrador o superusuario:
@@ -231,6 +232,24 @@ Estos programas se pueden editar con cualquier editor de texto, Emacs,
 gedit o Notepad++; también con los entornos integrados, que te
 ofrecerán ventajas adicionales como completar las variables y los
 nombres de los comandos.
+
+>El siguiente
+>[programa]((https://github.com/JJ/curso-js/tree/master/code/hola-all.js)
+>funcionaría al menos en 4 intérpretes, aparte de en la consola del navegador:
+
+~~~~~javascript
+var write;
+
+if ( typeof console != "undefined" ) {
+    write = console.log;
+} else {
+    write = print;
+}
+
+write( 'Hola, Mundo' );
+~~~~~
+
+>Si los tienes instalados, pruébalo. 
 
 ## Estructuras de control en JavaScript
 
@@ -812,67 +831,6 @@ js> for (i in objeto2) { print( i + " : "+ objeto2[i] )}; Madrid : 25 Atleti : 3
 
 Que parece más raro de la cuenta, pero que, con un poco de código, se
 podría también imprimir.
-
-Y JSON, precisamente, es uno de los formatos de intercambio, el más
-simple, el que se usa en AJAX, y un modo de acceder también a servicios
-web como *geonames*. Lo hacemos en [el siguiente ejemplo:
-`json-geonames.html`](https://github.com/JJ/curso-js/tree/master/code/json-geonames.html),
-del que extraemos el [código en JS (fichero
-`geonames_call.js`)](https://github.com/JJ/curso-js/tree/master/code/geonames_call.js)
-
-~~~~~~javascript
-// this function will be called by our JSON callback
-// the parameter jData will contain an array with geonames objects
-function getLocation(jData) {
-  if (jData == null) {
-    // There was a problem parsing search results
-    return;
-  }
-
-  var html = '<ul>';
-  var geonames = jData.geonames;
-  for (i=0;i< geonames.length;i++) {
-     var name = geonames[i];
-     // we create a simple html list with the geonames objects
-     // the link will call the center() javascript method with lat/lng as parameter
-     html = html+"<li><em>"+name.name+ "</em> - Latitud: " + name.lat +', longitud: ' + name.lng+ "</li>";
-  }
-  html+="</ul>";
-  document.getElementById('resultDiv').innerHTML = html;
-}
-
-// calls the geonames JSON webservice with the search term
-function search() {
-  request = 'http://ws.geonames.org/searchJSON?country=ES&q=' +  encodeURIComponent(document.getElementById('q').value)  + '&maxRows=10&callback=getLocation';
-
-  // Create a new script object
-  // Implementación en jsr_class.js
-  aObj = new JSONscriptRequest(request);
-  // Build the script tag
-  aObj.buildScriptTag();
-  // Execute (add) the script tag
-  aObj.addScriptTag();
-}
-
-~~~~~~
-
-Este ejemplo es un poco complicado, sobre todo, por el mecanismo que usa
-para hacer la llamada, y que está contenido en el fichero
-[`jsr_class.js`, que contiene la clase
-`JSONscriptRequest`](https://github.com/JJ/curso-js/tree/master/code/jsr_class.js),
-que será la que usemos para construir la llamada. La mecánica es la
-siguiente: cada vez que se introduce un nombre de un pueblo o ciudad de
-España, se genera un evento, y se llama a la función `search`. Esta
-función construye una petición, dentro de la cual está incluido
-`callback=getLocation`. El truco es que esa petición genera un
-*callback* tal que cuando se recibe la respuesta se llama a la función
-`getLocation` (definida más arriba).
-
-Esa función recibe como variable en `jData` el resultado que, al estar
-en formato JSON, ya está, de hecho, en el formato de un objeto en JS.
-Por eso, en el bucle dentro de la función `getLocation` se trabaja
-directamente con los datos obtenidos sin necesidad de hacer ningún tipo
-de parsing.
 
 ## Funciones como objetos
 
