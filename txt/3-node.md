@@ -1,6 +1,5 @@
+# Introducción a node.js {name="nodejs"}
 
-Introducción a node.js {name="nodejs"}
-----------------------
 
 ##Objetivos de este capítulo
 
@@ -80,7 +79,7 @@ var saludo = new Object;
 saludo.hola = 'mundo';
 saludo.adios ='muy buenas';
 console.log( saludo );
-~~~
+~~~~~
 
 La primera línea es exclusivamente para sistemas Linux (que son, por
 otro lado, los únicos serios para desarrollo de software); en ella habrá
@@ -510,7 +509,7 @@ preguntas.
 ## Agradecimientos
 
 Agradezco a los lectores en [Twitter](http://twitter.com/),
-especialmente [@danielribes](http://twitter.com/danielribes),
+especialmente a [`@danielribes`](http://twitter.com/danielribes),
 sugerencias sobre este material.
 
 ## Bibliografía
