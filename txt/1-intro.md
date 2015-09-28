@@ -10,20 +10,20 @@
 ## Introducción
 Lejos de ser solamente un lenguaje para el navegador,
 [JavaScript](http://es.wikipedia.org/wiki/JavaScript) tiene una ventaja
-frente a otros lenguajes de programación Está *en todas partes*. No hay
+frente a otros lenguajes de programación: Está *en todas partes*. No hay
 ordenador sin navegador, ni hay navegador sin JavaScript. Se puede
-ejecutar hasta en el navegador Opera que viene con la Wii; desde la
+ejecutar hasta en el navegador de las consolas de videojuegos; desde la
 madurez de [node.js](http://nodejs.org), es el único lenguaje que
 permite ejecutar aplicaciones en cliente y servidor, así que se ha
 convertido en uno de los lenguajes más útiles para desarrollo en
 Internet.
 
-Esto se debe, en parte a que ha sido definido como un [estándar ECMA
+Esto se debe en parte a que ha sido definido como un [estándar ECMA
 (denominado ECMAScript)](https://es.wikipedia.org/wiki/ECMAScript) lo
 que da lugar a muchas implementaciones diferentes, que son, además,
-independientes del fabricante. Y, por otro lado, también suele usar un
-conjunto de objetos estándar (que no son estrictamente parte de un
-lenguaje) que se pueden usar para añadir funcionalidad a una aplicación.
+independientes del fabricante. Y también en parte a que suele usar un
+conjunto de objetos estándar, que no son estrictamente parte de un
+lenguaje, que se pueden usar para añadir funcionalidad a una aplicación.
 Muchas aplicaciones complejas, como [GMail](http://gmail.com) o [Google
 Apps](http://drive.google.com) dependen de estos objetos para crear
 aplicaciones en la web que se comporten como si se ejecutaran en un
@@ -31,28 +31,38 @@ sistema operativo nativo; a estas aplicaciones se les ha denominado
 últimamente *Rich Internet Applications*.
 
 Además, a diferencia de otros lenguajes, es muy fácil crear una
-aplicación distribuida, cliente/servidor o MVC con JavaScript. Tanto por
-su integración con el navegador (parte inseparable de la web, una
-arquitectura cliente-servidor) como por los objetos que suele tener el
-mismo, crear una aplicación cliente-servidor es casi trivial y ha dado
+aplicación distribuida, cliente/servidor o [MVC](https://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93controlador) con JavaScript. Tanto por
+su integración con el navegador, parte inseparable de la web, una
+arquitectura cliente-servidor, como por los objetos que suele tener el
+mismo, crear una aplicación de este tipo es casi trivial y ha dado
 lugar a un estilo de programación denominado
 [AJAX](http://es.wikipedia.org/wiki/AJAX), que se verá más adelante.
 
 Para ejecutar JavaScript no hace falta más que un navegador, pero
-también hay entornos para trabajar con él de forma autónoma, tal como el
+también hay entornos para trabajar con él de forma autónoma, el más
+conocido de los cuales es [Node](http://nodejs.org), pero con otros representantes tales como el
 [Mozilla
 SpiderMonkey](https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey)
 y el [Rhino](https://developer.mozilla.org/en-US/docs/Rhino), éste
 último basado en Java; [hay una lista de intérpretes completa que se
 puede
 usar](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Shells).
-Conviene instalar alguno de ellos para poder ejecutar los programas de
-ejemplo; por ejemplo, para instalar el primero habrá que ejecutar (desde
-la consola de administrador o superusuario):
+Conviene instalar alguno de ellos para poder ejecutar desde línea de
+órdenes los programas de
+ejemplo;
+>Aunque, como hemos dicho arriba, no te va a hacer falta más que el
+>navegador para muchos de ellos
 
-	bash% apt-get install js
+por ejemplo, para instalar el primero habrá que ejecutar desde
+la consola de administrador o superusuario:
 
-(que no funcionará en las últimas versiones de ubuntu, como la 14.04) o
+	bash% apt-get install nodejs
+
+> En otros sistemas operativos o versiones de linux habrá primero que
+> localizar el paquete correspondiente, que seguramente se llamará
+> nodejs o algo muy parecido.
+
+O, si se quiere instalar
 
 	bash% apt-get install rhino
 
@@ -68,9 +78,33 @@ página de manual del intérprete para ver cómo se hace específicamente en
 cada caso; en general, los ejemplos que se incluyen aquí funcionan
 correctamente en `js` o `rhino`.
 
+> Por lo que he probado, SpiderMonkey, Rhino y KJSCMD se instalan
+> fácilmente en Ubuntu; no hay más que hacer `apt-cache search javascript`
+> y salen esos y alguno más. Fedora Core es un poco más rácano
+> en cuanto a entornos: aunque los puedes instalar bajándote los fuentes y
+> compilando, el que está disponible en los repositorios es uno llamado
+> sólo `js`, aparentemente el SpiderMonkey. Para instalarlo, escribir
+> `yum install js`. El Gnome Shell (incluido en la versión 3.0 de Gnome)
+> incluye también un intérprete de JavaScript como lenguaje nativo, y con
+> él se pueden desarrollar pequeños applets. Este intérprete, que está
+> instalado por defecto junto con el entorno, se denomina `gjs`, está
+> basado en SpiderMonkey y tiene la ventaja de que está integrado con
+> todas las librerías de Gnome, de forma que se pueden hacer programas
+> tales como [este, que crea una ventana con un
+> botón](https://github.com/JJ/curso-js/tree/master/code/g.js) sin
+> necesidad de instalar ningún módulo adicional. Éste intérprete es el que
+> usa desde `lg` (*looking glass*), una consola de depuración de Gnome al
+> estilo de la consola del navegador que se puede ejecutar desde entorno
+> pulsando Alt-F2 y escribiendo `lg`. Finalmente, Windows incluye [un
+> programa de línea de órdenes denominado `cscript` y
+> `wscript`](http://stackoverflow.com/questions/686377/windows-command-line-javascript)
+> que, una vez más, tiene ciertas diferencias con respecto al resto de los
+> intérpretes (todo lo relacionado con I/O); en realidad se trata de
+> JScript, otra implementación del estándar ECMAscript.
+
 En cuanto a los navegadores, puede que haga falta activar JavaScript
 para que lo entiendan. Por ejemplo, en Firefox hay que activarlo usando
-Edit -\> Preferencias -\> Contenido -\> Activar JavaScript. Normalmente
+Edit → Preferencias → Contenido → Activar JavaScript. Normalmente
 está activado por omisión. Por otro lado, veremos ejemplos
 principalmente de programas que se pueden usar desde el intérprete, y
 merece la pena instalarse uno.
@@ -93,43 +127,18 @@ por caso, acceder a bases de datos. Pero también ha permitido que el
 lenguaje siga siendo *pequeño*, y se haya desarrollado principalmente a
 base de añadir objetos y clases externas al mismo. En resumen, que en el
 marco de eso que se ha venido en llamar [web
-2.0](http://es.wikipedia.org/wiki/Web_2.0) JS se ha convertido en
+2.0](http://es.wikipedia.org/wiki/Web_2.0) y especialmente desde que
+se ha popularizado Node, JS se ha convertido en
 adulto, y merece la pena estudiarlo como cualquier otro lenguaje.
 
-Por último está el [1st JavaScript
-Editor](http://www.yaldex.com/JSFactory_Pro.htm), que es de pago, pero
-pueden conseguirse versiones de evaluación gratuitas.
-
-Por lo que he probado, SpiderMonkey, Rhino y KJSCMD se instalan
-fácilmente en Ubuntu; no hay más que hacer `aptitude search javascript`
-(en ubuntu) y salen esos y alguno más. Fedora Core es un poco más rácano
-en cuanto a entornos: aunque los puedes instalar bajándote los fuentes y
-compilando, el que está disponible en los repositorios es uno llamado
-sólo `js`, aparentemente el SpiderMonkey. Para instalarlo, escribir
-`yum install js`. El Gnome Shell (incluido en la versión 3.0 de Gnome)
-incluye también un intérprete de JavaScript como lenguaje nativo, y con
-él se pueden desarrollar pequeños applets. Este intérprete, que está
-instalado por defecto junto con el entorno, se denomina `gjs`, está
-basado en SpiderMonkey y tiene la ventaja de que está integrado con
-todas las librerías de Gnome, de forma que se pueden hacer programas
-tales como [este, que crea una ventana con un
-botón](https://github.com/JJ/curso-js/tree/master/code/g.js) sin
-necesidad de instalar ningún módulo adicional. Éste intérprete es el que
-usa desde `lg` (*looking glass*), una consola de depuración de Gnome al
-estilo de la consola del navegador que se puede ejecutar desde entorno
-pulsando Alt-F2 y escribiendo `lg`. Finalmente, Windows incluye [un
-programa de línea de órdenes denominado `cscript` y
-`wscript`](http://stackoverflow.com/questions/686377/windows-command-line-javascript)
-que, una vez más, tiene ciertas diferencias con respecto al resto de los
-intérpretes (todo lo relacionado con I/O); en realidad se trata de
-JScript, otra implementación del estándar ECMAscript.
-
-También se puede instalar como cliente y servidor JavaScript
-[node.js](http://nodejs.org), un procesador de bucles de eventos que es
-también intérprete en JavaScript. Y mucho más...
+>Por último está el [1st JavaScript Editor](http://www.yaldex.com/JSFactory_Pro.htm), que es de pago, pero
+>pueden conseguirse versiones de evaluación gratuitas. Desde aquí no
+>recomendamos software privativo para desarrollo de software, sin
+>embargo. 
 
 ## Primer programa en JavaScript
 
+Nuestro primer programa tiene dos versiones, al menos. 
 ~~~~~~
 #!/usr/bin/js
 print( 'Hola, Mundo' );

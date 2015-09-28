@@ -1,3 +1,3 @@
-#!/usr/bin/js
+#!/usr/bin/js24
 
 print( 'Hola, Mundo' );
