@@ -1,6 +1,8 @@
 # Licencia
 
-Esta obra está sujeta a la licencia Reconocimiento-CompartirIgual 4.0 Internacional de Creative Commons. Para ver una copia de esta licencia, visite http://creativecommons.org/licenses/by-sa/4.0/.
+Esta obra está sujeta a la licencia Reconocimiento-CompartirIgual 4.0
+Internacional de Creative Commons. Para ver una copia de esta
+licencia, visite http://creativecommons.org/licenses/by-sa/4.0/.
 
 ![cc-by-sa](imagenes/by-sa.png)
 
@@ -43,10 +45,10 @@ comprado. En cualquiera de los casos, está a la venta
 lo recomiendes, hables de él, digas que te ha parecido y, por
 supuesto, que lo compres. 
 
-# A quién va dirigido este texto
+## A quién va dirigido este texto
 
-O, dicho de otro modo, qué es lo que hace falta para entender el
-contenido de este texto. En unas palabras, iría dirigido a personas
+O, dicho de otro modo, qué es lo que hace falta para entender su
+contenido. En unas palabras, iría dirigido a personas
 con conocimientos de programación que no le tengan miedo a la línea de
 órdenes. Más en concreto, es conveniente saber algo de
 
@@ -59,9 +61,22 @@ con conocimientos de programación que no le tengan miedo a la línea de
   una estructura de datos; algún conocimiento de HTML tampoco
   estorbará. 
 
-# Disfrútalo
+## Disfrútalo
 
 Pero si no lo haces, nos gustará saber por qué. Una nota en el
 repositorio con correcciones y sugerencias será debidamente agradecida
-en este prólogo. 
+en este prólogo.
+
+## Quizás también te resulten útiles
+
+*Este espacio reservado para mi publicidad*
+
+[Aprende Git](https://www.amazon.es/dp/B00K515GL2?tag=atalaya-21&camp=3634&creative=24822&linkCode=as4&creativeASIN=B00K515GL2&adid=1JSPSM0MPZMV4BSEKEZN&)
+te enseñará esa utilísima herramienta para desarrollo de aplicaciones,
+y de cualquier otra cosa, en grupo. Y cuando ya tengas los dos,
+[Nuboso, con posibilidad de despliegue](https://www.amazon.es/dp/B00SDLIGC2?tag=atalaya-21&camp=3634&creative=24822&linkCode=as4&creativeASIN=B00SDLIGC2&adid=1T99TG5WHDH5STB3D4X8&)
+es una introducción práctica a la computación en nube que usa,
+extensivamente, JavaScript. 
+
+
   
