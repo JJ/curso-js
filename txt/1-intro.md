@@ -145,11 +145,19 @@ Nuestro primer programa tiene dos versiones, al menos. Empecemos por
 una de ellas
 ~~~~~~
 #!/usr/bin/js
-print( 'Hola, Mundo' );
+print( 'Hola, Mundo' ); // console.log en vez de print si "js" es node.
 ~~~~~~
 
-En realidad, el JS es bastante parecido al C, y, para el caso, también
-al Java. Este programa producirá (siempre que lo hagamos ejecutable con
+El programa en sí comienza en la seguna línea, y en él podemos ver que la sintaxis de JS es bastante parecida a la del lenguaje C y, para el caso, también
+al Java. La primera línea, clásica de los lenguajes de *scripting* en
+Linux, indica cuál va a ser el intérprete que se va a usar para el
+resto del fichero.
+
+>Si tienes instalado `node` `/usr/bin/js` será el intérprete de
+>node. Si no lo tienes instalado, puede ser algún otro intérprete,
+>como rhino o SpiderMonkey (en versiones más antiguas de Linux). 
+
+Este programa producirá (siempre que lo hagamos ejecutable con
 `chmod +x hola.js` previamente):
 
 ~~~~~
@@ -249,7 +257,23 @@ if ( typeof console != "undefined" ) {
 write( 'Hola, Mundo' );
 ~~~~~
 
->Si los tienes instalados, pruébalo. 
+>Si los tienes instalados, prueba este nueva versión.
+
+Adelantándonos un poco a los acontecimientos, hemos usado en este
+segundo programa dos características de JavaScript: primero, la
+definición de variables que usa tipos dinámicos: `write` no va a ser
+de ningún tipo hasta que se le asigne un valor. Y segunda
+característica, la de JS como lenguaje funcional: `write` recibe como
+valor una función y actúa como tal en la última línea.
+
+>Habiendo tantos intérpretes, ¿cuál usar? Aparte de que este
+>libro/curso se concentra en `node.js`, éste suele ser el intérprete
+>más popular y que más usuarios y desarrollo tiene, por lo que
+>aconsejamos que se use y la mayoría de los ejemplos lo van a
+>usar. Sin embargo, tanto *rhino* como *SpiderMonkey* son
+>perfectamente adecuados, con pequeños cambios (como `print` →
+>`console.log`) para aprender JavaScript trabajando fuera del
+>navegador. 
 
 ## Estructuras de control en JavaScript
 
@@ -281,7 +305,7 @@ print ("</"+tabla+">");
 >Como se puede ver en la primera línea, `#!/usr/bin/js24`, se está
 >usando SpiderMonkey como intérprete. Rhino y gjs usarán `print`de la
 >misma forma. Para usar node o desde la consola del navegador,
->sustituye `print` por `console.log`
+>sustituye `print` por `console.log`.
 
 Este programa tiene dos bucles anidados, que imprimen un producto dentro
 de una tabla. La salida será tal que así (ver el fuente para la
@@ -327,7 +351,7 @@ for (i=1; i<=3; i++ ) {
 print ("</"+tabla+">");
 ~~~~~~
 
-Aunque queda un poco torpe tanto \<\>... vamos a reducir un poco el
+Aunque queda un poco torpe tanto `<>`... vamos a reducir un poco el
 programa, haciéndolo [más
 elegante](https://github.com/JJ/curso-js/tree/master/code/tabla2.js)
 (aunque más largo: no se puede tener todo):
@@ -397,7 +421,8 @@ function Partido(local,visitante) {
   this.resultado=null;
 }
 
-var equipos= new Array('Madrid', 'Barça', 'Atleti', 'Geta', 'Betis', 'Depor', 'Sevilla', 'Graná');
+var equipos= new Array('Madrid', 'Barça', 'Atleti', 'Geta',
+	'Betis', 'Depor', 'Sevilla', 'Graná');
 
 var midsize = equipos.length/2;
 var quiniela = new Array( midsize );
