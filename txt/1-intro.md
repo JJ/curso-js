@@ -30,13 +30,20 @@ aplicaciones en la web que se comporten como si se ejecutaran en un
 sistema operativo nativo; a estas aplicaciones se les ha denominado
 últimamente *Rich Internet Applications*.
 
+>Su popularidad ha hecho que últimamente empiece a usarse también como
+>lenguaje *empotrado* en diferentes aplicaciones. Por ejemplo,
+>[el servidor web `nginx` incluye un intérprete que puede evaluar JS para generar contenido](https://www.nginx.com/blog/nginscript-why-our-own-javascript-implementation/),
+>[MineCraft tiene un mod que permite programar en JS](https://github.com/walterhiggins/ScriptCraft/blob/master/docs/YoungPersonsGuideToProgrammingMinecraft.md). También
+>se puede usar para
+>[programar macros en LibreOffice](https://help.libreoffice.org/Common/Scripting/es).  
+
 Además, a diferencia de otros lenguajes, es muy fácil crear una
 aplicación distribuida, cliente/servidor o [MVC](https://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93controlador) con JavaScript. Tanto por
 su integración con el navegador, parte inseparable de la web, una
 arquitectura cliente-servidor, como por los objetos que suele tener el
 mismo, crear una aplicación de este tipo es casi trivial y ha dado
 lugar a un estilo de programación denominado
-[AJAX](http://es.wikipedia.org/wiki/AJAX), que se verá más adelante.
+[Ajax](http://es.wikipedia.org/wiki/Ajax), que se verá más adelante.
 
 Para ejecutar JavaScript no hace falta más que un navegador, pero
 también hay entornos para trabajar con él de forma autónoma, el más
@@ -113,8 +120,12 @@ principalmente de programas que se pueden usar desde el intérprete, y
 merece la pena instalarse uno.
 
 Si usas Eclipse, puede que te venga bien el [plugin
-JSDT](http://www.eclipse.org/webtools/jsdt/). Igual al atento lector le
-funciona correctamente. Por otro lado, el `emacs` va de lujo. NetBeans
+JSDT](http://www.eclipse.org/webtools/jsdt/).
+
+> Igual al atento lector le funciona correctamente. Yo no conseguí
+> echarlo a andar.
+
+Por otro lado, el `emacs` va de lujo. NetBeans
 tiene también [soporte para
 JavaScript](http://netbeans.org/kb/docs/ide/javascript-editor.html),
 simplemente seleccionando este lenguaje para un nuevo fichero. El editor
@@ -1095,6 +1106,11 @@ sus comentarios y sugerencias. También a Javier Espigares por la lectura
 y comentarios sobre las versiones previas de este texto.
 
 ## Bibliografía 
+
+>Los enlaces en este texto son a la biblioteca de la UGR. Es posible
+> que el recurso electrónico o libro esté también disponible en alguna
+> biblioteca cercana; si no, habrá que adquirirlo o pedirlo prestado
+> usando el método habitual.
 
 Hay dos libros fundamentales para aprender JS, aunque están muy
 enfocados a JS en el navegador:[*JavaScript: The Definitive Guide*, el
