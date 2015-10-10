@@ -697,3 +697,4 @@ retoque adicional. Por supuesto, también es conveniente que se continúe con el
 
 ## Bibliografía 
 
+En [la web del programador de Mozilla dan una visión extensa de la programación "basada en objetos" de JS](https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Trabajando_con_objectos) tras una [introducción](https://developer.mozilla.org/es/docs/Web/JavaScript/Introducci%C3%B3n_a_JavaScript_orientado_a_objetos). El [tutorial en Cristalab](http://www.cristalab.com/tutoriales/programacion-orientada-a-objetos-oop-con-javascript-c232l/) es bastante completo también. 
