@@ -1,4 +1,4 @@
-#!/usr/bin/smjs
+#!/usr/bin/env js
 
 var matriz = [1,2,3];
 print( marca('table'));
