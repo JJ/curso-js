@@ -1218,14 +1218,6 @@ Toolkit](http://code.google.com/webtoolkit/) permite desarrollar en AJAX
 programando sólo en Java, aunque pueda que el JS generado necesite algún
 retoque adicional. Por supuesto, también es conveniente que se continúe con el siguiente capítulo. 
 
-## Agradecimientos
-
-Agradezco a los
-[comentaristas](http://barrapunto.com/comments.pl?sid=69179) de [los
-diferentes anuncios](http://barrapunto.com/comments.pl?sid=68032) que
-[publiqué en Barrapunto](http://barrapunto.com/comments.pl?sid=67899)
-sus comentarios y sugerencias. También a Javier Espigares por la lectura
-y comentarios sobre las versiones previas de este texto.
 
 ## Bibliografía 
 
