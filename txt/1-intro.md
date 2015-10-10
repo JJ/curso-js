@@ -531,6 +531,35 @@ se haya cargado todavía, con lo que no estará disponible. Una vez más,
 la programación distribuida no es totalmente igual a la programación en
 otros lenguajes.
 
+Sin embargo, la forma anterior de realizar el programa corresponde a
+una estructura más *tradicional* y semejante a lenguajes no
+funcionales como el C o el Java. Hay otra forma de hacerlo, que usa la
+capacidad de JS de trabajar con funciones como estructuras de datos de
+primera clase, será [la versión final del programa anterior](https://github.com/JJ/curso-js/tree/master/code/tabla-final.js):
+
+~~~~~javascript
+var matriz = [1,2,3];
+var wrap = function(m, start, end ) { return start+m+end; }
+var marca = function( m ) { return wrap(m, "<",">"); }
+var finmarca = function( m ) { return wrap(m,"</",">"); }
+var celda = function( contenido ) { 
+    return wrap( contenido, marca("td"), finmarca("td"));
+}
+var do_print=(typeof console != "undefined")
+    ?function(msg){console.log(msg)}
+    :print;
+
+do_print( marca('table'));
+matriz.forEach( function(elemento_i) {
+    do_print( marca( 'tr' ) );
+    matriz.forEach( function(elemento_j ) {
+	do_print ( celda(elemento_i*elemento_j));
+    });
+    do_print( finmarca( 'tr' ));
+})
+do_print (finmarca('table'));
+~~~~~
+
 ## Bibliografía 
 
 >Los enlaces en este texto son a la biblioteca de la UGR. Es posible
