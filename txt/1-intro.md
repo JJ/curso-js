@@ -208,16 +208,35 @@ la función `print`, que es la que se devuelve. Es decir, en algunos
 intérpretes de los anteriores usará `console.log` y en otros, en
 realidad, sólo en `gjs`, `print`.
 
+>la definición de la función en realidad es una exigencia del modelo
+>de seguridad de los navegadores. En node bastaría con haber devuelto,
+>igual que con `print`, simplemente `console.log`. 
+
+La segunda línea usa la función definida como tal función:
+`do_print("Aquí pongo lo que sea")`. En los diferentes intérpretes se
+ve también algún valor tal como `undefined`; en cada uno de los casos
+imprime el valor que devuelve la función, ninguno. Si la función
+hubiera devuelto algún valor al ejecutarse se habría impreso en esa
+línea.
+
+>Como ejercicio, se puede probar a ejecutar esa misma función en algún
+>intérprete que se tenga a mano: el de CouchDB, Rhino o Spidermonkey
+>si es que se tienen instalados. 
+
 ## Primer programa en JavaScript
 
-Nuestro primer programa tiene dos versiones, al menos. Empecemos por
-una de ellas
+Tras ver cómo funcionan los intérpretes y tenerlos a mano por si
+hubiera que probar alguna orden aislada, vamos a hacer un programa
+completo, el clásico. Nuestro primer programa tiene dos versiones, al
+menos. Empecemos por una de ellas
 ~~~~~~
 #!/usr/bin/js
 print( 'Hola, Mundo' ); // console.log en vez de print si "js" es node.
 ~~~~~~
 
-El programa en sí comienza en la seguna línea, y en él podemos ver que la sintaxis de JS es bastante parecida a la del lenguaje C y, para el caso, también
+El programa en sí comienza en la seguna línea, y en él podemos ver que
+la sintaxis de JS es bastante parecida a la del lenguaje C y, para el
+caso, también 
 al Java. La primera línea, clásica de los lenguajes de *scripting* en
 Linux, indica cuál va a ser el intérprete que se va a usar para el
 resto del fichero.
@@ -244,7 +263,12 @@ jmerelo@penny:~/code$ js24 hola.js
 Hola, Mundo
 ~~~~~~
 
-Este programa tiene una [segunda versión](https://github.com/JJ/curso-js/blob/master/code/holakase.js) en node.js habría que cambiar `print` por `console.log`, o
+Como hemos visto antes, escribir en la consola no forma parte del
+conjunto estándar de órdenes de JS, precisamente por todos los
+entornos posibles en los que se puede encontrar. Por eso este programa
+tiene una
+[segunda versión](https://github.com/JJ/curso-js/blob/master/code/holakase.js)
+en node.js habría que cambiar `print` por `console.log`, o 
 tendremos un error. También se puede usar directamente
 [la consola JavaScript online](http://jsconsole.com/?console.log%28%22Es%20una%20prueba%22%29)
 para ejecutarlo; `console.log` es la versión de la orden de imprimir
@@ -264,7 +288,7 @@ Gnome](https://github.com/JJ/curso-js/tree/master/code/hola-g.js).
 Para ejecutarlo desde el navegador habrá que hacer un poco más de
 historia, pero tampoco tanto. Primero, lo podemos ejecutar
 directamente. La combinación de teclas *Mayúsculas-Control-K* abre, en
-la parte baja del navegador, una consola de JavaScript. Donde aparece
+la parte baja de la ventana de Firefox, una consola de JavaScript. Donde aparece
 ">>", se escribe simplemente `console.log("Qué bonito")` y dará como
 resultado algo así:
 
@@ -273,9 +297,13 @@ resultado algo así:
 	Qué bonito
 
 En navegadores modernos la consola también completará automáticamente
-las órdenes mostrándote todas las opciones posibles. Arriba, el
+las órdenes mostrándote todas las opciones posibles.
+>En Chromium y Chrome se puede escribir directamente sobre la ventana,
+>no en la línea inferior *de interacción* como en Firefox.
+
+Arriba, el
 `undefined` indica simplemente que la función `console.log` no
-devuelve ningún valor. La línea siguiente es la que muestra el
+devuelve ningún valor, como ya hemos visto. La línea siguiente es la que muestra el
 resultado de ejecutar la orden.
 
 Segundo, podemos ejecutar JavaScript como parte de una página web. Lo
@@ -288,8 +316,8 @@ donde se incluye el programa en JS de esta forma:
 <script type='text/javascript' src='hola.js'></script>
 ~~~~~
 
-El problema es que, en este caso, la orden `print` se interpreta como
-impresión por impresora, y habrá que cambiarla por otra que signifique
+El problema es que, en este caso, la orden `print` se interpretaría como
+impresión por impresora y habrá que cambiarla por otra que signifique
 lo mismo, escribir en el dispositivo de salida que se esté
 [usando](https://github.com/JJ/curso-js/tree/master/code/hola-js-2.html):
 
@@ -297,12 +325,11 @@ lo mismo, escribir en el dispositivo de salida que se esté
 document.writeln('Hola, Mundo')
 ~~~~~
 
-
 Lo que también se puede escribir directamente
 [así](https://github.com/JJ/curso-js/tree/master/code/hola-js-3.html):
 
 ~~~~~
-<script  type='text/javascript'>document.writeln('Hola, Mundo')</script>
+<script type='text/javascript'>document.writeln('Hola, Mundo')</script>
 ~~~~~
 
 Estos programas se pueden editar con cualquier editor de texto, Emacs,
@@ -312,7 +339,7 @@ nombres de los comandos.
 
 >El siguiente
 >[programa]((https://github.com/JJ/curso-js/tree/master/code/hola-all.js)
->funcionaría al menos en 4 intérpretes, aparte de en la consola del navegador:
+>funcionaría al menos en 4 intérpretes, aparte de en la consola de algunos navegadores:
 
 ~~~~~javascript
 var write;
@@ -326,14 +353,22 @@ if ( typeof console != "undefined" ) {
 write( 'Hola, Mundo' );
 ~~~~~
 
->Si los tienes instalados, prueba este nueva versión.
+>Si los tienes instalados, prueba esta nueva versión que es, por otro
+>lado, la versión en programa de las sentencias que hemos progado
+>anteriormente. 
 
-Adelantándonos un poco a los acontecimientos, hemos usado en este
-segundo programa dos características de JavaScript: primero, la
-definición de variables que usa tipos dinámicos: `write` no va a ser
-de ningún tipo hasta que se le asigne un valor. Y segunda
-característica, la de JS como lenguaje funcional: `write` recibe como
-valor una función y actúa como tal en la última línea.
+En general, conviene ser consciente de que JavaScript incluye tantos
+las órdenes propias del lenguaje, definidas en los estándares
+ECMAScript, como *objetos* que son propios de cada implementación, que
+dependerán de dónde esté incrustado o de qué intérprete se use en cada
+momento. Prácticamente todas las órdenes de entrada/salida se
+implementarán mediante objetos u órdenes específicas de cada
+lenguaje. Por eso el clásico "Hola mundo" no acaba de ser el mejor
+ejemplo de primer programa para este lenguaje, aunque también nos ha
+servido para ver las diferencias entre las diferentes
+implementaciones. Conviene en cada caso consultar el manual de
+referencia del intérprete que se esté usando, sin embargo, para que no
+haya problemas.
 
 >Habiendo tantos intérpretes, ¿cuál usar? Aparte de que este
 >libro/curso se concentra en `node.js`, éste suele ser el intérprete
