@@ -166,14 +166,48 @@ nuestras primeras órdenes en JavaScript.
 Además, este programa es bastante característico de las
 características únicas de JS y se puede ejecutar sin variación en
 *node*
-![Programa ejecutado en node](imagenes/node-consola.png)
+![órdenes ejecutadas en node](imagenes/node-consola.png)
 en *gjs* que se instala en tu sistema si usas Gnome:
-![Programa ejecutado en gjs](imagenes/gjs-consola.png)
+![órdenes ejecutadas en gjs](imagenes/gjs-consola.png)
 en Chromium (la versión libre de Chrome, tendría que ser similar en
 él)
-![Programa ejecutado en gjs](imagenes/chromium-consola.png)
+![órdenes ejecutadas en gjs](imagenes/chromium-consola.png)
 y en el navegador libre Firefox
-![Programa ejecutado en Firefox](imagenes/firefox-consola.png)
+![órdenes ejecutadas en Firefox](imagenes/firefox-consola.png).
+
+Lo que hace este programa es definir una función, almacenarla en la
+variable `do_print` y usarla más tarde como tal función. Del tirón te
+muestra que JS es un lenguaje *funcional* donde las funciones son
+"ciudadanos de primer orden" y se puede usar una función en el mismo
+lugar donde se usaría cualquier otra estructura de datos. Pero,
+además, vemos que se usa `var` para definir una variable, o más bien
+el ámbito de una variable, porque en JS no es estrictamente necesario
+definirlas y que JS usa *tipado* dinámico: no hace falta asignarle un
+valor estático al tipo de la variable. `var zipi` es todo lo que se
+necesita para usar la variable `zipi`, aunque si aparece `zipi` por
+primera vez en la orden `zipi=0` nadie va a protestar.
+
+La asignación equivale a una sentencia `if-then-else`. Pregunta por el
+tipo (`typeof`) la variable `console`. También aquí podemos ver que
+los paréntesis son opcionales: `typeof console` es igual que
+`typeof(console)`. Si no existe `console`, su tipo será `undefined`,
+`console` es un objeto que permite acceder a escribir cosas en el
+terminal. Por eso si el tipo no es `undefined`, definimos una función
+sobre la marcha, prueba una vez más de la naturaleza funcional de
+JS. Después de `?` estará el valor devuelto por la expresión cuando
+ésta sea verdadera (como el `then` en un `if`) y se construye una
+función sobre la marcha con la palabra clave `function`, un parámetro
+`msg` y la expresión correspondiente. es decir, la función se puede
+definir y asignar en una variable así:
+
+	var usa_consola=function(msg){console.log(msg)};
+
+Tras el `:`, está la otra opción. En muchos intérpretes en JS no
+existe el objeto `console`, pero para escribir en el terminal se usa
+la función `print`, que es la que se devuelve. Es decir, en algunos
+intérpretes de los anteriores usará `console.log` y en otros, en
+realidad, sólo en `gjs`, `print`.
+
 ## Primer programa en JavaScript
 
 Nuestro primer programa tiene dos versiones, al menos. Empecemos por
