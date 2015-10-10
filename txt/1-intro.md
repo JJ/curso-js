@@ -89,7 +89,7 @@ página de manual del intérprete para ver cómo se hace específicamente en
 cada caso; en general, los ejemplos que se incluyen aquí funcionan
 correctamente en `js` o `rhino`.
 
-> Por lo que he probado, SpiderMonkey, Rhino y KJSCMD se instalan
+> Por lo que he probado, SpiderMonkey, Rhino, `gjs` y KJSCMD se instalan
 > fácilmente en Ubuntu; no hay más que hacer `apt-cache search javascript`
 > y salen esos y alguno más. Fedora Core es un poco más rácano
 > en cuanto a entornos: aunque los puedes instalar bajándote los fuentes y
@@ -153,6 +153,27 @@ adulto, y merece la pena estudiarlo como cualquier otro lenguaje.
 >recomendamos software privativo para desarrollo de software, sin
 >embargo. 
 
+## Trabajando con los intérpretes de órdenes
+
+Ya hemos comentado que es prácticamente seguro que tu ordenador tenga
+ya incluido un intérprete de órdenes, sea en el navegador o sea en
+forma de intérprete para la línea de órdenes. Vamos usarlo para ver
+nuestras primeras órdenes en JavaScript.
+
+    var do_print=(typeof console != "undefined")?function(msg){console.log(msg)}:print;
+	do_print("Cool cool cool")
+
+Además, este programa es bastante característico de las
+características únicas de JS y se puede ejecutar sin variación en
+*node*
+![Programa ejecutado en node](imagenes/node-consola.png)
+en *gjs* que se instala en tu sistema si usas Gnome:
+![Programa ejecutado en gjs](imagenes/gjs-consola.png)
+en Chromium (la versión libre de Chrome, tendría que ser similar en
+él)
+![Programa ejecutado en gjs](imagenes/chromium-consola.png)
+y en el navegador libre Firefox
+![Programa ejecutado en Firefox](imagenes/firefox-consola.png)
 ## Primer programa en JavaScript
 
 Nuestro primer programa tiene dos versiones, al menos. Empecemos por
