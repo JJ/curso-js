@@ -415,15 +415,31 @@ Este programa tiene dos bucles anidados, que imprimen un producto dentro
 de una tabla. La salida será tal que así (ver el fuente para la
 estructura):
 
-  --- --- ---
-  1   2   3
-  2   4   6
-  3   6   9
-  --- --- ---
+<table>
+	<tr>
+		<td>1</td>
+		<td>2</td>
+		<td>3</td>
+	</tr>
+
+	<tr>
+		<td>2</td>
+		<td>4</td>
+		<td>6</td>
+	</tr>
+
+	<tr>
+		<td>3</td>
+		<td>6</td>
+		<td>9</td>
+	</tr>
+
+</table>
+	
 
 El programa es menos complicado de lo que parece. Para declarar
 variables en JS se usa el genérico `var`, aunque también se pueden
-declarar tipos específicos. Para no pillarnos los dedos, usamos var. En
+declarar tipos específicos. Para no pillarnos los dedos, usamos `var`. En
 realidad, tampoco hace falta: simplemente usando una variable aparece
 mágicamente. Con las matrices ocurre igual (es decir, se declaran y se
 les asigna valor directamente) : `matriz` lo es, y simplemente se
