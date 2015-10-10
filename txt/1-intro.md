@@ -438,10 +438,15 @@ estructura):
 	
 
 El programa es menos complicado de lo que parece. Para declarar
-variables en JS se usa el genérico `var`, aunque también se pueden
-declarar tipos específicos. Para no pillarnos los dedos, usamos `var`. En
-realidad, tampoco hace falta: simplemente usando una variable aparece
-mágicamente. Con las matrices ocurre igual (es decir, se declaran y se
+variables en JS se usa el genérico `var`, porque JavaScript tiene
+tipificado dinámico, asignando a una variable un tipo determinado
+dependiendo de su valor. `var` declar aun ámbito: simplemente usando una variable aparece
+mágicamente, como se hace en las dos variables de bucle `i` y `j`.
+
+>Dependiendo del intérprete, el uso de esas variables puede provocar
+>un *warning*. En `gjs`, por ejemplo, dirá *Gjs-Message: JS WARNING: [tabla.js 8]: assignment to undeclared variable i*
+ 
+Con las matrices ocurre igual (es decir, se declaran y se
 les asigna valor directamente) : `matriz` lo es, y simplemente se
 declaran sus valores entre corchetes. Ojo con los nombres de variables,
 que a diferencia de otros lenguajes, distinguen entre mayúsculas y
@@ -471,7 +476,7 @@ for (i=1; i<=3; i++ ) {
 print ("</"+tabla+">");
 ~~~~~~
 
-Aunque queda un poco torpe tanto `<>`... vamos a reducir un poco el
+Aunque queda un poco torpe tanto `<>`... Vamos a reducir un poco el
 programa, haciéndolo [más
 elegante](https://github.com/JJ/curso-js/tree/master/code/tabla2.js)
 (aunque más largo: no se puede tener todo):
@@ -503,8 +508,11 @@ function celda( contenido ) {
 
 La principal diferencia con respecto al anterior es el **uso de
 funciones**. Las funciones en JS tienen una estructura bastante clásica:
-`function` nombre-de-función (param1, param2...). Una vez más, se nota
-que JS no e un lenguaje con tipos fuertes, pudiendo pasar los parámetros
+`function` nombre-de-función (param1, param2...).
+>Ya hemos visto al principio de este capítulo que también se pueden
+>definir sobre la marcha y asignares a una variable.
+Una vez más, se nota
+que JS no es un lenguaje con tipos estáticos, pudiendo pasar los parámetros
 sin tipo, y adaptándose dentro de la función al tipo necesario. Se pasan
 por valor, es decir, que las modificaciones al parámetro formal no se
 trasladan a la variable que se use. Además, se pueden declarar donde a
@@ -528,12 +536,17 @@ otros lenguajes.
 JavaScript es un lenguaje basado en objetos, aunque un tanto peculiar;
 en realidad, de casi todas las características de un lenguaje orientado
 a objetos, solo tiene los objetos, e incluso estos son un tanto
-peculiares. Por eso no es exactamente *dirigido a objetos* u *orientado
+peculiares.
+
+>Esto está cambiando en las últimas versiones del lenguaje, empezando
+>por ES6
+
+Por eso no es exactamente *dirigido a objetos* u *orientado
 a objetos*. Las características las veremos en el siguiente
 [programa](https://github.com/JJ/curso-js/tree/master/code/quiniela.js),
 que podría servir para hacer quinielas.
 
-~~~~~~javascript
+~~~~~javascript
 // Definición de la clase Partido
 function Partido(local,visitante) {
   this.local = local;
@@ -555,7 +568,7 @@ for ( i=0; i < midsize ; i++ ) {
 for ( i in quiniela ) {
   print( "Partido " + (parseInt(i)+1)+": " + quiniela[i].local + " - " + quiniela[i].visitante);
 }
-~~~~~~
+~~~~~
 
 Con lo primero que nos enfrentamos es con una nueva forma de definir una
 matriz o `Array`: ya que sabemos que JS es OO, pues usamos una forma OO
@@ -746,7 +759,7 @@ switch (resultado) {
 y que viene a ser como el anterior, pero con `case`s en vez de `if`s.
 Vamos, tres cuartos de lo mismo.
 
-## Manejando Objetos
+## Manejando objetos
 
 En realidad, todo en JavaScript es un objeto, y especialmente los
 vectores: tanto los vectores tradicionales como las matrices asociativas
