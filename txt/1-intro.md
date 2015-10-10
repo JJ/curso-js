@@ -35,7 +35,10 @@ sistema operativo nativo; a estas aplicaciones se les ha denominado
 >[el servidor web `nginx` incluye un intérprete que puede evaluar JS para generar contenido](https://www.nginx.com/blog/nginscript-why-our-own-javascript-implementation/),
 >[MineCraft tiene un mod que permite programar en JS](https://github.com/walterhiggins/ScriptCraft/blob/master/docs/YoungPersonsGuideToProgrammingMinecraft.md). También
 >se puede usar para
->[programar macros en LibreOffice](https://help.libreoffice.org/Common/Scripting/es).  
+>[programar macros en LibreOffice](https://help.libreoffice.org/Common/Scripting/es)
+>y en las [Google apps](http://drive.google.com); al accedeer al
+>interfaz de programación de Google Drive se accede en realidad a un
+>entorno de programación en JS. 
 
 Además, a diferencia de otros lenguajes, es muy fácil crear una
 aplicación distribuida, cliente/servidor o [MVC](https://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93controlador) con JavaScript. Tanto por
@@ -78,7 +81,7 @@ o
 
 	bash% apt-get install libmozjs-24-bin
 
-que instalará Spidermonkey en el fichero `js24`
+que instalará Spidermonkey en el fichero ejecutable `js24`.
 
 Hay algunas diferencias entre los intérpretes, sobre todo en cualquier
 función que tenga que ver con la entrada/salida. Conviene consultar la
