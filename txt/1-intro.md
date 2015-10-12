@@ -326,7 +326,7 @@ document.writeln('Hola, Mundo')
 ~~~~~
 
 Lo que también se puede escribir directamente
-[así](https://github.com/JJ/curso-js/tree/master/code/hola-js-3.html):
+[así](https://github.com/JJ/curso-js/tree/master/code/hola-js-3.html) y puedes [ver en acción en JSFiddle](https://jsfiddle.net/jjmerelo/L4z134ox/) :
 
 ~~~~~
 <script type='text/javascript'>document.writeln('Hola, Mundo')</script>
