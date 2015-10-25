@@ -9,7 +9,7 @@
 
 ## Introducción al interfaz REST
 
-[REST](http://es.wikipedia.org/wiki/REST) es una serie de convenciones
+[REST](https://es.wikipedia.org/wiki/REST) es una serie de convenciones
 en la interacción cliente-servidor sobre el protocolo [HTTP](#HTTP). En
 la práctica, un interfaz REST es un interfaz de programación de
 aplicaciones que usa, para acceder al servidor, el conjunto completo de
@@ -21,14 +21,14 @@ Aunque se trate de un *hermano menor* de otros tipos de servicios web
 todo al poco overhead que añade a las peticiones y a la facilidad de su
 uso, tanto en el cliente como el servidor. También se puede implementar
 directamente sobre servidores web estándar como Apache o
-[nginx](http://es.wikipedia.org/wiki/Nginx) , lo que facilita su
+[nginx](https://es.wikipedia.org/wiki/Nginx) , lo que facilita su
 implantación y desarrollo. Crear un cliente para un [API](#API) REST es
 tan fácil como crear una cadena; de hecho, se pueden usar desde la línea
 de órdenes
 
 ## El protocolo HTTP y sus múltiples posibilidades
 
-El protocolo [HTTP](http://es.wikipedia.org/wiki/HTTP) es uno de los
+El protocolo [HTTP](https://es.wikipedia.org/wiki/HTTP) es uno de los
 protocolos más infrautilizados de la historia. A pesar de que ofrece
 múltiples posibilidades y versiones, se usa simplemente para enviar y
 recibir información de un servidor. Para recibir información se usa la
@@ -73,22 +73,20 @@ representación, que se transfiere al cliente por una petición; esa
 representación se puede cambiar con diferentes operaciones. Sin embargo,
 con esto sólo estamos especificando la capa más baja del servicio web;
 hace falta una capa de mensajería. Y esta capa de mensajería se suele
-denominar [POX](http://es.wikipedia.org/wiki/POX), o *Plain Old XML*
+denominar [POX](https://es.wikipedia.org/wiki/POX), o *Plain Old XML*
 (XML *de toda la vida*), es decir XML bien formado con algunas
 ampliaciones, pero sin ningún tipo de validación. En algunos casos se
 usa texto directamente, aunque también se puede usar JSON o cualquier
 otro tipo de capa.
 
 De hecho, las aplicaciones [REST suelen ser más
-populares](http://www.oreillynet.com/pub/wlg/3005) que otros servicios
+populares](http://nordicapis.com/rest-better-than-soap-yes-use-cases/) que otros servicios
 web, por el simple hecho de que es muy fácil construir el interfaz:
 simplemente creando una cadena determinada. Eso los hace también más
 rápidos, aunque sean menos flexibles.
 
-Vamos a ver un interfaz de este tipo relativamente reciente: el de
-[Twitter](http://twitter.com/), un sitio *social* que transmite a todo
-el que quiera escucharlo las líneas de estado (mensajes de menos de 200
-caracteres). El [API de Twitter](https://dev.twitter.com/docs) es
+Vamos a ver un interfaz de este tipo: el de
+[Twitter](https://twitter.com/), cuyo [API](https://dev.twitter.com/overview/documentation) es
 [RESTful](#RESTful), y está bastante bien diseñada. Para usarla es
 necesario darse de alta; desde la versión 1.1 del interfaz todas las
 peticiones necesitan autenticación. Así que usaremos [otro interfaz, el
@@ -236,7 +234,7 @@ denominar también *arquitecturas orientadas al recurso*
 
 Por eso también se suelen proponer una serie de [buenas prácticas para
 diseñar un interfaz
-REST](http://en.wikipedia.org/wiki/Representational_State_Transfer#Guiding_principles_of_the_interface):
+REST](https://en.wikipedia.org/wiki/Representational_State_Transfer#Guiding_principles_of_the_interface):
 
 -   La funcionalidad está divida en recursos
 -   Se usa una sintaxis universal basada en URL
@@ -305,7 +303,7 @@ es reflejar en el código, de la forma más natural posible, el diseño del
 interfaz REST.
 
 Pero primero hay que instalarlo. Node.js tiene un sistema de gestión de
-módulos bastante simple llamado [npm](http://npmjs.org/) que [hemos
+módulos bastante simple llamado [npm](http://npmjs.com/) que [hemos
 visto en el tema anterior](#nodejs). Tras seguir las instrucciones en el
 sitio para instalarlo (o, en el caso de ubuntu, instalarlo desde
 Synaptic o con apt-get), vamos al directorio en el que vayamos a crear
@@ -345,7 +343,7 @@ de cada función de respuesta podemos procesar las órdenes que queramos.
 
 Por otro lado, se usa `send` en vez de `end` para enviar el resultado.
 Lo que viene a ser lo mismo, `s` más o menos, aunque [send es más
-flexible](http://expressjs.com/guide.html#http-methods), admitiendo todo
+flexible](http://expressjs.com/api.html#res.send), admitiendo todo
 tipo de datos que son procesados para enviar al cliente la respuesta
 correcta. Tampoco hace falta establecer explícitamente el tipo MIME que
 se devuelve, encargándose `send` del mismo.
@@ -462,7 +460,7 @@ sido la respuesta y la imprime.
 
 ## Usando Ajax
 
-Aunque inicialmente [AJAX](http://es.wikipedia.org/wiki/AJAX) era un
+Aunque inicialmente [AJAX](https://es.wikipedia.org/wiki/AJAX) era un
 acrónimo de *Asynchronous JavaScript and XML*, hoy en día se ha dejado
 de usar como tal y viene a abarcar todas las tecnologías asíncronas de
 interacción cliente servidor, usando cualquier formato de serialización
@@ -670,7 +668,7 @@ navegadores admiten todos los tipos de conexión propuestos; se trata de
 un estándar en evolución que se ha implementado a partir de 2012.
 
 Para usarlo ya se puede probar con librerías como
-[socket.io](http://socket.io/#how-to-use), que proporcionan todas las
+[socket.io](http://socket.io/), que proporcionan todas las
 facilidades de WebSocket mediante la conexión que esté disponible en el
 navegador.
 
@@ -686,7 +684,7 @@ CouchDB](http://geneura.ugr.es/%7Ejmerelo/asignaturas/AAP/AAP-CouchDB.mhtml),
 pero el tema de diseño de sistemas con node.js y JQuery en el cliente
 puede ir mucho más allá, usando, por ejemplo [marcos MVC para node.js
 como Sails.js](http://sailsjs.org) o [cualquier otro de los
-recomendados.](http://stackoverflow.com/questions/9744798/which-nodejs-mvc-framework-currently-has-the-best-mix-of-maturity-and-ease-of-us)
+recomendados.](http://nodeframework.com/)
 
 jQuery también admite todo tipo de plugins, y muchos de ellos se pueden
 usar con [formularios](http://malsup.com/jquery/form/) haciendo su
