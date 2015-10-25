@@ -1,7 +1,6 @@
 #!/bin/bash
 
-
-
+# Convierte a ePub
 pandoc -S --toc --epub-metadata=../metadata.xml --epub-stylesheet=../js.css \
     -o aprendejs.epub aprendeJS.txt \
     prologo.md  1-intro.md 2-js-navegador.md \

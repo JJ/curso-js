@@ -1,0 +1,7 @@
+#!/bin/bash
+
+mkdir -p pdf # It creates the directory if it does not exist
+for fichero in $( ls *.md)
+do
+    pandoc -f markdown -o pdf/${fichero%.md}.pdf ${fichero} 
+done

@@ -1,1 +1,5 @@
 *~
+*.epub
+txt/html
+txt/pdf
+*.pdf
