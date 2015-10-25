@@ -69,7 +69,12 @@ con conocimientos de programación que no le tengan miedo a la línea de
   
 * Programación básica, es decir, saber qué es una variable, un bucle y
   una estructura de datos; algún conocimiento de HTML tampoco
-  estorbará. 
+  estorbará.
+
+* Conocimientos de HTML, porque la forma de trabajar con JavaScript en
+  el navegador es usar marcas de HTML. También es necesario para
+  entender qué es el modelo de objetos del documento sobre el que
+  trabaja JS en el navegador.
 
 ## Disfrútalo
 

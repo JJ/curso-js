@@ -8,12 +8,16 @@
 
 ## El modelo de objetos del documento
 
-Ya no es tan difícil encontrar un enfoque como el de este curso,
-centrado en JS como lenguaje y no como un chisme más dentro del
-navegador. Eventualmente, habrá que tratar con esto, así que este
-momento es tan bueno como cualquier otro. En realidad, la mayor
+> Las primeras versiones de este texto, en 2007, hacían énfasis en
+> enseñar el lenguaje *fuera del navegadpr*. En aquél momento no era
+> demasiado común. Sin embargo, ya no es tan difícil encontrar un enfoque como el de este curso,
+> centrado en JS como lenguaje y no como un chisme más dentro del
+> navegador. Eventualmente, habrá que tratar con esto, así que este
+> momento es tan bueno como cualquier otro.
+
+En realidad, la mayor
 diferencia entre JS-sin-navegador y JS-con-navegador es el bagaje de
-objetos con el que tiene que trabajar y también el modelo que se va a
+objetos con el que tiene que trabajar y el modelo que se va a
 usar para entrada y salida: la propia *página* en la que está inserto el
 programa.
 
@@ -34,7 +38,7 @@ del mundo mundial.
 Para empezar, vamos a ver qué pinta tiene el DOM de un documento
 cualquiera. Por ejemplo, usemos esta misma página, que para eso está ya
 en HTML. En Firefox, se ve el DOM completo con la combinación de teclas
-Ctrl+Shift+I. Para ésta página, saldría algo así: ![DOM de una
+`Ctrl+Shift+I`. Para ésta página, saldría algo así: ![DOM de una
 página](imagenes/AAP-DOM.png) La estructura es la que cabe esperar: hay
 un nodo raíz, etiquetado como `document`, del que descienden las dos
 partes del documento HTML: `HEAD` y `BODY`. Y de ahí, pues el resto.
@@ -174,7 +178,7 @@ for ( var secs = 0; secs < h2.length; secs ++ ) {
 
 Este programa añade unas flechitas de navegación a una página que
 incluya cabeceras `h2` de forma que se pueda pasar de cada sección a la
-anterior a la siguiente (de ahí lo de aap-nav). Tiene dos partes: la
+anterior a la siguiente (de ahí lo de `aap-nav`). Tiene dos partes: la
 primera parte halla las etiquetas de navegación, y la segunda las
 inserta. Tres partes, de hecho, si incluimos las declaraciones del
 principio, que son para uso y disfrute del propio GreaseMonkey. Las dos
@@ -252,10 +256,8 @@ newdocument.write(contenido);
 
 <p>Desbloquea las ventanas emergentes</p>
 
-<hr>
-<address></address>
-<!-- hhmts start -->Last modified: Sun Apr  7 19:49:52 CEST 2013 <!-- hhmts end -->
-</body> </html>
+</body>
+</html>
 ~~~~~
 
 En este caso, se crea una nueva página estática usando `write` sobre el
