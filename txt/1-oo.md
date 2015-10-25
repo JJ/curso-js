@@ -146,7 +146,7 @@ vector (ejecutar una operación sobre sus valores, por ejemplo) sólo se
 usan sus valores: valor[0], valor[1],..., valor[n].
 
 Sin embargo, una matriz asociativa, diccionario, mapa o
-[Tabla\_hash](http://es.wikipedia.org/wiki/Tabla_hash) (o simplemente
+[Tabla\_hash](https://es.wikipedia.org/wiki/Tabla_hash) (o simplemente
 *hash*) está compuesto por una serie de pares (cadena alfanumérica,
 valor): (cadena~1~, valor~1~, cadena~2~,valor~2~... cadena~n~,
 valor~n~). Los valores están asociados a su cadena correspondiente; de
@@ -407,22 +407,16 @@ que dará el resultado siguiente:
 Queda con esto más o menos claro que para ir donde nadie ha ido antes
 con JS, hay que meterse un poco en Java. Pero no siempre. Tenéis alguna
 información más en [este tutorial de
-Mozilla](http://www.mozilla.org/rhino/ScriptingJava.html), que te
+Mozilla](https://developer.mozilla.org/en-US/docs/Mozilla/Projects/Rhino/Scripting_Java), que te
 explica como importar espacios de nombres completos e incluso como
 implementar interfaces de Java.
 
-Aunque no lo parezca, JS es todavía un lenguaje joven, al que le faltan
-gran cantidad de librerías básicas, y, especialmente, una forma
-centralizada de empaquetar, probar y distribuir esas librerías, como
-[CPAN](http://www.cpan.org) para Perl o GEMs para Ruby. Hay algo por el
-estilo, [llamado OpenJSAN](http://openjsan.org), de JS Archive Network.
-Para instalarlo hace falta Perl, y sólo hay unas pocas librerías
-todavía. Algunas muy útiles, pero siguen siendo unas pocas. Otras, como
-la amplia [JSlib](http://code.google.com/p/jslibs/), sólo va en Windows.
-En todo caso, a estas alturas parece un proyecto muerto.
-
-La que si es popular es [Prototype](http://prototypejs.org/), una
-librería que se usa principalmente en conjunción con RoR y AJAX, pero
+Últimamente, los módulos de JavaScript se importan en Node usando
+`npm` y en el cliente usando `bower`. Ambos usan GitHub o algún otro
+repositorio para especificar la localización de los fuentes. Eso ha
+hecho que haya muchas liberías populares, tales como [Prototype](http://prototypejs.org/), una
+librería que se usa principalmente en conjunción con Ruby on Rails y
+Ajax (que veremos más adelante), pero
 resulta que necesita ejecutarse dentro del navegador, porque usa objetos
 del mismo (como `document`, por ejemplo). Así que la dejaremos para más
 adelante.
@@ -433,7 +427,7 @@ Lo interesante de los objetos en JS es que hay una forma muy fácil de
 *serializarlos* (es decir, convertirlos en texto u otro formato de forma
 que se puedan intercambiar fácilmente con otros programas a través de la
 red); a este formato se le denomina
-[JSON](http://es.wikipedia.org/wiki/JSON) (JavaScript Object Notation).
+[JSON](https://es.wikipedia.org/wiki/JSON) (JavaScript Object Notation).
 Y como en realidad, tal como se ha visto en el apartado anterior, todo
 es un objeto en JS, se puede usar esta notación para asignar valores
 prácticamente a cualquier cosa. Vamos a usar una vez más el intérprete
@@ -478,7 +472,7 @@ a métodos de una clase simplemente usando su nombre (en realidad, un
 puntero a función). Las diferentes formas de definir funciones se
 explican en [este post de StackOverflow (un recurso imprescindible, por
 otro
-lado).](http://stackoverflow.com/questions/1140089/how-does-an-anonymous-function-in-javascript-work)
+lado).](http://stackoverflow.com/questions/1140089/why-do-you-need-to-invoke-an-anonymous-function-on-the-same-line)
 
 Vamos a verlo a verlo a continuación, usando nuestra conocida quiniela;
 usaremos una función para imprimir el resultado de la quiniela, de forma
@@ -599,25 +593,28 @@ sintaxis es que las funciones son variables de pleno derecho, que
 podemos usar como parámetros de otras funciones; esto se usará de forma
 extensiva cuando veamos jQuery y node.js.
 
-## CommonJS, una infraestructura común para carga de módulos
+## Require.JS, una infraestructura común para carga de módulos
 
 Uno de los problemas de JS es que, al haber sido desarrollado
 principalmente para trabajar en el navegador, carece de una serie de
 librerías comunes para trabajar en el servidor o en aplicaciones de
-escritorio. [CommonJS](http://www.commonjs.org) es un intento de dar tal
+escritorio. [CommonJS](http://requirejs.org/docs/commonjs.html) fue un intento de dar tal
 infraestructura. Principalmente se trata de proveer una serie de
 especificaciones para hacer cosas comunes, desde o más simple, que es
 crear un módulo o librería hasta cosas más complejas: interacción con
-consola o con línea de órdenes.
+consola o con línea de órdenes. Sin embargo, no acabó de tener éxito
+por su falta de especificación de formatos de transporte, así que
+finalmente se adoptó la especificación
+[Require.js](http://requirejs.org/), que es la que
+se usa, precisamente, en Node y en otros intérpretes populares.  
 
 Por lo pronto la especificación que ha tenido más éxito es la de
-módulos, que [se resume en este
-artículo](http://dailyjs.com/2010/10/18/modules/); se trata de que un
+módulos, que [se resume en esta presentación](https://darrenderidder.github.io/talks/ModulePatterns/#/4); se trata de que un
 módulo escrito para un intérprete (Rhino, por ejemplo) pueda funcionar
 en otro (tal como node.js). Vamos a ver cómo adaptaríamos alguna de las
 cosas hechas a este estándar, por ejemplo, cambiando esto sobre la clase
-Nuevo\_partido.js creada anteriormente (la llamamos
-[Un\_Partido](https://github.com/JJ/curso-js/tree/master/code/Un_Partido.js)).
+`Nuevo_partido.js` creada anteriormente (la llamamos
+[Un_Partido](https://github.com/JJ/curso-js/tree/master/code/Un_Partido.js)).
 
 ~~~~~~javascript
 // Definición de la clase Nuevo_partido
@@ -674,8 +671,8 @@ cualquier otro objeto, como podemos ver usando console.
 A diferencia de casi todos los lenguajes de scripting, no hay un modo
 estándar de instalar módulos JavaScript, aunque algunos intérpretes
 (notablemente Node.js, del que hablaremos luego) sí lo tienen. De hecho,
-ni siquiera common.js es universal, existiendo otras convenciones que le
-hacen la competencia tales como [require.js](http://requirejs.org/). La
+ni siquiera require.js es universal, existiendo otras convenciones que le
+hacen la competencia tales como [AMD](http://requirejs.org/docs/whyamd.html). La
 principal ventaja de common.js es su aceptación por parte de node.js,
 precisamente y su uso en NPM, por eso cabe suponer que el resto
 empezarán, más o menos, a usarlo. En todo caso, [son enfoques
@@ -690,11 +687,17 @@ para ampliar información sobre JavaScript. Quizás también pueda ser
 interesante usar alguna librería que facilite su uso como
 [Mochikit](http://mochi.github.com/mochikit/) o
 [Prototype](http://www.prototypejs.org/). También el [Google Web
-Toolkit](http://code.google.com/webtoolkit/) permite desarrollar en AJAX
+Toolkit](http://www.gwtproject.org/?csw=1) permite desarrollar en Ajax
 programando sólo en Java, aunque pueda que el JS generado necesite algún
-retoque adicional. Por supuesto, también es conveniente que se continúe con el siguiente capítulo. 
+retoque adicional. Por supuesto, también es conveniente que se
+continúe con el siguiente capítulo.  
 
 
 ## Bibliografía 
 
-En [la web del programador de Mozilla dan una visión extensa de la programación "basada en objetos" de JS](https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Trabajando_con_objectos) tras una [introducción](https://developer.mozilla.org/es/docs/Web/JavaScript/Introducci%C3%B3n_a_JavaScript_orientado_a_objetos). El [tutorial en Cristalab](http://www.cristalab.com/tutoriales/programacion-orientada-a-objetos-oop-con-javascript-c232l/) es bastante completo también. 
+En
+[la web del programador de Mozilla dan una visión extensa de la programación "basada en objetos" de JS](https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Trabajando_con_objectos)
+tras una
+[introducción](https://developer.mozilla.org/es/docs/Web/JavaScript/Introducci%C3%B3n_a_JavaScript_orientado_a_objetos). El
+[tutorial en Cristalab](http://www.cristalab.com/tutoriales/programacion-orientada-a-objetos-oop-con-javascript-c232l/)
+es bastante completo también.  
