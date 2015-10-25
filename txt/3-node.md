@@ -105,13 +105,13 @@ en la segunda le asignamos el valor `mundo` a la variable de instancia
 `console.log` imprime la cadena en la salida, escribiendo directamente
 (y además en JSON) el valor de la misma. `console` es un objeto que
 forma parte de la [librería estándar de entrada salida de
-node](http://nodejs.org/api/stdio.html%20). Equivale a la *consola* o el
+node](https://nodejs.org/api/stdio.html). Equivale a la *consola* o el
 terminal, permitiendo enviar información a la misma con `log` y con
 otras órdenes como `error`; la diferencia es que en el primer caso se
 escribe en salida estándar y en el segundo en salida de error estándar
 (no se capturaría en una redirección de salida, por ejemplo).
 `console.log` puede usar también [formatos como la orden `printf` de
-C](http://nodejs.org/api/stdio.html#stdio_console_log_data), es decir,
+C](https://nodejs.org/api/stdio.html#stdio_console_log_data), es decir,
 
     console.log('Respuesta: %s', saludo.hola     )
 
@@ -474,7 +474,7 @@ omisión será 8080 (lo que se ve en la segunda línea), pero si se pasa
 algún argumento (y es un puerto válido) se usará ese valor.
 
 Algunos sitios web como [Heroku](http://www.heroku.com/) o
-[Nodester](http://nodester.com/) permiten publicar de forma gratuita
+[Appfog](http://appfog.com/) permiten publicar de forma gratuita
 aplicaciones web hechas con node.js. Pueden ser bastante útiles para
 crear prototipos o para hacer pruebas, incluso para alojar prácticas de
 alguna asignatura o curso.
@@ -533,8 +533,8 @@ para seguir con [el sitio de node.js](http://www.nodehispano.com/) en
 español, que incluye enlaces a
 [nodebeginner](http://www.nodebeginner.org/index-es.html), el libro para
 principiantes en node.js. La traducción tiene algunos errores, pero es
-legible. Finalmente, [Opsou nos ofrece una lista de tutoriales en
-español](http://www.opsou.com/blog/recopilacion-de-tutoriales-sobre-node-js-en-castellano/).
+legible. Finalmente, [NodeHispano nos ofrece una lista de recursos en
+español](http://www.nodehispano.com/).
 Finalmente, también hay [una cuenta de Twitter (no demasiado
 activa)](https://twitter.com/nodejs_es). También el libro inserto (o
 cualquier otro recomendado, a esta alturas hay una cantidad ingente de
