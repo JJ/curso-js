@@ -9,7 +9,7 @@
 
 ## Introducción
 Lejos de ser solamente un lenguaje para el navegador,
-[JavaScript](http://es.wikipedia.org/wiki/JavaScript) tiene una ventaja
+[JavaScript](https://es.wikipedia.org/wiki/JavaScript) tiene una ventaja
 frente a otros lenguajes de programación: Está *en todas partes*. No hay
 ordenador sin navegador, ni hay navegador sin JavaScript. Se puede
 ejecutar hasta en el navegador de las consolas de videojuegos; desde la
@@ -24,8 +24,8 @@ que da lugar a muchas implementaciones diferentes, que son, además,
 independientes del fabricante. Y también en parte a que suele usar un
 conjunto de objetos estándar, que no son estrictamente parte de un
 lenguaje, que se pueden usar para añadir funcionalidad a una aplicación.
-Muchas aplicaciones complejas, como [GMail](http://gmail.com) o [Google
-Apps](http://drive.google.com) dependen de estos objetos para crear
+Muchas aplicaciones complejas, como GMail o Google
+Apps dependen de estos objetos para crear
 aplicaciones en la web que se comporten como si se ejecutaran en un
 sistema operativo nativo; a estas aplicaciones se les ha denominado
 últimamente *Rich Internet Applications*.
@@ -46,14 +46,14 @@ su integración con el navegador, parte inseparable de la web, una
 arquitectura cliente-servidor, como por los objetos que suele tener el
 mismo, crear una aplicación de este tipo es casi trivial y ha dado
 lugar a un estilo de programación denominado
-[Ajax](http://es.wikipedia.org/wiki/Ajax), que se verá más adelante.
+[Ajax](https://es.wikipedia.org/wiki/Ajax), que se verá más adelante.
 
 Para ejecutar JavaScript no hace falta más que un navegador, pero
 también hay entornos para trabajar con él de forma autónoma, el más
-conocido de los cuales es [Node](http://nodejs.org), pero con otros representantes tales como el
+conocido de los cuales es [Node](https://nodejs.org/en), pero con otros representantes tales como el
 [Mozilla
 SpiderMonkey](https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey)
-y el [Rhino](https://developer.mozilla.org/en-US/docs/Rhino), éste
+y el [Rhino]( https://developer.mozilla.org/en-US/docs/Mozilla/Projects/Rhino), éste
 último basado en Java; [hay una lista de intérpretes completa que se
 puede
 usar](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Shells).
@@ -130,7 +130,7 @@ JSDT](http://www.eclipse.org/webtools/jsdt/).
 
 Por otro lado, el `emacs` va de lujo. NetBeans
 tiene también [soporte para
-JavaScript](http://netbeans.org/kb/docs/ide/javascript-editor.html),
+JavaScript](https://netbeans.org/kb/73/ide/javascript-editor.html),
 simplemente seleccionando este lenguaje para un nuevo fichero. El editor
 detecta la estructura del fichero e incluso analiza el código indicando
 los problemas, indentando automáticamente y emparejando paréntesis y
@@ -144,7 +144,7 @@ por caso, acceder a bases de datos. Pero también ha permitido que el
 lenguaje siga siendo *pequeño*, y se haya desarrollado principalmente a
 base de añadir objetos y clases externas al mismo. En resumen, que en el
 marco de eso que se ha venido en llamar [web
-2.0](http://es.wikipedia.org/wiki/Web_2.0) y especialmente desde que
+2.0](https://es.wikipedia.org/wiki/Web_2.0) y especialmente desde que
 se ha popularizado Node, JS se ha convertido en
 adulto, y merece la pena estudiarlo como cualquier otro lenguaje.
 
@@ -583,7 +583,7 @@ Hay [muchos más recursos, algunos de ellos disponibles de forma
 electrónica](http://bencore.ugr.es/iii/encore/search/C|Sjavascript|Orightresult|U1?lang=spi&suite=pearl).
 
 Como recursos adicionales, [las páginas de JavaScript en
-Mozilla.org](%0A%20%20%20%20https://developer.mozilla.org/en-US/docs/JavaScript/About_JavaScript?redirectlocale=en-US&redirectslug=About_JavaScript),
+Mozilla.org](https://developer.mozilla.org/en-US/docs/JavaScript/About_JavaScript?redirectlocale=en-US&redirectslug=About_JavaScript),
 el [estándar
 completo](http://www.ecma-international.org/publications/standards/Ecma-262.htm),
 y el [curso de JavaScript de Víctor Rivas
