@@ -12,7 +12,17 @@ Como este libro es libre, tanto el texto como los ejemplos están en
 [GitHub](http://github.com/JJ/curso-js). Úsalos a tu antojo, según la
 licencia.
 
-Este libro se escribió originalmente para impartir clase en 4º de Telecos y posteriormente se ha usado para impartir un [curso de JavaScript](http://cevug.ugr.es/javascript) impartido en el Centro de
+Agradezco a los
+[comentaristas](http://barrapunto.com/comments.pl?sid=69179) de [los
+diferentes anuncios](http://barrapunto.com/comments.pl?sid=68032) que
+[publiqué en Barrapunto](http://barrapunto.com/comments.pl?sid=67899)
+sus comentarios y sugerencias. También a Javier Espigares por la lectura
+y comentarios sobre las versiones previas de este texto.
+
+Este libro se escribió originalmente para impartir clase en 4º de
+Telecos y posteriormente se ha usado para impartir un
+[curso de JavaScript](http://cevug.ugr.es/javascript) impartido en el
+Centro de  
 Enseñanzas Virtuales de la UGR en 2014. Por lo tanto,
 agradecemos a los cotutores y alumnos la retroalimentación ofrecida, especialmente
 a José Antonio Vacas, que se revisó el material y nos hizo grandes
