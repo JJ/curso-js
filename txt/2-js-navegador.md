@@ -23,7 +23,7 @@ programa.
 
 En general, lo que hace un navegador es analizar el HTML que le envía el
 servidor y convertirlo en un árbol, el
-[DOM](http://es.wikipedia.org/wiki/DOM) o *document object model*. Todo
+[DOM](https://es.wikipedia.org/wiki/DOM) o *document object model*. Todo
 lo que hay en el documento es una hoja o un nudo dentro de ese árbol. Lo
 importante es que los programas JS, aparte de ser hojas dentro de ese
 árbol, también actúan sobre ese árbol, añadiendo o quitando hojas, o
@@ -31,7 +31,7 @@ simplemente alterando sus propiedades. El DOM está definido como un
 [estándar del W3](http://www.w3.org/DOM/), pero eso no quita que haya
 problemas de compatibilidad entre los diferentes navegadores. Por
 ejemplo,
-[Mozilla](https://developer.mozilla.org/en/docs/Gecko_DOM_Reference)
+[Mozilla](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)
 tiene su modelo de objetos, que usa en sus navegadores, los más bonitos
 del mundo mundial.
 
@@ -268,7 +268,7 @@ mini-tutorial](http://www.htmlgoodies.com/beyond/javascript/javascript-dynamic-d
 
 ## Selectores
 
-Las hojas de estilo [CSS](http://es.wikipedia.org/wiki/CSS) son una
+Las hojas de estilo [CSS](https://es.wikipedia.org/wiki/CSS) son una
 especificación de la apariencia de elementos tanto HTML como XML que
 permiten asignar parámetros de presentación específico a cada elemento o
 a grupos de ellos. No es el objetivo de este manual enseñarlas, pero su
@@ -351,7 +351,7 @@ que se activa tras el evento `load`, es decir, cuando se carga la página
 [JQuery](http://jquery.com) es una librería en JavaScript que está
 diseñada principalmente para simplificar la creación de programas y
 permitir crear interfaces ricos de usuario.
-[JQuery](http://es.wikipedia.org/wiki/JQuery) se ha popularizado desde
+[JQuery](https://es.wikipedia.org/wiki/JQuery) se ha popularizado desde
 su creación en el año 2006 hasta el punto que se calcula que se usa en
 más de la mitad de los sitios más populares. Por supuesto, es software
 libre con una [licencia MIT](http://en.wikipedia.org/wiki/MIT_License).
