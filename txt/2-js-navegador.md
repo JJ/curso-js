@@ -1,4 +1,4 @@
-#JavaScript en el navegador y JQuery {name="jquery"}
+#JavaScript en el navegador y JQuery 
 
 
 ##Objetivos de este capítulo
@@ -96,7 +96,7 @@ un array con todos los elementos que tengan esa etiqueta, y
 `getElementById('ej.t1.3')` devolverá el tercer bloque de ejercicios de
 este tema, como veremos en el ejemplo siguiente 
 
-~~~~~
+~~~~~javascript
 function putBloque(value) {
 	var ejs = document.getElementById('ej.T1.'+value);
 	document.getElementById('resultado1').innerHTML=ejs.textContent; }
@@ -344,7 +344,7 @@ ejemplo](https://github.com/JJ/curso-js/blob/master/code/onload.html)
 El uso de evento está hacia el final del código, donde usamos `alert`
 que se activa tras el evento `load`, es decir, cuando se carga la página
 
-## JQuery: Introducción [\#](#TJ:tj:jq)
+## JQuery: Introducción 
 
 [JQuery](http://jquery.com) es una librería en JavaScript que está
 diseñada principalmente para simplificar la creación de programas y
