@@ -1,0 +1,234 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="js.css" type="text/css" />
+</head>
+<body>
+<h1 id="javascript-en-el-navegador-y-jquery">JavaScript en el navegador y JQuery</h1>
+<h2 id="objetivos-de-este-capítulo">Objetivos de este capítulo</h2>
+<ul>
+<li>Trabajar con JavaScript en el navegador</li>
+<li>Usar librerías populares de JavaScript en ese contexto</li>
+</ul>
+<h2 id="el-modelo-de-objetos-del-documento">El modelo de objetos del documento</h2>
+<blockquote>
+<p>Las primeras versiones de este texto, en 2007, hacían énfasis en enseñar el lenguaje <em>fuera del navegadpr</em>. En aquél momento no era demasiado común. Sin embargo, ya no es tan difícil encontrar un enfoque como el de este curso, centrado en JS como lenguaje y no como un chisme más dentro del navegador. Eventualmente, habrá que tratar con esto, así que este momento es tan bueno como cualquier otro.</p>
+</blockquote>
+<p>En realidad, la mayor diferencia entre JS-sin-navegador y JS-con-navegador es el bagaje de objetos con el que tiene que trabajar y el modelo que se va a usar para entrada y salida: la propia <em>página</em> en la que está inserto el programa.</p>
+<p>En general, lo que hace un navegador es analizar el HTML que le envía el servidor y convertirlo en un árbol, el <a href="http://es.wikipedia.org/wiki/DOM">DOM</a> o <em>document object model</em>. Todo lo que hay en el documento es una hoja o un nudo dentro de ese árbol. Lo importante es que los programas JS, aparte de ser hojas dentro de ese árbol, también actúan sobre ese árbol, añadiendo o quitando hojas, o simplemente alterando sus propiedades. El DOM está definido como un <a href="http://www.w3.org/DOM/">estándar del W3</a>, pero eso no quita que haya problemas de compatibilidad entre los diferentes navegadores. Por ejemplo, <a href="https://developer.mozilla.org/en/docs/Gecko_DOM_Reference">Mozilla</a> tiene su modelo de objetos, que usa en sus navegadores, los más bonitos del mundo mundial.</p>
+<p>Para empezar, vamos a ver qué pinta tiene el DOM de un documento cualquiera. Por ejemplo, usemos esta misma página, que para eso está ya en HTML. En Firefox, se ve el DOM completo con la combinación de teclas <code>Ctrl+Shift+I</code>. Para ésta página, saldría algo así: <img src="imagenes/AAP-DOM.png" alt="DOM de una página" /> La estructura es la que cabe esperar: hay un nodo raíz, etiquetado como <code>document</code>, del que descienden las dos partes del documento HTML: <code>HEAD</code> y <code>BODY</code>. Y de ahí, pues el resto.</p>
+<p>Todos las herramientas relacionadas con la página web, como el CSS, trabajan y tienen en cuenta esta estructura DOM del documento. Y cuando un programa JS se ejecuta dentro de un documento, puede alterar su estructura. Veámoslo, por ejemplo, en el <a href="https://github.com/JJ/curso-js/blob/master/code/docwrite.html"><code>docwrite.html</code></a>:</p>
+<pre class="sourceCode html"><code class="sourceCode html"><span class="dt">&lt;!DOCTYPE </span>HTML PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot;<span class="dt">&gt;</span>
+<span class="kw">&lt;html&gt;</span>
+  <span class="kw">&lt;head&gt;</span>
+    <span class="kw">&lt;title&gt;</span>Prueba document.write<span class="kw">&lt;/title&gt;</span>
+<span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&#39;application/javascript&#39;</span><span class="kw">&gt;</span>
+      <span class="kw">function</span> <span class="fu">setColor</span>( color ) {
+      <span class="ot">document</span>.<span class="fu">getElementById</span>(<span class="st">&#39;color&#39;</span>).<span class="ot">style</span>.<span class="fu">background</span> =color;
+      }
+&lt;<span class="ot">/script&gt;</span>
+<span class="ot">  &lt;/head</span>&gt;
+
+  &lt;body&gt;
+    &lt;h1&gt;Prueba <span class="ot">document</span>.<span class="fu">write</span>&lt;<span class="ot">/h1&gt;</span>
+
+<span class="ot">&lt;p&gt;&lt;input type=&#39;text&#39; name=&#39;color&#39; value=&#39;Color </span><span class="fl">(</span><span class="ot">in inglis</span><span class="fl">)</span><span class="ot">&#39; onChange=&#39;setColor</span><span class="fl">(</span><span class="ot">value</span><span class="fl">)</span><span class="ot">&#39; /</span>&gt;&lt;<span class="ot">/p&gt;</span>
+
+<span class="ot">&lt;div id=&#39;color&#39;&gt;&amp;nbsp;&amp;nbsp;&lt;/div</span>&gt;
+
+    &lt;hr&gt;
+    &lt;address&gt;&lt;a href=<span class="st">&quot;mailto:jmerelo@localhost.localdomain&quot;</span>&gt;Juan <span class="ot">J</span>. <span class="fu">Merelo</span>&lt;<span class="ot">/a&gt;&lt;/address</span>&gt;
+&lt;!-- Created: Wed Feb <span class="dv">21</span> <span class="dv">18</span>:<span class="dv">45</span>:<span class="dv">35</span> CET <span class="dv">2007</span> --&gt;
+&lt;!-- hhmts start --&gt;
+Last modified: Sun Feb <span class="dv">25</span> <span class="dv">18</span>:<span class="dv">57</span>:<span class="dv">52</span> CET <span class="dv">2007</span>
+&lt;!-- hhmts end --&gt;
+  &lt;<span class="ot">/body&gt;</span>
+<span class="ot">&lt;/html</span>&gt;</code></pre>
+<p>que crearía un DOM con el aspecto siguiente: <img src="imagenes/nuevonodo.png" alt="Creación de un nodo en el DOM con JS" /> Como se ve, el nodo <code>P</code> sigue al nodo <code>script</code>, es decir, que el nodo se crea en el DOM justamente siguiendo al nodo que incluye el script. En realidad, se crean tantos nodos como a uno le interese, pero de esta forma sólo se pueden colocar en el sitio donde está el script. Así que habrá que imaginar otra forma de hacerlo.</p>
+<p>Navegar por el modelo de objetos no es excesivamente complicado, gracias a las funciones <code>getElementsBy*</code>, que escogen elementos del DOM de acuerdo con alguna característica. <code>getElementsByTagName</code> escoge elementos por el nombre de la etiqueta, mientras que <code>getElementById</code> usa el atributo <code>id</code>; nótese la diferencia entre <code>Elements</code> y <code>Element</code>; en el primer caso se devuelve un <code>Array</code> y en el segundo uno solo, porque la Id es única. Cuando se trabaja con un documento, habrá que usar de forma sabia los atributos y clases de forma que sea fácil escoger y trabajar con los elementos de un tipo determinado, o con un elemento en concreto. Por ejemplo, <code>getElementByTagName('h2')</code> devolverá un array con todos los elementos que tengan esa etiqueta, y <code>getElementById('ej.t1.3')</code> devolverá el tercer bloque de ejercicios de este tema, como veremos en el ejemplo siguiente</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="fu">putBloque</span>(value) {
+    <span class="kw">var</span> ejs = <span class="ot">document</span>.<span class="fu">getElementById</span>(<span class="st">&#39;ej.T1.&#39;</span>+value);
+    <span class="ot">document</span>.<span class="fu">getElementById</span>(<span class="st">&#39;resultado1&#39;</span>).<span class="fu">innerHTML</span>=<span class="ot">ejs</span>.<span class="fu">textContent</span>; }</code></pre>
+<p>Un par de líneas sólo de JS: una para buscar el elemento (la primera) y la segunda para extraer su contenido (<code>textContent</code>) e introducirlo en otro, el elemento <code>resultado1</code> que teníamos preparado al efecto. <code>innerHTML</code> es el HTML interno de un elemento: al asignarle un valor, efectivamente, sustituimos parte del contenido de la página dinámicamente. ¿No es una maravilla?</p>
+<h2 id="usando-greasemonkey">Usando GreaseMonkey</h2>
+<p>No se sabe porqué los temas de JS tienen tanta relación con los primates, pero el hecho es que <a href="http://greasespot.com">GreaseMonkey</a> (o <a href="http://tampermonkey.net/">TamperMonkey</a>, su equivalente en Chrome, Chromium y Opera Next, que tiene una <em>capa de compatibilidad</em> que permite ejecutar estos scripts) es un <em>plugin</em> para los navegadores <a href="http://mozilla.org">Mozilla</a> que permite instalar en el navegador programillas JS específicos de una página o grupo de páginas. Para trabajar con él, lo primero que hay que hacer es instalarlo (Herramientas-&gt;Complementos en Firefox y Herramientas-&gt;Extensiones en Chrome y Chromium) y reiniciar el navegador.</p>
+<p>Una vez hecho eso, Grease/TamperMonkey reconoce los scripts con la extensión <code>.user.js</code> como propios (es decir, los abre cuando se descargan desde una web o se abre el fichero), los instala, y permite gestionarlos, activarlos, y desactivarlos, desde un icono con un monito en la barra inferior del navegador. O sea, que una vez que se vea el monito, podemos cargar <a href="https://github.com/JJ/curso-js/blob/master/code/aap-nav.user.js">este programa (<code>aap-nav.user.js</code>)</a> que lo usa:</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// ==UserScript==</span>
+<span class="co">// @name                AAP-Nav</span>
+<span class="co">// @namespace           http://geneura.org/projects/greasemonkey</span>
+<span class="co">// @description         Navegación por las secciones de AAP</span>
+<span class="co">// @include             http://geneura.ugr.es/~jmerelo/asignaturas/*</span>
+<span class="co">// ==/UserScript==</span>
+
+<span class="fu">GM_log</span>(<span class="st">&#39;Entrando en AAP-Nav&#39;</span>);
+<span class="kw">var</span> h2 = <span class="ot">document</span>.<span class="fu">getElementsByTagName</span>(<span class="st">&#39;h2&#39;</span>);
+<span class="kw">var</span> a_nodes = <span class="kw">new</span> Array;
+<span class="kw">var</span> anchors = <span class="kw">new</span> Array;
+<span class="kw">for</span> ( <span class="kw">var</span> secs = <span class="dv">0</span>; secs &lt; <span class="ot">h2</span>.<span class="fu">length</span>; secs ++ ) {
+  <span class="kw">var</span> thisA = h2[secs].<span class="fu">getElementsByTagName</span>(<span class="st">&#39;a&#39;</span>);
+  a_nodes[secs] = thisA[<span class="dv">0</span>];
+  anchors[secs] = thisA[<span class="dv">0</span>].<span class="fu">getAttribute</span>(<span class="st">&#39;name&#39;</span>);
+  <span class="fu">GM_log</span>(<span class="st">&#39;Anchor &#39;</span> + secs + <span class="st">&quot; &quot;</span> + anchors[secs]);
+}
+
+<span class="kw">for</span> ( <span class="kw">var</span> secs = <span class="dv">0</span>; secs &lt; <span class="ot">h2</span>.<span class="fu">length</span>; secs ++ ) {
+  <span class="kw">var</span> span = <span class="ot">document</span>.<span class="fu">createElement</span>(<span class="st">&#39;span&#39;</span>);
+  <span class="ot">span</span>.<span class="fu">setAttribute</span>(<span class="st">&#39;style&#39;</span>,<span class="st">&#39;background:lightblue&#39;</span>);
+  <span class="kw">if</span> ( secs &gt; <span class="dv">0</span> ) {
+    <span class="kw">var</span> ahref = <span class="ot">document</span>.<span class="fu">createElement</span>(<span class="st">&#39;a&#39;</span>);
+    <span class="ot">ahref</span>.<span class="fu">setAttribute</span>(<span class="st">&#39;href&#39;</span>,<span class="st">&#39;#&#39;</span>+anchors[secs<span class="dv">-1</span>]);
+    <span class="kw">var</span> txt=<span class="ot">document</span>.<span class="fu">createTextNode</span>(<span class="st">&#39;^&#39;</span>);
+    <span class="ot">ahref</span>.<span class="fu">appendChild</span>(txt);
+    <span class="ot">span</span>.<span class="fu">appendChild</span>(ahref);
+  }
+  <span class="kw">if</span> ( secs &lt; <span class="ot">h2</span>.<span class="fu">length</span> -<span class="dv">1</span>  ) {
+    <span class="ot">span</span>.<span class="fu">appendChild</span>(<span class="ot">document</span>.<span class="fu">createTextNode</span>(<span class="st">&#39; | &#39;</span>));
+    <span class="kw">var</span> ahref = <span class="ot">document</span>.<span class="fu">createElement</span>(<span class="st">&#39;a&#39;</span>);
+    <span class="ot">ahref</span>.<span class="fu">setAttribute</span>(<span class="st">&#39;href&#39;</span>,<span class="st">&#39;#&#39;</span>+anchors[secs<span class="dv">+1</span>]);
+    <span class="kw">var</span> txt=<span class="ot">document</span>.<span class="fu">createTextNode</span>(<span class="st">&#39;v&#39;</span>);
+    <span class="ot">ahref</span>.<span class="fu">appendChild</span>(txt);
+    <span class="ot">span</span>.<span class="fu">appendChild</span>(ahref);
+  }
+  a_nodes[secs].<span class="ot">parentNode</span>.<span class="fu">insertBefore</span>(span,a_nodes[secs]);
+}</code></pre>
+<p>Este programa añade unas flechitas de navegación a una página que incluya cabeceras <code>h2</code> de forma que se pueda pasar de cada sección a la anterior a la siguiente (de ahí lo de <code>aap-nav</code>). Tiene dos partes: la primera parte halla las etiquetas de navegación, y la segunda las inserta. Tres partes, de hecho, si incluimos las declaraciones del principio, que son para uso y disfrute del propio GreaseMonkey. Las dos primeras son terminológicas: cómo se llama, y qué espacio de nombres usa. Esto es para distinguir scripts con el mismo nombre de diferentes fuentes. La tercera, una descripción, aparece en los directorios correspondientes y cuando gestionamos los scripts.</p>
+<p>El cuarto apartado es el más importante. Es un patrón de las páginas en las que va a funcionar el script. Éste no tendría sentido fuera de las páginas de la asignatura en la que estaban incluidos originalmente estos apuntes, así que incluimos en el mismo simplemente a las que hay en ese directorio. Cuando el navegador cargue alguna página con ese patrón, GM lo detectará y cargará el script; para que trabaje sobre otro conjunto de páginas habrá que poner el patrón correspondiente.</p>
+<p>El programa en sí hace uso de los elementos explicados en la sección anterior: extrae del documento los títulos de capítulo (h2) y de ahí los <em>anchor</em> (<code>a name</code>) y sus atributos, metiendo todo lo metible en un bucle. Hace falta tenerlos todos en un array, por eso se usa un segundo bucle para insertar en la página los elementos de navegación.</p>
+<p>Este segundo bucle crea elementos a tutiplén, usando <code>createElement</code> (para crear un elemento), <code>setAttribute</code> (para poner su atributo) y <code>createTextNode</code> (para meter texto dentro de los elementos). Luego, a modo de injerto, se van metiendo los elementos unos dentro de otros usando <code>appendChild</code>. Y, finalmente, se insertan los elementos creados en el documento en la penúltima línea:</p>
+<pre><code>a_nodes[secs].parentNode.insertBefore(span,a_nodes[secs]);</code></pre>
+<p>que navega desde el <em>ancla</em> hasta su padre (<code>parentNode</code>) e inserta antes del mismo (<code>insertBefore</code>) el <code>span</code> que hemos creado previamente. El resultado, si todo ha ido bien, deberías verlo en este mismo tutorial.</p>
+<p>Además, hace uso de algunas funciones propias de GM: <code>GM_log</code>, que escribe en la consola de JavaScript. Muy útil para depurarlo, inútil en producción; pero si abres la consola de JS verás los mensajes que ha usado.</p>
+<p>Para usarlo con TamperMonkey, hay que marcar <a href="http://tampermonkey.net/#features">las opciones de compatibilidad con GreaseMonkey y Firefox</a>, aunque también trata de detectar las opciones necesarias automáticamente.</p>
+<h2 id="trabajando-con-otras-ventanas">Trabajando con otras ventanas</h2>
+<p>Una de las características específicas del DOM es la posibilidad de trabajar con otras ventanas, creando contenido y presentándolo en las mismas. Para eso se usa el objeto <code>window</code>; lo interesante de este elemento eso que está incluido en el propio DOM, por lo que se puede usar desde JavaScript como hacemos en el siguiente programa. No es que sea aconsejable, por cierto; debe usarse sólo en caso de que sea imprescindible (a veces se usa para autenticación, por ejemplo, o para no crear elementos nuevos en el interfaz). Por ejemplo, se hace así en <a href="https://github.com/JJ/curso-js/blob/master/code/windowopen.html">este programa</a></p>
+<pre class="sourceCode html"><code class="sourceCode html"><span class="dt">&lt;!DOCTYPE </span>HTML PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot; &quot;http://www.w3.org/TR/html4/loose.dtd&quot;<span class="dt">&gt;</span>
+<span class="kw">&lt;html&gt;</span>
+<span class="kw">&lt;head&gt;</span>
+<span class="kw">&lt;meta</span><span class="ot"> http-equiv=</span><span class="st">&quot;Content-Type&quot;</span><span class="ot"> content=</span><span class="st">&quot;text/html; charset=iso-8859-15&quot;</span><span class="kw">&gt;</span>
+<span class="kw">&lt;title&gt;</span>Probando window.open<span class="kw">&lt;/title&gt;</span>
+<span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&#39;application/javascript&#39;</span><span class="kw">&gt;</span>
+<span class="kw">var</span> contenido = <span class="st">&quot;&lt;html&gt;&lt;head&gt;&lt;title&gt;Mi ventanita&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;Mi ventanita&lt;/h1&gt;&lt;/body&gt;&lt;/html&quot;</span>;
+newwindow=<span class="ot">window</span>.<span class="fu">open</span>();
+newdocument=<span class="ot">newwindow</span>.<span class="fu">document</span>;
+<span class="ot">newdocument</span>.<span class="fu">write</span>(contenido);
+&lt;<span class="ot">/script&gt;</span>
+<span class="ot">&lt;/head</span>&gt;
+&lt;body&gt;
+&lt;h1&gt;Esta es una página que abre otra ventana&lt;<span class="ot">/h1&gt;</span>
+
+<span class="ot">&lt;p&gt;Desbloquea las ventanas emergentes&lt;/p</span>&gt;
+
+&lt;<span class="ot">/body&gt;</span>
+<span class="ot">&lt;/html</span>&gt;</code></pre>
+<p>En este caso, se crea una nueva página estática usando <code>write</code> sobre el documento que hemos creado. No es que sea demasiado útil (se podría usar el URL directamente pasándoselo como parámetro a <code>open</code>) pero demuestra las posibilidades del mismo, que también se pueden ver en <a href="http://www.htmlgoodies.com/beyond/javascript/javascript-dynamic-document-creation-in-new-windows.html">este mini-tutorial</a>.</p>
+<h2 id="selectores">Selectores</h2>
+<p>Las hojas de estilo <a href="http://es.wikipedia.org/wiki/CSS">CSS</a> son una especificación de la apariencia de elementos tanto HTML como XML que permiten asignar parámetros de presentación específico a cada elemento o a grupos de ellos. No es el objetivo de este manual enseñarlas, pero su utilidad va más allá de la mera apariencia, permitiendo designar (usando IDs) y agrupar (usando <em>clases</em>) elementos o grupos de los mismos. Cuando hemos hablado anteriormente de seleccionar un solo elemento por la id, estamos usando un tipo de selector básico; sin embargo, si queremos trabajar con selectores más generales (como haremos más adelante) es conveniente que se aprenda la sintaxis de CSS que es la que se usa de forma más general.</p>
+<p>La <a href="http://www.w3.org/TR/CSS2/selector.html">sintaxis más general está especificada por la W3</a> y se puede observar en cualquier hoja de estilo. De esta, extraemos <a href="http://net.tutsplus.com/tutorials/html-css-techniques/the-30-css-selectors-you-must-memorize/">los 30 selectores que se deben memorizar</a>, principalmente <code>#</code> que se refiere a un id específico (por ejemplo, <code>#ej.1.1</code> seleccionaría un div declarado como <code>div id='ej1.1.1'</code> y <code>.</code> que se refiere a una clase; <code>.ej</code> por ejemplo seleccionaría todos los div declarados así: <code>div class='ej'</code>.</p>
+<h2 id="eventos">Eventos</h2>
+<p>Para entender bien el uso de JavaScript en el navegador es conveniente introducir el concepto de eventos. Se trata simplemente de señales generadas por el mismo, o bien registradas por el usuario (es decir, introducidas por el usuario cuando suceda algo determinado). El navegador, por ejemplo, genera un evento cuando el ratón entra o sale de un elemento, cuando se carga la página, o cuando se pulsa el ratón sobre un elemento activo. He <a href="http://www.koderguru.com/tutorials/javascript/javascriptevents.php">la lista de todos los eventos y de los elementos a los que afectan</a>. Los eventos permiten por un lado trabajar con un patrón de programación reactiva, en la que se reacciona a lo que va sucediendo en el navegador y, a la vez, un cierto grado de concurrencia porque cada evento sucede en una hebra diferente. También se trabaja de forma asíncrona, porque en muchos casos no se llevarán a cabo de forma secuencial sino cuando se cumplan ciertas condiciones.</p>
+<p>La forma más simple de trabajar con eventos es usar los atributos de un elemento HTML para activarlos, como <a href="#">aquí mismo</a>. El atributo <code>onClick</code> tiene como valor directamente una llamada a una función en JS que se activa cuando se pulsa el botón sobre este tipo de elemento.</p>
+<p>Hay <a href="http://101.lv/learn/JSweek/ch5.htm">una docena de eventos</a>, pero no todos se usan con la misma asiduidad. Uno que se usa habitualmente es el evento <code>load</code>, que ejecuta algo sólo cuando se ha cargado la página completa. El comienzo de ejecución de cualquier elemento de JS conviene, como buena práctica, que se haga tras el evento onLoad, porque si no se ha terminado de cargar puede que el DOM no esté completo o que no lo estén las definiciones de algunos elementos que el programa JS pueda necesitar. El evento <code>load</code> sólo se activa desde el elemento <code>body</code>, como en <a href="https://github.com/JJ/curso-js/blob/master/code/onload.html">este ejemplo</a></p>
+<pre class="sourceCode html"><code class="sourceCode html"><span class="dt">&lt;!DOCTYPE </span>HTML PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot; &quot;http://www.w3.org/TR/html4/loose.dtd&quot;<span class="dt">&gt;</span>
+<span class="kw">&lt;html&gt;</span>
+<span class="kw">&lt;head&gt;</span>
+<span class="kw">&lt;meta</span><span class="ot"> http-equiv=</span><span class="st">&quot;Content-Type&quot;</span><span class="ot"> content=</span><span class="st">&quot;text/html; charset=iso-8859-15&quot;</span><span class="kw">&gt;</span>
+<span class="kw">&lt;title&gt;</span>Probando onLoad<span class="kw">&lt;/title&gt;</span>
+<span class="kw">&lt;/head&gt;</span>
+
+<span class="kw">&lt;body</span><span class="ot"> onLoad=</span><span class="st">&#39;alert(&quot;Ahora está todo cargado&quot;)&#39;</span><span class="kw">&gt;</span>
+<span class="kw">&lt;h1&gt;</span>Esta es una página que no tiene gran cosa<span class="kw">&lt;/h1&gt;</span>
+
+<span class="kw">&lt;p&gt;</span>Pero podría tenerla.<span class="kw">&lt;/p&gt;</span>
+
+<span class="kw">&lt;hr&gt;</span>
+<span class="kw">&lt;address&gt;&lt;/address&gt;</span>
+<span class="co">&lt;!-- hhmts start --&gt;</span>Last modified: Sun Apr  7 19:49:52 CEST 2013 <span class="co">&lt;!-- hhmts end --&gt;</span>
+<span class="kw">&lt;/body&gt;</span> <span class="kw">&lt;/html&gt;</span></code></pre>
+<p>El uso de evento está hacia el final del código, donde usamos <code>alert</code> que se activa tras el evento <code>load</code>, es decir, cuando se carga la página</p>
+<h2 id="jquery-introducción">JQuery: Introducción</h2>
+<p><a href="http://jquery.com">JQuery</a> es una librería en JavaScript que está diseñada principalmente para simplificar la creación de programas y permitir crear interfaces ricos de usuario. <a href="http://es.wikipedia.org/wiki/JQuery">JQuery</a> se ha popularizado desde su creación en el año 2006 hasta el punto que se calcula que se usa en más de la mitad de los sitios más populares. Por supuesto, es software libre con una <a href="http://en.wikipedia.org/wiki/MIT_License">licencia MIT</a>. Ha sido aceptada también e integrada por casi todas las grandes empresas que crean herramientas de desarrollo de software e incluso Google aloja directamente una copia de JQuery que se puede usar desde cualquier programa.</p>
+<p>A vista de pájaro, JQuery introduce un objeto, <code>$</code>, que permite acceder a todas sus funciones. Podemos empezar con la función <code>ready</code> en el <a href="https://github.com/JJ/curso-js/blob/master/code/ready.html">siguiente programa</a>:</p>
+<pre class="sourceCode html"><code class="sourceCode html"><span class="dt">&lt;!DOCTYPE </span>HTML PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot; &quot;http://www.w3.org/TR/html4/loose.dtd&quot;<span class="dt">&gt;</span>
+<span class="kw">&lt;html&gt;</span>
+<span class="kw">&lt;head&gt;</span>
+<span class="kw">&lt;meta</span><span class="ot"> http-equiv=</span><span class="st">&quot;Content-Type&quot;</span><span class="ot"> content=</span><span class="st">&quot;text/html; charset=iso-8859-15&quot;</span><span class="kw">&gt;</span>
+<span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+<span class="kw">&lt;title&gt;</span>Probando ready de jQuery<span class="kw">&lt;/title&gt;</span>
+<span class="kw">&lt;/head&gt;</span>
+
+<span class="kw">&lt;body&gt;</span>
+<span class="kw">&lt;h1&gt;</span>Esta es una página que no tiene gran cosa<span class="kw">&lt;/h1&gt;</span>
+
+<span class="kw">&lt;p&gt;</span>Pero podría tenerla.<span class="kw">&lt;/p&gt;</span>
+<span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&#39;text/javascript&#39;</span><span class="kw">&gt;</span>
+<span class="fu">$</span>(document).<span class="fu">ready</span>(<span class="kw">function</span>() {
+    <span class="fu">alert</span>(<span class="st">&#39;Ahora estamos listos&#39;</span>);
+});
+&lt;<span class="ot">/script&gt;</span>
+<span class="ot">&lt;address&gt;&lt;/address</span>&gt;
+&lt;!-- hhmts start --&gt;Last modified: Sun Apr  <span class="dv">7</span> <span class="dv">19</span>:<span class="dv">49</span>:<span class="dv">52</span> CEST <span class="dv">2013</span> &lt;!-- hhmts end --&gt;
+&lt;<span class="ot">/body&gt; </span>
+<span class="ot">&lt;/html</span>&gt;</code></pre>
+<p>En este caso, usamos como se ha indicado antes la copia de JQuery proporcionada por Google, que, como cualquier otra librería JS, debe ser incluida en nuestra página para ser usada. Por otro lado, la única función que usamos de JQuery está tras el párrafo: cuando el documento está <em>listo</em> (<code>ready</code>), lanzamos un <code>alert</code>. Este script funciona exactamente igual que como el que habíamos visto anteriormente.</p>
+<p>De hecho, se puede <a href="https://github.com/JJ/curso-js/blob/master/code/ready-simple.html">simplificar</a> e incluso ahorrar la orden para pasar directamente a la función que queremos que se active cuando se cargue la página.</p>
+<p>JQuery también simplifica el uso de selectores para extraer elementos del DOM, usando la misma sintaxis que hemos visto arriba: <code>$(&quot;selector&quot;)</code> permite extraer una serie de elementos que cumplan esa sintaxis que, como hemos visto más arriba, es la misma que se usa en las CSS. Lo vemos en el <a href="https://github.com/JJ/curso-js/blob/master/code/selectores.html">siguiente ejemplo</a></p>
+<pre class="sourceCode html"><code class="sourceCode html"><span class="dt">&lt;!DOCTYPE </span>HTML PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot; &quot;http://www.w3.org/TR/html4/loose.dtd&quot;<span class="dt">&gt;</span>
+<span class="kw">&lt;html&gt;</span>
+<span class="kw">&lt;head&gt;</span>
+<span class="kw">&lt;meta</span><span class="ot"> http-equiv=</span><span class="st">&quot;Content-Type&quot;</span><span class="ot"> content=</span><span class="st">&quot;text/html; charset=iso-8859-15&quot;</span><span class="kw">&gt;</span>
+<span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+<span class="kw">&lt;title&gt;</span>Probando ready de jQuery<span class="kw">&lt;/title&gt;</span>
+<span class="kw">&lt;/head&gt;</span>
+
+<span class="kw">&lt;body&gt;</span>
+<span class="kw">&lt;h1&gt;</span>Esta es una página que no tiene gran cosa<span class="kw">&lt;/h1&gt;</span>
+
+<span class="kw">&lt;p&gt;</span>Pero podría tenerla.<span class="kw">&lt;/p&gt;</span>
+<span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&#39;text/javascript&#39;</span><span class="kw">&gt;</span>
+<span class="fu">$</span>(<span class="kw">function</span>() {
+    <span class="kw">var</span> hachedoses =<span class="st">&#39;&#39;</span>;
+    <span class="fu">$</span>(<span class="st">&quot;h2&quot;</span>).<span class="fu">each</span>( <span class="kw">function</span>() {
+        hachedoses += <span class="kw">this</span>.<span class="fu">textContent</span> + <span class="st">&quot; - &quot;</span>;
+    } );
+    <span class="fu">alert</span>(hachedoses);
+    <span class="fu">$</span>(<span class="st">&quot;#cambiando&quot;</span>).<span class="fu">html</span>( hachedoses ); 
+});
+&lt;<span class="ot">/script&gt;</span>
+<span class="ot">&lt;h2&gt;Este es un H2&lt;/h2</span>&gt;
+
+&lt;h2&gt;Este es otro H2&lt;<span class="ot">/h2&gt;</span>
+
+<span class="ot">&lt;H2&gt;Y este, lo adivinaste, otro&lt;/H2</span>&gt;
+
+&lt;div id=<span class="st">&#39;cambiando&#39;</span> style=<span class="st">&#39;border:dashed&#39;</span>&gt;&lt;<span class="ot">/div&gt;</span>
+<span class="ot">&lt;/body</span>&gt; 
+&lt;<span class="ot">/html&gt;</span></code></pre>
+<p>En este ejemplo, primero se recorren los elementos <code>h2</code> pero en vez de hacerse a partir de un bucle se usa directamente el objeto generado por el selector y que aplica a cada uno de ellos una función anónima; en este caso la función concatena a <code>hachedoses</code> el contenido en texto del elemento. Usamos el <code>alert</code> principalmente para que se vea el contenido del <code>div</code> definido más abajo vacío y posteriormente con el contenido que se le añade en la última línea del script, que usa como selector el equivalente a un elemento con el id <code>#cambiando</code>.</p>
+<h2 id="bibliografía">Bibliografía</h2>
+<p>La mejor bibliografía está en inglés: <a href="http://jqfundamentals.com/">jQuery fundamentals</a>, por ejemplo, es un libro gratuito. <a href="https://es.coursera.org/course/webapplications">Arquitectura de la aplicación web</a> es un curso gratuito de Coursera que incluye una parte de jQuery.</p>
+</body>
+</html>

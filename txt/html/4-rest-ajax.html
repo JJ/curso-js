@@ -1,0 +1,320 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="js.css" type="text/css" />
+</head>
+<body>
+<h1 id="trabajando-con-rest-y-ajax">Trabajando con REST y AJAX</h1>
+<h2 id="objetivos-de-este-capítulo">Objetivos de este capítulo</h2>
+<ul>
+<li>Aprender los conceptos generales de los interfaces REST.</li>
+<li>Programar clientes y servidores para REST usando diferentes lenguajes de programación</li>
+<li>Introducción a Ajax y otras técnicas cliente-servidor.</li>
+</ul>
+<h2 id="introducción-al-interfaz-rest">Introducción al interfaz REST</h2>
+<p><a href="http://es.wikipedia.org/wiki/REST">REST</a> es una serie de convenciones en la interacción cliente-servidor sobre el protocolo <a href="#HTTP">HTTP</a>. En la práctica, un interfaz REST es un interfaz de programación de aplicaciones que usa, para acceder al servidor, el conjunto completo de órdenes del protocolo <a href="#HTTP">HTTP</a> y confía en los mensajes informativos y de error del mismo.</p>
+<p>Aunque se trate de un <em>hermano menor</em> de otros tipos de servicios web (que se verán más adelante en este curso), su popularidad se debe sobre todo al poco overhead que añade a las peticiones y a la facilidad de su uso, tanto en el cliente como el servidor. También se puede implementar directamente sobre servidores web estándar como Apache o <a href="http://es.wikipedia.org/wiki/Nginx">nginx</a> , lo que facilita su implantación y desarrollo. Crear un cliente para un <a href="#API">API</a> REST es tan fácil como crear una cadena; de hecho, se pueden usar desde la línea de órdenes</p>
+<h2 id="el-protocolo-http-y-sus-múltiples-posibilidades">El protocolo HTTP y sus múltiples posibilidades</h2>
+<p>El protocolo <a href="http://es.wikipedia.org/wiki/HTTP">HTTP</a> es uno de los protocolos más infrautilizados de la historia. A pesar de que ofrece múltiples posibilidades y versiones, se usa simplemente para enviar y recibir información de un servidor. Para recibir información se usa la orden <code>GET</code>, y para enviar, la orden <code>POST</code>. Pero también hay otras posibilidades, <code>PUT</code> (que envía un recurso determinado al servidor), <code>DELETE</code> (que borra un recurso del servidor) e incluso <code>HEAD</code> (igual que <code>GET</code>, pero sin el cuerpo de la respuesta).</p>
+<p>El protocolo <a href="#HTTP">HTTP</a> gira alrededor del concepto de <em>recurso</em>: un recurso en un servidor está identificado por un URI, y es la mínima acción que un servidor puede realizar. Como características adicionales, la acción de algunas peticiones (<code>GET</code> y <code>HEAD</code>) debe ser <em>segura</em>, es decir, dejar al servidor en el mismo estado que antes de la petición. Otras acciones, como <code>PUT</code> y <code>DELETE</code>, se denominan <em>idempotentes</em>: el hacer varias veces la misma petición tiene el mismo efecto que el hacerla una sola vez.</p>
+<p><a href="#HTTP">HTTP</a> funciona puramente como cliente-servidor: se hace una petición, y se espera la respuesta. Lo que no quiere decir que no se puedan hacer peticiones concurrentes y asíncronas; sin embargo, esas peticiones tendrán que estar dentro del marco de una página web (o sea, una aplicación).</p>
+<p>A las peticiones el servidor responde con una serie de <a href="http://en.wikipedia.org/wiki/List_of_HTTP_status_codes">códigos estándar</a>, que usan la misma presentación que la petición: texto puro y duro. Cuando todo va bien, la respuesta es <code>200 OK</code>; los códigos <code>2xx</code> corresponden, en general, a una petición hecha, y fuera de los 2xx existe el caos y el descontrol. En especial, un código 500 implica error en el servidor. Evidentemente, estos mensajes están pensados para que los lea un cliente en el navegador; sin embargo, cuando trabajamos directamente sobre este protocolo, nuestro programa deberá ser consciente de ellos y responder de forma adecuada como si se tratara de una llamada a otro procedimiento.</p>
+<p>Las aplicaciones construidas alrededor del protocolo HTTP y sus características se suelen llamar <a href="http://en.wikipedia.org/wiki/Representational_State_Transfer">aplicaciones RESTful</a> (REST == REpresentational State Transfer). La idea de REST es que se transfiere el estado del servidor al cliente. Un recurso tiene una representación, que se transfiere al cliente por una petición; esa representación se puede cambiar con diferentes operaciones. Sin embargo, con esto sólo estamos especificando la capa más baja del servicio web; hace falta una capa de mensajería. Y esta capa de mensajería se suele denominar <a href="http://es.wikipedia.org/wiki/POX">POX</a>, o <em>Plain Old XML</em> (XML <em>de toda la vida</em>), es decir XML bien formado con algunas ampliaciones, pero sin ningún tipo de validación. En algunos casos se usa texto directamente, aunque también se puede usar JSON o cualquier otro tipo de capa.</p>
+<p>De hecho, las aplicaciones <a href="http://www.oreillynet.com/pub/wlg/3005">REST suelen ser más populares</a> que otros servicios web, por el simple hecho de que es muy fácil construir el interfaz: simplemente creando una cadena determinada. Eso los hace también más rápidos, aunque sean menos flexibles.</p>
+<p>Vamos a ver un interfaz de este tipo relativamente reciente: el de <a href="http://twitter.com/">Twitter</a>, un sitio <em>social</em> que transmite a todo el que quiera escucharlo las líneas de estado (mensajes de menos de 200 caracteres). El <a href="https://dev.twitter.com/docs">API de Twitter</a> es <a href="#RESTful">RESTful</a>, y está bastante bien diseñada. Para usarla es necesario darse de alta; desde la versión 1.1 del interfaz todas las peticiones necesitan autenticación. Así que usaremos <a href="http://developer.github.com/v3/">otro interfaz, el de GitHub</a>, para hacer pruebas. Por ejemplo, esta petición te dará todas las <em>organizaciones</em> a las que pertenece el usuario <a href="http://github.com/JJ">JJ</a>:</p>
+<pre><code>bash$ curl -i https://api.github.com/users/JJ/orgs</code></pre>
+<p>Para llevar a cabo este ejemplo hay que instalar <code>curl</code>, un programa que en una primera aproximación es simplemente un descargador de páginas web pero que en segunda se puede usar como un completo cliente <a href="#REST">REST</a>; en este caso <code>-i</code> te incluye las cabeceras en la salida, con lo que producirá algo de este estilo</p>
+<pre><code>HTTP/1.1 200 OK
+Server: GitHub.com
+Date: Sun, 27 Sep 2015 10:37:52 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 1572
+Status: 200 OK
+X-RateLimit-Limit: 60
+X-RateLimit-Remaining: 59
+X-RateLimit-Reset: 1443353872
+Cache-Control: public, max-age=60, s-maxage=60
+ETag: &quot;5730bce87980897ab7fea5d3851e4fbb&quot;
+Vary: Accept
+X-GitHub-Media-Type: github.v3
+X-XSS-Protection: 1; mode=block
+X-Frame-Options: deny
+Content-Security-Policy: default-src &#39;none&#39;
+Access-Control-Allow-Credentials: true
+Access-Control-Expose-Headers: ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+Access-Control-Allow-Origin: *
+X-GitHub-Request-Id: 5121A912:10752:2CFC37B:5607C700
+Strict-Transport-Security: max-age=31536000; includeSubdomains; preload
+X-Content-Type-Options: nosniff
+Vary: Accept-Encoding
+X-Served-By: 065b43cd9674091fec48a221b420fbb3
+
+[
+  {
+    &quot;login&quot;: &quot;openkratio&quot;,
+    &quot;id&quot;: 2310256,
+    &quot;url&quot;: &quot;https://api.github.com/orgs/openkratio&quot;,
+    &quot;repos_url&quot;: &quot;https://api.github.com/orgs/openkratio/repos&quot;,
+    &quot;events_url&quot;: &quot;https://api.github.com/orgs/openkratio/events&quot;,
+    &quot;members_url&quot;: &quot;https://api.github.com/orgs/openkratio/members{/member}&quot;,
+    &quot;public_members_url&quot;: &quot;https://api.github.com/orgs/openkratio/public_members{/member}&quot;,
+    &quot;avatar_url&quot;: &quot;https://avatars.githubusercontent.com/u/2310256?v=3&quot;,
+    &quot;description&quot;: &quot;OpenGov &amp; OpenData Organization&quot;
+  },
+  {
+    &quot;login&quot;: &quot;CANUBE&quot;,
+    &quot;id&quot;: 3839808,
+    &quot;url&quot;: &quot;https://api.github.com/orgs/CANUBE&quot;,
+    &quot;repos_url&quot;: &quot;https://api.github.com/orgs/CANUBE/repos&quot;,
+    &quot;events_url&quot;: &quot;https://api.github.com/orgs/CANUBE/events&quot;,
+    &quot;members_url&quot;: &quot;https://api.github.com/orgs/CANUBE/members{/member}&quot;,
+    &quot;public_members_url&quot;: &quot;https://api.github.com/orgs/CANUBE/public_members{/member}&quot;,
+    &quot;avatar_url&quot;: &quot;https://avatars.githubusercontent.com/u/3839808?v=3&quot;,
+    &quot;description&quot;: null
+  },
+  {
+    &quot;login&quot;: &quot;MusesProject&quot;,
+    &quot;id&quot;: 6651546,
+    &quot;url&quot;: &quot;https://api.github.com/orgs/MusesProject&quot;,
+    &quot;repos_url&quot;: &quot;https://api.github.com/orgs/MusesProject/repos&quot;,
+    &quot;events_url&quot;: &quot;https://api.github.com/orgs/MusesProject/events&quot;,
+    &quot;members_url&quot;: &quot;https://api.github.com/orgs/MusesProject/members{/member}&quot;,
+    &quot;public_members_url&quot;: &quot;https://api.github.com/orgs/MusesProject/public_members{/member}&quot;,
+    &quot;avatar_url&quot;: &quot;https://avatars.githubusercontent.com/u/6651546?v=3&quot;,
+    &quot;description&quot;: &quot;Muses project is funded by the EU&quot;
+  }
+]
+</code></pre>
+<p>Casi todos los servicios web incluyen alguna forma de autenticación; una de las formas de hacerlo es incluirlo en el propio URL, en la forma habitual: <code>usuario:clave@host</code>; en este caso no es necesario y en la mayoría de los <a href="#API">API</a> REST se usa ya autenticación OAuth en alguna de sus formas.</p>
+<p>Y lo único que hacemos con la respuesta es imprimirla, tal cual, pero lo mejor sería extraer información útil de la misma, como ocurre en <a href="https://github.com/JJ/curso-js/blob/13e25e97315e58a84f268349ba61b650e7a097e3/code/github-get.js">este programa en node.js</a>:</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">#!/usr/bin/env node</span>
+
+<span class="kw">var</span> https = <span class="fu">require</span>(<span class="st">&#39;https&#39;</span>);
+
+<span class="kw">var</span> user =<span class="ot">process</span>.<span class="fu">argv</span>[<span class="dv">2</span>]?<span class="ot">process</span>.<span class="fu">argv</span>[<span class="dv">2</span>]:<span class="st">&#39;JJ&#39;</span>;
+
+<span class="kw">var</span> options = {
+    <span class="dt">host</span>: <span class="st">&#39;api.github.com&#39;</span>,
+    <span class="dt">path</span>: <span class="st">&#39;/users/&#39;</span>+user,
+    <span class="dt">method</span>: <span class="st">&#39;GET&#39;</span>,
+    <span class="dt">headers</span>: {<span class="st">&#39;User-Agent&#39;</span>: <span class="st">&#39;Prueba-Node-App&#39;</span>}
+};
+
+
+<span class="kw">var</span> req = <span class="ot">https</span>.<span class="fu">get</span>(options, <span class="kw">function</span>(res) {
+    <span class="ot">res</span>.<span class="fu">setEncoding</span>(<span class="st">&#39;utf8&#39;</span>);
+    <span class="ot">res</span>.<span class="fu">on</span>(<span class="st">&#39;data&#39;</span>, <span class="kw">function</span> (datos_JSON) {
+    <span class="ot">console</span>.<span class="fu">log</span>(datos_JSON);
+    <span class="kw">var</span> datos=<span class="ot">JSON</span>.<span class="fu">parse</span>(datos_JSON);
+    <span class="ot">console</span>.<span class="fu">log</span>(<span class="st">&#39;Login: &#39;</span> + <span class="ot">datos</span>.<span class="fu">login</span>+ <span class="st">&quot;</span><span class="ch">\n</span><span class="st">Nombre: &quot;</span> + <span class="ot">datos</span>.<span class="fu">name</span> + <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>);
+    });
+});
+<span class="ot">req</span>.<span class="fu">end</span>();</code></pre>
+<p>Este programa descarga información de un usuario en JSON y la procesa. Toma el usuario que se pase por la línea de órdenes, o bien usa <code>JJ</code> por defecto, dando un resultado así</p>
+<pre><code>jmerelo@penny:~/txt/docencia/cursos/JavaScript$  node code/github-get.js  Login: JJ Nombre: Juan Julián Merelo Guervós`</code></pre>
+<p>El programa hace una petición GET al <a href="#API">API</a> de GitHub y del objeto en JSON devuelto extrae (tras su conversión en un objeto JS con <code>JSON.parse</code> un par de variables del mismo y las imprime. El objeto contiene muchas más cosas que no nos interesan. El <a href="http://nodejs.org/api/https.html#https_https_request_options_callback">módulo <code>https</code></a> usado es muy similar al <code>http</code>, salvo por el protocolo usado. La petición que se está usando es la forma más general, pero se puede usar directamente <code>get</code> <a href="https://github.com/JJ/curso-js/blob/master/code/github-get.js">de esta forma</a>:</p>
+<pre><code>var   req = https.get(&#39;https://api.github.com/users/&#39;+user,     function(res) </code></pre>
+<p>con exactamente el mismo resultado.</p>
+<p>La idea de <a href="#REST">REST</a> desde el punto de vista del servidor es usar el URL para representar recursos, y las propias órdenes de HTTP para ejercitar acciones sobre ese recursos. En general, <code>GET</code> servirá para transferir la representación de un recurso del cliente al servidor, <code>POST</code> cambiará el estado de un recurso, <code>PUT</code> (que no se suele usar tan a menudo) directamente cambiaría la representación del recurso, mientras que <code>DELETE</code> borraría el recurso; a estas arquitecturas se les suele denominar también <em>arquitecturas orientadas al recurso</em></p>
+<p>Por eso también se suelen proponer una serie de <a href="http://en.wikipedia.org/wiki/Representational_State_Transfer#Guiding_principles_of_the_interface">buenas prácticas para diseñar un interfaz REST</a>:</p>
+<ul>
+<li>La funcionalidad está divida en recursos</li>
+<li>Se usa una sintaxis universal basada en URL</li>
+<li>Todos los recursos tienen un interfaz uniforme, con un conjunto bien definido de operaciones y un conjunto restringido de tipos de contenido. En particular, este interfaz esconde los detalles de la implementación.</li>
+</ul>
+<p>Por ejemplo, supongamos que hay que diseñar un interfaz REST para una quiniela deportiva. Hay una quiniela por jornada, y cada jornada tiene 15 partidos. Supongamos que se conocen los partidos de antemano, y que sólo se pueden proponer resultados por parte de un usuario. Se podría diseñar el interfaz de la forma siguiente:</p>
+<ul>
+<li>Quiniela de una jornada: <code>http://jost.com/quiniela/jornada/[número de       jornada]</code></li>
+<li>Un partido de una quiniela: <code>http://jost.com/quiniela/jornada/[número de       jornada]/partido/[número de partido]</code></li>
+<li>Para los resultados, habría que sustituir <code>quiniela</code> por <code>resultados</code>. Adicionalmente, añadir <code>usuario/[nombre de usuario]</code>, para recuperar los resultados propuestos por un usuario determinado. Por ejemplo, Resultados: <code>http://jost.com/resultados/jornada/22/usuario/foobar</code></li>
+</ul>
+<p>Las operaciones HTTP que se van a usar vienen determinadas por el diseño del interfaz. Por ejemplo, para proponer un resultado determinado habría que hacer una petición POST con dos parámetros: el nombre de usuario y el resultado propuesto. El servidor responderá con un mensaje estándar HTTP y un fichero XML si se ha podido hacer correctamente, y con un error HTTP si no.</p>
+<p>El principal problema con este diseño <a href="#RESTful">RESTful</a> es hacerlo en la práctica. Como se ha visto a la hora de programar <a href="#CGI">CGIs</a>, en general el camino a un recurso es tortuoso, y la forma como se pasan los parámetros tiene un montón de &amp; e signos =. Así que hay que <em>limpiar</em> el URL de alguna forma. Dependiendo de la implementación del servidor, quizás se puede hacer directamente; por ejemplo, en caso de que se trate de un <code>.war</code> en un contenedor de servlets, ya se encarga directamente; sin embargo. Algunos <a href="#CGI">CGIs</a> también permiten interpretar directamente el URL. Pero otra forma de hacerlo es usar <a href="http://httpd.apache.org/docs/2.2/mod/mod_rewrite.html"><code>mod_rewrite</code></a>, que permite reescribir los URLs, de forma que la petición cambia de forma antes de servirse la petición. Estos <em>cambios</em> toman la forma de directivas del servidor; por ejemplo, en Apache podríamos usar la siguiente (dentro del fichero <code>httpd.conf</code> o el fichero de configuración de un directorio en particular, <code>.htaccess</code>:</p>
+<pre><code>RewriteRule \^quiniela/(\\w+)/(\\d+)/(\\w+)/(\\d+)\$ /\~jmerelo/REST/quiniela.cgi?\$1=\$2&amp;\$3=\$4 [L]</code></pre>
+<p>Parece un poco complicada, pero no lo es. Para empezar, se cambiará la expresión regular de la izquierda por la de la derecha. La de la izquierda incluye palabras (\w+) y números (\d+), y en la expresión de la derecha aparecen, por orden, representados por <code>$n</code>.</p>
+<p>El hecho de que sea tan complicado diseñar interfaces REST con recursos, como los <a href="#CGI">CGIs</a>, que no están preparados para ello hace que existan marcos de aplicaciones, como los que veremos a continuación, en los que todo esto se hace de una forma mucho más simple, trabajando directamente con las rutas REST.</p>
+<h2 id="interfaces-rest-simples-con-express">Interfaces REST simples con express</h2>
+<p>Para diseñar interfaces REST de forma bastante simple, hay un <a href="http://expressjs.com/">módulo de node.js llamado express</a>. La idea de este módulo es reflejar en el código, de la forma más natural posible, el diseño del interfaz REST.</p>
+<p>Pero primero hay que instalarlo. Node.js tiene un sistema de gestión de módulos bastante simple llamado <a href="http://npmjs.org/">npm</a> que <a href="#nodejs">hemos visto en el tema anterior</a>. Tras seguir las instrucciones en el sitio para instalarlo (o, en el caso de ubuntu, instalarlo desde Synaptic o con apt-get), vamos al directorio en el que vayamos a crear el programa y escribimos</p>
+<p><code>npm install express</code></p>
+<p>en general, no hace falta tener permiso de administrador, sólo el necesario para crear, leer y ejecutar ficheros en el directorio en el que se esté trabajando</p>
+<p>Tras la instalación, el programa que hemos visto más arriba se transforma en el siguiente:</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> puerto=<span class="ot">process</span>.<span class="fu">argv</span>[<span class="dv">2</span>]?<span class="ot">process</span>.<span class="fu">argv</span>[<span class="dv">2</span>]:<span class="dv">8080</span>;
+<span class="kw">var</span> express=<span class="fu">require</span>(<span class="st">&#39;express&#39;</span>); 
+<span class="kw">var</span> app = <span class="fu">express</span>(); 
+<span class="ot">app</span>.<span class="fu">get</span>(<span class="st">&#39;/&#39;</span>, <span class="kw">function</span> (req, res) { 
+    <span class="ot">res</span>.<span class="fu">send</span>(<span class="st">&#39;Portada&#39;</span>); 
+}); 
+<span class="ot">app</span>.<span class="fu">get</span>(<span class="st">&#39;/proc&#39;</span>, <span class="kw">function</span> (req, res) { 
+    <span class="ot">res</span>.<span class="fu">send</span>(<span class="st">&#39;No es la portada&#39;</span>); 
+}); 
+
+<span class="ot">app</span>.<span class="fu">listen</span>(puerto); 
+<span class="ot">console</span>.<span class="fu">log</span>(<span class="st">&#39;Servidor en http://127.0.0.1:&#39;</span>+puerto+<span class="st">&#39;/&#39;</span>);</code></pre>
+<p>Para empezar, <code>express</code> nos evita todas las molestias de tener que procesar nosotros la línea de órdenes: directamente escribimos una función para cada respuesta que queramos tener, lo que facilita mucho la programación. Las órdenes reflejan directamente las órdenes de <a href="#HTTP">HTTP</a> a las que queremos responder, en este caso <code>get</code> y por otro lado se pone directamente la función para cada una de ellas. Dentro de cada función de respuesta podemos procesar las órdenes que queramos.</p>
+<p>Por otro lado, se usa <code>send</code> en vez de <code>end</code> para enviar el resultado. Lo que viene a ser lo mismo, <code>s</code> más o menos, aunque <a href="http://expressjs.com/guide.html#http-methods">send es más flexible</a>, admitiendo todo tipo de datos que son procesados para enviar al cliente la respuesta correcta. Tampoco hace falta establecer explícitamente el tipo MIME que se devuelve, encargándose <code>send</code> del mismo.</p>
+<p>Con el mismo <code>express</code> se pueden generar aplicaciones no tan básicas ejecutándolo de la forma siguiente:</p>
+<pre><code>node_modules/express/bin/express prueba-rest</code></pre>
+<p>Se indica el camino completo a la aplicación binaria, que sería el puesto. Con esto se genera un directorio prueba-rest. Cambiándoos al mismo y escribiendo simplemente <code>npm install</code> se instalarán las dependencias necesarias. La aplicación estará en el fichero <code>app.js</code>, lista para funcionar, pero evidentemente habrá que adaptarla a nuestras necesidades particulares.</p>
+<p>El acceso a los parámetros de la llamada y la realización de diferentes actividades según el mismo se denomina enrutado. En express se pueden definir los parámetros de forma bastante simple, usando marcadores precedidos por <code>:</code>. Por ejemplo, si queremos tener diferentes contadores podríamos usar el <a href="https://github.com/JJ/curso-js/blob/master/code/express-count.js">programa siguiente</a>:</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> express=<span class="fu">require</span>(<span class="st">&#39;express&#39;</span>);
+<span class="kw">var</span> app = <span class="fu">express</span>();
+<span class="kw">var</span> contadores = <span class="kw">new</span> Array;
+<span class="kw">var</span> puerto=<span class="ot">process</span>.<span class="fu">argv</span>[<span class="dv">2</span>]?<span class="ot">process</span>.<span class="fu">argv</span>[<span class="dv">2</span>]:<span class="dv">8080</span>;
+
+<span class="ot">app</span>.<span class="fu">get</span>(<span class="st">&#39;/&#39;</span>, <span class="kw">function</span> (req, res) {   
+    <span class="ot">res</span>.<span class="fu">send</span>(<span class="st">&#39;Portada&#39;</span>);
+});
+
+<span class="ot">app</span>.<span class="fu">put</span>(<span class="st">&#39;/contador/:id&#39;</span>, <span class="kw">function</span>( req,res ) {
+    contadores[<span class="ot">req</span>.<span class="ot">params</span>.<span class="fu">id</span>] = <span class="dv">0</span>;
+    <span class="ot">res</span>.<span class="fu">send</span>( { <span class="dt">creado</span>: <span class="ot">req</span>.<span class="ot">params</span>.<span class="fu">id</span> } );
+});
+
+<span class="ot">app</span>.<span class="fu">get</span>(<span class="st">&#39;/contador/:id&#39;</span>, <span class="kw">function</span> (req, res) {   
+    <span class="ot">res</span>.<span class="fu">send</span>( <span class="st">&quot;{ &quot;</span>+<span class="ot">req</span>.<span class="ot">params</span>.<span class="fu">id</span>+<span class="st">&quot;: &quot;</span>+ contadores[<span class="ot">req</span>.<span class="ot">params</span>.<span class="fu">id</span>] + <span class="st">&quot;}&quot;</span>  );
+});
+
+<span class="ot">app</span>.<span class="fu">post</span>(<span class="st">&#39;/contador/:id&#39;</span>, <span class="kw">function</span> (req, res) {   
+    contadores[<span class="ot">req</span>.<span class="ot">params</span>.<span class="fu">id</span>]++;
+    <span class="ot">res</span>.<span class="fu">send</span>( <span class="st">&quot;{ &quot;</span>+<span class="ot">req</span>.<span class="ot">params</span>.<span class="fu">id</span>+<span class="st">&quot;: &quot;</span>+ contadores[<span class="ot">req</span>.<span class="ot">params</span>.<span class="fu">id</span>] + <span class="st">&quot;}&quot;</span>  );
+});
+
+<span class="ot">app</span>.<span class="fu">listen</span>(puerto);
+<span class="ot">console</span>.<span class="fu">log</span>(<span class="st">&#39;Server running at http://127.0.0.1:&#39;</span>+puerto+<span class="st">&#39;/&#39;</span>);</code></pre>
+<p>Este <a href="https://github.com/JJ/curso-js/tree/master/code/express-count.js%27">programa (express-count.js)</a> introduce otras dos órdenes REST: PUT, que, como recordamos, sirve para crear nuevos recurso y es idempotente (se puede usar varias veces con el mismo resultado), y además POST. Esa orden la vamos a usar para crear contadores a los que posteriormente accederemos con get. PUT no es una orden a la que se pueda acceder desde el navegador, así que para usarla necesitaremos hacer algo así desde la línea de órdenes: <code>curl -X PUT http://127.0.0.1:8080/contador/primero</code> para lo que previamente habrá que haber instalado <code>curl</code>, claro. Esta orden llama a PUT sobre el programa, y crea un contador que se llama <code>primero</code>. Una vez creado, podemos acceder a él desde la línea de órdenes o desde el navegador (desde el navegador se generan peticiones GET y POST solamente).</p>
+<h2 id="clientes-rest">Clientes REST</h2>
+<p>Tampoco es complicado escribir con node.js un cliente REST. Se puede hacer mediante peticiones HTTP, pero por supuesto es más fácil escribir un cliente usando la librería <a href="https://github.com/danwrong/restler">restler</a>, que se instala de la misma forma que hemos visto anteriormente con <code>npm</code>. Una vez instalada, se puede escribir un cliente como este al utilísimo crea-contadores anterior.</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">
+<span class="kw">var</span> rest = <span class="fu">require</span>(<span class="st">&#39;restler&#39;</span>); 
+<span class="kw">var</span> url = <span class="st">&#39;http://127.0.0.1:8080/contador/&#39;</span>; 
+<span class="ot">process</span>.<span class="ot">argv</span>.<span class="fu">forEach</span>(<span class="kw">function</span> (val, index, array) { 
+    <span class="kw">if</span> ( index &gt; <span class="dv">1</span> ) { 
+    <span class="ot">rest</span>.<span class="fu">put</span>( url + val ).<span class="fu">on</span>(<span class="st">&#39;complete&#39;</span>, <span class="kw">function</span>( data ) { 
+        <span class="ot">console</span>.<span class="fu">log</span>( data ); 
+    } ); 
+    } 
+});</code></pre>
+<p>El cliente es bastante simple, y lo que hace es crear tantos contadores como argumentos le pasamos por la línea de órdenes. Tras definir un par de variables (ojo con la segunda, tiene que contener el URL del sitio donde vamos a hacer la consulta, el número y la dirección puede ser otro cualquiera, lo que no variará será <code>contador</code> si estamos usando el programa anterior), usamos la variable <code>process.argv</code> que contiene los argumentos de la línea de órdenes.</p>
+<p>Sobre ese objeto ejecutamos un bucle, <code>forEach</code> recorre los elementos de un objeto llamando sobre cada uno de ellos una función con tres argumentos: el índice y el elemento que se está recorriendo en ese momento, y el array completo, que en este caso no vamos a usar. Además, los argumentos están en realidad a partir del segundo elemento; los dos primeros contienen el camino a node y el camino completo al programa que se está ejecutando.</p>
+<p>La clientela REST se usa con <code>rest.put</code>. Vamos a crear un contador con el nombre <code>val</code> que se envía desde la línea de órdenes, para lo que creamos el URL del mismo simplemente concatenando las dos cadenas.</p>
+<p>Recordemos que node.js actúa de forma asíncrona, por lo que lo que hacemos con esa orden es crear un callback cuando (<em>on</em>) la petición se haya completado (<em>complete</em>). Ese callback simplemente te dice cual ha sido la respuesta y la imprime.</p>
+<h2 id="usando-ajax">Usando Ajax</h2>
+<p>Aunque inicialmente <a href="http://es.wikipedia.org/wiki/AJAX">AJAX</a> era un acrónimo de <em>Asynchronous JavaScript and XML</em>, hoy en día se ha dejado de usar como tal y viene a abarcar todas las tecnologías asíncronas de interacción cliente servidor, usando cualquier formato de serialización (aunque más generalmente JSON) y en el cliente (aunque generalmente se trata de JavaScript, pero puede ser también Dart u otro lenguaje insertado en el navegador, como Java).</p>
+<p>Con lo visto hasta ahora ya podemos intentar hacer un programa cliente con otro servidor en Ajax. En algún tema anterior hemos introducido la J de JavaScript; también hemos visto como trabajar con JSON desde el servidor, que sería la X, y nos falta la A. A se refiere a Asíncrono, y se trata de que las peticiones desde el cliente (el navegador) no lo bloqueen mientras el servidor contesta (si lo hiciera, para el caso se podría generar una página nueva cada vez que se hiciera cualquier interacción). En la práctica, el AJAX se basa en una clase de JavaScript, <code>XMLHttpRequest</code>, que hace una petición al servidor, y crea un evento que se dispara en el navegador cuando se produce la respuesta. Puede haber varias peticiones de este estilo funcionando simultáneamente, de forma que el navegador se comporta, en realidad, como si se tratara de un interfaz de usuario.</p>
+<p>Un programa AJAX, por tanto, tiene dos partes. La parte servidor se suele programar habitualmente para que responda a un interfaz REST, pero esto es simplemente una convención. Podíamos, por ejemplo, usar los programas que hemos visto anteriormente</p>
+<p>En cuanto al cliente, hay que tener en cuenta que únicamente se pueden hacer peticiones al mismo dominio desde el que se ha descargado la página en la que se haya inserto. Es decir, sólo puedes hacer peticiones a <code>dominio.com</code> desde páginas que te hayas descargado desde <code>dominio.com</code>. Por eso es importante que el sistema que tenga el <a href="#API">API</a> REST sea capaz también de servir las páginas; es lo que vamos a hacer en el siguiente ejemplo. Necesitaremos tres ficheros para ejecutar el programa. El primero es el <a href="https://github.com/JJ/curso-js/tree/master/code/count-server.js">servidor en node.js</a>:</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> fs = <span class="fu">require</span>(<span class="st">&#39;fs&#39;</span>);
+<span class="kw">var</span> express=<span class="fu">require</span>(<span class="st">&#39;express&#39;</span>);
+<span class="kw">var</span> app = <span class="fu">express</span>();
+<span class="kw">var</span> contadores = <span class="kw">new</span> Array;
+<span class="kw">var</span> portada = <span class="ot">fs</span>.<span class="fu">readFileSync</span>(<span class="st">&#39;sumar_formulario.html&#39;</span>,<span class="st">&#39;utf8&#39;</span>);
+
+<span class="ot">app</span>.<span class="fu">get</span>(<span class="st">&#39;/&#39;</span>, <span class="kw">function</span> (req, res) { 
+    <span class="ot">res</span>.<span class="fu">send</span>(portada);
+});
+
+<span class="ot">app</span>.<span class="fu">get</span>(<span class="st">&#39;/js/:page&#39;</span>, <span class="kw">function</span> (req, res) { 
+    <span class="kw">var</span> js = <span class="ot">fs</span>.<span class="fu">readFileSync</span>(<span class="ot">req</span>.<span class="ot">params</span>.<span class="fu">page</span>);
+    <span class="ot">res</span>.<span class="fu">contentType</span>(<span class="st">&#39;text/javascript&#39;</span>);
+    <span class="ot">res</span>.<span class="fu">send</span>(js);
+});
+
+<span class="ot">app</span>.<span class="fu">put</span>(<span class="st">&#39;/contador/:id&#39;</span>, <span class="kw">function</span>( req,res ) {
+    contadores[<span class="ot">req</span>.<span class="ot">params</span>.<span class="fu">id</span>] = <span class="dv">0</span>;
+    <span class="ot">res</span>.<span class="fu">send</span>(<span class="st">&#39;Creado contador &#39;</span>+ <span class="ot">req</span>.<span class="ot">params</span>.<span class="fu">id</span> );
+});
+
+<span class="ot">app</span>.<span class="fu">post</span>(<span class="st">&#39;/contador/:id&#39;</span>, <span class="kw">function</span> (req, res) {   
+    contadores[<span class="ot">req</span>.<span class="ot">params</span>.<span class="fu">id</span>]++;
+    <span class="ot">res</span>.<span class="fu">contentType</span>(<span class="st">&#39;application/json&#39;</span>);
+    <span class="ot">res</span>.<span class="fu">send</span>( { <span class="dt">resultado</span>:  contadores[<span class="ot">req</span>.<span class="ot">params</span>.<span class="fu">id</span>] } );
+    <span class="ot">console</span>.<span class="fu">log</span>( { <span class="st">&#39;Post&#39;</span>:  contadores} );
+});
+
+<span class="ot">app</span>.<span class="fu">get</span>(<span class="st">&#39;/contador/:id&#39;</span>, <span class="kw">function</span> (req, res) {   
+    <span class="ot">res</span>.<span class="fu">contentType</span>(<span class="st">&#39;application/json&#39;</span>);
+    <span class="ot">res</span>.<span class="fu">send</span>( <span class="st">&quot;{ &#39;resultado&#39;: &quot;</span> + contadores[<span class="ot">req</span>.<span class="ot">params</span>.<span class="fu">id</span>] + <span class="st">&quot;}</span><span class="ch">\n</span><span class="st">&quot;</span> );
+});
+
+
+<span class="ot">app</span>.<span class="fu">get</span>(<span class="st">&#39;/suma/:id1/:id2&#39;</span>, <span class="kw">function</span> (req, res) {   
+    <span class="ot">res</span>.<span class="fu">send</span>( { <span class="dt">resultado</span>: contadores[<span class="ot">req</span>.<span class="ot">params</span>.<span class="fu">id1</span>] +  contadores[<span class="ot">req</span>.<span class="ot">params</span>.<span class="fu">id2</span>]} );
+});
+
+<span class="ot">app</span>.<span class="fu">listen</span>(<span class="dv">8080</span>);
+<span class="ot">console</span>.<span class="fu">log</span>(<span class="st">&#39;Server running at http://127.0.0.1:8080/&#39;</span>);</code></pre>
+<p>Este código es similar al que hemos usado anteriormente, salvo que respondemos a más comandos REST: GET, PUT y POST. PUT crea el contador, POST lo incrementa y finalmente GET obtiene el resultado; recordemos que GET debe ser idempotente y dejar al servidor en el mismo estado. Estos dos últimos, además, devuelven el resultado en JSON, y no en texto. Lo normal sería que entendieran varios formatos (incluyendo texto y HTML), pero por lo pronto lo dejaremos así.</p>
+<p>También hay que tener en cuenta que este servidor tiene que servir <em>todos</em> los ficheros, no sólo el <a href="#API">API</a> REST. Por eso se ha creado otro seudo-comando que lee un fichero y lo sirve como JS. Ojo, este tipo de órdenes son un potencial hueco de seguridad. Lo dejamos así por simplicidad, no porque sea la forma adecuada que debería tener una aplicación en producción.</p>
+<p>La <a href="https://github.com/JJ/curso-js/tree/master/code/sumar_formulario.html">página web</a> incluye lo mínimo necesario: el script JS incluido y un formulario para solicitar el nombre del contador que se va a incrementar. El URL del formulario incluye el &quot;camino&quot; ficticio al que responderá el servidor REST, que incluye <code>js</code>. Ese fichero, precisamente, es el que vemos aquí:</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> request;
+<span class="kw">function</span> <span class="fu">cuenta</span>() {
+  request = <span class="kw">new</span> <span class="fu">XMLHttpRequest</span>();
+  <span class="kw">var</span> contador=<span class="ot">document</span>.<span class="fu">getElementById</span>(<span class="st">&#39;contador&#39;</span>).<span class="fu">value</span>;
+  <span class="kw">var</span> peticion_str = <span class="st">&#39;/contador/&#39;</span>+contador;
+  <span class="ot">request</span>.<span class="fu">open</span>(<span class="st">&#39;POST&#39;</span>, peticion_str , <span class="kw">true</span>);
+  <span class="ot">request</span>.<span class="fu">onreadystatechange</span>= escribe_resultado ;
+  <span class="ot">request</span>.<span class="fu">send</span>(<span class="kw">null</span>);
+}
+
+<span class="kw">function</span> <span class="fu">escribe_resultado</span>(){
+  <span class="kw">if</span> ( <span class="ot">request</span>.<span class="fu">readyState</span> == <span class="dv">4</span> ) {
+    <span class="kw">if</span> ( <span class="ot">request</span>.<span class="fu">status</span> == <span class="dv">200</span> ) {
+    <span class="kw">var</span> json;
+    <span class="fu">eval</span> ( <span class="st">&#39;json = &#39;</span>+ <span class="ot">request</span>.<span class="fu">responseText</span> );
+    <span class="ot">console</span>.<span class="fu">log</span>(json);
+    <span class="ot">document</span>.<span class="fu">getElementById</span>(<span class="st">&#39;Resultado&#39;</span>).<span class="fu">innerHTML</span>= <span class="st">&#39;Resultado = &#39;</span>+ 
+        <span class="ot">json</span>.<span class="fu">resultado</span>
+    }
+  }
+}</code></pre>
+<p>Por lo pronto vemos cómo funciona en JS &quot;clásico&quot;, para entender un poco mejor el mecanismo que sigue. Luego más adelante veremos que en JQuery se puede hacer de forma mucho más simple. El código tiene dos funciones: la que hace la llamada (<code>cuenta</code>) y la que responde a la misma, el callback (<code>escribe_resultado</code>). La primera construye el URL y hace la petición POST para incrementar el contador, y con <code>onreadystatechange</code> establece la llamada para cuando llegue asíncronamente el resultado.</p>
+<p>Esta segunda función recibe el JSON y usa un simple evaluador para extraer su resultado, previa comprobación de que efectivamente se ha recibido la respuesta completa y de forma efectiva; la respuesta la escribe en un <code>div</code>.</p>
+<p>Para hacer funcionar este programa tendremos que crear previamente los contadores usando cualquier otro programa</p>
+<p>En realidad, es mucho más fácil hacerlo con JQuery. En <a href="http://codeko.com/docs/oslgr/intro_jquery/ajax2.php">esta web de Codeko</a> muestran como funcionan las órdenes básicas. El <a href="https://github.com/JJ/curso-js/tree/master/code/formulario-jquery.html">formulario sería bastante similar</a>, aunque hemos tenido que <a href="https://github.com/JJ/curso-js/tree/master/code/count-server-var.js">modificar el servidor para que muestre diferentes páginas principales</a>. El principal cambio será, obviamente, en el código usado para la solicitud Ajax, que usará jQuery en vez de JS puro. <a href="https://github.com/JJ/curso-js/tree/master/code/cuenta-jquery.js">Helo aquí</a>:</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="fu">$</span>(document).<span class="fu">ready</span>(<span class="kw">function</span>() {
+    <span class="fu">$</span>(<span class="st">&quot;#formulario&quot;</span>).<span class="fu">change</span>(<span class="kw">function</span>(){
+        <span class="ot">$</span>.<span class="fu">get</span>(<span class="st">&#39;/contador/&#39;</span>+<span class="fu">$</span>(<span class="st">&#39;#contador&#39;</span>).<span class="fu">val</span>(), <span class="kw">function</span>( data) {
+              <span class="fu">$</span>(<span class="st">&#39;#Resultado&#39;</span>).<span class="fu">html</span>(<span class="st">&#39;Resultado &#39;</span>+ <span class="ot">data</span>.<span class="fu">resultado</span>);
+              });
+    });
+} );          </code></pre>
+<p>Este pequeño programa tiene todo lo compacto y críptico a lo que nos tiene acostumbrados jQuery. Como es habitual, se ejecuta sólo cuando se ha cargado la página y usa el programa para añadir funcionalidad, eventos, al HTML en vez de tener el propio evento definido en el mismo; lo clásico en JS (y jQuery) es dividir el código de la funcionalidad. Lo que hace es que crea un evento sobre el formulario tal que al cambiar llame a una función anónima.</p>
+<p>Esa función, en un par de líneas, hace lo mismo que previamente con unas cuantas líneas en JS: hace una petición <code>get</code> (en la que usa también los selectores jQuery para extraer el valor, contenido en $val()$, del elemento del formulario) y una vez obtenido el resultado usa el selector del elemento correspondiente, <code>#Resultado</code>, para insertarlo. Adicionalmente, jQuery esconde el mecanismo subyacente de llamada haciéndolo independiente del navegador. Si XMLHttpRequest funciona, lo usa; si no, usa el mecanismo nativo.</p>
+<h2 id="más-allá-del-ajax">Más allá del Ajax</h2>
+<p>Ajax permite trabajar con el servidor de forma asíncrona, pero siempre que sea el cliente el que comience la conexión. En muchos casos puede que no sea la forma más eficiente de trabajar con él, porque se tienen que hacer peticiones de forma periódica y porque puede haber picos en los que se sature el mismo. Por eso hay métodos para que sea el servidor el que inicie, o al menos envíe información al cliente; a esto se le le suele llamar tecnologías <em>push</em> (desde el punto de vista del servidor) y <a href="http://en.wikipedia.org/wiki/Comet_%28programming%29">Comet</a> desde el punto de vista del cliente.</p>
+<p>La idea, por tanto, es que tras el comienzo de una conexión por parte del cliente, sea el servidor el que continúe enviando información al mismo, sin cerrarla. Hay diferentes formas de hacerlo: mediante streaming y utilizando lo que se denomina <em>long polling</em> .</p>
+<p>Lo anterior se suele implementar con una serie de tecnologías ad hoc, que tratan de evitar los modelos de seguridad del cliente de diferentes formas. Pero hay un estándar emergente denominado <a href="http://en.wikipedia.org/wiki/WebSocket">WebSocket</a> que es simplemente una conexión TCP bidireccional entre cliente y servidor, el equivalente en el navegador de un Socket tradicional. Actualmente no todos los navegadores admiten todos los tipos de conexión propuestos; se trata de un estándar en evolución que se ha implementado a partir de 2012.</p>
+<p>Para usarlo ya se puede probar con librerías como <a href="http://socket.io/#how-to-use">socket.io</a>, que proporcionan todas las facilidades de WebSocket mediante la conexión que esté disponible en el navegador.</p>
+<p>Un ejemplo de como usar estas librerías está en <a href="http://project70.com/nodejs/node-js-comet-real-time-chat-a-great-first-project/">este tutorial</a> que muestra como llevar a cabo un chat en tiempo real usando node.js.</p>
+<h2 id="a-dónde-ir-desde-aquí">A dónde ir desde aquí</h2>
+<p>Se puede ir a <a href="http://geneura.ugr.es/%7Ejmerelo/asignaturas/AAP/AAP-CouchDB.mhtml">aprender el uso de un sistema de almacenamiento de objetos llamado CouchDB</a>, pero el tema de diseño de sistemas con node.js y JQuery en el cliente puede ir mucho más allá, usando, por ejemplo <a href="http://sailsjs.org">marcos MVC para node.js como Sails.js</a> o <a href="http://stackoverflow.com/questions/9744798/which-nodejs-mvc-framework-currently-has-the-best-mix-of-maturity-and-ease-of-us">cualquier otro de los recomendados.</a></p>
+<p>jQuery también admite todo tipo de plugins, y muchos de ellos se pueden usar con <a href="http://malsup.com/jquery/form/">formularios</a> haciendo su procesamiento mucho más rápido. Siempre hay una forma más simple de hacer las cosas y posiblemente hay software libre para solucionarlo.</p>
+<h2 id="bibliografía-y-enlaces">Bibliografía y enlaces</h2>
+<p>En general, REST se considera, de forma amplia, dentro de los servicios Web, por eso los libros que trabajan con él, en general, también incluyen capítulos que tratan con REST. Sin embargo, si quieres usar un lenguaje de programación determinado, te puede venir bien <a href="http://www.amazon.com/gp/product/0596002068?ie=UTF8&amp;tag=perltutobyjjmere&amp;link_code=as3&amp;camp=211189&amp;creative=373489&amp;creativeASIN=0596002068">Programming Web Services with Perl, de Ray y Kuchenko</a>. Es quizás un poco más prolijo en el apartado XML de la cuenta, y está un tanto atrasado, pero vienen todos los módulos de Perl bien detallados y explicados. El <a href="https://www.amazon.es/dp/B0043D2ESQ/ref=as_li_ss_til?tag=atalaya-21&amp;camp=3634&amp;creative=24822&amp;linkCode=as4&amp;creativeASIN=B0043D2ESQ&amp;adid=1V5KDS1RVBZAE2W5B2PR&amp;">RESTful Web Services Cookbook</a> también es bastante útil en este sentido.</p>
+</body>
+</html>

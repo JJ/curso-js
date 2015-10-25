@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="js.css" type="text/css" />
+</head>
+<body>
+<h2 id="glosario">Glosario</h2>
+<h2 id="api" name="API">API</h2>
+<p><em>Application programming interface</em>, conjunto de órdenes que se usan para interactuar con una aplicación a través de la llamada a una serie de funciones. En un interfaz <a href="#RESTful">RESTful'</a> las llamadas a funciones son URLs a las que se les puede pasar, de forma adicional, parámetros en forma de estructuras de datos codificadas, generalmente, en JSON o XML y que se recibirán por entrada estándar al modo <a href="#CGI">CGI</a>.</p>
+<h2 id="cgi" name="CGI">CGI</h2>
+<p>En el contexto de la web, <a href="http://www.w3.org/CGI/">CGI</a> significa <em>Common Gateway Interface</em>, o interfaz de enlace común; es un método para ejecutar programas desde un servidor web que consiste en codificar las entradas al programa en entrada estándar (como si los leyera desde teclado) y en variables de entorno (como si desde la línea de comandos definiéramos una serie de variables) y entregar la salida por entrada estándar. El servidor web ejecuta el programa, definiendo variables de entorno y proporcionándole la entrada, y recibe la salida que envía al quien ha solicitado el URL.</p>
+<h2 id="http" name="HTTP">HTTP</h2>
+<p><a href="http://es.wikipedia.org/wiki/Http">HTTP o Hypertext Transfer Protocol, protocolo de transferencia hipertexto</a>, es el protocolo usado en toda la web y que rige la forma como se solicitan recursos a un servidor web, cómo se sirven y cómo se indican errores sucedidos en el mismo. Durante mucho tiempo, el servidor web por excelencia ha sido <a href="http://httpd.apache.org">Apache</a>, pero hoy en día es muy habitual la creación de aplicaciones en torno a servidores HTTP integrados, como en node.js o en entornos MVC como Django.</p>
+<h2 id="paas" name="PaaS">PaaS</h2>
+<p><a href="http://es.wikipedia.org/wiki/PaaS#Plataforma_como_servicio">Platform as a Service, o Plataforma como Servicio</a>, es un producto que integra una máquina virtual provisionada con una serie de aplicaciones de tal forma que sólo hay que subir el código que usa esa aplicación. Básicamente se trata de usar servicios en la nube sin necesidad de instalar y configurar los programas necesarios. Estos PaaS pueden ir desde lo más básico, una simple base de datos, hasta integrar pilas completas de servicios que permitan desplegar, por ejemplo, una aplicación <code>node.js</code> o Django.</p>
+<h2 id="rest" name="REST">REST</h2>
+<p><a href="http://es.wikipedia.org/wiki/Representational_State_Transfer">REST</a> significa transferencia de estado que representa algo (por no traducir representacional, que suena fatal). Es una convención para el diseño de <a href="#API">API</a>s que consiste en usar los verbos del protocolo <a href="#HTTP">HTTP</a> y su significado estricto para llevar a cabo todas las operaciones de un programa.</p>
+<h2 id="restful" name="RESTful">RESTful</h2>
+<p><a href="#API">API</a> diseñada siguiendo las convenciones <a href="#REST">REST</a>.</p>
+</body>
+</html>

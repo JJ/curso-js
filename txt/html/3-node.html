@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="js.css" type="text/css" />
+</head>
+<body>
+<h1 id="introducción-a-node.js" name="nodejs">Introducción a node.js</h1>
+<h2 id="objetivos-de-este-capítulo">Objetivos de este capítulo</h2>
+<ul>
+<li>Conocer node.js y saber sus conceptos fundamentales.</li>
+<li>Aprender los conceptos básicos de los servicios web basados en <a href="#REST">REST</a>, la representación de datos usada y cómo implementarlos en node.js</li>
+<li>Realizar prototipos rápidos de cliente y servidor de servicio web usando node.js</li>
+</ul>
+<h2 id="node.js-un-intérprete-asíncrono-para-js">Node.js, un intérprete asíncrono para JS</h2>
+<p>La aceptación de JS como un lenguaje de programación procede del hecho de su incorporación en diferentes herramientas de propósito general, sobre todo a partir de haberlo desgajado del navegador en e introducido en herramientas como las que hemos comentado anteriormente. Una de tales herramientas es <a href="http://nodejs.org/">Node.js</a>, un marco para programación de eventos asíncrono que usa como base JS. Se puede usar directamente como intérprete de JS (tal como hemos hecho <a href="http://geneura.ugr.es/%7Ejmerelo/tutoriales/servicios-web">en este otro tutorial</a>), salvo por el hecho de que está preparado para trabajar de forma asíncrona, por lo que un patrón habitual de comportamiento, que es asignar la salida de una orden a una variable, se convierte aquí en la creación de un <em>callback</em>, es decir, de una función a la que se llama una vez que se complete la acción que se ha solicitado. No es que sea algo extraño dentro del mundo JS, puesto que es la misma forma de trabajar que tiene <a href="#jquery">JQuery</a>.</p>
+<p>En todo caso, node.js incluye una serie de bibliotecas básicas que convierten JS en un lenguaje de propósito general, algo que le falta a otros intérpretes como Rhino, que necesita usar librerías de Java para poder hacer cosas básicas como abrir ficheros. Empecemos pues, por el principio: instalar node.js, lo que se puede hacer en Linux fácilmente con <code>sudo apt-get install nodejs</code>, desde los repositorios, o <a href="http://nodejs.org/download/">descargándoselo desde su web</a>. Conviene usar este último método, porque es un lenguaje en evolución constante, de forma que los repositorios de Linux van siempre un poco por detrás.</p>
+<p>No hace falta instalar node.js para empezar a usarlo. Algunos PaaS como <a href="http://heroku.com">Heroku</a> te proporcionan tanto una serie de herramientas para prototipar y publicar aplicaciones basadas en node.js como una línea de órdenes de la que usarla directamente.</p>
+<p>Por otro lado, otra opción conveniente es <a href="https://gist.github.com/isaacs/579814">instalar <code>nave</code></a>, un entorno virtual que permite trabajar simultáneamente con diferentes versiones de node y, sobre todo, tener la última versión, más allá de la que proporcione la distribución.</p>
+<p>Como última opción de instalación en una máquina <em>limpia</em> que use Linux (lo que debería ser obvio, Windows automáticamente ensucia la máquina en la que se instala) se pueden seguir <a href="https://gist.github.com/JJ/8459799">estas instrucciones</a> para instalar los prerrequisitos y la última versión de node.</p>
+<p>Para terminar, hay algunos sitios en Internet que permiten ejecutar, directamente desde el navegador, un terminal sobre una máquina virtual; algunos incluyen node.js ya instalado de serie. Por ejemplo, <a href="http://koding.com/R/jjmerelo">Koding</a> permite abrir un <a href="https://koding.com/Terminal" title="tendrás que estar conectado para que esto funcione">terminal</a> donde, además, puedes dejar ejecutándose tus programas y acceder a ellos desde fuera.</p>
+<p>En este tutorial aconsejamos trabajar con Linux; por lo que será conveniente o bien que te instales cualquier tipo de distribución o tengas acceso a una máquina virtual en tu propio ordenador o en la nube, como la que proporciona <a href="http://koding.com/R/jjmerelo">koding.com</a></p>
+<p>Seguimos haciendo nuestro primer programa, un <a href="https://github.com/JJ/curso-js/blob/master/code/guenas.js">programa simple (guenas.js)</a> en <code>node.js</code> y ejecutémoslo.</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">#!/usr/local/bin/node</span>
+
+<span class="kw">var</span> saludo = <span class="kw">new</span> Object;
+<span class="ot">saludo</span>.<span class="fu">hola</span> = <span class="st">&#39;mundo&#39;</span>;
+<span class="ot">saludo</span>.<span class="fu">adios</span> =<span class="st">&#39;muy buenas&#39;</span>;
+<span class="ot">console</span>.<span class="fu">log</span>( saludo );</code></pre>
+<p>La primera línea es exclusivamente para sistemas Linux (que son, por otro lado, los únicos serios para desarrollo de software); en ella habrá que poner el camino completo al intérprete de node; este es una opción, como <code>/usr/local/bin/node</code> u <code>/usr/bin/env node</code> en el caso de usar <code>nave</code>; con ella y haciendo ejecutable el fichero con <code>chmod +x node.js</code> podemos ejecutarlo y obtener el siguiente resultado</p>
+<pre><code>jmerelo@penny:~/servicios-web/ejemplos$  ./guenas.js
+{ hola: &#39;mundo&#39; }</code></pre>
+<p>En otro entorno (o si no se quiere hacer al fichero ejecutable), con escribir</p>
+<pre><code>jmerelo@penny:~/servicios-web/ejemplos$  node guenas.js </code></pre>
+<p>es suficiente. En cualquier caso, la salida será la misma. Y la explicación también: definimos un objeto <code>saludo</code> en la primera línea, y en la segunda le asignamos el valor <code>mundo</code> a la variable de instancia <code>hola</code>, o visto de otro modo, el valor <code>mundo</code> a la clave <code>hola</code>. <code>console.log</code> imprime la cadena en la salida, escribiendo directamente (y además en JSON) el valor de la misma. <code>console</code> es un objeto que forma parte de la <a href="http://nodejs.org/api/stdio.html%20">librería estándar de entrada salida de node</a>. Equivale a la <em>consola</em> o el terminal, permitiendo enviar información a la misma con <code>log</code> y con otras órdenes como <code>error</code>; la diferencia es que en el primer caso se escribe en salida estándar y en el segundo en salida de error estándar (no se capturaría en una redirección de salida, por ejemplo). <code>console.log</code> puede usar también <a href="http://nodejs.org/api/stdio.html#stdio_console_log_data">formatos como la orden <code>printf</code> de C</a>, es decir,</p>
+<pre><code>console.log(&#39;Respuesta: %s&#39;, saludo.hola     )</code></pre>
+<p>como hacemos en <a href="https://github.com/JJ/curso-js/blob/master/code/guenas-nave.js">este programa</a>. El objeto <code>console</code> existe en la mayoría de los navegadores modernos y especialmente en Chrome/Chromium, pero el resultado saldrá por la <em>consola</em> del navegador que forma parte de las herramientas del mismo; se le denomina <em>herramientas de desarrollador</em> o <em>consola de JavaScript</em>.</p>
+<p>Sin embargo, node.js no es un intérprete habitual, tiene una forma particular de hacer las cosas: asíncronamente. Veremos, por ejemplo, como <a href="http://docs.nodejitsu.com/articles/file-system/how-to-read-files-in-nodejs">leer un fichero</a>, el de las quinielas que hemos usado hasta ahora.</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">#!/usr/bin/env node</span>
+
+<span class="kw">var</span> fs = <span class="fu">require</span>(<span class="st">&#39;fs&#39;</span>);
+<span class="ot">fs</span>.<span class="fu">readFile</span>(<span class="st">&#39;quiniela.datos&#39;</span>, <span class="st">&#39;utf8&#39;</span>, 
+        <span class="kw">function</span>(err,datos) {
+        <span class="kw">if</span> (err) {
+            <span class="kw">return</span> <span class="ot">console</span>.<span class="fu">log</span>(err);
+        };
+        <span class="kw">var</span> filas = <span class="ot">datos</span>.<span class="fu">split</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>);
+        <span class="kw">for</span> ( <span class="kw">var</span> f <span class="kw">in</span> filas ) {
+            <span class="kw">var</span> cachos = filas[f].<span class="fu">split</span>(<span class="st">&quot; &quot;</span>);
+            <span class="kw">var</span> partido = { <span class="st">&#39;local&#39;</span>: cachos[<span class="dv">0</span>],
+                    <span class="st">&#39;visitante&#39;</span>: cachos[<span class="dv">1</span>],
+                    <span class="st">&#39;resultado&#39;</span>: cachos[<span class="dv">2</span>] };
+            <span class="ot">console</span>.<span class="fu">log</span>( partido );
+        }
+        }
+);</code></pre>
+<p>En este <a href="https://github.com/JJ/curso-js/blob/master/code/lee-quiniela.js">programa</a> (que actúa sobre <a href="https://github.com/JJ/curso-js/blob/master/code/quiniela.datos">este fichero de datos</a>) se usa el intérprete node.js, lo que se ve en la primera línea, que no hace falta en Windows (aunque se tendrá que ejecutar desde línea de órdenes poniendo explícitamente node fichero.js). En la segunda vemos que se carga una librería usando <code>require</code>, el <a href="T1:t1:common">mecanismo común</a> para cargar un módulo y evaluarlo, que, además, crea un objeto que se puede usar; lo usamos más adelante para leer un fichero. <a href="http://nodejs.org/api/fs.html"><code>fs</code> se refiere a <em>filesystem</em></a>, o sistema de ficheros, y es el módulo que contiene una serie de funciones para interaccionar con el mismo.</p>
+<p>La siguiente línea es la que usa un modo de actuación propio de node.js. Como ya se ha indicado (varias veces), node funciona de forma asíncrona. En general, el patrón de las funciones en node, en vez de ser <code class="ejemplo">haz_a(); haz_b();</code> que ejecutaría <code>haz_a</code>, y, tras terminar, ejecutaría <code>haz_b</code>, es <code class="ejemplo">haz_a(parametros, haz_b); haz_c()</code> que viene a decir ejecuta <code>haz_a</code> sobre unos <code>parametros</code> y, cuando veas que has terminado, llama a la función <code>haz_b</code>; fijaros que se trata de un puntero a función, no una llamada a la misma (no lleva paréntesis). Pero dependiendo de lo que tarde <code>haz_a</code>, <code>haz_c</code> podría ejecutarse antes que <code>haz_b</code>. En general, la secuencia de las líneas no tiene por qué ser la secuencia de ejecución de las funciones, eso es precisamente lo que significa la asincronía. Eso no quiere decir que no se pueda usar como cualquier otro lenguaje, sólo que hay que tener cuidado y usar patrones de programación específicos. Y, por otro lado, permite responder muy rápidamente a eventos sin bloquear la operación; cada evento inicia una hebra y se van procesando en paralelo.</p>
+<p>Vamos a la orden específica: efectivamente, con <code>readFile</code> leemos el fichero. Los dos primeros argumentos son el nombre del fichero y, a continuación, la codificación, que es obligatorio usar (bueno, más o menos: <a href="http://nodejs.org/api/fs.html#fs_fs_readfile_filename_options_callback">si no se da la codificación, te devuelve un buffer, no el contenido del fichero</a>). Y continuación el <em>callback</em> del que hemos hablado: una función que se ejecuta cuando se termine; se trata de una función anónima tal como las que hemos visto en apartados anteriores. El hecho de que se ejecute asíncronamente quiere decir que fs.readFile se ejecuta y se deja el evento generado; si hubiera una orden a continuación se ejecutaría inmediatamente. Esto le permite a <code>node.js</code> leer las cosas con mucha eficiencia, y hacer una serie de operaciones que no se pueden hacer fácilmente con otros lenguajes.</p>
+<p>Concentrémonos en la función. Tiene dos argumentos: <code>err</code> y <code>datos</code>. Si hay un error, estará en la primera variable (que comprobamos) y si no, el resultado irá a la segunda variable. Es decir, cuando se ejecute la acción, se llamará a la función con dos argumentos, uno de los cuales será <code>null</code>. Vemos también que se usa <code>console.log</code> para escribir en la consola; <code>console</code> es un objeto que equivaldría al <code>document</code> del DOM, salvo que no tiene ningún tipo de estructura; tiene la ventaja de que si se escribe una estructura de datos compleja, la &quot;desplegará&quot;.</p>
+<p>El resto del programa es más o menos habitual; usamos la clase que hemos definido anteriormente para genera un objeto de cada tipo e imprimirlo usando <code>console.log</code>. El resultado será más o menos así:</p>
+<pre><code>{ local: &#39;Madrid&#39;, visitante: &#39;Barça&#39;, resultado: &#39;x&#39; }
+{ local: &#39;Atleti&#39;, visitante: &#39;Barça&#39;, resultado: &#39;1&#39; }
+{ local: &#39;Athleti&#39;, visitante: &#39;Recre&#39;, resultado: &#39;1&#39; }
+{ local: &#39;Depor&#39;, visitante: &#39;Athleti&#39;, resultado: &#39;2&#39; }
+{ local: &#39;Elche&#39;, visitante: &#39;Hércules&#39;, resultado: &#39;x&#39; }
+{ local: &#39;Cai&#39;, visitante: &#39;Madrid&#39;, resultado: &#39;x&#39; }
+{ local: &#39;Graná&#39;, visitante: &#39;Recre&#39;, resultado: &#39;1&#39; }</code></pre>
+<p>Es decir, los datos leídos en formato JSON.</p>
+<h2 id="npm-instalación-de-módulos-en-node"><code>npm</code>, instalación de módulos en Node</h2>
+<p><code>fs</code> es sólo el principio de una serie de módulos muy interesante; de hecho, es un módulo que se instala por omisión. Hay un módulo para crear servidores web, pero lo veremos más adelante (sólo para tener una idea se puede visitar <a href="http://nodetuts.com/">nodetuts</a>). En el <a href="http://nodejs.org/docs/latest/api/index.html">sitio de descarga de nodejs</a> vienen también todos los módulos disponibles, que permiten trabajar con el sistema operativo y cosas más avanzadas como una interfaz criptográfica. Pero si se quieren instalar más módulos, una de las características más interesantes de node es que tiene su propio gestor de paquetes, <code>npm</code>. Hay que <a href="http://npmjs.org/">seguir las instrucciones para instalarlo</a> y una vez hecho tener en cuenta que los módulos se instalan por omisión en el directorio superior al que uno está trabajando. La <a href="https://npmjs.org/">lista de todos los paquetes está en línea, y contiene módulos para la mayoría de los servicios web y aplicaciones actuales.</a></p>
+<p>Instalemos por ejemplo <a href="https://github.com/mikeal/request"><code>request</code></a>, una de las librerías más populares, que actúa como cliente de <a href="#HTTP">HTTP</a>. Una vez instalado npm, se escribe (en el directorio donde lo vayamos a usar, en general; la política de módulos de Node es tener los módulos instalados junto con la aplicación que los usa, en vez de en un sitio centralizado) <code>npm install request</code>. Esta orden, si la conexión a Internet está disponible, descargará e instalará el módulo en el directorio desde la que la llamemos. Si se ejecuta por primera vez, creará un directorio <code>node_modules</code>, dentro del cual habrá un directorio <code>request</code>.</p>
+<p>Con <code>request</code> podemos codificar todo tipo de peticiones <a href="#REST">REST</a>. A un nivel muy básico se puede usar de la forma siguiente, en el programa <a href="https://github.com/JJ/curso-js/blob/master/code/github-get.js"><code>github-get.js</code></a>, que pide información sobre un usuario en GitHub:</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">#!/usr/bin/env node</span>
+
+<span class="kw">var</span> https = <span class="fu">require</span>(<span class="st">&#39;https&#39;</span>);
+
+<span class="kw">var</span> user =<span class="ot">process</span>.<span class="fu">argv</span>[<span class="dv">2</span>]?<span class="ot">process</span>.<span class="fu">argv</span>[<span class="dv">2</span>]:<span class="st">&#39;JJ&#39;</span>;
+
+<span class="kw">var</span> options = {
+    <span class="dt">host</span>: <span class="st">&#39;api.github.com&#39;</span>,
+    <span class="dt">path</span>: <span class="st">&#39;/users/&#39;</span>+user,
+    <span class="dt">method</span>: <span class="st">&#39;GET&#39;</span>,
+    <span class="dt">headers</span>: {<span class="st">&#39;User-Agent&#39;</span>: <span class="st">&#39;Prueba-Node-App&#39;</span>}
+};
+
+
+<span class="kw">var</span> req = <span class="ot">https</span>.<span class="fu">get</span>(options, <span class="kw">function</span>(res) {
+    <span class="ot">res</span>.<span class="fu">setEncoding</span>(<span class="st">&#39;utf8&#39;</span>);
+    <span class="ot">res</span>.<span class="fu">on</span>(<span class="st">&#39;data&#39;</span>, <span class="kw">function</span> (datos_JSON) {
+    <span class="ot">console</span>.<span class="fu">log</span>(datos_JSON);
+    <span class="kw">var</span> datos=<span class="ot">JSON</span>.<span class="fu">parse</span>(datos_JSON);
+    <span class="ot">console</span>.<span class="fu">log</span>(<span class="st">&#39;Login: &#39;</span> + <span class="ot">datos</span>.<span class="fu">login</span>+ <span class="st">&quot;</span><span class="ch">\n</span><span class="st">Nombre: &quot;</span> + <span class="ot">datos</span>.<span class="fu">name</span> + <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>);
+    });
+});
+<span class="ot">req</span>.<span class="fu">end</span>();</code></pre>
+<p>Usamos la librería recién instalada para descargarnos información de un usuario de <a href="https://GitHub.com">GitHub</a>, usando la librería llamada $JSON$, que se instala con Node. La forma de petición es la asíncrona habitual en Node: se hace la petición y se le pasa la función a la que hay que llamar cuando se reciba la respuesta, como en el caso anterior de apertura de un fichero. A la función se la llama con tres parámetros: o bien <code>err</code>, en caso de que se produzca un error, o bien <code>response</code> y <code>body</code> en caso de que la respuesta sea correcta. <code>body</code> contendrá el texto de la respuesta, que habrá que decodificar (o imprimir tal cual, en caso de que se trate de HTML); <code>response</code> es una estructura de datos compleja, que podemos imprimir con <code>console.log</code> (y saldrá un montón de cosas, incluyendo la versión de <a href="#HTTP">HTTP</a>, las cabeceras, y mucha información más), pero que contiene, entre otras cosas, el estado de la petición, con un código del protocolo <a href="#HTTP">HTTP</a>. En el programa anterior se comprobaba sólo si había error o no; ahora demás comprobamos que el código devuelto es el correcto, es decir, 200. Si hubiera un código 400, o 500, o incluso un 201, tendríamos que interpretar la respuesta de otra forma.</p>
+<h2 id="usando-un-servidor-web">Usando un servidor web</h2>
+<p>Para enviar respuestas a una petición web hay que hacerlo desde un servidor. La tendencia moderna es hacerlo desde un entorno integrado, sin embargo los servidores web multifunción permiten tanto ofrecer páginas web estáticas como webs dinámicas, y además hacerlo desde una variedad de lenguajes de programación; por eso conviene conocer, al menos, cómo instalar un servidor web simple y hacer programas que funcionen desde él con facilidad.</p>
+<p>El clásico <a href="http://httpd.apache.org/">Apache</a> sigue usándose extensivamente, aunque últimamente se están empezando a usar otras opciones como el <a href="http://nginx.org/">nginx</a>, un servidor web de altas prestaciones que se puede instalar, además, en todo tipo de plataformas (aunque este último no puede ejecutar, de forma directa, los <a href="#CGI">CGIs</a> de los que hablamos en este apartado). Tanto uno como otro están disponibles en los repositorios de las distribuciones Linux más comunes.</p>
+<p>Un servidor web se instala como un servicio (es decir, un programa que se queda ejecutándose en memoria permanentemente) y <em>escucha</em> un puerto TCP/IP, normalmente el 80; este puerto, en Linux, está reservado (como todos hasta el 999) al superusuario, así que hay que ejecutarlo con esos privilegios. Una vez instalado se pueden servir tanto páginas estáticas (habrá que consultar en la documentación para ver cuál es el directorio configurado para hacerlo) como dinámicas (una vez más, también hay que consultar cuál es el directorio por omisión). Las páginas estáticas se sirven (más o menos) tal cual, y las dinámicas se generan a partir de la ejecución de un programa desde el servidor, con los privilegios del mismo o los que tenga configurados. Esto lo veremos más adelante, pero la idea principal es que los recursos accesibles al servidor web están en una serie de directorios cuyo valor lo calcula el servidor a partir del URL que se le solicita.</p>
+<p>Para servir contenidos desde un programa, la forma habitual es copiar el programa con la extensión .cgi al directorio que se haya configurado para ello. De la forma más simple posible un CGI escrito en node.js podría ser el siguiente:</p>
+<pre><code>#!/usr/bin/node
+//cabecera
+console.log(&#39;Content-Type: text/plain; charset=UTF-8&#39;);
+//contenido
+var una_variable=[&#39;uno&#39;,&#39;dos&#39;,{ tres: &#39;tres&#39;}];
+console.log(&#39;&#39;);
+console.log(una_variable);</code></pre>
+<p>Para ejecutarlo no hay más que copiarlo a un directorio determinado con permisos de ejecución para otros (<code>chmod +x hola-js.cgi</code>).La primera envía una cabecera al cliente que le indica el tipo que se usa; la segunda parte es la que efectivamente envía el contenido, en este caso una variable en JSON (recordad que console.log escribe en salida estándar, y convierte las estructuras de datos a JSON).</p>
+<blockquote>
+<p>Node, por su naturaleza asíncrona, realmente no es el mejor sistema para trabajar con JavaScript en un servidor que incluya otros lenguajes. Sin embargo, se puede usar JavaScript de muchas maneras diferentes: <a href="https://github.com/decafjs/decaf">DecafJS</a>, por ejemplo, es un intérprete de JS que incluye también un servidor web; o <a href="https://github.com/ondras/TeaJS/">TeaJS</a>, que está un tanto abandonado y es un sistema para crear <a href="#CGI">CGIs</a> basado en el intérprete rápido de JS de Google. Por no introducir más herramientas, no los vamos a ver aquí, pero conviene tener en cuenta que existen este tipo de soluciones que pueden convivir en un servidor como Apache o NGINX con otros lenguajes como Ruby o Perl.</p>
+</blockquote>
+<h2 id="node.js-como-servidor">node.js como servidor</h2>
+<p>Crear un servidor web con node.js es tan simple que venía directamente en <a href="http://nodejs.org/">su página principal</a> hasta hace nada</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> http=<span class="fu">require</span>(<span class="st">&#39;http&#39;</span>);
+<span class="ot">http</span>.<span class="fu">createServer</span>(<span class="kw">function</span> (req, res) {
+    <span class="ot">res</span>.<span class="fu">writeHead</span>(<span class="dv">200</span>, {<span class="st">&#39;Content-Type&#39;</span>: <span class="st">&#39;text/plain&#39;</span>});
+    <span class="ot">res</span>.<span class="fu">end</span>(<span class="st">&#39;Ahí estamos</span><span class="ch">\n</span><span class="st">&#39;</span>);
+}).<span class="fu">listen</span>(<span class="dv">8080</span>, <span class="st">&#39;127.0.0.1&#39;</span>);
+<span class="ot">console</span>.<span class="fu">log</span>(<span class="st">&#39;Server running at http://127.0.0.1:8080/&#39;</span>);</code></pre>
+<p>Este <a href="https://github.com/JJ/curso-js/blob/master/code/servidor.js">programa</a> simplemente escribirá &quot;Ahí estamos&quot; en el navegador cuando se solicite el URL. Nada complicado, pero tampoco lo es el programa: se usa un <a href="http://nodejs.org/api/http.html">módulo <code>http</code></a> que es estándar en Node en la primera línea del programa; se crea un servidor con <code>createServer</code>. Esta orden recibe como parámetro la función a la que hay que llamar cada vez que se reciba una petición. Cuando se recibe una petición, se llama a una función que escribe primero la cabecera <a href="#HTTP">HTTP</a> (<code>writeHead</code>) y termina (<code>end</code>) el servicio de la misma escribiendo el contenido que nos aparecerá en el navegador.</p>
+<p><code>http.createServer</code> crea un objeto y lo devuelve; en este caso, no lo asignamos a ninguna variable, sino que sobre el mismo objeto (anónimo) le decimos con <code>listen</code> en qué puerto (8080) y dirección (la del propio ordenador, <em>there's no place like 127.0.0.1</em>) va a escuchar el servidor. Es una orden que se ejecuta de forma asíncrona, con lo que lo que crea es un <em>callback</em> que se llamará cada vez que se llame a ese URL. Sólo los puertos por encima de 1024 están accesibles al usuario, así que tendréis que usar un número en ese rango (como 8080 o 12121, todos por debajo de 65535). El mensaje se escribe en pantalla de forma síncrona, es decir que a partir de que se escriba ese mensaje sabremos que podemos usar el servidor.</p>
+<p>Evidentemente, si queremos crear un servidor que haga <em>algo</em> tendremos que usar las peticiones que se reciban para dar una respuesta variable. En el <a href="https://github.com/JJ/curso-js/blob/master/code/servidor-var.js">programa</a></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> http=<span class="fu">require</span>(<span class="st">&#39;http&#39;</span>); 
+<span class="ot">http</span>.<span class="fu">createServer</span>(<span class="kw">function</span> (req, res) {
+    <span class="ot">res</span>.<span class="fu">writeHead</span>(<span class="dv">200</span>, {<span class="st">&#39;Content-Type&#39;</span>: <span class="st">&#39;text/plain&#39;</span>}); 
+    <span class="ot">res</span>.<span class="fu">end</span>(<span class="st">&#39;Ahí estamos &#39;</span> + <span class="ot">req</span>.<span class="fu">url</span>); 
+}).<span class="fu">listen</span>(<span class="dv">8081</span>, <span class="st">&#39;127.0.0.1&#39;</span>); 
+<span class="ot">console</span>.<span class="fu">log</span>(<span class="st">&#39;Servidor ejecutándose en http://127.0.0.1:8081/&#39;</span>);</code></pre>
+<p>La principal diferencia entre este programa y el anterior es, aparte del puerto usado (8081 en vez de 8080) la línea en la que escribe algo, y en la que usa la variable <code>req</code>, un <a href="http://nodejs.org/api/http.html#http_event_request">objeto</a> que contiene información sobre la petición, y entre otras cosas el URL (una vez eliminada la parte del servidor) que se ha usado; este URL es el que se escribe a continuación de &quot;Ahí estamos&quot;, tal cual.</p>
+<p>En general, para programar un servicio web habrá que trabajar con esa petición (que será la que reciba la orden del <a href="#API">API</a>) y actuar según la misma, y teniendo en cuenta también la orden <a href="#HTTP">HTTP</a> que se use (PUT, GET o la que sea). Esto lo veremos un poco más adelante.</p>
+<p>A partir de ahí se puede construir un mínimo interfaz <a href="#REST">REST</a> para responder a una serie de peticiones. La idea básica es que las funciones a las que tendremos que llamar estarán identificadas por el URL que se use para pedirlas. Por ejemplo, el programa <a href="https://github.com/JJ/curso-js/blob/master/code/rest-minimo.js">rest-minimo.js</a></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">#!/usr/bin/env node</span>
+
+<span class="kw">var</span> http=<span class="fu">require</span>(<span class="st">&#39;http&#39;</span>); 
+<span class="kw">var</span> puerto=<span class="ot">process</span>.<span class="fu">argv</span>[<span class="dv">2</span>]?<span class="ot">process</span>.<span class="fu">argv</span>[<span class="dv">2</span>]:<span class="dv">8080</span>;
+<span class="ot">http</span>.<span class="fu">createServer</span>(<span class="kw">function</span> (req, res) { 
+    <span class="ot">res</span>.<span class="fu">writeHead</span>(<span class="dv">200</span>, {<span class="st">&#39;Content-Type&#39;</span>: <span class="st">&#39;text/plain&#39;</span>}); 
+    <span class="kw">var</span> split_url=<span class="ot">req</span>.<span class="ot">url</span>.<span class="fu">split</span>(<span class="st">&quot;/&quot;</span>); 
+    <span class="kw">if</span> ( split_url[<span class="dv">1</span>] == <span class="st">&#39;&#39;</span> ) { 
+    <span class="ot">res</span>.<span class="fu">end</span>(<span class="st">&#39;Portada&#39;</span>); 
+    } <span class="kw">else</span> <span class="kw">if</span> ( split_url[<span class="dv">1</span>] == <span class="st">&#39;proc&#39;</span> ) { 
+    <span class="ot">res</span>.<span class="fu">end</span>(<span class="st">&#39;No es la portada&#39;</span>); 
+    } <span class="kw">else</span> { 
+    <span class="ot">res</span>.<span class="fu">end</span>(<span class="st">&#39;No entiendo la petición&#39;</span>); 
+    } 
+}).<span class="fu">listen</span>(puerto, <span class="st">&#39;127.0.0.1&#39;</span>); 
+<span class="ot">console</span>.<span class="fu">log</span>(<span class="st">&#39;Server running at http://127.0.0.1:&#39;</span>+puerto+<span class="st">&#39;/&#39;</span>);</code></pre>
+<p>En este programa procesamos, no sólo imprimimos, la variable <code>req</code>. Es una estructura de datos con un montón de cosas (insertad un console.log si queréis verlo), pero de la que vamos a usar solamente el camino. La idea es que el URL lo que describe es un recurso, no un fichero, así que nosotros procesamos el URL partiéndolo en sus diferentes componentes. Si en el primer componente no hay nada, damos la portada; si hay, por ejemplo, <code>proc</code>, haríamos otra cosa diferente, y eventualmente si se trata de un URL desconocido devolvemos un mensaje diferente.</p>
+<p>Adicionalmente, hemos introducido en este programa un puerto que se toma de la línea de órdenes. <code>process.argv</code> contiene información sobre la línea de órdenes y otras cosas; en el 2º elemento es donde está, precisamente, el primer argumento de la línea de órdenes. El puerto por omisión será 8080 (lo que se ve en la segunda línea), pero si se pasa algún argumento (y es un puerto válido) se usará ese valor.</p>
+<p>Algunos sitios web como <a href="http://www.heroku.com/">Heroku</a> o <a href="http://nodester.com/">Nodester</a> permiten publicar de forma gratuita aplicaciones web hechas con node.js. Pueden ser bastante útiles para crear prototipos o para hacer pruebas, incluso para alojar prácticas de alguna asignatura o curso.</p>
+<h2 id="para-finalizar">Para finalizar</h2>
+<p>Hay muchas más cosas que se pueden hacer con Node. Por ejemplo, un <a href="https://github.com/mixu/nwm">gestor de ventanas</a>. Con <a href="http://appjs.org/">appjs</a> puedes construir aplicaciones cliente-servidor con su propia ventana, igual que con el más veterano <a href="https://github.com/rogerwang/node-webkit">node-webkit</a>.</p>
+<p>Si se quiere trabajar principalmente en el navegador, <a href="http://jquery.com/">jQuery</a> funciona de forma muy similar a node: es un entorno asíncrono para crear aplicaciones desde el navegador fácilmente, sin tener que escribir demasiado código JavaScript. Trasladar un programa de node a JQuery, es bastante directo, y existen diversidad de ampliaciones (plugins) para jQuery que hacen la vida (todavía) más fácil.</p>
+<p>Por otro lado, cualquier lenguaje de scripting como Python o Perl permite crear también arquitecturas cliente y servidor, sólo que no se pueden incluir en el navegador (o usar la experiencia que tenemos con el mismo). Sin embargo, especialmente cuando se trate sólo de consumir servicios web, pueden ser la opción más adecuada.</p>
+<p>En cuanto a recurso para hacer preguntas y obtener respuestas interesantes, <a href="http://stackoverflow.com/">StackOverflow</a> es un recurso imprescindible. Recuerda que tu karma aumentará también cuando contestes preguntas.</p>
+<h2 id="agradecimientos">Agradecimientos</h2>
+<p>Agradezco a los lectores en <a href="http://twitter.com/">Twitter</a>, especialmente a <a href="http://twitter.com/danielribes"><code>@danielribes</code></a>, sugerencias sobre este material.</p>
+<h2 id="bibliografía">Bibliografía</h2>
+<p>Como recursos adicionales, <a href="https://developer.mozilla.org/en/About_JavaScript">las páginas de JavaScript en Mozilla.org</a>, el <a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm">estándar completo</a>, <a href="http://eloquentjavascript.net/">Eloquent JavaScript</a> y el <a href="http://geneura.ugr.es/%7Evictor/cursillos/javascript/js_intro.html">curso de JavaScript de Víctor Rivas Santos</a>.</p>
+<p>Por último, <a href="https://www.amazon.co.uk/dp/0596517742?tag=severawebsite-21&amp;camp=2902&amp;creative=19466&amp;linkCode=as4&amp;creativeASIN=0596517742&amp;adid=0MJ7MPPRP9H7PJ2B5MPB&amp;">JavaScript: The good parts</a> es un manual bastante completo que menciona muchos trucos para trabajar con este lenguaje.</p>
+<p>Específicamente de node.js, se puede empezar por <a href="http://stackoverflow.com/questions/2353818/how-do-i-get-started-with-node-js">esta pregunta en StackOverflow</a>, para seguir con <a href="http://www.nodehispano.com/">el sitio de node.js</a> en español, que incluye enlaces a <a href="http://www.nodebeginner.org/index-es.html">nodebeginner</a>, el libro para principiantes en node.js. La traducción tiene algunos errores, pero es legible. Finalmente, <a href="http://www.opsou.com/blog/recopilacion-de-tutoriales-sobre-node-js-en-castellano/">Opsou nos ofrece una lista de tutoriales en español</a>. Finalmente, también hay <a href="https://twitter.com/nodejs_es">una cuenta de Twitter (no demasiado activa)</a>. También el libro inserto (o cualquier otro recomendado, a esta alturas hay una cantidad ingente de bibliografía sobre node.js).</p>
+</body>
+</html>

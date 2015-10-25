@@ -1,0 +1,365 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="js.css" type="text/css" />
+</head>
+<body>
+<h1 id="programación-con-objetos-que-no-dirigida-a">Programación con objetos, que no &quot;dirigida a&quot;</h1>
+<h2 id="objetivos-de-este-capítulo">Objetivos de este capítulo</h2>
+<ul>
+<li>Entender qué es un objeto en JavaScript.</li>
+<li>Usar objetos y clases en JavaScript</li>
+<li>Aprender a modularizar una aplicación en varios ficheros.</li>
+</ul>
+<h2 id="clases-y-objetos-en-javascript">Clases y objetos en JavaScript</h2>
+<p>JavaScript es un lenguaje basado en objetos, aunque un tanto peculiar; en realidad, de casi todas las características de un lenguaje orientado a objetos, solo tiene los objetos, e incluso estos son un tanto peculiares.</p>
+<blockquote>
+<p>Esto está cambiando en las últimas versiones del lenguaje, empezando por ES6</p>
+</blockquote>
+<p>Por eso no es exactamente <em>dirigido a objetos</em> u <em>orientado a objetos</em>. Las características las veremos en el siguiente <a href="https://github.com/JJ/curso-js/tree/master/code/quiniela.js">programa</a>, que podría servir para hacer quinielas.</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// Definición de la clase Partido</span>
+<span class="kw">function</span> <span class="fu">Partido</span>(local,visitante) {
+  <span class="kw">this</span>.<span class="fu">local</span> = local;
+  <span class="kw">this</span>.<span class="fu">visitante</span>=visitante;
+  <span class="kw">this</span>.<span class="fu">resultado</span>=<span class="kw">null</span>;
+}
+
+<span class="kw">var</span> equipos= <span class="kw">new</span> <span class="fu">Array</span>(<span class="st">&#39;Madrid&#39;</span>, <span class="st">&#39;Barça&#39;</span>, <span class="st">&#39;Atleti&#39;</span>, <span class="st">&#39;Geta&#39;</span>,
+    <span class="st">&#39;Betis&#39;</span>, <span class="st">&#39;Depor&#39;</span>, <span class="st">&#39;Sevilla&#39;</span>, <span class="st">&#39;Graná&#39;</span>);
+
+<span class="kw">var</span> midsize = <span class="ot">equipos</span>.<span class="fu">length</span>/<span class="dv">2</span>;
+<span class="kw">var</span> quiniela = <span class="kw">new</span> <span class="fu">Array</span>( midsize );
+<span class="kw">for</span> ( i=<span class="dv">0</span>; i &lt; midsize ; i++ ) {
+  <span class="kw">var</span> equipo1 = <span class="ot">equipos</span>.<span class="fu">splice</span>(<span class="ot">Math</span>.<span class="fu">floor</span>( <span class="ot">equipos</span>.<span class="fu">length</span>*<span class="ot">Math</span>.<span class="fu">random</span>()) , <span class="dv">1</span>);
+  <span class="kw">var</span> equipo2 = <span class="ot">equipos</span>.<span class="fu">splice</span>(<span class="ot">Math</span>.<span class="fu">floor</span>( <span class="ot">equipos</span>.<span class="fu">length</span>*<span class="ot">Math</span>.<span class="fu">random</span>()), <span class="dv">1</span>);
+  quiniela[i] = <span class="kw">new</span> <span class="fu">Partido</span>( equipo1, equipo2 );
+ }
+
+<span class="kw">for</span> ( i <span class="kw">in</span> quiniela ) {
+  <span class="fu">print</span>( <span class="st">&quot;Partido &quot;</span> + (<span class="fu">parseInt</span>(i)+<span class="dv">1</span>)+<span class="st">&quot;: &quot;</span> + quiniela[i].<span class="fu">local</span> + <span class="st">&quot; - &quot;</span> + quiniela[i].<span class="fu">visitante</span>);
+}</code></pre>
+<p>Con lo primero que nos enfrentamos es con una nueva forma de definir una matriz o <code>Array</code>: ya que sabemos que JS es OO, pues usamos una forma OO de definirlo, mediante la orden <code>new</code>, que, como en Java y en C++, crea un nuevo objeto llamando al <em>constructor</em> del mismo. En este caso le pasamos directamente los elementos que constituyen el vector o <em>array</em>, pero podríamos haberle pasado el tamaño de esta forma: <code>var myArray = new Array(33);</code> Los objetos así creados son objetos de pleno derecho, y se puede acceder a sus propiedades con métodos usando también una sintaxis clásica: el puntito <code>.</code> tras el nombre de la variable. Por ejemplo, <code>myArray.length</code> devolvería el tamaño de la matriz</p>
+<p>Pero como lo que se trata en este programa es de definir nosotros una clase, lo hacemos en las líneas siguientes, en la función <code>Partido</code>, que convencionalmente ponemos en mayúscula, para indicar que es un nombre de clase. En realidad, una clase en JS es una función dentro de la cual se le asigna un valor a la variable <code>this</code>, como en esta: cada uno de los elementos de la variable <code>this</code> será una variable de instancia. Como se ve, aquí no hay encapsulación ni perrito que le ladre.</p>
+<p>Lo que vamos a crear es un vector de estos partidos, e irle asignando valores extraídos aleatoriamente. Mientras tanto, usamos los métodos que llevan objetos de clases estándar JS; igual que otros lenguajes tienen librería estándar, JS tiene clases estándar: <code>Array</code>, que ya hemos visto, y <code>Math</code>. Lo que usamos de <code>Math</code> son métodos de clase, no de instancia, tales como <code>Math.random</code>, que genera un número aleatorio entre 0 y 1. También se usa un método de instancia, <code>splice</code>, que extrae una parte del vector de equipos; extraemos el seleccionado, para que no moleste mientras generamos el resto de la quiniela.</p>
+<p>Y el objeto lo creamos mediante una clásica llamada:</p>
+<pre><code>quiniela[i] = new Partido( equipo1, equipo2 );</code></pre>
+<p>Más adelante usamos un bucle <code>in</code> para escribir los valores de cada uno de los partidos; las variables no están encapsuladas, así que se puede acceder a ellas directamente: <code>partido.local</code>, por ejemplo. Hay también un pequeño truco: el uso de <code>parseInt</code> dentro de <code>print</code> para que se interprete <code>i</code> como un número entero, no como una cadena, y, por tanto, el <code>+</code> que lo sigue como una suma normal y no una concatenación de cadenas. <code>i+1</code> daría <code>11</code>, mientras que <code>parseInt(i)+1</code> dará 2.</p>
+<p>Y el resultado, aleatorio por supuesto, será algo así como esto:</p>
+<pre><code>Partido 0: Graná - Atleti
+Partido 1: Madrid - Depor
+Partido 2: Betis - Barça
+Partido 3: Sevilla - Geta</code></pre>
+<p>Añadir métodos de clase se hace más o menos de la misma forma, que no es muy ortodoxa, pero es la que hay. Lo veremos en <a href="https://github.com/JJ/curso-js/tree/master/code/quiniela2.js">el siguiente programa</a>, del que sacamos el fragmento más interesante:</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// Definición de la clase Partido</span>
+<span class="kw">function</span> <span class="fu">Partido</span>(local,visitante) {
+  <span class="kw">this</span>.<span class="fu">local</span> = local;
+  <span class="kw">this</span>.<span class="fu">visitante</span>=visitante;
+  <span class="kw">this</span>.<span class="fu">resultado</span>=<span class="kw">null</span>;
+  <span class="kw">this</span>.<span class="fu">setResultado</span> = setResultado;
+  <span class="kw">this</span>.<span class="fu">toString</span> = toString;
+}
+
+<span class="kw">function</span> <span class="fu">setResultado</span>( esteResultado ) {
+  <span class="kw">if</span> ( esteResultado == <span class="st">&#39;1&#39;</span> || esteResultado==<span class="st">&#39;x&#39;</span> || esteResultado==<span class="st">&#39;2&#39;</span> ) 
+    <span class="kw">this</span>.<span class="fu">resultado</span> = esteResultado;
+}
+
+<span class="kw">function</span> <span class="fu">toString</span>() {
+    <span class="kw">return</span> <span class="st">&quot;Partido &quot;</span> + i + <span class="st">&quot;: &quot;</span> + quiniela[i].<span class="fu">local</span> + <span class="st">&quot; - &quot;</span> + quiniela[i].<span class="fu">visitante</span> + <span class="st">&quot; = &quot;</span>+ <span class="kw">this</span>.<span class="fu">resultado</span>;
+}</code></pre>
+<p>Añadimos un par de funciones, y para que <em>pertenezcan</em> a la clase, hala, con un <code>this</code> por aquí y un <code>this</code> por allá, solucionado. Es de buen gusto llamar al método con el mismo nombre que la función, para no despistarse; también seguir una cierta convención para ponerles nombres: <code>get</code>, o <code>to</code>, o cosas por el estilo. Lo que no es de recibo es llamar a una función que cambia el valor de la variable igual que la variable, porque entonces nos liamos. Y como ya hemos visto antes como se llama a los métodos de instancia, pues listos. No se hable más.</p>
+<h2 id="matrices-asociativas">Matrices asociativas</h2>
+<p>Pero hay más matrices, aparte de las lineales: JS, como muchos otros lenguajes, permite trabajar con <em>matrices asociativas</em> (también llamadas <em>diccionarios</em> o <em>hashes</em>). En una matriz asociativa, la clave es una cadena, en vez de un número, lo que le da mucha más flexibilidad a la hora de almacenar información. En un vector, se accede a cada uno de los elementos del vector a través de un índice numérico, y eso implica también un orden en su estructura (y, a veces, una continuidad en su almacenamiento, aunque no necesariamente tiene que ser así). Es decir, un vector lineal es un grupo de parejas (0, valor[0], 1, valor[1],...., n, valor[n]). De hecho, como los números suelen ser sucesivos, muchas veces se dan por sobreentendidos, de forma que para trabajar con un vector (ejecutar una operación sobre sus valores, por ejemplo) sólo se usan sus valores: valor[0], valor[1],..., valor[n].</p>
+<p>Sin embargo, una matriz asociativa, diccionario, mapa o <a href="http://es.wikipedia.org/wiki/Tabla_hash">Tabla_hash</a> (o simplemente <em>hash</em>) está compuesto por una serie de pares (cadena alfanumérica, valor): (cadena<sub>1</sub>, valor<sub>1</sub>, cadena<sub>2</sub>,valor<sub>2</sub>... cadena<sub>n</sub>, valor<sub>n</sub>). Los valores están asociados a su cadena correspondiente; de forma que se accede a los valores a través de la cadena alfanumérica usada para indexarlos, que se suele denominar <em>clave</em> (<em>key</em>). Casi todos los lenguajes de programación tienen alguna forma de usar estas matrices asociativas. Por ejemplo, en Perl:</p>
+<pre class="sourceCode perl"><code class="sourceCode perl"><span class="kw">my</span> <span class="dt">%matrizAsociativa</span>; <span class="co"># % para matrices asociativas</span>
+<span class="dt">$matrizAsociativa</span>{<span class="kw">&#39;</span><span class="st">variable</span><span class="kw">&#39;</span>}=<span class="kw">&#39;</span><span class="st">Valor</span><span class="kw">&#39;</span>; <span class="co"># { para las claves print $matrizAsociativa{&#39;variable&#39;};</span></code></pre>
+<p>devolvería <code>Valor</code>.</p>
+<p>Las usaremos en el <a href="https://github.com/JJ/curso-js/tree/master/code/liga.js">siguiente programa</a>, que genera aleatoriamente diez jornadas de una liga, y asigna puntuación según los resultados:</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="fu">load</span>(<span class="st">&#39;Partido.js&#39;</span>);
+
+<span class="kw">var</span> equipos= <span class="kw">new</span> <span class="fu">Array</span>(<span class="st">&#39;Madrid&#39;</span>, <span class="st">&#39;Barça&#39;</span>, <span class="st">&#39;Atleti&#39;</span>, <span class="st">&#39;Geta&#39;</span>, <span class="st">&#39;Betis&#39;</span>, <span class="st">&#39;Depor&#39;</span>, <span class="st">&#39;Sevilla&#39;</span>, <span class="st">&#39;Graná&#39;</span>);
+
+<span class="kw">function</span> <span class="fu">jornada</span>( estosEquipos ) {
+
+  <span class="kw">var</span> equiposAqui = <span class="kw">new</span> Array;
+  equiposAqui = <span class="ot">equiposAqui</span>.<span class="fu">concat</span>(estosEquipos);
+  <span class="kw">var</span> midsize = <span class="ot">equiposAqui</span>.<span class="fu">length</span>/<span class="dv">2</span>;
+  <span class="kw">var</span> quiniela = <span class="kw">new</span> <span class="fu">Array</span>( midsize );
+  <span class="kw">var</span> unox2 = <span class="kw">new</span> <span class="fu">Array</span>( <span class="st">&#39;1&#39;</span>,<span class="st">&#39;x&#39;</span>,<span class="st">&#39;2&#39;</span>);
+  <span class="kw">for</span> ( <span class="kw">var</span> i=<span class="dv">0</span>; i &lt; midsize ; i++ ) {
+    <span class="kw">var</span> equipo1 = <span class="ot">equiposAqui</span>.<span class="fu">splice</span>(<span class="ot">Math</span>.<span class="fu">floor</span>( <span class="ot">equiposAqui</span>.<span class="fu">length</span>*<span class="ot">Math</span>.<span class="fu">random</span>()) , <span class="dv">1</span>);
+    <span class="kw">var</span> equipo2 = <span class="ot">equiposAqui</span>.<span class="fu">splice</span>(<span class="ot">Math</span>.<span class="fu">floor</span>( <span class="ot">equiposAqui</span>.<span class="fu">length</span>*<span class="ot">Math</span>.<span class="fu">random</span>()), <span class="dv">1</span>);
+    quiniela[i] = <span class="kw">new</span> <span class="fu">Partido</span>( equipo1, equipo2 );
+    quiniela[i].<span class="fu">setResultado</span>( unox2[<span class="ot">Math</span>.<span class="fu">floor</span>( <span class="dv">3</span>*<span class="ot">Math</span>.<span class="fu">random</span>()) ]);
+  }
+  <span class="kw">return</span> quiniela;
+}</code></pre>
+<p>En parte, este programa es similar a los anteriores: la parte que generaba cada jornada está ahora en una función, que devuelve un <code>array</code> de resultados, que se guardan en el array <code>quinielas</code>. Hemos sacado, además, la definición de la clase <code>Partido</code> a un fichero externo, que cargamos con <code>load</code>. Por otro lado, como a la función <code>jornada</code> se le pasa una referencia al vector con los equipos, tenemos que copiarlo a una variable local, definiéndola (<code>equiposAqui</code>), y concatenándole (<code>concat</code>) el vector que se le pasa por valor, que es igual que copiarlo, pero seo hace en una sola orden.</p>
+<p>El truco está a partir de la definición de la variable <code>resultados</code>. Esta variable es una matriz asociativa que contendrá la puntuación de los equipos, y estará indexada por el nombre del equipo. Se declara igual que los demás arrays, y, para inicializarlo, vamos extrayendo los valores del vector de equipos, y usándolos como clave: <code>resultados[equipos[i]]=0;</code> <code>equipos[i]</code> valdrá sucesivamente Barça, Graná... y así se irán inicializando a 0 los valores correspondientes. Si no se inicializan, la primera vez que se usa una variable tiene el valor <code>NaN</code>, con el que no se puede hacer nada. Es así de arisco.</p>
+<p>Más adelante se va recorriendo en un bucle doble los partidos de cada una de las jornadas, y asignando puntuación dependiendo del resultado de la quiniela. Se usa la construcción <code>if... else if       ... else</code>, que funciona de la forma habitual, aunque también podríamos haber usado <code>switch</code>, como en <a href="https://github.com/JJ/curso-js/tree/master/code/liga2.js">el siguiente programa</a>, que en lo único que cambia es en estas líneas:</p>
+<pre><code>switch (resultado) {
+    case &#39;1&#39;:
+      resultados[local]+=3;
+      break;
+    case &#39;x&#39;:
+      resultados[local]+=1;
+      resultados[visitante]+=1;
+      break;
+    default:
+      resultados[visitante]+=3;
+    }</code></pre>
+<p>y que viene a ser como el anterior, pero con <code>case</code>s en vez de <code>if</code>s. Vamos, tres cuartos de lo mismo.</p>
+<h2 id="manejando-objetos">Manejando objetos</h2>
+<p>En realidad, todo en JavaScript es un objeto, y especialmente los vectores: tanto los vectores tradicionales como las matrices asociativas como los objetos se representan internamente de la misma forma, y te puedes referir a ellos de diferentes maneras. Vamos a usar el depurador interactivo para verlo, ejecutando simplemente <code>rhino</code>, o <code>kjs</code> en la línea de comandos. Una vez hecho, tecleamos las siguientes órdenes:</p>
+<pre><code>js&gt; foo = new Array
+js&gt; foo.cero=&#39;Cero&#39; Cero
+js&gt; foo[1] = &#39;Uno&#39; Uno
+js&gt; foo[&#39;dos&#39;] = &#39;Dos&#39; Dos
+js&gt; foo.dos Dos
+js&gt; foo[&#39;cero&#39;] Cero
+js&gt; for ( i in foo) { print(foo[i]);}
+Cero Uno Dos</code></pre>
+<p>Hay que teclear lo que se encuentra detrás de <code>js&gt;</code>; cada segunda línea es la respuesta del intérprete a nuestras órdenes. En la primera, creamos un vector, y le asignamos valor a tres elementos de formas diferentes: usando la notación de objeto (con el .) para el 0, la notación de vector para el 1, y la notación de matriz asociativa para el 2. Luego se ve que, independientemente de cómo se haya asignado el valor, se puede usar cualquier otra notación para acceder al elemento; y, finalmente, vemos como se puede recorrer de forma uniforme el array usando sus componentes mediante la orden <code>in</code>.</p>
+<p>Por eso precisamente, hay que tener un poco de cuidado con estos arrays asociativos que se comportan un poco como les da la gana. Es conveniente usar para ellos <code>Object</code>, que es lo que son, en vez de <code>Array</code>. De hecho, si en lo anterior sustituimos <code>Array</code> por <code>Object</code> dará exactamente el mismo resultado. Por eso <a href="http://andrewdupont.net/2006/05/18/javascript-associative-arrays-considered-harmful/">se consideran perniciosas los arrays asociativos en JS</a>, pero es simplemente una cuestión de convención.</p>
+<p>No todo va a ser público en un objeto; también pueden tener su intimidad guardada en variables privadas:</p>
+<pre><code>js&gt; function Foo( bar ) { this.bar = bar; var privada = 7;}
+js&gt; var este_foo = new Foo( &#39;correquetepillo&#39; );
+js&gt; print(este_foo.bar) correquetepillo
+js&gt; print(este_foo.privada) undefined</code></pre>
+<p>Es tan secreta, de hecho, que ni siquiera te dice que no existe: simplemente que su valor está indefinido.</p>
+<p>El propio estándar JavaScript (ECMAScript) define una serie de clases que se pueden instanciar, que corresponderían a la librería estándar (o librería estándar de clases) en otros lenguajes. Una de ellas ya la hemos visto: la clase <code>Array</code>. Otra es la clase <code>String</code>, que se usa para manejar cadenas alfanuméricas, chorros de 0s y 1s.</p>
+<pre><code>js&gt; var cadena = new String(&quot;1&quot;);
+js&gt; print(cadena + 1) 11</code></pre>
+<p>La clase <code>String</code> tiene una serie de métodos que permiten hacer lo habitual con las cadenas: encadenarlas, dividirlas, y buscar cosas.</p>
+<pre><code>js&gt; var nombres = &quot;Pedro, Lucas, Juan&quot;.split(&quot;, &quot;);
+js&gt; print(nombres[0]) Pedro</code></pre>
+<p>En este caso, <code>split</code> es un método de la clase String, y lo estamos aplicando directamente sobre la cadena <code>&quot;Pedro, Lucas, Juan&quot;</code>, que, de por si, es un objeto de esa clase. <code>split</code> divide la cadena usando los caracteres que le pasamos, y da lugar a un <code>Array</code> con tantos componentes como resulte.</p>
+<p>De camino, podría haber una clase para escribir y leer ficheros, porque con el rato que llevamos, todavía no hemos visto ninguna, y, además, cualquier lenguaje decente escribe y lee ficheros. Es más, es que muchos no hacen otra cosa, ¿no? Pues no. El estándar JS no define ningún tipo de rutina de E/S. Pero si usamos el intérprete Rhino (en vez de SpiderMonkey, que es el que hemos venido usando), podemos usar clases de Java directamente, lo que complica terriblemente el programa, pero <a href="https://github.com/JJ/curso-js/tree/master/code/lee_quiniela.js">ahí está, de todas formas</a>:</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// ejecutar con rhino lee_quiniela.js &lt;argumento&gt;</span>
+<span class="fu">load</span>(<span class="st">&#39;Partido.js&#39;</span>);
+<span class="kw">var</span> FileReader = <span class="ot">java</span>.<span class="ot">io</span>.<span class="fu">FileReader</span>;
+<span class="kw">var</span> BufferedReader =<span class="ot">java</span>.<span class="ot">io</span>.<span class="fu">BufferedReader</span>;
+
+<span class="kw">var</span> file_name = arguments[<span class="dv">0</span>];
+
+<span class="kw">var</span> f = <span class="kw">new</span> <span class="fu">FileReader</span>(file_name);
+<span class="kw">var</span> br = <span class="kw">new</span> <span class="fu">BufferedReader</span>( f );
+<span class="kw">var</span> resultados= <span class="kw">new</span> Array;
+<span class="kw">var</span> line = <span class="kw">new</span> String;
+<span class="kw">while</span> ((line = <span class="ot">br</span>.<span class="fu">readLine</span>()) != <span class="kw">null</span>) {
+    <span class="kw">var</span> estaLinea = <span class="kw">new</span> <span class="fu">String</span>( line );
+    <span class="kw">var</span> resultado  = <span class="ot">estaLinea</span>.<span class="fu">split</span>(<span class="st">&quot; &quot;</span>);
+ 
+    <span class="kw">switch</span> (resultado[<span class="dv">2</span>]) {
+    <span class="kw">case</span> <span class="st">&#39;1&#39;</span>:
+    <span class="kw">if</span> ( resultados[resultado[<span class="dv">0</span>]] ) {
+        resultados[resultado[<span class="dv">0</span>]]+=<span class="dv">3</span>;
+    } <span class="kw">else</span> {
+        resultados[resultado[<span class="dv">0</span>]]=<span class="dv">3</span>;
+    }
+    <span class="kw">break</span>;
+    <span class="kw">case</span> <span class="st">&#39;x&#39;</span>:
+    <span class="kw">if</span> ( resultados[resultado[<span class="dv">0</span>]] ) {
+        resultados[resultado[<span class="dv">0</span>]]+=<span class="dv">1</span>;
+    } <span class="kw">else</span> {
+        resultados[resultado[<span class="dv">0</span>]]=<span class="dv">1</span>;
+    }
+    <span class="kw">if</span> ( resultados[resultado[<span class="dv">1</span>]] ) {
+        resultados[resultado[<span class="dv">1</span>]]+=<span class="dv">1</span>;
+    } <span class="kw">else</span> {
+        resultados[resultado[<span class="dv">1</span>]]=<span class="dv">1</span>;
+    }
+    <span class="kw">break</span>;
+    <span class="kw">default</span>:
+    <span class="kw">if</span> ( resultados[resultado[<span class="dv">1</span>]] ) {
+        resultados[resultado[<span class="dv">1</span>]]+=<span class="dv">3</span>;
+    } <span class="kw">else</span> {
+        resultados[resultado[<span class="dv">1</span>]]=<span class="dv">3</span>;
+    }
+    <span class="kw">break</span>
+    }
+}
+
+<span class="kw">for</span> ( <span class="kw">var</span> i <span class="kw">in</span> resultados ) {
+    <span class="fu">print</span>( i + <span class="st">&quot;: &quot;</span> + resultados[i])
+}</code></pre>
+<p>El programa es bastante similar al anterior, pero lee de fichero en vez de generar los resultados aleatoriamente. Y lo lee aproximadamente de la misma forma a como se haría en Java. Por eso hay que usar Rhino, que permite usar las clases de la librería estándar de Java de forma <em>nativa</em>. En este caso usamos dos clases: <code>FileReader</code> y <code>BufferedReader</code>, para poder leer de línea en línea. La única diferencia a como se haría en Java es que hay que pasar la línea leída de un objeto <code>String</code> de Java a un objeto <code>String</code> de JS, que es lo que se hace en <code>var estaLinea = new String( line );</code>. También sale un poco más largo porque, como indicamos en el programa de más arriba, los elementos de un <code>Array</code> hay que inicializarlos; en cada caso del <code>switch</code> comprobamos si están inicializados o no antes de sumarles; si no lo está, le asignamos el valor directamente.</p>
+<p>En realidad, las primeras líneas lo único que hacen es declarar un <em>alias</em> para las clases de Java. En JS una variable puede contener cualquier cosa, incluso una clase. Así acortamos el nombre, y parecen más de javascrí.</p>
+<p>La otra diferencia es también cómo se ejecuta el fichero: <code>rhino lee_quiniela.js quiniela.datos</code> para ejecutarlo sobre el <a href="https://github.com/JJ/curso-js/tree/master/code/quiniela.datos">fichero <code>quiniela.datos</code></a>, que dará el resultado siguiente:</p>
+<pre><code>Elche: 1
+Atleti: 3
+Cai: 1
+Athleti: 6
+Bar~a: 1
+Madrid: 2
+H~rcules: 1</code></pre>
+<p>Queda con esto más o menos claro que para ir donde nadie ha ido antes con JS, hay que meterse un poco en Java. Pero no siempre. Tenéis alguna información más en <a href="http://www.mozilla.org/rhino/ScriptingJava.html">este tutorial de Mozilla</a>, que te explica como importar espacios de nombres completos e incluso como implementar interfaces de Java.</p>
+<p>Aunque no lo parezca, JS es todavía un lenguaje joven, al que le faltan gran cantidad de librerías básicas, y, especialmente, una forma centralizada de empaquetar, probar y distribuir esas librerías, como <a href="http://www.cpan.org">CPAN</a> para Perl o GEMs para Ruby. Hay algo por el estilo, <a href="http://openjsan.org">llamado OpenJSAN</a>, de JS Archive Network. Para instalarlo hace falta Perl, y sólo hay unas pocas librerías todavía. Algunas muy útiles, pero siguen siendo unas pocas. Otras, como la amplia <a href="http://code.google.com/p/jslibs/">JSlib</a>, sólo va en Windows. En todo caso, a estas alturas parece un proyecto muerto.</p>
+<p>La que si es popular es <a href="http://prototypejs.org/">Prototype</a>, una librería que se usa principalmente en conjunción con RoR y AJAX, pero resulta que necesita ejecutarse dentro del navegador, porque usa objetos del mismo (como <code>document</code>, por ejemplo). Así que la dejaremos para más adelante.</p>
+<h2 id="objetos-para-el-camino-json">Objetos para el camino: JSON</h2>
+<p>Lo interesante de los objetos en JS es que hay una forma muy fácil de <em>serializarlos</em> (es decir, convertirlos en texto u otro formato de forma que se puedan intercambiar fácilmente con otros programas a través de la red); a este formato se le denomina <a href="http://es.wikipedia.org/wiki/JSON">JSON</a> (JavaScript Object Notation). Y como en realidad, tal como se ha visto en el apartado anterior, todo es un objeto en JS, se puede usar esta notación para asignar valores prácticamente a cualquier cosa. Vamos a usar una vez más el intérprete en modo interactivo para ver un ejemplo:</p>
+<pre><code>js&gt; var objeto = { Madrid : 25, Atleti: 33, Ponferradina: 44 };
+js&gt; for (i in objeto) { print( i + &quot; : &quot;+ objeto[i] )}; Madrid : 25 Atleti : 33 Ponferradina : 44</code></pre>
+<p>Más fácil no puede ser. Se le asigna valor a un objeto con el formato clave : valor (con coma al final), de la misma forma que se haría a un array asociativo. Además, se pueden crear objetos sobre la marcha y asignárselos a una variable cuyo valor se cree también sobre la marcha:</p>
+<pre><code>js&gt; eval(&quot;var objeto2 = { Madrid : 25, Atleti: 33, Ponferradina: 44 }&quot;);
+js&gt; for (i in objeto2) { print( i + &quot; : &quot;+ objeto[i] )}; Madrid : 25 Atleti : 33 Ponferradina : 44</code></pre>
+<p>donde usamos <code>eval</code>, que interpreta una expresión en JavaScript como si del propio intérprete se tratara. Las expresiones se pueden anidar, para dar lugar a objetos más complejos</p>
+<pre><code>js&gt; eval(&quot;var objeto2 = { Madrid : 25, Atleti: 33, Ponferradina: { casa: 33, fuera: 44} }&quot;);
+js&gt; for (i in objeto2) { print( i + &quot; : &quot;+ objeto2[i] )}; Madrid : 25 Atleti : 33 Ponferradina : [object Object]</code></pre>
+<p>Que parece más raro de la cuenta, pero que, con un poco de código, se podría también imprimir.</p>
+<h2 id="funciones-como-objetos">Funciones como objetos</h2>
+<p>Las funciones son objetos de pleno derecho en JavaScript. Se puede crear una función como cualquier otro objeto, y de hecho ya hemos visto algo parecido cuando hemos definido una clase (que es simplemente un tipo de función). Como tales objetos, podemos pasarlas como parámetros y modificarlas de diferentes formas; algo así hemos visto ya cuando hemos definido objetos también, en los que se asignan los nombres de funciones a métodos de una clase simplemente usando su nombre (en realidad, un puntero a función). Las diferentes formas de definir funciones se explican en <a href="http://stackoverflow.com/questions/1140089/how-does-an-anonymous-function-in-javascript-work">este post de StackOverflow (un recurso imprescindible, por otro lado).</a></p>
+<p>Vamos a verlo a verlo a continuación, usando nuestra conocida quiniela; usaremos una función para imprimir el resultado de la quiniela, de forma que se pueda ver la salida de varias formas diferentes. En <a href="https://github.com/JJ/curso-js/tree/master/code/Nuevo_partido.js">el siguiente módulo hacemos uso de esta funcionalidad</a>:</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// Definición de la clase Partido</span>
+<span class="kw">function</span> <span class="fu">Nuevo_partido</span>(local,visitante, resultado) {
+    <span class="kw">this</span>.<span class="fu">local</span> = local;
+    <span class="kw">this</span>.<span class="fu">visitante</span>=visitante;
+    <span class="kw">this</span>.<span class="fu">resultado</span>=resultado;
+    <span class="kw">this</span>.<span class="fu">setResultado</span> = setResultado;
+    <span class="kw">this</span>.<span class="fu">toString</span> = toString;
+    <span class="kw">this</span>.<span class="fu">set_to_string</span> = set_to_string;
+    <span class="kw">this</span>.<span class="fu">impresor</span> = _toString;
+}
+
+<span class="kw">function</span> <span class="fu">setResultado</span>( esteResultado ) {
+    <span class="kw">if</span> ( esteResultado == <span class="st">&#39;1&#39;</span> || esteResultado==<span class="st">&#39;x&#39;</span> || esteResultado==<span class="st">&#39;2&#39;</span> ) 
+    <span class="kw">this</span>.<span class="fu">resultado</span> = esteResultado;
+}
+
+<span class="kw">function</span> <span class="fu">toString</span>() {
+    <span class="kw">return</span> <span class="kw">this</span>.<span class="fu">impresor</span>(<span class="kw">this</span>.<span class="fu">local</span>, <span class="kw">this</span>.<span class="fu">visitante</span>, <span class="kw">this</span>.<span class="fu">resultado</span>);
+}
+
+<span class="kw">function</span> <span class="fu">_toString</span>( local, visitante ) {
+    <span class="kw">return</span> <span class="st">&quot;: &quot;</span> + <span class="kw">this</span>.<span class="fu">local</span> + <span class="st">&quot; - &quot;</span> + <span class="kw">this</span>.<span class="fu">visitante</span> + <span class="st">&quot; = &quot;</span>+ <span class="kw">this</span>.<span class="fu">resultado</span>;
+}
+
+<span class="kw">function</span> <span class="fu">set_to_string</span> ( impresor ) {
+    <span class="kw">this</span>.<span class="fu">impresor</span> = impresor;
+}</code></pre>
+<p>En esta clase la principal diferencia es que usamos el método <code>impresor</code> como una variable al cual le podemos asignar diferentes valores, incluso desde fuera. De esta forma se puede modificar el comportamiento de un objeto: asignamos un comportamiento por omisión, pero si es necesario podemos cambiar <em>desde fuera</em> el comportamiento de esa clase simplemente asignándole un valor nuevo. De hecho, esto es lo que vamos a hacer en el <a href="https://github.com/JJ/curso-js/tree/master/code/liga3.js">programa siguiente (<code>liga3.js</code>)</a>:</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">#!/usr/bin/env js</span>
+
+<span class="fu">load</span>(<span class="st">&#39;Nuevo_partido.js&#39;</span>);
+
+<span class="kw">var</span> equipos= <span class="kw">new</span> <span class="fu">Array</span>(<span class="st">&#39;Madrid&#39;</span>, <span class="st">&#39;Barça&#39;</span>, <span class="st">&#39;Atleti&#39;</span>, <span class="st">&#39;Geta&#39;</span>, <span class="st">&#39;Betis&#39;</span>, <span class="st">&#39;Depor&#39;</span>, <span class="st">&#39;Sevilla&#39;</span>, <span class="st">&#39;Graná&#39;</span>);
+
+<span class="kw">function</span> <span class="fu">jornada</span>( estosEquipos ) {
+    <span class="kw">var</span> equiposAqui = <span class="kw">new</span> Array;
+    <span class="kw">var</span> imprime = <span class="kw">function</span>( local, visitante, resultado ) { 
+    <span class="fu">print</span>(<span class="st">&quot;Imprimiendo </span><span class="ch">\n</span><span class="st">&quot;</span>);
+    <span class="kw">return</span>  <span class="st">&quot;- &quot;</span> + local + <span class="st">&quot; vs. &quot;</span> + visitante + <span class="st">&quot; resultado  &quot;</span>+ resultado;
+    };
+    equiposAqui = <span class="ot">equiposAqui</span>.<span class="fu">concat</span>(estosEquipos);
+    <span class="kw">var</span> midsize = <span class="ot">equiposAqui</span>.<span class="fu">length</span>/<span class="dv">2</span>;
+    <span class="kw">var</span> quiniela = <span class="kw">new</span> <span class="fu">Array</span>( midsize );
+    <span class="kw">var</span> unox2 = <span class="kw">new</span> <span class="fu">Array</span>( <span class="st">&#39;1&#39;</span>,<span class="st">&#39;x&#39;</span>,<span class="st">&#39;2&#39;</span>);
+    <span class="kw">for</span> ( <span class="kw">var</span> i=<span class="dv">0</span>; i &lt; midsize ; i++ ) {
+    <span class="kw">var</span> equipo1 = <span class="ot">equiposAqui</span>.<span class="fu">splice</span>(<span class="ot">Math</span>.<span class="fu">floor</span>( <span class="ot">equiposAqui</span>.<span class="fu">length</span>*<span class="ot">Math</span>.<span class="fu">random</span>()) , <span class="dv">1</span>);
+    <span class="kw">var</span> equipo2 = <span class="ot">equiposAqui</span>.<span class="fu">splice</span>(<span class="ot">Math</span>.<span class="fu">floor</span>( <span class="ot">equiposAqui</span>.<span class="fu">length</span>*<span class="ot">Math</span>.<span class="fu">random</span>()), <span class="dv">1</span>);
+    quiniela[i] = <span class="kw">new</span> <span class="fu">Nuevo_partido</span>( equipo1, equipo2 );
+    quiniela[i].<span class="fu">setResultado</span>( unox2[<span class="ot">Math</span>.<span class="fu">floor</span>( <span class="dv">3</span>*<span class="ot">Math</span>.<span class="fu">random</span>()) ]);
+    quiniela[i].<span class="fu">set_to_string</span>( imprime );
+    }
+    <span class="kw">return</span> quiniela;
+}
+
+<span class="kw">var</span> quinielas = <span class="kw">new</span> Array;
+<span class="kw">for</span> ( <span class="kw">var</span> i = <span class="dv">0</span>; i &lt; <span class="dv">10</span>; i ++ ) {
+  quinielas[i] = <span class="fu">jornada</span>( equipos ); 
+}
+
+<span class="kw">var</span> resultados= <span class="kw">new</span> Array;
+<span class="kw">for</span> ( <span class="kw">var</span> i <span class="kw">in</span> equipos ) {
+  resultados[equipos[i]]=<span class="dv">0</span>;
+}
+
+<span class="kw">for</span> ( <span class="kw">var</span> i = <span class="dv">0</span>; i &lt; <span class="ot">quinielas</span>.<span class="fu">length</span>; i ++ ) {
+    <span class="kw">for</span> ( <span class="kw">var</span> j = <span class="dv">0</span>;j &lt; quinielas[i].<span class="fu">length</span>; j ++ ) {
+      <span class="kw">var</span> local = quinielas[i][j].<span class="fu">local</span>;
+      <span class="kw">var</span> visitante = quinielas[i][j].<span class="fu">visitante</span>;
+      <span class="kw">var</span> resultado = quinielas[i][j].<span class="fu">resultado</span>;
+      <span class="kw">switch</span> (resultado) {
+      <span class="kw">case</span> <span class="st">&#39;1&#39;</span>:
+      resultados[local]+=<span class="dv">3</span>;
+      <span class="kw">break</span>;
+      <span class="kw">case</span> <span class="st">&#39;x&#39;</span>:
+      resultados[local]+=<span class="dv">1</span>;
+      resultados[visitante]+=<span class="dv">1</span>;
+      <span class="kw">break</span>;
+      <span class="kw">default</span>:
+      resultados[visitante]+=<span class="dv">3</span>;
+      }
+    }
+}
+
+<span class="kw">for</span> ( <span class="kw">var</span> i <span class="kw">in</span> resultados ) {
+  <span class="fu">print</span>( i + <span class="st">&quot;: &quot;</span> + resultados[i])
+}</code></pre>
+<p>Como en todos los scripts, habrá que tener en cuenta que la primera línea, <code>#!/usr/bin/js</code>, tendrá que sustituirse por el intérprete de JavaScript que usemos (<code>rhino</code>, <code>gjs</code>, <code>node</code> o el que sea; en este último caso es probable que la línea sea <code>/usr/bin/env node</code>). La parte nueva de este programa está en en la línea 9, donde se define la variable <code>imprime</code>. Se define una función <em>sin nombre</em> (lo que se suele denominar un <em>closure</em> o función anónima) a la que podemos acceder mediante la variable que le hemos asignado. Lo importante de esta sintaxis es que las funciones son variables de pleno derecho, que podemos usar como parámetros de otras funciones; esto se usará de forma extensiva cuando veamos jQuery y node.js.</p>
+<h2 id="commonjs-una-infraestructura-común-para-carga-de-módulos">CommonJS, una infraestructura común para carga de módulos</h2>
+<p>Uno de los problemas de JS es que, al haber sido desarrollado principalmente para trabajar en el navegador, carece de una serie de librerías comunes para trabajar en el servidor o en aplicaciones de escritorio. <a href="http://www.commonjs.org">CommonJS</a> es un intento de dar tal infraestructura. Principalmente se trata de proveer una serie de especificaciones para hacer cosas comunes, desde o más simple, que es crear un módulo o librería hasta cosas más complejas: interacción con consola o con línea de órdenes.</p>
+<p>Por lo pronto la especificación que ha tenido más éxito es la de módulos, que <a href="http://dailyjs.com/2010/10/18/modules/">se resume en este artículo</a>; se trata de que un módulo escrito para un intérprete (Rhino, por ejemplo) pueda funcionar en otro (tal como node.js). Vamos a ver cómo adaptaríamos alguna de las cosas hechas a este estándar, por ejemplo, cambiando esto sobre la clase Nuevo_partido.js creada anteriormente (la llamamos <a href="https://github.com/JJ/curso-js/tree/master/code/Un_Partido.js">Un_Partido</a>).</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// Definición de la clase Nuevo_partido</span>
+<span class="ot">exports</span>.<span class="fu">Un_Partido</span> = <span class="kw">function</span> (local,visitante,resultado) {
+    <span class="kw">this</span>.<span class="fu">local</span> = local;
+    <span class="kw">this</span>.<span class="fu">visitante</span>=visitante;
+    <span class="kw">this</span>.<span class="fu">resultado</span>=resultado;
+    <span class="kw">this</span>.<span class="fu">setResultado</span> = setResultado;
+    <span class="kw">this</span>.<span class="fu">toString</span> = toString;
+    <span class="kw">this</span>.<span class="fu">set_to_string</span> = set_to_string;
+    <span class="kw">this</span>.<span class="fu">impresor</span> = _toString;
+}
+
+<span class="kw">function</span> <span class="fu">setResultado</span>( esteResultado ) {
+    <span class="kw">if</span> ( esteResultado == <span class="st">&#39;1&#39;</span> || esteResultado==<span class="st">&#39;x&#39;</span> || esteResultado==<span class="st">&#39;2&#39;</span> ) 
+    <span class="kw">this</span>.<span class="fu">resultado</span> = esteResultado;
+}
+
+<span class="kw">function</span> <span class="fu">toString</span>() {
+    <span class="kw">return</span> <span class="kw">this</span>.<span class="fu">impresor</span>(<span class="kw">this</span>.<span class="fu">local</span>, <span class="kw">this</span>.<span class="fu">visitante</span>, <span class="kw">this</span>.<span class="fu">resultado</span>);
+}
+
+<span class="kw">function</span> <span class="fu">_toString</span>( local, visitante, resultado ) {
+    <span class="kw">return</span> <span class="st">&quot;: &quot;</span> + local + <span class="st">&quot; - &quot;</span> + visitante + <span class="st">&quot; = &quot;</span> + resultado;
+}
+
+<span class="kw">function</span> <span class="fu">set_to_string</span> ( impresor ) {
+    <span class="kw">this</span>.<span class="fu">impresor</span> = impresor;
+}</code></pre>
+<p>El único cambio ha sido que en vez de definir la función directamente, se define como un atributo de <code>exports</code>. El resto, al ser atributos de ese objeto, no hace falta que lo definamos de la misma forma. Al llamarlo también habrá un pequeño cambio. Mientras que antes teníamos que hacer un eval sobre lo cargado, ahora basta con (<a href="https://github.com/JJ/curso-js/tree/master/codeusa_partido.js">programa usa_partido.js</a>):</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> un_partido = <span class="fu">require</span>(<span class="st">&#39;./Un_Partido.js&#39;</span>);
+<span class="kw">var</span> este_partido = <span class="kw">new</span> <span class="ot">un_partido</span>.<span class="fu">Un_Partido</span>( <span class="st">&#39;este&#39;</span>,<span class="st">&#39;otro&#39;</span>,<span class="st">&#39;1&#39;</span>);
+<span class="ot">console</span>.<span class="fu">log</span>(<span class="st">&#39;Resultado &#39;</span> + <span class="ot">este_partido</span>.<span class="fu">toString</span>());</code></pre>
+<p>Este módulo ya se comporta como el resto de los módulos de Node, haciendo falta usar sólo require (con el camino completo) para cargarlo. Ahora, con require lo que definimos es un objeto, y las funciones son atributos de ese objeto; por lo que a la hora de declarar nuevos objetos de esa clase tendremos que hacerlo con <code>new un_partido.Un_Partido</code>. A partir de ahí el objeto generado se comporta exactamente igual que cualquier otro objeto, como podemos ver usando console.</p>
+<p>A diferencia de casi todos los lenguajes de scripting, no hay un modo estándar de instalar módulos JavaScript, aunque algunos intérpretes (notablemente Node.js, del que hablaremos luego) sí lo tienen. De hecho, ni siquiera common.js es universal, existiendo otras convenciones que le hacen la competencia tales como <a href="http://requirejs.org/">require.js</a>. La principal ventaja de common.js es su aceptación por parte de node.js, precisamente y su uso en NPM, por eso cabe suponer que el resto empezarán, más o menos, a usarlo. En todo caso, <a href="http://requirejs.org/docs/commonjs.html">son enfoques diferentes</a>, uno se concentra en la forma de cargar el módulo mientras que otro se concentra en la forma de empaquetarlo.</p>
+<h2 id="para-finalizar">Para finalizar</h2>
+<p>Cualquiera de los recursos que listo ahí abajo pueden resultar útiles para ampliar información sobre JavaScript. Quizás también pueda ser interesante usar alguna librería que facilite su uso como <a href="http://mochi.github.com/mochikit/">Mochikit</a> o <a href="http://www.prototypejs.org/">Prototype</a>. También el <a href="http://code.google.com/webtoolkit/">Google Web Toolkit</a> permite desarrollar en AJAX programando sólo en Java, aunque pueda que el JS generado necesite algún retoque adicional. Por supuesto, también es conveniente que se continúe con el siguiente capítulo.</p>
+<h2 id="bibliografía">Bibliografía</h2>
+<p>En <a href="https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Trabajando_con_objectos">la web del programador de Mozilla dan una visión extensa de la programación &quot;basada en objetos&quot; de JS</a> tras una <a href="https://developer.mozilla.org/es/docs/Web/JavaScript/Introducci%C3%B3n_a_JavaScript_orientado_a_objetos">introducción</a>. El <a href="http://www.cristalab.com/tutoriales/programacion-orientada-a-objetos-oop-con-javascript-c232l/">tutorial en Cristalab</a> es bastante completo también.</p>
+</body>
+</html>

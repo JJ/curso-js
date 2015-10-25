@@ -1,0 +1,253 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="js.css" type="text/css" />
+</head>
+<body>
+<h1 id="javascript-pero-si-es-muy-fácil">¿JavaScript? Pero si es muy fácil</h1>
+<h2 id="objetivos-de-este-capítulo">Objetivos de este capítulo</h2>
+<ul>
+<li>Aprender qué es JavaScript</li>
+<li>Entender la presencia de múltiples implementaciones y lo que ello significa.</li>
+<li>Aprender la sintaxis de JavaScript</li>
+<li>Realizar un pequeño ejemplo en JavaScript</li>
+</ul>
+<h2 id="introducción">Introducción</h2>
+<p>Lejos de ser solamente un lenguaje para el navegador, <a href="http://es.wikipedia.org/wiki/JavaScript">JavaScript</a> tiene una ventaja frente a otros lenguajes de programación: Está <em>en todas partes</em>. No hay ordenador sin navegador, ni hay navegador sin JavaScript. Se puede ejecutar hasta en el navegador de las consolas de videojuegos; desde la madurez de <a href="http://nodejs.org">node.js</a>, es el único lenguaje que permite ejecutar aplicaciones en cliente y servidor, así que se ha convertido en uno de los lenguajes más útiles para desarrollo en Internet.</p>
+<p>Esto se debe en parte a que ha sido definido como un <a href="https://es.wikipedia.org/wiki/ECMAScript">estándar ECMA (denominado ECMAScript)</a> lo que da lugar a muchas implementaciones diferentes, que son, además, independientes del fabricante. Y también en parte a que suele usar un conjunto de objetos estándar, que no son estrictamente parte de un lenguaje, que se pueden usar para añadir funcionalidad a una aplicación. Muchas aplicaciones complejas, como <a href="http://gmail.com">GMail</a> o <a href="http://drive.google.com">Google Apps</a> dependen de estos objetos para crear aplicaciones en la web que se comporten como si se ejecutaran en un sistema operativo nativo; a estas aplicaciones se les ha denominado últimamente <em>Rich Internet Applications</em>.</p>
+<blockquote>
+<p>Su popularidad ha hecho que últimamente empiece a usarse también como lenguaje <em>empotrado</em> en diferentes aplicaciones. Por ejemplo, <a href="https://www.nginx.com/blog/nginscript-why-our-own-javascript-implementation/">el servidor web <code>nginx</code> incluye un intérprete que puede evaluar JS para generar contenido</a>, <a href="https://github.com/walterhiggins/ScriptCraft/blob/master/docs/YoungPersonsGuideToProgrammingMinecraft.md">MineCraft tiene un mod que permite programar en JS</a>. También se puede usar para <a href="https://help.libreoffice.org/Common/Scripting/es">programar macros en LibreOffice</a> y en las <a href="http://drive.google.com">Google apps</a>; al accedeer al interfaz de programación de Google Drive se accede en realidad a un entorno de programación en JS.</p>
+</blockquote>
+<p>Además, a diferencia de otros lenguajes, es muy fácil crear una aplicación distribuida, cliente/servidor o <a href="https://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93controlador">MVC</a> con JavaScript. Tanto por su integración con el navegador, parte inseparable de la web, una arquitectura cliente-servidor, como por los objetos que suele tener el mismo, crear una aplicación de este tipo es casi trivial y ha dado lugar a un estilo de programación denominado <a href="http://es.wikipedia.org/wiki/Ajax">Ajax</a>, que se verá más adelante.</p>
+<p>Para ejecutar JavaScript no hace falta más que un navegador, pero también hay entornos para trabajar con él de forma autónoma, el más conocido de los cuales es <a href="http://nodejs.org">Node</a>, pero con otros representantes tales como el <a href="https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey">Mozilla SpiderMonkey</a> y el <a href="https://developer.mozilla.org/en-US/docs/Rhino">Rhino</a>, éste último basado en Java; <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Shells">hay una lista de intérpretes completa que se puede usar</a>. Conviene instalar alguno de ellos para poder ejecutar desde línea de órdenes los programas de ejemplo;</p>
+<blockquote>
+<p>Aunque, como hemos dicho arriba, no te va a hacer falta más que el navegador para muchos de ellos.</p>
+</blockquote>
+<p>por ejemplo, para instalar el primero habrá que ejecutar desde la consola de administrador o superusuario:</p>
+<pre><code>bash% apt-get install nodejs</code></pre>
+<blockquote>
+<p>En otros sistemas operativos o versiones de linux habrá primero que localizar el paquete correspondiente, que seguramente se llamará nodejs o algo muy parecido.</p>
+</blockquote>
+<p>O, si se quiere instalar</p>
+<pre><code>bash% apt-get install rhino</code></pre>
+<p>o</p>
+<pre><code>bash% apt-get install libmozjs-24-bin</code></pre>
+<p>que instalará Spidermonkey en el fichero ejecutable <code>js24</code>.</p>
+<p>Hay algunas diferencias entre los intérpretes, sobre todo en cualquier función que tenga que ver con la entrada/salida. Conviene consultar la página de manual del intérprete para ver cómo se hace específicamente en cada caso; en general, los ejemplos que se incluyen aquí funcionan correctamente en <code>js</code> o <code>rhino</code>.</p>
+<blockquote>
+<p>Por lo que he probado, SpiderMonkey, Rhino, <code>gjs</code> y KJSCMD se instalan fácilmente en Ubuntu; no hay más que hacer <code>apt-cache search javascript</code> y salen esos y alguno más. Fedora Core es un poco más rácano en cuanto a entornos: aunque los puedes instalar bajándote los fuentes y compilando, el que está disponible en los repositorios es uno llamado sólo <code>js</code>, aparentemente el SpiderMonkey. Para instalarlo, escribir <code>yum install js</code>. El Gnome Shell (incluido en la versión 3.0 de Gnome) incluye también un intérprete de JavaScript como lenguaje nativo, y con él se pueden desarrollar pequeños applets. Este intérprete, que está instalado por defecto junto con el entorno, se denomina <code>gjs</code>, está basado en SpiderMonkey y tiene la ventaja de que está integrado con todas las librerías de Gnome, de forma que se pueden hacer programas tales como <a href="https://github.com/JJ/curso-js/tree/master/code/g.js">este, que crea una ventana con un botón</a> sin necesidad de instalar ningún módulo adicional. Éste intérprete es el que usa desde <code>lg</code> (<em>looking glass</em>), una consola de depuración de Gnome al estilo de la consola del navegador que se puede ejecutar desde entorno pulsando Alt-F2 y escribiendo <code>lg</code>. Finalmente, Windows incluye <a href="http://stackoverflow.com/questions/686377/windows-command-line-javascript">un programa de línea de órdenes denominado <code>cscript</code> y <code>wscript</code></a> que, una vez más, tiene ciertas diferencias con respecto al resto de los intérpretes (todo lo relacionado con I/O); en realidad se trata de JScript, otra implementación del estándar ECMAscript. Finalmente, para instalar <code>kjs</code>, el intérprete JavaScript parte del entorno KDE, tendrás que instalar todos los binarios de KDE con <code>sudo apt-get install kdelibs-bin</code>.</p>
+</blockquote>
+<p>En cuanto a los navegadores, puede que haga falta activar JavaScript para que lo entiendan. Por ejemplo, en Firefox hay que activarlo usando Edit → Preferencias → Contenido → Activar JavaScript. Normalmente está activado por omisión. Por otro lado, veremos ejemplos principalmente de programas que se pueden usar desde el intérprete, y merece la pena instalarse uno.</p>
+<p>Si usas Eclipse, puede que te venga bien el <a href="http://www.eclipse.org/webtools/jsdt/">plugin JSDT</a>.</p>
+<blockquote>
+<p>Igual al atento lector le funciona correctamente. Yo no conseguí echarlo a andar.</p>
+</blockquote>
+<p>Por otro lado, el <code>emacs</code> va de lujo. NetBeans tiene también <a href="http://netbeans.org/kb/docs/ide/javascript-editor.html">soporte para JavaScript</a>, simplemente seleccionando este lenguaje para un nuevo fichero. El editor detecta la estructura del fichero e incluso analiza el código indicando los problemas, indentando automáticamente y emparejando paréntesis y llaves.</p>
+<p>En realidad, esa integración con el navegador puede que haya estorbado a la aceptación de JS como un lenguaje <em>decente</em>; tampoco ha ayudado que la mayoría de las librerías que se hayan desarrollado estén relacionadas precisamente con la Web, y no tenga una librería decente para, pongamos por caso, acceder a bases de datos. Pero también ha permitido que el lenguaje siga siendo <em>pequeño</em>, y se haya desarrollado principalmente a base de añadir objetos y clases externas al mismo. En resumen, que en el marco de eso que se ha venido en llamar <a href="http://es.wikipedia.org/wiki/Web_2.0">web 2.0</a> y especialmente desde que se ha popularizado Node, JS se ha convertido en adulto, y merece la pena estudiarlo como cualquier otro lenguaje.</p>
+<blockquote>
+<p>Por último está el <a href="http://www.yaldex.com/JSFactory_Pro.htm">1st JavaScript Editor</a>, que es de pago, pero pueden conseguirse versiones de evaluación gratuitas. Desde aquí no recomendamos software privativo para desarrollo de software, sin embargo.</p>
+</blockquote>
+<h2 id="trabajando-con-los-intérpretes-de-órdenes">Trabajando con los intérpretes de órdenes</h2>
+<p>Ya hemos comentado que es prácticamente seguro que tu ordenador tenga ya incluido un intérprete de órdenes, sea en el navegador o sea en forma de intérprete para la línea de órdenes. Vamos usarlo para ver nuestras primeras órdenes en JavaScript.</p>
+<pre><code>var do_print=(typeof console != &quot;undefined&quot;)?function(msg){console.log(msg)}:print;
+do_print(&quot;Cool cool cool&quot;)</code></pre>
+<p>Además, este programa es bastante característico de las características únicas de JS y se puede ejecutar sin variación en <em>node</em> <img src="imagenes/node-consola.png" alt="órdenes ejecutadas en node" /> en <em>gjs</em> que se instala en tu sistema si usas Gnome: <img src="imagenes/gjs-consola.png" alt="órdenes ejecutadas en gjs" /> en Chromium (la versión libre de Chrome, tendría que ser similar en él) <img src="imagenes/chromium-consola.png" alt="órdenes ejecutadas en gjs" /> y en el navegador libre Firefox <img src="imagenes/firefox-consola.png" alt="órdenes ejecutadas en Firefox" />.</p>
+<p>Lo que hace este programa es definir una función, almacenarla en la variable <code>do_print</code> y usarla más tarde como tal función. Del tirón te muestra que JS es un lenguaje <em>funcional</em> donde las funciones son &quot;ciudadanos de primer orden&quot; y se puede usar una función en el mismo lugar donde se usaría cualquier otra estructura de datos. Pero, además, vemos que se usa <code>var</code> para definir una variable, o más bien el ámbito de una variable, porque en JS no es estrictamente necesario definirlas y que JS usa <em>tipado</em> dinámico: no hace falta asignarle un valor estático al tipo de la variable. <code>var zipi</code> es todo lo que se necesita para usar la variable <code>zipi</code>, aunque si aparece <code>zipi</code> por primera vez en la orden <code>zipi=0</code> nadie va a protestar.</p>
+<p>La asignación equivale a una sentencia <code>if-then-else</code>. Pregunta por el tipo (<code>typeof</code>) la variable <code>console</code>. También aquí podemos ver que los paréntesis son opcionales: <code>typeof console</code> es igual que <code>typeof(console)</code>. Si no existe <code>console</code>, su tipo será <code>undefined</code>, <code>console</code> es un objeto que permite acceder a escribir cosas en el terminal. Por eso si el tipo no es <code>undefined</code>, definimos una función sobre la marcha, prueba una vez más de la naturaleza funcional de JS. Después de <code>?</code> estará el valor devuelto por la expresión cuando ésta sea verdadera (como el <code>then</code> en un <code>if</code>) y se construye una función sobre la marcha con la palabra clave <code>function</code>, un parámetro <code>msg</code> y la expresión correspondiente. es decir, la función se puede definir y asignar en una variable así:</p>
+<pre><code>var usa_consola=function(msg){console.log(msg)};</code></pre>
+<p>Tras el <code>:</code>, está la otra opción. En muchos intérpretes en JS no existe el objeto <code>console</code>, pero para escribir en el terminal se usa la función <code>print</code>, que es la que se devuelve. Es decir, en algunos intérpretes de los anteriores usará <code>console.log</code> y en otros, en realidad, sólo en <code>gjs</code>, <code>print</code>.</p>
+<blockquote>
+<p>la definición de la función en realidad es una exigencia del modelo de seguridad de los navegadores. En node bastaría con haber devuelto, igual que con <code>print</code>, simplemente <code>console.log</code>.</p>
+</blockquote>
+<p>La segunda línea usa la función definida como tal función: <code>do_print(&quot;Aquí pongo lo que sea&quot;)</code>. En los diferentes intérpretes se ve también algún valor tal como <code>undefined</code>; en cada uno de los casos imprime el valor que devuelve la función, ninguno. Si la función hubiera devuelto algún valor al ejecutarse se habría impreso en esa línea.</p>
+<blockquote>
+<p>Como ejercicio, se puede probar a ejecutar esa misma función en algún intérprete que se tenga a mano: el de CouchDB, Rhino o Spidermonkey si es que se tienen instalados.</p>
+</blockquote>
+<h2 id="primer-programa-en-javascript">Primer programa en JavaScript</h2>
+<p>Tras ver cómo funcionan los intérpretes y tenerlos a mano por si hubiera que probar alguna orden aislada, vamos a hacer un programa completo, el clásico. Nuestro primer programa tiene dos versiones, al menos. Empecemos por una de ellas <sub><sub>~</sub></sub>~ #!/usr/bin/js print( 'Hola, Mundo' ); // console.log en vez de print si &quot;js&quot; es node. <sub><sub>~</sub></sub>~</p>
+<p>El programa en sí comienza en la seguna línea, y en él podemos ver que la sintaxis de JS es bastante parecida a la del lenguaje C y, para el caso, también al Java. La primera línea, clásica de los lenguajes de <em>scripting</em> en Linux, indica cuál va a ser el intérprete que se va a usar para el resto del fichero.</p>
+<blockquote>
+<p>Si tienes instalado <code>node</code> <code>/usr/bin/js</code> será el intérprete de node. Si no lo tienes instalado, puede ser algún otro intérprete, como rhino o SpiderMonkey (en versiones más antiguas de Linux).</p>
+</blockquote>
+<p>Este programa producirá (siempre que lo hagamos ejecutable con <code>chmod +x hola.js</code> previamente):</p>
+<pre><code>jmerelo@vega:~/txt/docencia/AAP/Temario$ ./hola.js Hola, Mundo</code></pre>
+<p>Podemos probar con diferentes intérpretes que tengamos instalados.</p>
+<pre><code>jmerelo@penny:~/code$ gjs hola.js
+Hola, Mundo
+jmerelo@penny:~/code$ rhino hola.js
+Hola, Mundo
+jmerelo@penny:~/code$ js24 hola.js
+Hola, Mundo</code></pre>
+<p>Como hemos visto antes, escribir en la consola no forma parte del conjunto estándar de órdenes de JS, precisamente por todos los entornos posibles en los que se puede encontrar. Por eso este programa tiene una <a href="https://github.com/JJ/curso-js/blob/master/code/holakase.js">segunda versión</a> en node.js habría que cambiar <code>print</code> por <code>console.log</code>, o tendremos un error. También se puede usar directamente <a href="http://jsconsole.com/?console.log%28%22Es%20una%20prueba%22%29">la consola JavaScript online</a> para ejecutarlo; <code>console.log</code> es la versión de la orden de imprimir que funciona en la mayoría de los intérpretes más conocidos (Node y los del navegador).</p>
+<blockquote>
+<p>Con <code>kjs</code> habrá que ejecutarlo también directamente desde la línea de órdenes; con un fichero da un error y no he encontrado ningún manual específico sobre él, así que no aconsejo usar esa versión de JS. Esto, sin embargo, parece funcionar: <code>kjs -e 'print(&quot;Hola,mundo&quot;)'</code>.</p>
+</blockquote>
+<p>Por otro lado, <a href="https://github.com/JJ/curso-js/tree/master/code/hola-g.js">este programa, <code>hola-g.js</code>, sería equivalente para el intérprete <code>gjs</code> que viene con Gnome</a>.</p>
+<p>Para ejecutarlo desde el navegador habrá que hacer un poco más de historia, pero tampoco tanto. Primero, lo podemos ejecutar directamente. La combinación de teclas <em>Mayúsculas-Control-K</em> abre, en la parte baja de la ventana de Firefox, una consola de JavaScript. Donde aparece &quot;&gt;&gt;&quot;, se escribe simplemente <code>console.log(&quot;Qué bonito&quot;)</code> y dará como resultado algo así:</p>
+<pre><code>console.log(&quot;Qué bonito&quot;)
+undefined
+Qué bonito</code></pre>
+<p>En navegadores modernos la consola también completará automáticamente las órdenes mostrándote todas las opciones posibles. &gt;En Chromium y Chrome se puede escribir directamente sobre la ventana, &gt;no en la línea inferior <em>de interacción</em> como en Firefox.</p>
+<p>Arriba, el <code>undefined</code> indica simplemente que la función <code>console.log</code> no devuelve ningún valor, como ya hemos visto. La línea siguiente es la que muestra el resultado de ejecutar la orden.</p>
+<p>Segundo, podemos ejecutar JavaScript como parte de una página web. Lo vemos en <a href="https://github.com/JJ/curso-js/tree/master/code/hola-js.html">este ejemplo (darle a ver fuente para ver el código)</a> donde se incluye el programa en JS de esta forma:</p>
+<pre><code>&lt;script type=&#39;text/javascript&#39; src=&#39;hola.js&#39;&gt;&lt;/script&gt;</code></pre>
+<p>El problema es que, en este caso, la orden <code>print</code> se interpretaría como impresión por impresora y habrá que cambiarla por otra que signifique lo mismo, escribir en el dispositivo de salida que se esté <a href="https://github.com/JJ/curso-js/tree/master/code/hola-js-2.html">usando</a>:</p>
+<pre><code>document.writeln(&#39;Hola, Mundo&#39;)</code></pre>
+<p>Lo que también se puede escribir directamente <a href="https://github.com/JJ/curso-js/tree/master/code/hola-js-3.html">así</a> y puedes <a href="https://jsfiddle.net/jjmerelo/L4z134ox/">ver en acción en JSFiddle</a> :</p>
+<pre><code>&lt;script type=&#39;text/javascript&#39;&gt;document.writeln(&#39;Hola, Mundo&#39;)&lt;/script&gt;</code></pre>
+<p>Estos programas se pueden editar con cualquier editor de texto, Emacs, gedit o Notepad++; también con los entornos integrados, que te ofrecerán ventajas adicionales como completar las variables y los nombres de los comandos.</p>
+<blockquote>
+<p>El siguiente [programa]((https://github.com/JJ/curso-js/tree/master/code/hola-all.js) funcionaría al menos en 4 intérpretes, aparte de en la consola de algunos navegadores:</p>
+</blockquote>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> write;
+
+<span class="kw">if</span> ( <span class="kw">typeof</span> console != <span class="st">&quot;undefined&quot;</span> ) {
+    write = <span class="ot">console</span>.<span class="fu">log</span>;
+} <span class="kw">else</span> {
+    write = print;
+}
+
+<span class="fu">write</span>( <span class="st">&#39;Hola, Mundo&#39;</span> );</code></pre>
+<blockquote>
+<p>Si los tienes instalados, prueba esta nueva versión que es, por otro lado, la versión en programa de las sentencias que hemos progado anteriormente.</p>
+</blockquote>
+<p>En general, conviene ser consciente de que JavaScript incluye tantos las órdenes propias del lenguaje, definidas en los estándares ECMAScript, como <em>objetos</em> que son propios de cada implementación, que dependerán de dónde esté incrustado o de qué intérprete se use en cada momento. Prácticamente todas las órdenes de entrada/salida se implementarán mediante objetos u órdenes específicas de cada lenguaje. Por eso el clásico &quot;Hola mundo&quot; no acaba de ser el mejor ejemplo de primer programa para este lenguaje, aunque también nos ha servido para ver las diferencias entre las diferentes implementaciones. Conviene en cada caso consultar el manual de referencia del intérprete que se esté usando, sin embargo, para que no haya problemas.</p>
+<blockquote>
+<p>Habiendo tantos intérpretes, ¿cuál usar? Aparte de que este libro/curso se concentra en <code>node.js</code>, éste suele ser el intérprete más popular y que más usuarios y desarrollo tiene, por lo que aconsejamos que se use y la mayoría de los ejemplos lo van a usar. Sin embargo, tanto <em>rhino</em> como <em>SpiderMonkey</em> son perfectamente adecuados, con pequeños cambios (como <code>print</code> → <code>console.log</code>) para aprender JavaScript trabajando fuera del navegador.</p>
+</blockquote>
+<h2 id="estructuras-de-control-en-javascript">Estructuras de control en JavaScript</h2>
+<p>Vistas ya las mil y una formas de escribir cosas en la pantalla y ejecutar un programa con los mil y un intérpretes de javascript, procedamos a temas más escabrosos, como lo que viene siendo hacer algo <em>realmente</em>. Por ejemplo, un bucle que cree una tabla HTML, como se hace en el siguiente <a href="https://github.com/JJ/curso-js/tree/master/code/tabla.js">programilla</a>:</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">#!/usr/bin/js24</span>
+
+<span class="kw">var</span> tabla=<span class="st">&quot;table&quot;</span>;
+<span class="kw">var</span> celda=<span class="st">&quot;td&quot;</span>;
+<span class="kw">var</span> fila=<span class="st">&quot;tr&quot;</span>;
+<span class="kw">var</span> matriz = [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>];
+<span class="fu">print</span>( <span class="st">&quot;&lt;&quot;</span>+tabla+<span class="st">&quot;&gt;&quot;</span>);
+<span class="kw">for</span> (i <span class="kw">in</span> matriz ) {
+  <span class="fu">print</span>( <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&lt;&quot;</span>+fila+<span class="st">&quot;&gt;&quot;</span>);
+  <span class="kw">for</span> ( j <span class="kw">in</span> matriz ) {
+    <span class="fu">print</span> (<span class="st">&quot;</span><span class="ch">\t\t</span><span class="st">&lt;&quot;</span>+celda+<span class="st">&quot;&gt;&quot;</span>+matriz[i]*matriz[j]+<span class="st">&quot;&lt;/&quot;</span>+celda+<span class="st">&quot;&gt;&quot;</span>);
+  }
+  <span class="fu">print</span> (<span class="st">&quot;</span><span class="ch">\t</span><span class="st">&lt;/&quot;</span>+fila+<span class="st">&quot;&gt;</span><span class="ch">\n</span><span class="st">&quot;</span>);
+ }
+<span class="fu">print</span> (<span class="st">&quot;&lt;/&quot;</span>+tabla+<span class="st">&quot;&gt;&quot;</span>);</code></pre>
+<blockquote>
+<p>Como se puede ver en la primera línea, <code>#!/usr/bin/js24</code>, se está usando SpiderMonkey como intérprete. Rhino y gjs usarán <code>print</code>de la misma forma. Para usar node o desde la consola del navegador, sustituye <code>print</code> por <code>console.log</code>.</p>
+</blockquote>
+<p>Este programa tiene dos bucles anidados, que imprimen un producto dentro de una tabla. La salida será tal que así (ver el fuente para la estructura):</p>
+<table>
+<pre><code>&lt;tr&gt;
+    &lt;td&gt;1&lt;/td&gt;
+    &lt;td&gt;2&lt;/td&gt;
+    &lt;td&gt;3&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+    &lt;td&gt;2&lt;/td&gt;
+    &lt;td&gt;4&lt;/td&gt;
+    &lt;td&gt;6&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+    &lt;td&gt;3&lt;/td&gt;
+    &lt;td&gt;6&lt;/td&gt;
+    &lt;td&gt;9&lt;/td&gt;
+&lt;/tr&gt;</code></pre>
+</table>
+<p>El programa es menos complicado de lo que parece. Para declarar variables en JS se usa el genérico <code>var</code>, porque JavaScript tiene tipificado dinámico, asignando a una variable un tipo determinado dependiendo de su valor. <code>var</code> declar aun ámbito: simplemente usando una variable aparece mágicamente, como se hace en las dos variables de bucle <code>i</code> y <code>j</code>.</p>
+<blockquote>
+<p>Dependiendo del intérprete, el uso de esas variables puede provocar un <em>warning</em>. En <code>gjs</code>, por ejemplo, dirá <em>Gjs-Message: JS WARNING: [tabla.js 8]: assignment to undeclared variable i</em></p>
+</blockquote>
+<p>Con las matrices ocurre igual (es decir, se declaran y se les asigna valor directamente) : <code>matriz</code> lo es, y simplemente se declaran sus valores entre corchetes. Ojo con los nombres de variables, que a diferencia de otros lenguajes, distinguen entre mayúsculas y minúsculas. <code>esta_variable</code> es diferente de <code>esta_Variable</code>.</p>
+<p>JS puede usar un tipo de bucle que tienen la apariencia habitual (en lenguajes derivados del C), y se pueden usar igual que en C, pero haremos un bucle que recorra la matriz, usando un <em>iterador</em> <code>i</code>, que en este caso se comporta como una variable de bucle de las de toda la vida. Usamos el <code>+</code> para concatenación de cadenas, y poco más. El resto es como el C, o el Java. De hecho, se pueden usar los bucles clásicos con comparación e incremento, como se muestra en <a href="https://github.com/JJ/curso-js/tree/master/code/tabla1.js"><code>tabla1.js</code></a>:</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> tabla=<span class="st">&quot;table&quot;</span>;
+<span class="kw">var</span> celda=<span class="st">&quot;td&quot;</span>;
+<span class="kw">var</span> fila=<span class="st">&quot;tr&quot;</span>;
+<span class="fu">print</span>( <span class="st">&quot;&lt;&quot;</span>+tabla+<span class="st">&quot;&gt;&quot;</span>);
+<span class="kw">for</span> (i=<span class="dv">1</span>; i&lt;=<span class="dv">3</span>; i++ ) {
+    <span class="fu">print</span>( <span class="st">&quot;&lt;&quot;</span>+fila+<span class="st">&quot;&gt;&quot;</span>);
+    <span class="kw">for</span> ( j=<span class="dv">1</span>; j&lt;=<span class="dv">3</span>; j++  ) {
+    <span class="fu">print</span> (<span class="st">&quot;&lt;&quot;</span>+celda+<span class="st">&quot;&gt;&quot;</span>+i*j+<span class="st">&quot;&lt;/&quot;</span>+celda+<span class="st">&quot;&gt;&quot;</span>);
+    }
+    <span class="fu">print</span> (<span class="st">&quot;&lt;/&quot;</span>+fila+<span class="st">&quot;&gt;</span><span class="ch">\n</span><span class="st">&quot;</span>);
+}
+<span class="fu">print</span> (<span class="st">&quot;&lt;/&quot;</span>+tabla+<span class="st">&quot;&gt;&quot;</span>);</code></pre>
+<p>Aunque queda un poco torpe tanto <code>&lt;&gt;</code>... Vamos a reducir un poco el programa, haciéndolo <a href="https://github.com/JJ/curso-js/tree/master/code/tabla2.js">más elegante</a> (aunque más largo: no se puede tener todo):</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> matriz = [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>];
+<span class="fu">print</span>( <span class="fu">marca</span>(<span class="st">&#39;table&#39;</span>));
+<span class="kw">for</span> (i <span class="kw">in</span> matriz ) {
+  <span class="fu">print</span>( <span class="fu">marca</span>( <span class="st">&#39;tr&#39;</span> ));
+  <span class="kw">for</span> ( j <span class="kw">in</span> matriz ) {
+    <span class="fu">print</span> ( <span class="fu">celda</span>(matriz[i]*matriz[j]));
+  }
+  <span class="fu">print</span> ( <span class="fu">finmarca</span>(<span class="st">&#39;tr&#39;</span>));
+}
+<span class="fu">print</span> (<span class="fu">finmarca</span>(<span class="st">&#39;table&#39;</span>));
+
+<span class="kw">function</span> <span class="fu">marca</span>( m ) {
+  <span class="kw">return</span> <span class="st">&quot;&lt;&quot;</span>+m+<span class="st">&quot;&gt;&quot;</span>;
+}
+
+<span class="kw">function</span> <span class="fu">finmarca</span>( m ) {
+  <span class="kw">return</span> <span class="st">&quot;&lt;/&quot;</span>+m+<span class="st">&quot;&gt;&quot;</span>;
+}
+
+<span class="kw">function</span> <span class="fu">celda</span>( contenido ) {
+  <span class="kw">return</span> <span class="fu">marca</span>(<span class="st">&quot;td&quot;</span>)+contenido+<span class="fu">finmarca</span>(<span class="st">&quot;td&quot;</span>);
+}</code></pre>
+<p>La principal diferencia con respecto al anterior es el <strong>uso de funciones</strong>. Las funciones en JS tienen una estructura bastante clásica: <code>function</code> nombre-de-función (param1, param2...). &gt;Ya hemos visto al principio de este capítulo que también se pueden &gt;definir sobre la marcha y asignares a una variable. Una vez más, se nota que JS no es un lenguaje con tipos estáticos, pudiendo pasar los parámetros sin tipo, y adaptándose dentro de la función al tipo necesario. Se pasan por valor, es decir, que las modificaciones al parámetro formal no se trasladan a la variable que se use. Además, se pueden declarar donde a uno le dé la gana. Para llamarlas tampoco hay que hacer nada especial, se usa el clásico paréntesis. La salida es exactamente la misma que antes. El también clásico <code>return</code> devuelve un valor.</p>
+<p>El ámbito de las variables es el bloque donde aparecen o se declaran, pero hay que tener en cuenta que, a efectos de JS, una página web es un <em>programa</em>. Se pueden declarar variables en la cabecera del documento HTML, y estarán accesibles en cualquier otro sitio, siempre que esté ms adelante en el documento. También habrá que tener en cuenta, en caso de que esté incluido en una página web, que aunque la declaración de una subrutina afecte a todo el programa, puede que esa parte de la página no se haya cargado todavía, con lo que no estará disponible. Una vez más, la programación distribuida no es totalmente igual a la programación en otros lenguajes.</p>
+<p>Sin embargo, la forma anterior de realizar el programa corresponde a una estructura más <em>tradicional</em> y semejante a lenguajes no funcionales como el C o el Java. Hay otra forma de hacerlo, que usa la capacidad de JS de trabajar con funciones como estructuras de datos de primera clase, será <a href="https://github.com/JJ/curso-js/tree/master/code/tabla-final.js">la versión final del programa anterior</a>:</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> matriz = [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>];
+<span class="kw">var</span> wrap = <span class="kw">function</span>(m, start, end ) { <span class="kw">return</span> start+m+end; }
+<span class="kw">var</span> marca = <span class="kw">function</span>( m ) { <span class="kw">return</span> <span class="fu">wrap</span>(m, <span class="st">&quot;&lt;&quot;</span>,<span class="st">&quot;&gt;&quot;</span>); }
+<span class="kw">var</span> finmarca = <span class="kw">function</span>( m ) { <span class="kw">return</span> <span class="fu">wrap</span>(m,<span class="st">&quot;&lt;/&quot;</span>,<span class="st">&quot;&gt;&quot;</span>); }
+<span class="kw">var</span> celda = <span class="kw">function</span>( contenido ) { 
+    <span class="kw">return</span> <span class="fu">wrap</span>( contenido, <span class="fu">marca</span>(<span class="st">&quot;td&quot;</span>), <span class="fu">finmarca</span>(<span class="st">&quot;td&quot;</span>));
+}
+<span class="kw">var</span> do_print=(<span class="kw">typeof</span> console != <span class="st">&quot;undefined&quot;</span>)
+    ?<span class="kw">function</span>(msg){<span class="ot">console</span>.<span class="fu">log</span>(msg)}
+    :print;
+
+<span class="fu">do_print</span>( <span class="fu">marca</span>(<span class="st">&#39;table&#39;</span>));
+<span class="ot">matriz</span>.<span class="fu">forEach</span>( <span class="kw">function</span>(elemento_i) {
+    <span class="fu">do_print</span>( <span class="fu">marca</span>( <span class="st">&#39;tr&#39;</span> ) );
+    <span class="ot">matriz</span>.<span class="fu">forEach</span>( <span class="kw">function</span>(elemento_j ) {
+    <span class="fu">do_print</span> ( <span class="fu">celda</span>(elemento_i*elemento_j));
+    });
+    <span class="fu">do_print</span>( <span class="fu">finmarca</span>( <span class="st">&#39;tr&#39;</span> ));
+})
+<span class="fu">do_print</span> (<span class="fu">finmarca</span>(<span class="st">&#39;table&#39;</span>));</code></pre>
+<h2 id="bibliografía">Bibliografía</h2>
+<blockquote>
+<p>Los enlaces en este texto son a la biblioteca de la UGR. Es posible que el recurso electrónico o libro esté también disponible en alguna biblioteca cercana; si no, habrá que adquirirlo o pedirlo prestado usando el método habitual.</p>
+</blockquote>
+<p>Hay dos libros fundamentales para aprender JS, aunque están muy enfocados a JS en el navegador:<a href="http://bencore.ugr.es/iii/encore/record/C|Rb2011082|Sjavascript+definitive+guide|Orightresult|X2?lang=spi&amp;suite=pearl"><em>JavaScript: The Definitive Guide</em>, el libro del rinoceronte</a>, editado por O'Reilly, que está <a href="http://proquest.safaribooksonline.com/9781449393854?uicode=goliat">disponible como recurso electrónico en la UGR</a> y <a href="http://bencore.ugr.es/iii/encore/record/C|Rb1987808|Sjavascript+bible|Orightresult|X5?lang=spi&amp;suite=pearl"><em>JavaScript Bible, de Danny Goodman</em>, un tocho considerable</a>, en el que hay de todo, y que viene con un útil CD con ejemplos. También está como <a href="http://proquest.safaribooksonline.com/?uiCode=goliat&amp;xmlId=9780470526910">recurso electrónico</a>. Hay <a href="http://bencore.ugr.es/iii/encore/search/C|Sjavascript|Orightresult|U1?lang=spi&amp;suite=pearl">muchos más recursos, algunos de ellos disponibles de forma electrónica</a>.</p>
+<p>Como recursos adicionales, <a href="%0A%20%20%20%20https://developer.mozilla.org/en-US/docs/JavaScript/About_JavaScript?redirectlocale=en-US&amp;redirectslug=About_JavaScript">las páginas de JavaScript en Mozilla.org</a>, el <a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm">estándar completo</a>, y el <a href="http://geneura.ugr.es/~victor/cursillos/javascript/js_intro.html">curso de JavaScript de Víctor Rivas Santos</a>.</p>
+</body>
+</html>
