@@ -1,11 +1,11 @@
-// DefiniciÛn de la clase Partido
-function Partido(local,visitante) {
-  this.local = local;
-  this.visitante=visitante;
+// Definici√≥n de la clase Partido
+function Partido(_local,_visitante) {
+  this.local = _local;
+  this.visitante=_visitante;
   this.resultado=null;
 }
 
-var equipos= new Array('Madrid', 'BarÁa', 'Atleti', 'Geta', 'Betis', 'Depor', 'Sevilla', 'Gran·');
+var equipos= new Array('Madrid', 'Bar√ßa', 'Atleti', 'Geta', 'Betis', 'Depor', 'Sevilla', 'Gran√°');
 
 var midsize = equipos.length/2;
 var quiniela = new Array( midsize );
