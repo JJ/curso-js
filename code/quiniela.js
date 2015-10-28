@@ -2,9 +2,9 @@
 
 
 // Definición de la clase Partido
-function Partido(local,visitante) {
-  this.local = local;
-  this.visitante=visitante;
+function Partido(_local,_visitante) {
+  this.local = _local;
+  this.visitante=_visitante;
   this.resultado=null;
 }
 
