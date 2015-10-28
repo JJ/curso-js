@@ -247,11 +247,16 @@ en la línea de comandos. Una vez hecho, tecleamos las siguientes
 
 ~~~~~
 js> foo = new Array
-js> foo.cero='Cero' Cero
-js> foo[1] = 'Uno' Uno
-js> foo['dos'] = 'Dos' Dos
-js> foo.dos Dos
-js> foo['cero'] Cero
+js> foo.cero='Cero' 
+Cero
+js> foo[1] = 'Uno' 
+Uno
+js> foo['dos'] = 'Dos' 
+Dos
+js> foo.dos 
+Dos
+js> foo['cero'] 
+Cero
 js> for ( i in foo) { print(foo[i]);}
 Cero Uno Dos
 ~~~~~
