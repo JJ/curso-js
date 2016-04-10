@@ -9,7 +9,7 @@
 ## El modelo de objetos del documento
 
 > Las primeras versiones de este texto, en 2007, hacían énfasis en
-> enseñar el lenguaje *fuera del navegadpr*. En aquél momento no era
+> enseñar el lenguaje *fuera del navegador*. En aquél momento no era
 > demasiado común. Sin embargo, ya no es tan difícil encontrar un enfoque como el de este curso,
 > centrado en JS como lenguaje y no como un chisme más dentro del
 > navegador. Eventualmente, habrá que tratar con esto, así que este
@@ -344,7 +344,13 @@ ejemplo](https://github.com/JJ/curso-js/blob/master/code/onload.html)
 ~~~~~
 
 El uso de evento está hacia el final del código, donde usamos `alert`
-que se activa tras el evento `load`, es decir, cuando se carga la página
+que se activa tras el evento `load`, es decir, cuando se carga la
+página
+
+>En realidad, fuera de ejemplos puramente académicos, `alert` no debe
+>usarse por problemas de usabilidad, es una práctica nefasta. Por eso,
+>es mucho mejor que sustituyas esa orden por `console.log("Ahora está
+>todo cargado")`
 
 ## JQuery: Introducción 
 
@@ -380,7 +386,7 @@ programa](https://github.com/JJ/curso-js/blob/master/code/ready.html):
 <p>Pero podría tenerla.</p>
 <script type='text/javascript'>
 $(document).ready(function() {
-    alert('Ahora estamos listos');
+    console.log('Ahora estamos listos');
 });
 </script>
 <address></address>
@@ -393,7 +399,12 @@ En este caso, usamos como se ha indicado antes la copia de JQuery
 proporcionada por Google, que, como cualquier otra librería JS, debe ser
 incluida en nuestra página para ser usada. Por otro lado, la única
 función que usamos de JQuery está tras el párrafo: cuando el documento
-está *listo* (`ready`), lanzamos un `alert`. Este script funciona
+está *listo* (`ready`), escribimos en la consola que estamos listos.
+
+>Conviene que tengas la consola de depuración abierta; en este
+>ejercicio y en todos, para observar errores y poder depurar el DOM y
+>otros elementos de la página. 
+Este script funciona
 exactamente igual que como el que habíamos visto anteriormente.
 
 De hecho, se puede
@@ -427,7 +438,7 @@ $(function() {
     $("h2").each( function() {
         hachedoses += this.textContent + " - ";
     } );
-    alert(hachedoses);
+    console.log(hachedoses);
     $("#cambiando").html( hachedoses ); 
 });
 </script>
@@ -446,10 +457,15 @@ En este ejemplo, primero se recorren los elementos `h2` pero en vez de
 hacerse a partir de un bucle se usa directamente el objeto generado por
 el selector y que aplica a cada uno de ellos una función anónima; en
 este caso la función concatena a `hachedoses` el contenido en texto del
-elemento. Usamos el `alert` principalmente para que se vea el contenido
-del `div` definido más abajo vacío y posteriormente con el contenido que
+elemento. Usamos la escritura en la consola con `console.log` principalmente para que se vea el contenido
+del `div` definido más abajo y vacío y posteriormente con el contenido que
 se le añade en la última línea del script, que usa como selector el
 equivalente a un elemento con el id `#cambiando`.
+
+Conviene recordar que `console.log` se usa aquí principalmente por
+cuestiones de depuración. En producción se debe tratar de evitar,
+porque al usuario no le sirve de nada más que una cierta ralentización
+por hacer una operación de entrada salida. 
 
 ## Bibliografía
 
