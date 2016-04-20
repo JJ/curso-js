@@ -103,7 +103,8 @@ este tema, como veremos en el ejemplo siguiente
 ~~~~~javascript
 function putBloque(value) {
 	var ejs = document.getElementById('ej.T1.'+value);
-	document.getElementById('resultado1').innerHTML=ejs.textContent; }
+	document.getElementById('resultado1').innerHTML=ejs.textContent;
+}
 ~~~~~
 
 Un par de líneas sólo de JS: una para buscar el elemento (la primera) y
@@ -116,15 +117,16 @@ dinámicamente. ¿No es una maravilla?
 ## Usando GreaseMonkey
 
 No se sabe porqué los temas de JS tienen tanta relación con los
-primates, pero el hecho es que [GreaseMonkey](http://greasespot.com) (o
-[TamperMonkey](http://tampermonkey.net/), su equivalente en Chrome,
-Chromium y Opera Next, que tiene una *capa de compatibilidad* que
-permite ejecutar estos scripts) es un *plugin* para los navegadores
+primates, pero el hecho es que [GreaseMonkey](http://greasespot.com) es un *plugin* para los navegadores
 [Mozilla](http://mozilla.org) que permite instalar en el navegador
 programillas JS específicos de una página o grupo de páginas. Para
 trabajar con él, lo primero que hay que hacer es instalarlo
-(Herramientas-\>Complementos en Firefox y Herramientas-\>Extensiones en
-Chrome y Chromium) y reiniciar el navegador.
+(Herramientas-\>Complementos en Firefox) y reiniciar el navegador.
+
+>[TamperMonkey](http://tampermonkey.net/) es su equivalente en Chrome,
+Chromium y Opera Next. Este tiene una *capa de compatibilidad* que
+permite ejecutar estos scripts, configurándolo y haciendo una serie de
+transformaciones si es necesario. 
 
 Una vez hecho eso, Grease/TamperMonkey reconoce los scripts con la
 extensión `.user.js` como propios (es decir, los abre cuando se
@@ -263,8 +265,7 @@ newdocument.write(contenido);
 En este caso, se crea una nueva página estática usando `write` sobre el
 documento que hemos creado. No es que sea demasiado útil (se podría usar
 el URL directamente pasándoselo como parámetro a `open`) pero demuestra
-las posibilidades del mismo, que también se pueden ver en [este
-mini-tutorial](http://www.htmlgoodies.com/beyond/javascript/javascript-dynamic-document-creation-in-new-windows.html). 
+las posibilidades del mismo, que también se pueden ver en [este mini-tutorial](http://www.htmlgoodies.com/beyond/javascript/javascript-dynamic-document-creation-in-new-windows.html). 
 
 ## Selectores
 
@@ -280,11 +281,9 @@ queremos trabajar con selectores más generales (como haremos más
 adelante) es conveniente que se aprenda la sintaxis de CSS que es la que
 se usa de forma más general.
 
-La [sintaxis más general está especificada por la
-W3](http://www.w3.org/TR/CSS2/selector.html) y se puede observar en
-cualquier hoja de estilo. De esta, extraemos [los 30 selectores que se
-deben
-memorizar](http://net.tutsplus.com/tutorials/html-css-techniques/the-30-css-selectors-you-must-memorize/),
+La [sintaxis más general está especificada por la W3](http://www.w3.org/TR/CSS2/selector.html) y se puede observar en
+cualquier hoja de estilo. De esta, extraemos
+[los 30 selectores que se deben memorizar](http://net.tutsplus.com/tutorials/html-css-techniques/the-30-css-selectors-you-must-memorize/),
 principalmente `#` que se refiere a un id específico (por ejemplo,
 `#ej.1.1` seleccionaría un div declarado como `div id='ej1.1.1'` y `.`
 que se refiere a una clase; `.ej` por ejemplo seleccionaría todos los
@@ -352,121 +351,12 @@ página
 >es mucho mejor que sustituyas esa orden por `console.log("Ahora está
 >todo cargado")`
 
-## JQuery: Introducción 
-
-[JQuery](http://jquery.com) es una librería en JavaScript que está
-diseñada principalmente para simplificar la creación de programas y
-permitir crear interfaces ricos de usuario.
-[JQuery](https://es.wikipedia.org/wiki/JQuery) se ha popularizado desde
-su creación en el año 2006 hasta el punto que se calcula que se usa en
-más de la mitad de los sitios más populares. Por supuesto, es software
-libre con una [licencia MIT](http://en.wikipedia.org/wiki/MIT_License).
-Ha sido aceptada también e integrada por casi todas las grandes empresas
-que crean herramientas de desarrollo de software e incluso Google aloja
-directamente una copia de JQuery que se puede usar desde cualquier
-programa.
-
-A vista de pájaro, JQuery introduce un objeto, `$`, que permite acceder
-a todas sus funciones. Podemos empezar con la función `ready` en el
-[siguiente
-programa](https://github.com/JJ/curso-js/blob/master/code/ready.html):
-
-~~~~~HTML
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<title>Probando ready de jQuery</title>
-</head>
-
-<body>
-<h1>Esta es una página que no tiene gran cosa</h1>
-
-<p>Pero podría tenerla.</p>
-<script type='text/javascript'>
-$(document).ready(function() {
-    console.log('Ahora estamos listos');
-});
-</script>
-<address></address>
-<!-- hhmts start -->Last modified: Sun Apr  7 19:49:52 CEST 2013 <!-- hhmts end -->
-</body> 
-</html>
-~~~~~
-
-En este caso, usamos como se ha indicado antes la copia de JQuery
-proporcionada por Google, que, como cualquier otra librería JS, debe ser
-incluida en nuestra página para ser usada. Por otro lado, la única
-función que usamos de JQuery está tras el párrafo: cuando el documento
-está *listo* (`ready`), escribimos en la consola que estamos listos.
-
->Conviene que tengas la consola de depuración abierta; en este
->ejercicio y en todos, para observar errores y poder depurar el DOM y
->otros elementos de la página. 
-Este script funciona
-exactamente igual que como el que habíamos visto anteriormente.
-
-De hecho, se puede
-[simplificar](https://github.com/JJ/curso-js/blob/master/code/ready-simple.html)
-e incluso ahorrar la orden para pasar directamente a la función que
-queremos que se active cuando se cargue la página.
-
-JQuery también simplifica el uso de selectores para extraer elementos
-del DOM, usando la misma sintaxis que hemos visto arriba:
-`$("selector")` permite extraer una serie de elementos que cumplan esa
-sintaxis que, como hemos visto más arriba, es la misma que se usa en las
-CSS. Lo vemos en el [siguiente
-ejemplo](https://github.com/JJ/curso-js/blob/master/code/selectores.html)
-
-~~~~~HTML
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<title>Probando ready de jQuery</title>
-</head>
-
-<body>
-<h1>Esta es una página que no tiene gran cosa</h1>
-
-<p>Pero podría tenerla.</p>
-<script type='text/javascript'>
-$(function() {
-    var hachedoses ='';
-    $("h2").each( function() {
-        hachedoses += this.textContent + " - ";
-    } );
-    console.log(hachedoses);
-    $("#cambiando").html( hachedoses ); 
-});
-</script>
-<h2>Este es un H2</h2>
-
-<h2>Este es otro H2</h2>
-
-<H2>Y este, lo adivinaste, otro</H2>
-
-<div id='cambiando' style='border:dashed'></div>
-</body> 
-</html>
-~~~~~
-
-En este ejemplo, primero se recorren los elementos `h2` pero en vez de
-hacerse a partir de un bucle se usa directamente el objeto generado por
-el selector y que aplica a cada uno de ellos una función anónima; en
-este caso la función concatena a `hachedoses` el contenido en texto del
-elemento. Usamos la escritura en la consola con `console.log` principalmente para que se vea el contenido
-del `div` definido más abajo y vacío y posteriormente con el contenido que
-se le añade en la última línea del script, que usa como selector el
-equivalente a un elemento con el id `#cambiando`.
-
-Conviene recordar que `console.log` se usa aquí principalmente por
-cuestiones de depuración. En producción se debe tratar de evitar,
-porque al usuario no le sirve de nada más que una cierta ralentización
-por hacer una operación de entrada salida. 
-
 ## Bibliografía
 
-La mejor bibliografía está en inglés: [jQuery fundamentals](http://jqfundamentals.com/), por ejemplo, es un libro gratuito. [Arquitectura de la aplicación web](https://es.coursera.org/course/webapplications) es un curso gratuito de Coursera que incluye una parte de jQuery. 
+Prácticamente toda la bibliografía sobre JavaScript, al menos hasta
+hace unos años, estaba enfocada a trabajar con JS en el
+navegador. También la
+[sección del tutorial de Víctor Rivas dedicada a este tema](http://vrivas.es/javascript-2014/js_window.html)
+es, como siempre,
+útil. [AprenderAProgramar](http://aprenderaprogramar.com/index.php?option=com_content&view=article&id=859:javascript-redireccionar-y-recargar-webs-windowlocation-href-hostname-assign-reload-replace-cu01171e&catid=78:tutorial-basico-programador-web-javascript-desde-&Itemid=206)
+incluye también una referencia de los objetos disponibles. 
