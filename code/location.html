@@ -6,6 +6,9 @@
 <script type='text/javascript'>
 function use_location() {
   console.log( window.location );
+  var this_url = window.location.href;
+  var query = this_url.match(/\?(\w+)/);
+  document.getElementById('titulo').insertAdjacentHTML('afterbegin',query[1]);
 }
 </script>
 </head>
