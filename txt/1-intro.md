@@ -122,15 +122,13 @@ está activado por omisión. Por otro lado, veremos ejemplos
 principalmente de programas que se pueden usar desde el intérprete, y
 merece la pena instalarse uno.
 
-Si usas Eclipse, puede que te venga bien el [plugin
-JSDT](http://www.eclipse.org/webtools/jsdt/).
+Si usas Eclipse, puede que te venga bien el [plugin JSDT](http://www.eclipse.org/webtools/jsdt/).
 
 > Igual al atento lector le funciona correctamente. Yo no conseguí
 > echarlo a andar.
 
 Por otro lado, el `emacs` va de lujo. NetBeans
-tiene también [soporte para
-JavaScript](https://netbeans.org/kb/73/ide/javascript-editor.html),
+tiene también [soporte para JavaScript](https://netbeans.org/kb/73/ide/javascript-editor.html),
 simplemente seleccionando este lenguaje para un nuevo fichero. El editor
 detecta la estructura del fichero e incluso analiza el código indicando
 los problemas, indentando automáticamente y emparejando paréntesis y
@@ -143,8 +141,7 @@ precisamente con la Web, y no tenga una librería decente para, pongamos
 por caso, acceder a bases de datos. Pero también ha permitido que el
 lenguaje siga siendo *pequeño*, y se haya desarrollado principalmente a
 base de añadir objetos y clases externas al mismo. En resumen, que en el
-marco de eso que se ha venido en llamar [web
-2.0](https://es.wikipedia.org/wiki/Web_2.0) y especialmente desde que
+marco de eso que se ha venido en llamar [web 2.0](https://es.wikipedia.org/wiki/Web_2.0) y especialmente desde que
 se ha popularizado Node, JS se ha convertido en
 adulto, y merece la pena estudiarlo como cualquier otro lenguaje.
 
@@ -285,9 +282,7 @@ los del navegador).
 > de JS. Esto, sin embargo, parece funcionar: `kjs -e
 >'print("Hola,mundo")'`. 
 
-Por otro lado, [este programa, `hola-g.js`, sería equivalente
-para el intérprete `gjs` que viene con
-Gnome](https://github.com/JJ/curso-js/tree/master/code/hola-g.js).
+Por otro lado, [este programa, `hola-g.js`, sería equivalente para el intérprete `gjs` que viene con Gnome](https://github.com/JJ/curso-js/tree/master/code/hola-g.js).
 
 Para ejecutarlo desde el navegador habrá que hacer un poco más de
 historia, pero tampoco tanto. Primero, lo podemos ejecutar
@@ -313,9 +308,7 @@ devuelve ningún valor, como ya hemos visto. La línea siguiente es la que muest
 resultado de ejecutar la orden.
 
 Segundo, podemos ejecutar JavaScript como parte de una página web. Lo
-vemos en [este ejemplo (darle a ver 
-fuente para ver el
-código)](https://github.com/JJ/curso-js/tree/master/code/hola-js.html)
+vemos en [este ejemplo (darle a ver fuente para ver el código)](https://github.com/JJ/curso-js/tree/master/code/hola-js.html)
 donde se incluye el programa en JS de esta forma:
 
 ~~~~~
@@ -483,8 +476,7 @@ print ("</"+tabla+">");
 ~~~~~~
 
 Aunque queda un poco torpe tanto `<>`... Vamos a reducir un poco el
-programa, haciéndolo [más
-elegante](https://github.com/JJ/curso-js/tree/master/code/tabla2.js)
+programa, haciéndolo [más elegante](https://github.com/JJ/curso-js/tree/master/code/tabla2.js)
 (aunque más largo: no se puede tener todo):
 
 ~~~~~~javascript
