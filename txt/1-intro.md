@@ -84,7 +84,7 @@ o
 	bash% sudo apt-get install libmozjs-24-bin
 ~~~~~~
 
-que instalará Spidermonkey en el fichero ejecutable `js24`.
+que instalará SpiderMonkey en el fichero ejecutable `js24`.
 
 Hay algunas diferencias entre los intérpretes, sobre todo en cualquier
 función que tenga que ver con la entrada/salida. Conviene consultar la
@@ -235,7 +235,7 @@ menos. Empecemos por una de ellas
 print( 'Hola, Mundo' ); // console.log en vez de print si "js" es node.
 ~~~~~~
 
-El programa en sí comienza en la seguna línea, y en él podemos ver que
+El programa en sí comienza en la segunda línea, y en él podemos ver que
 la sintaxis de JS es bastante parecida a la del lenguaje C y, para el
 caso, también 
 al Java. La primera línea, clásica de los lenguajes de *scripting* en
