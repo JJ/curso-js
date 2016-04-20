@@ -51,12 +51,9 @@ lugar a un estilo de programación denominado
 Para ejecutar JavaScript no hace falta más que un navegador, pero
 también hay entornos para trabajar con él de forma autónoma, el más
 conocido de los cuales es [Node](https://nodejs.org/en), pero con otros representantes tales como el
-[Mozilla
-SpiderMonkey](https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey)
+[Mozilla SpiderMonkey](https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey)
 y el [Rhino]( https://developer.mozilla.org/en-US/docs/Mozilla/Projects/Rhino), éste
-último basado en Java; [hay una lista de intérpretes completa que se
-puede
-usar](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Shells).
+último basado en Java; [hay una lista de intérpretes completa que se puede usar](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Shells).
 Conviene instalar alguno de ellos para poder ejecutar desde línea de
 órdenes los programas de
 ejemplo;
@@ -568,23 +565,13 @@ do_print (finmarca('table'));
 > usando el método habitual.
 
 Hay dos libros fundamentales para aprender JS, aunque están muy
-enfocados a JS en el navegador:[*JavaScript: The Definitive Guide*, el
-libro del
-rinoceronte](http://bencore.ugr.es/iii/encore/record/C|Rb2011082|Sjavascript+definitive+guide|Orightresult|X2?lang=spi&suite=pearl),
-editado por O'Reilly, que está [disponible como recurso electrónico en
-la
-UGR](http://proquest.safaribooksonline.com/9781449393854?uicode=goliat)
-y [*JavaScript Bible, de Danny Goodman*, un tocho
-considerable](http://bencore.ugr.es/iii/encore/record/C|Rb1987808|Sjavascript+bible|Orightresult|X5?lang=spi&suite=pearl),
+enfocados a JS en el navegador:[*JavaScript: The Definitive Guide*, el libro del rinoceronte](http://bencore.ugr.es/iii/encore/record/C|Rb2011082|Sjavascript+definitive+guide|Orightresult|X2?lang=spi&suite=pearl),
+editado por O'Reilly, que está [disponible como recurso electrónico en la UGR](http://proquest.safaribooksonline.com/9781449393854?uicode=goliat)
+y [*JavaScript Bible, de Danny Goodman*, un tocho considerable](http://bencore.ugr.es/iii/encore/record/C|Rb1987808|Sjavascript+bible|Orightresult|X5?lang=spi&suite=pearl),
 en el que hay de todo, y que viene con un útil CD con ejemplos. También
-está como [recurso
-electrónico](http://proquest.safaribooksonline.com/?uiCode=goliat&xmlId=9780470526910).
-Hay [muchos más recursos, algunos de ellos disponibles de forma
-electrónica](http://bencore.ugr.es/iii/encore/search/C|Sjavascript|Orightresult|U1?lang=spi&suite=pearl).
+está como [recurso electrónico](http://proquest.safaribooksonline.com/?uiCode=goliat&xmlId=9780470526910).
+Hay [muchos más recursos, algunos de ellos disponibles de forma electrónica](http://bencore.ugr.es/iii/encore/search/C|Sjavascript|Orightresult|U1?lang=spi&suite=pearl).
 
-Como recursos adicionales, [las páginas de JavaScript en
-Mozilla.org](https://developer.mozilla.org/en-US/docs/JavaScript/About_JavaScript?redirectlocale=en-US&redirectslug=About_JavaScript),
-el [estándar
-completo](http://www.ecma-international.org/publications/standards/Ecma-262.htm),
-y el [curso de JavaScript de Víctor Rivas
-Santos](http://geneura.ugr.es/~victor/cursillos/javascript/js_intro.html).
+Como recursos adicionales, [las páginas de JavaScript en Mozilla.org](https://developer.mozilla.org/en-US/docs/JavaScript/About_JavaScript?redirectlocale=en-US&redirectslug=About_JavaScript),
+el [estándar completo](http://www.ecma-international.org/publications/standards/Ecma-262.htm),
+y el [curso de JavaScript de Víctor Rivas Santos](http://geneura.ugr.es/~victor/cursillos/javascript/js_intro.html).

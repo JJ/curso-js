@@ -320,9 +320,7 @@ cualquier lenguaje decente escribe y lee ficheros. Es más, es que muchos
 no hacen otra cosa, ¿no? Pues no. El estándar JS no define ningún tipo
 de rutina de E/S. Pero si usamos el intérprete Rhino (en vez de
 SpiderMonkey, que es el que hemos venido usando), podemos usar clases de
-Java directamente, lo que complica terriblemente el programa, pero [ahí
-está, de todas
-formas](https://github.com/JJ/curso-js/tree/master/code/lee_quiniela.js):
+Java directamente, lo que complica terriblemente el programa, pero [ahí está, de todas formas](https://github.com/JJ/curso-js/tree/master/code/lee_quiniela.js):
 
 ~~~~~~javascript
 // ejecutar con rhino lee_quiniela.js <argumento>
@@ -411,8 +409,7 @@ que dará el resultado siguiente:
 	
 Queda con esto más o menos claro que para ir donde nadie ha ido antes
 con JS, hay que meterse un poco en Java. Pero no siempre. Tenéis alguna
-información más en [este tutorial de
-Mozilla](https://developer.mozilla.org/en-US/docs/Mozilla/Projects/Rhino/Scripting_Java), que te
+información más en [este tutorial de Mozilla](https://developer.mozilla.org/en-US/docs/Mozilla/Projects/Rhino/Scripting_Java), que te
 explica como importar espacios de nombres completos e incluso como
 implementar interfaces de Java.
 
