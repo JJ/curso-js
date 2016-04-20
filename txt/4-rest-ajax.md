@@ -89,8 +89,7 @@ Vamos a ver un interfaz de este tipo: el de
 [Twitter](https://twitter.com/), cuyo [API](https://dev.twitter.com/overview/documentation) es
 [RESTful](#RESTful), y está bastante bien diseñada. Para usarla es
 necesario darse de alta; desde la versión 1.1 del interfaz todas las
-peticiones necesitan autenticación. Así que usaremos [otro interfaz, el
-de GitHub](http://developer.github.com/v3/), para hacer pruebas. Por
+peticiones necesitan autenticación. Así que usaremos [otro interfaz, el de GitHub](http://developer.github.com/v3/), para hacer pruebas. Por
 ejemplo, esta petición te dará todas las *organizaciones* a las que
 pertenece el usuario [JJ](http://github.com/JJ):
 
@@ -173,9 +172,7 @@ mayoría de los [API](#API) REST se usa ya autenticación OAuth en alguna
 de sus formas.
 
 Y lo único que hacemos con la respuesta es imprimirla, tal cual, pero lo
-mejor sería extraer información útil de la misma, como ocurre en [este
-programa en
-node.js](https://github.com/JJ/curso-js/blob/13e25e97315e58a84f268349ba61b650e7a097e3/code/github-get.js):
+mejor sería extraer información útil de la misma, como ocurre en [este programa en node.js](https://github.com/JJ/curso-js/blob/13e25e97315e58a84f268349ba61b650e7a097e3/code/github-get.js):
 
 ~~~~~javascript
 #!/usr/bin/env node
@@ -216,8 +213,7 @@ contiene muchas más cosas que no nos interesan. El [módulo
 `https`](http://nodejs.org/api/https.html#https_https_request_options_callback)
 usado es muy similar al `http`, salvo por el protocolo usado. La
 petición que se está usando es la forma más general, pero se puede usar
-directamente `get` [de esta
-forma](https://github.com/JJ/curso-js/blob/master/code/github-get.js):
+directamente `get` [de esta forma](https://github.com/JJ/curso-js/blob/master/code/github-get.js):
 
     var   req = https.get('https://api.github.com/users/'+user,     function(res) 
 
@@ -364,8 +360,7 @@ El acceso a los parámetros de la llamada y la realización de diferentes
 actividades según el mismo se denomina enrutado. En express se pueden
 definir los parámetros de forma bastante simple, usando marcadores
 precedidos por `:`. Por ejemplo, si queremos tener diferentes contadores
-podríamos usar el [programa
-siguiente](https://github.com/JJ/curso-js/blob/master/code/express-count.js):
+podríamos usar el [programa siguiente](https://github.com/JJ/curso-js/blob/master/code/express-count.js):
 
 ~~~~~javascript
 var express=require('express');
@@ -395,8 +390,7 @@ app.listen(puerto);
 console.log('Server running at http://127.0.0.1:'+puerto+'/');
 ~~~~~
 
-Este [programa
-(express-count.js)](https://github.com/JJ/curso-js/tree/master/code/express-count.js%27)
+Este [programa (express-count.js)](https://github.com/JJ/curso-js/tree/master/code/express-count.js%27)
 introduce otras dos órdenes REST: PUT, que, como recordamos, sirve para
 crear nuevos recurso y es idempotente (se puede usar varias veces con el
 mismo resultado), y además POST. Esa orden la vamos a usar para crear
@@ -494,8 +488,7 @@ a `dominio.com` desde páginas que te hayas descargado desde
 `dominio.com`. Por eso es importante que el sistema que tenga el
 [API](#API) REST sea capaz también de servir las páginas; es lo que
 vamos a hacer en el siguiente ejemplo. Necesitaremos tres ficheros para
-ejecutar el programa. El primero es el [servidor en
-node.js](https://github.com/JJ/curso-js/tree/master/code/count-server.js):
+ejecutar el programa. El primero es el [servidor en node.js](https://github.com/JJ/curso-js/tree/master/code/count-server.js):
 
 ~~~~~javascript
 var fs = require('fs');

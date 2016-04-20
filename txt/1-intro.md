@@ -18,8 +18,8 @@ permite ejecutar aplicaciones en cliente y servidor, así que se ha
 convertido en uno de los lenguajes más útiles para desarrollo en
 Internet.
 
-Esto se debe en parte a que ha sido definido como un [estándar ECMA
-(denominado ECMAScript)](https://es.wikipedia.org/wiki/ECMAScript) lo
+Esto se debe en parte a que ha sido definido como un 
+[estándar ECMA (denominado ECMAScript)](https://es.wikipedia.org/wiki/ECMAScript) lo
 que da lugar a muchas implementaciones diferentes, que son, además,
 independientes del fabricante. Y también en parte a que suele usar un
 conjunto de objetos estándar, que no son estrictamente parte de un
@@ -36,7 +36,7 @@ sistema operativo nativo; a estas aplicaciones se les ha denominado
 >[MineCraft tiene un mod que permite programar en JS](https://github.com/walterhiggins/ScriptCraft/blob/master/docs/YoungPersonsGuideToProgrammingMinecraft.md). También
 >se puede usar para
 >[programar macros en LibreOffice](https://help.libreoffice.org/Common/Scripting/es)
->y en las [Google apps](http://drive.google.com); al accedeer al
+>y en las [Google apps](http://drive.google.com); al acceder al
 >interfaz de programación de Google Drive se accede en realidad a un
 >entorno de programación en JS. 
 

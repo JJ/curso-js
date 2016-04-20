@@ -104,8 +104,7 @@ en la segunda le asignamos el valor `mundo` a la variable de instancia
 `hola`, o visto de otro modo, el valor `mundo` a la clave `hola`.
 `console.log` imprime la cadena en la salida, escribiendo directamente
 (y además en JSON) el valor de la misma. `console` es un objeto que
-forma parte de la [librería estándar de entrada salida de
-node](https://nodejs.org/api/stdio.html). Equivale a la *consola* o el
+forma parte de la [librería estándar de entrada salida de node](https://nodejs.org/api/stdio.html). Equivale a la *consola* o el
 terminal, permitiendo enviar información a la misma con `log` y con
 otras órdenes como `error`; la diferencia es que en el primer caso se
 escribe en salida estándar y en el segundo en salida de error estándar
