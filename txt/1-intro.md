@@ -52,7 +52,7 @@ Para ejecutar JavaScript no hace falta más que un navegador, pero
 también hay entornos para trabajar con él de forma autónoma, el más
 conocido de los cuales es [Node](https://nodejs.org/en), pero con otros representantes tales como el
 [Mozilla SpiderMonkey](https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey)
-y el [Rhino]( https://developer.mozilla.org/en-US/docs/Mozilla/Projects/Rhino), éste
+y el [Rhino](https://developer.mozilla.org/en-US/docs/Mozilla/Projects/Rhino), éste
 último basado en Java; [hay una lista de intérpretes completa que se puede usar](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Shells).
 Conviene instalar alguno de ellos para poder ejecutar desde línea de
 órdenes los programas de
@@ -64,9 +64,9 @@ ejemplo;
 por ejemplo, para instalar el primero habrá que ejecutar desde
 la consola de administrador o superusuario:
 
-```
+~~~~~~
 	bash% sudo apt-get install nodejs
-```
+~~~~~~
 
 > En otros sistemas operativos o versiones de linux habrá primero que
 > localizar el paquete correspondiente, que seguramente se llamará
@@ -74,15 +74,15 @@ la consola de administrador o superusuario:
 
 O, si se quiere instalar
 
-```
+~~~~~~
 	bash% sudo apt-get install rhino
-```
+~~~~~~
 
 o
 
-```
+~~~~~~
 	bash% sudo apt-get install libmozjs-24-bin
-```
+~~~~~~
 
 que instalará Spidermonkey en el fichero ejecutable `js24`.
 
@@ -160,8 +160,10 @@ ya incluido un intérprete de órdenes, sea en el navegador o sea en
 forma de intérprete para la línea de órdenes. Vamos usarlo para ver
 nuestras primeras órdenes en JavaScript.
 
+~~~~~~
     var do_print=(typeof console != "undefined")?function(msg){console.log(msg)}:print;
 	do_print("Cool cool cool")
+~~~~~~
 
 Además, este programa es bastante característico de las
 características únicas de JS y se puede ejecutar sin variación en
@@ -200,7 +202,9 @@ función sobre la marcha con la palabra clave `function`, un parámetro
 `msg` y la expresión correspondiente. es decir, la función se puede
 definir y asignar en una variable así:
 
+~~~~~~
 	var usa_consola=function(msg){console.log(msg)};
+~~~~~~
 
 Tras el `:`, está la otra opción. En muchos intérpretes en JS no
 existe el objeto `console`, pero para escribir en el terminal se usa
@@ -292,9 +296,11 @@ la parte baja de la ventana de Firefox, una consola de JavaScript. Donde aparece
 ">>", se escribe simplemente `console.log("Qué bonito")` y dará como
 resultado algo así:
 
+~~~~~~
     console.log("Qué bonito")
 	undefined
 	Qué bonito
+~~~~~~
 
 En navegadores modernos la consola también completará automáticamente
 las órdenes mostrándote todas las opciones posibles.
