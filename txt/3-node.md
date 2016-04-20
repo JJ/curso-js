@@ -513,28 +513,20 @@ sugerencias sobre este material.
 
 ## Bibliografía
 
-Como recursos adicionales, [las páginas de JavaScript en
-Mozilla.org](https://developer.mozilla.org/en/About_JavaScript), el
-[estándar
-completo](http://www.ecma-international.org/publications/standards/Ecma-262.htm),
-[Eloquent JavaScript](http://eloquentjavascript.net/) y el [curso de
-JavaScript de Víctor Rivas
-Santos](http://geneura.ugr.es/%7Evictor/cursillos/javascript/js_intro.html).
+Como recursos adicionales, [las páginas de JavaScript en Mozilla.org](https://developer.mozilla.org/en/About_JavaScript), el
+[estándar completo](http://www.ecma-international.org/publications/standards/Ecma-262.htm),
+[Eloquent JavaScript](http://eloquentjavascript.net/) y el [curso de JavaScript de Víctor Rivas Santos](http://geneura.ugr.es/%7Evictor/cursillos/javascript/js_intro.html).
 
-Por último, [JavaScript: The good
-parts](https://www.amazon.co.uk/dp/0596517742?tag=severawebsite-21&camp=2902&creative=19466&linkCode=as4&creativeASIN=0596517742&adid=0MJ7MPPRP9H7PJ2B5MPB&)
+Por último, [JavaScript: The good parts](https://www.amazon.co.uk/dp/0596517742?tag=severawebsite-21&camp=2902&creative=19466&linkCode=as4&creativeASIN=0596517742&adid=0MJ7MPPRP9H7PJ2B5MPB&)
 es un manual bastante completo que menciona muchos trucos para trabajar
 con este lenguaje.
 
-Específicamente de node.js, se puede empezar por [esta pregunta en
-StackOverflow](http://stackoverflow.com/questions/2353818/how-do-i-get-started-with-node-js),
+Específicamente de node.js, se puede empezar por [esta pregunta en StackOverflow](http://stackoverflow.com/questions/2353818/how-do-i-get-started-with-node-js),
 para seguir con [el sitio de node.js](http://www.nodehispano.com/) en
 español, que incluye enlaces a
 [nodebeginner](http://www.nodebeginner.org/index-es.html), el libro para
 principiantes en node.js. La traducción tiene algunos errores, pero es
-legible. Finalmente, [NodeHispano nos ofrece una lista de recursos en
-español](http://www.nodehispano.com/).
-Finalmente, también hay [una cuenta de Twitter (no demasiado
-activa)](https://twitter.com/nodejs_es). También el libro inserto (o
+legible. Finalmente, [NodeHispano nos ofrece una lista de recursos en español](http://www.nodehispano.com/).
+Finalmente, también hay [una cuenta de Twitter (no demasiado activa)](https://twitter.com/nodejs_es). También el libro inserto (o
 cualquier otro recomendado, a esta alturas hay una cantidad ingente de
 bibliografía sobre node.js).

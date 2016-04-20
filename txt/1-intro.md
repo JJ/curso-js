@@ -64,7 +64,9 @@ ejemplo;
 por ejemplo, para instalar el primero habrá que ejecutar desde
 la consola de administrador o superusuario:
 
-	bash% apt-get install nodejs
+```
+	bash% sudo apt-get install nodejs
+```
 
 > En otros sistemas operativos o versiones de linux habrá primero que
 > localizar el paquete correspondiente, que seguramente se llamará
@@ -72,11 +74,15 @@ la consola de administrador o superusuario:
 
 O, si se quiere instalar
 
-	bash% apt-get install rhino
+```
+	bash% sudo apt-get install rhino
+```
 
 o
 
-	bash% apt-get install libmozjs-24-bin
+```
+	bash% sudo apt-get install libmozjs-24-bin
+```
 
 que instalará Spidermonkey en el fichero ejecutable `js24`.
 
@@ -98,17 +104,14 @@ correctamente en `js` o `rhino`.
 > instalado por defecto junto con el entorno, se denomina `gjs`, está
 > basado en SpiderMonkey y tiene la ventaja de que está integrado con
 > todas las librerías de Gnome, de forma que se pueden hacer programas
-> tales como [este, que crea una ventana con un
-> botón](https://github.com/JJ/curso-js/tree/master/code/g.js) sin
+> tales como [este, que crea una ventana con un botón](https://github.com/JJ/curso-js/tree/master/code/g.js) sin
 > necesidad de instalar ningún módulo adicional. Éste intérprete es el que
 > usa desde `lg` (*looking glass*), una consola de depuración de Gnome al
 > estilo de la consola del navegador que se puede ejecutar desde entorno
-> pulsando Alt-F2 y escribiendo `lg`. Finalmente, Windows incluye [un
-> programa de línea de órdenes denominado `cscript` y
-> `wscript`](http://stackoverflow.com/questions/686377/windows-command-line-javascript)
+> pulsando Alt-F2 y escribiendo `lg`. Finalmente, Windows incluye [un programa de línea de órdenes denominado `cscript` y  `wscript`](http://stackoverflow.com/questions/686377/windows-command-line-javascript)
 > que, una vez más, tiene ciertas diferencias con respecto al resto de los
 > intérpretes (todo lo relacionado con I/O); en realidad se trata de
-> JScript, otra implementación del estándar ECMAscript. Finalmente,
+> JScript, otra implementación del estándar ECMAScript. Finalmente,
 > para instalar `kjs`, el intérprete JavaScript parte del entorno KDE,
 > tendrás que instalar todos los binarios de KDE con `sudo apt-get install kdelibs-bin`.
 
@@ -217,7 +220,7 @@ hubiera devuelto algún valor al ejecutarse se habría impreso en esa
 línea.
 
 >Como ejercicio, se puede probar a ejecutar esa misma función en algún
->intérprete que se tenga a mano: el de CouchDB, Rhino o Spidermonkey
+>intérprete que se tenga a mano: el de CouchDB, Rhino o SpiderMonkey
 >si es que se tienen instalados. 
 
 ## Primer programa en JavaScript
