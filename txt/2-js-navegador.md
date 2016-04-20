@@ -355,7 +355,8 @@ página
 
 Prácticamente toda la bibliografía sobre JavaScript, al menos hasta
 hace unos años, estaba enfocada a trabajar con JS en el
-navegador. También la
+navegador así que encontrar referencias sobre este capítulo no debería
+ser un problema. También la
 [sección del tutorial de Víctor Rivas dedicada a este tema](http://vrivas.es/javascript-2014/js_window.html)
 es, como siempre,
 útil. [AprenderAProgramar](http://aprenderaprogramar.com/index.php?option=com_content&view=article&id=859:javascript-redireccionar-y-recargar-webs-windowlocation-href-hostname-assign-reload-replace-cu01171e&catid=78:tutorial-basico-programador-web-javascript-desde-&Itemid=206)
