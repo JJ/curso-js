@@ -349,7 +349,75 @@ página
 >En realidad, fuera de ejemplos puramente académicos, `alert` no debe
 >usarse por problemas de usabilidad, es una práctica nefasta. Por eso,
 >es mucho mejor que sustituyas esa orden por `console.log("Ahora está
->todo cargado")`
+>todo cargado")`.
+
+## Usando el objeto `Window`: trabajando con el URL
+
+Un URL describe un recurso y, además de la parte estática que contiene
+un nombre de fichero o ruta REST, la parte dinámica tiene asignación
+de valores de variables y, en general, lo que uno quiera. En una
+página estática HTML se puede usar para pasar información a un script
+en JavaScript que, en general, tiene acceso al mismo a través del
+objeto `window.location`
+
+Veremos como se usa en la siguiente página con un *script* insertado:
+
+~~~~
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">
+<title>Probando el objeto location</title>
+<script type='text/javascript'>
+function use_location() {
+  console.log( window.location );
+  var this_url = window.location.href;
+  var query = this_url.match(/\?(\w+)/);
+  document.getElementById('titulo').insertAdjacentHTML('afterbegin',query[1]);
+}
+</script>
+</head>
+
+<body onload='use_location()'>
+  <h1>Hablando de <span id='titulo' style='border:dashed'></span></h1>
+</body> 
+</html>
+~~~~
+
+Este script usa la información que se le pasa a la página tras la `?`
+para desplegarla como parte del título de la misma. Con
+`console.log(window.location );` mostramos el contenido completo del
+objeto `location`. [Este objeto](https://developer.mozilla.org/en-US/docs/Web/API/Window/location) analiza el URL y lo separa en varias
+partes: por ejemplo, en `hash` está el fragmento del documento que se
+indica con `#`; `host` y `hostname` se diferencian solo en que
+incluyen o no el número de puerto y otros atributos nos permiten
+extraer ese número de puerto o el protocolo, en este caso `file:`. El
+que nos interesa es `href`, que asignamos a una variable en la
+siguiente línea. Este `href` incluye la dirección completa, y en la
+línea siguiente, usando expresiones regulares, extraemos la parte que
+queda a la derecha de la interrogación.
+
+Podríamos haber hecho lo mismo con `window.location.search`, que
+incluye la interrogación y lo que queda a la derecha de la misma, el
+resultado habría sido el mismo, porque `match`, una función para
+cadenas en JavaScript, extrae la información de la expresión regular,
+devolviendo un `array` en el que el primer elemento es la expresión
+regular completa que cumple esa condición y, a partir de ahí, los
+elementos que cumplen las condiciones que están entre paréntesis. En
+este caso, `\w+` sería cualquier caracter alfanumérico que siga al
+signo de interrogación, que es lo que andamos buscando. El signo de
+interrogación, como tiene significado en expresiones regulares, se
+precede de un \ para que en este caso tenga un significado literal.
+
+Finalmente usamos la función `insertAdjacentHTML` para insertar dentro
+del `span` el contenido extraído. [Esta función](https://developer.mozilla.org/es/docs/Web/API/Element/insertAdjacentHTML) es más práctica que
+`innerHTML`, más rápida y permite manipular el DOM insertando nuevos
+elementos en el mismo. El primer parámetro, en este caso `afterbegin`,
+indica, desde el punto de vista de la marca HTML, dónde se va a
+insertar. Combinando `before` y `after`, `begin` y `end`, podemos
+insertar elementos en cualquier posición posible con respecto a una
+marca. 
+
 
 ## Bibliografía
 
