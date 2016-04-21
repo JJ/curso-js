@@ -353,7 +353,7 @@ write( 'Hola, Mundo' );
 ~~~~~
 
 >Si los tienes instalados, prueba esta nueva versión que es, por otro
->lado, la versión en programa de las sentencias que hemos progamado
+>lado, la versión en programa de las sentencias que hemos programado
 >anteriormente. 
 
 En general, conviene ser consciente de que JavaScript incluye tantos
@@ -406,7 +406,7 @@ print ("</"+tabla+">");
 ~~~~~~
 
 >Como se puede ver en la primera línea, `#!/usr/bin/js24`, se está
->usando SpiderMonkey como intérprete. Rhino y gjs usarán `print`de la
+>usando SpiderMonkey como intérprete. Rhino y gjs usarán `print` de la
 >misma forma. Para usar node o desde la consola del navegador,
 >sustituye `print` por `console.log`.
 
@@ -439,12 +439,16 @@ estructura):
 El programa es menos complicado de lo que parece. Para declarar
 variables en JS se usa el genérico `var`, porque JavaScript tiene
 tipificado dinámico, asignando a una variable un tipo determinado
-dependiendo de su valor. `var` declar aun ámbito: simplemente usando una variable aparece
+dependiendo de su valor. `var` declara un ámbito: simplemente usando una variable aparece
 mágicamente, como se hace en las dos variables de bucle `i` y `j`.
 
 >Dependiendo del intérprete, el uso de esas variables puede provocar
->un *warning*. En `gjs`, por ejemplo, dirá *Gjs-Message: JS WARNING: [tabla.js 8]: assignment to undeclared variable i*
- 
+>un *warning*. En `gjs`, por ejemplo, dirá 
+
+~~~
+Gjs-Message: JS WARNING: [tabla.js 8]: assignment to undeclared variable i`
+~~~
+
 Con las matrices ocurre igual (es decir, se declaran y se
 les asigna valor directamente) : `matriz` lo es, y simplemente se
 declaran sus valores entre corchetes. Ojo con los nombres de variables,
