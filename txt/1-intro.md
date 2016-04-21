@@ -337,7 +337,7 @@ ofrecerán ventajas adicionales como completar las variables y los
 nombres de los comandos.
 
 >El siguiente
->[programa]((https://github.com/JJ/curso-js/tree/master/code/hola-all.js)
+>[programa](https://github.com/JJ/curso-js/tree/master/code/hola-all.js)
 >funcionaría al menos en 4 intérpretes, aparte de en la consola de algunos navegadores:
 
 ~~~~~javascript
@@ -353,7 +353,7 @@ write( 'Hola, Mundo' );
 ~~~~~
 
 >Si los tienes instalados, prueba esta nueva versión que es, por otro
->lado, la versión en programa de las sentencias que hemos progado
+>lado, la versión en programa de las sentencias que hemos progamado
 >anteriormente. 
 
 En general, conviene ser consciente de que JavaScript incluye tantos
