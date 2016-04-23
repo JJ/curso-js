@@ -1,4 +1,4 @@
-# Introducción a node.js {name="nodejs"}
+# Introducción a node.js
 
 
 ##Objetivos de este capítulo
@@ -18,8 +18,7 @@ sobre todo a partir de haberlo desgajado del navegador en e introducido
 en herramientas como las que hemos comentado anteriormente. Una de tales
 herramientas es [Node.js](http://nodejs.org/), un marco para
 programación de eventos asíncrono que usa como base JS. Se puede usar
-directamente como intérprete de JS (tal como hemos hecho [en este otro
-tutorial](http://geneura.ugr.es/%7Ejmerelo/tutoriales/servicios-web)),
+directamente como intérprete de JS (tal como hemos hecho [en este otro tutorial](http://geneura.ugr.es/%7Ejmerelo/tutoriales/servicios-web)),
 salvo por el hecho de que está preparado para trabajar de forma
 asíncrona, por lo que un patrón habitual de comportamiento, que es
 asignar la salida de una orden a una variable, se convierte aquí en la
@@ -43,24 +42,25 @@ No hace falta instalar node.js para empezar a usarlo. Algunos PaaS como
 herramientas para prototipar y publicar aplicaciones basadas en node.js
 como una línea de órdenes de la que usarla directamente.
 
-Por otro lado, otra opción conveniente es [instalar
-`nave`](https://gist.github.com/isaacs/579814), un entorno virtual que
-permite trabajar simultáneamente con diferentes versiones de node y,
+Por otro lado, otra opción conveniente es [instalar `nave`](https://gist.github.com/isaacs/579814) o, incluso mejor, [`nvm`](https://github.com/creationix/nvm), ambos entornos virtuales que
+permiten trabajar simultáneamente con diferentes versiones de node y,
 sobre todo, tener la última versión, más allá de la que proporcione la
 distribución.
 
 Como última opción de instalación en una máquina *limpia* que use Linux
-(lo que debería ser obvio, Windows automáticamente ensucia la máquina en
-la que se instala) se pueden seguir [estas
-instrucciones](https://gist.github.com/JJ/8459799) para instalar los
-prerrequisitos y la última versión de node.
+>lo que debería ser obvio, Windows automáticamente ensucia la máquina en la que se instala
+se pueden seguir [estas instrucciones](https://gist.github.com/JJ/8459799) para instalar los
+prerrequisitos y la última versión de node. Esto puede ser útil para instalarlo en la nube o alguna otra máquina virtual en la que se vaya a desplegar una aplicación.
 
 Para terminar, hay algunos sitios en Internet que permiten ejecutar,
 directamente desde el navegador, un terminal sobre una máquina virtual;
 algunos incluyen node.js ya instalado de serie. Por ejemplo,
 [Koding](http://koding.com/R/jjmerelo) permite abrir un
-[terminal](https://koding.com/Terminal "tendrás que
-          estar conectado para que esto funcione") donde, además, puedes
+[terminal](https://koding.com/Terminal) 
+
+>Tendrás que estar conectado para que esto funcione
+
+donde, además, puedes
 dejar ejecutándose tus programas y acceder a ellos desde fuera.
 
 En este tutorial aconsejamos trabajar con Linux; por lo que será
@@ -68,18 +68,17 @@ conveniente o bien que te instales cualquier tipo de distribución o
 tengas acceso a una máquina virtual en tu propio ordenador o en la nube,
 como la que proporciona [koding.com](http://koding.com/R/jjmerelo)
 
-Seguimos haciendo nuestro primer programa, un [programa simple
-(guenas.js)](https://github.com/JJ/curso-js/blob/master/code/guenas.js)
+Seguimos haciendo nuestro primer programa, un [programa simple (`guenas.js`)](https://github.com/JJ/curso-js/blob/master/code/guenas.js)
 en `node.js` y ejecutémoslo.
 
-~~~~~javascript
+~~~javascript
 #!/usr/local/bin/node
 
 var saludo = new Object;
 saludo.hola = 'mundo';
 saludo.adios ='muy buenas';
 console.log( saludo );
-~~~~~
+~~~
 
 La primera línea es exclusivamente para sistemas Linux (que son, por
 otro lado, los únicos serios para desarrollo de software); en ella habrá
@@ -88,15 +87,17 @@ como `/usr/local/bin/node` u `/usr/bin/env node` en el caso de usar
 `nave`; con ella y haciendo ejecutable el fichero con `chmod +x node.js`
 podemos ejecutarlo y obtener el siguiente resultado
 
-~~~~~
+~~~
 jmerelo@penny:~/servicios-web/ejemplos$  ./guenas.js
 { hola: 'mundo' }
-~~~~~
+~~~
 
 En otro entorno (o si no se quiere hacer al fichero ejecutable), con
 escribir
 
-    jmerelo@penny:~/servicios-web/ejemplos$  node guenas.js 
+~~~
+jmerelo@penny:~/servicios-web/ejemplos$  node guenas.js 
+~~~
 
 es suficiente. En cualquier caso, la salida será la misma. Y la
 explicación también: definimos un objeto `saludo` en la primera línea, y
@@ -109,13 +110,13 @@ terminal, permitiendo enviar información a la misma con `log` y con
 otras órdenes como `error`; la diferencia es que en el primer caso se
 escribe en salida estándar y en el segundo en salida de error estándar
 (no se capturaría en una redirección de salida, por ejemplo).
-`console.log` puede usar también [formatos como la orden `printf` de
-C](https://nodejs.org/api/stdio.html#stdio_console_log_data), es decir,
+`console.log` puede usar también [formatos como los usados por la orden `printf` de C](https://nodejs.org/api/stdio.html#stdio_console_log_data), es decir,
 
-    console.log('Respuesta: %s', saludo.hola     )
+~~~
+console.log('Respuesta: %s', saludo.hola )
+~~~
 
-como hacemos en [este
-programa](https://github.com/JJ/curso-js/blob/master/code/guenas-nave.js).
+como hacemos en [este programa](https://github.com/JJ/curso-js/blob/master/code/guenas-nave.js).
 El objeto `console` existe en la mayoría de los navegadores modernos y
 especialmente en Chrome/Chromium, pero el resultado saldrá por la
 *consola* del navegador que forma parte de las herramientas del mismo;
@@ -124,11 +125,10 @@ JavaScript*.
 
 Sin embargo, node.js no es un intérprete habitual, tiene una forma
 particular de hacer las cosas: asíncronamente. Veremos, por ejemplo,
-como [leer un
-fichero](http://docs.nodejitsu.com/articles/file-system/how-to-read-files-in-nodejs),
+como [leer un fichero](http://docs.nodejitsu.com/articles/file-system/how-to-read-files-in-nodejs),
 el de las quinielas que hemos usado hasta ahora.
 
-~~~~~javascript
+~~~javascript
 #!/usr/bin/env node
 
 var fs = require('fs');
@@ -147,20 +147,17 @@ fs.readFile('quiniela.datos', 'utf8',
 		}
 	    }
 );
-~~~~~
+~~~
 
 En este
 [programa](https://github.com/JJ/curso-js/blob/master/code/lee-quiniela.js)
-(que actúa sobre [este fichero de
-datos](https://github.com/JJ/curso-js/blob/master/code/quiniela.datos))
+(que actúa sobre [este fichero de datos](https://github.com/JJ/curso-js/blob/master/code/quiniela.datos))
 se usa el intérprete node.js, lo que se ve en la primera línea, que no
 hace falta en Windows (aunque se tendrá que ejecutar desde línea de
 órdenes poniendo explícitamente node fichero.js). En la segunda vemos
-que se carga una librería usando `require`, el [mecanismo
-común](T1:t1:common) para cargar un módulo y evaluarlo, que, además,
+que se carga una librería usando `require`, el mecanismo común para cargar un módulo y evaluarlo, que, además,
 crea un objeto que se puede usar; lo usamos más adelante para leer un
-fichero. [`fs` se refiere a
-*filesystem*](http://nodejs.org/api/fs.html), o sistema de ficheros, y
+fichero. [`fs` se refiere a *filesystem*](http://nodejs.org/api/fs.html), o sistema de ficheros, y
 es el módulo que contiene una serie de funciones para interaccionar con
 el mismo.
 
@@ -184,13 +181,11 @@ hebra y se van procesando en paralelo.
 Vamos a la orden específica: efectivamente, con `readFile` leemos el
 fichero. Los dos primeros argumentos son el nombre del fichero y, a
 continuación, la codificación, que es obligatorio usar (bueno, más o
-menos: [si no se da la codificación, te devuelve un buffer, no el
-contenido del
-fichero](http://nodejs.org/api/fs.html#fs_fs_readfile_filename_options_callback)).
+menos: [si no se da la codificación, te devuelve un buffer, no el contenido del fichero](http://nodejs.org/api/fs.html#fs_fs_readfile_filename_options_callback)).
 Y continuación el *callback* del que hemos hablado: una función que se
 ejecuta cuando se termine; se trata de una función anónima tal como las
 que hemos visto en apartados anteriores. El hecho de que se ejecute
-asíncronamente quiere decir que fs.readFile se ejecuta y se deja el
+asíncronamente quiere decir que `fs.readFile` se ejecuta y se deja el
 evento generado; si hubiera una orden a continuación se ejecutaría
 inmediatamente. Esto le permite a `node.js` leer las cosas con mucha
 eficiencia, y hacer una serie de operaciones que no se pueden hacer
@@ -209,7 +204,7 @@ El resto del programa es más o menos habitual; usamos la clase que hemos
 definido anteriormente para genera un objeto de cada tipo e imprimirlo
 usando `console.log`. El resultado será más o menos así:
 
-~~~~~
+~~~
 { local: 'Madrid', visitante: 'Barça', resultado: 'x' }
 { local: 'Atleti', visitante: 'Barça', resultado: '1' }
 { local: 'Athleti', visitante: 'Recre', resultado: '1' }
@@ -217,7 +212,7 @@ usando `console.log`. El resultado será más o menos así:
 { local: 'Elche', visitante: 'Hércules', resultado: 'x' }
 { local: 'Cai', visitante: 'Madrid', resultado: 'x' }
 { local: 'Graná', visitante: 'Recre', resultado: '1' }
-~~~~~
+~~~
 
 Es decir, los datos leídos en formato JSON.
 
@@ -226,17 +221,14 @@ Es decir, los datos leídos en formato JSON.
 `fs` es sólo el principio de una serie de módulos muy interesante; de
 hecho, es un módulo que se instala por omisión. Hay un módulo para crear
 servidores web, pero lo veremos más adelante (sólo para tener una idea
-se puede visitar [nodetuts](http://nodetuts.com/)). En el [sitio de
-descarga de nodejs](http://nodejs.org/docs/latest/api/index.html) vienen
+se puede visitar [`nodetuts`](http://nodetuts.com/)). En el [sitio de descarga de nodejs](http://nodejs.org/docs/latest/api/index.html) vienen
 también todos los módulos disponibles, que permiten trabajar con el
 sistema operativo y cosas más avanzadas como una interfaz criptográfica.
 Pero si se quieren instalar más módulos, una de las características más
 interesantes de node es que tiene su propio gestor de paquetes, `npm`.
 Hay que [seguir las instrucciones para instalarlo](http://npmjs.org/) y
 una vez hecho tener en cuenta que los módulos se instalan por omisión en
-el directorio superior al que uno está trabajando. La [lista de todos
-los paquetes está en línea, y contiene módulos para la mayoría de los
-servicios web y aplicaciones actuales.](https://npmjs.org/)
+el directorio superior al que uno está trabajando. La [lista de todos los paquetes está en línea, y contiene módulos para la mayoría de los servicios web y aplicaciones actuales](https://npmjs.org/).
 
 Instalemos por ejemplo [`request`](https://github.com/mikeal/request),
 una de las librerías más populares, que actúa como cliente de
@@ -254,7 +246,7 @@ un nivel muy básico se puede usar de la forma siguiente, en el programa
 [`github-get.js`](https://github.com/JJ/curso-js/blob/master/code/github-get.js),
 que pide información sobre un usuario en GitHub:
 
-~~~~~~javascript
+~~~javascript
 #!/usr/bin/env node
 
 var https = require('https');
@@ -278,11 +270,11 @@ var req = https.get(options, function(res) {
     });
 });
 req.end();
-~~~~~~
+~~~
 
 Usamos la librería recién instalada para descargarnos información de un
 usuario de [GitHub](https://GitHub.com), usando la librería llamada
-\$JSON\$, que se instala con Node. La forma de petición es la asíncrona
+`JSON`, que se instala con Node. La forma de petición es la asíncrona
 habitual en Node: se hace la petición y se le pasa la función a la que
 hay que llamar cuando se reciba la respuesta, como en el caso anterior
 de apertura de un fichero. A la función se la llama con tres parámetros:
@@ -291,9 +283,9 @@ o bien `err`, en caso de que se produzca un error, o bien `response` y
 texto de la respuesta, que habrá que decodificar (o imprimir tal cual,
 en caso de que se trate de HTML); `response` es una estructura de datos
 compleja, que podemos imprimir con `console.log` (y saldrá un montón de
-cosas, incluyendo la versión de [HTTP](#HTTP), las cabeceras, y mucha
+cosas, incluyendo la versión de HTTP, las cabeceras, y mucha
 información más), pero que contiene, entre otras cosas, el estado de la
-petición, con un código del protocolo [HTTP](#HTTP). En el programa
+petición, con un código del protocolo HTTP. En el programa
 anterior se comprobaba sólo si había error o no; ahora demás comprobamos
 que el código devuelto es el correcto, es decir, 200. Si hubiera un
 código 400, o 500, o incluso un 201, tendríamos que interpretar la
@@ -311,10 +303,10 @@ funcionen desde él con facilidad.
 
 El clásico [Apache](http://httpd.apache.org/) sigue usándose
 extensivamente, aunque últimamente se están empezando a usar otras
-opciones como el [nginx](http://nginx.org/), un servidor web de altas
+opciones como el [`nginx`](http://nginx.org/), un servidor web de altas
 prestaciones que se puede instalar, además, en todo tipo de plataformas
 (aunque este último no puede ejecutar, de forma directa, los
-[CGIs](#CGI) de los que hablamos en este apartado). Tanto uno como otro
+CGIs de los que hablamos en este apartado). Tanto uno como otro
 están disponibles en los repositorios de las distribuciones Linux más
 comunes.
 
@@ -334,11 +326,11 @@ en una serie de directorios cuyo valor lo calcula el servidor a partir
 del URL que se le solicita.
 
 Para servir contenidos desde un programa, la forma habitual es copiar el
-programa con la extensión .cgi al directorio que se haya configurado
+programa con la extensión `.cgi` al directorio que se haya configurado
 para ello. De la forma más simple posible un CGI escrito en node.js
 podría ser el siguiente:
 
-~~~~~
+~~~
 #!/usr/bin/node
 //cabecera
 console.log('Content-Type: text/plain; charset=UTF-8');
@@ -346,13 +338,13 @@ console.log('Content-Type: text/plain; charset=UTF-8');
 var una_variable=['uno','dos',{ tres: 'tres'}];
 console.log('');
 console.log(una_variable);
-~~~~~~
+~~~
 
 Para ejecutarlo no hay más que copiarlo a un directorio determinado con
 permisos de ejecución para otros (`chmod +x hola-js.cgi`).La primera
 envía una cabecera al cliente que le indica el tipo que se usa; la
 segunda parte es la que efectivamente envía el contenido, en este caso
-una variable en JSON (recordad que console.log escribe en salida
+una variable en JSON (recordad que `console.log` escribe en salida
 estándar, y convierte las estructuras de datos a JSON).
 
 > Node, por su naturaleza asíncrona, realmente no es el mejor sistema para
@@ -361,7 +353,7 @@ estándar, y convierte las estructuras de datos a JSON).
 > [DecafJS](https://github.com/decafjs/decaf), por ejemplo, es un intérprete de JS
 > que incluye también un servidor web; o
 > [TeaJS](https://github.com/ondras/TeaJS/), que está un tanto abandonado y es un sistema para crear
-> [CGIs](#CGI) basado en el intérprete rápido de JS de Google. Por no
+> CGIs basado en el intérprete rápido de JS de Google. Por no
 > introducir más herramientas, no los vamos a ver aquí, pero conviene
 > tener en cuenta que existen este tipo de soluciones que pueden convivir
 > en un servidor como Apache o NGINX con otros lenguajes como Ruby o Perl.
@@ -371,14 +363,14 @@ estándar, y convierte las estructuras de datos a JSON).
 Crear un servidor web con node.js es tan simple que venía directamente
 en [su página principal](http://nodejs.org/) hasta hace nada
 
-~~~~~javascript
+~~~javascript
 var http=require('http');
 http.createServer(function (req, res) {
 	res.writeHead(200, {'Content-Type': 'text/plain'});
 	res.end('Ahí estamos\n');
 }).listen(8080, '127.0.0.1');
 console.log('Server running at http://127.0.0.1:8080/');
-~~~~~
+~~~
 
 Este
 [programa](https://github.com/JJ/curso-js/blob/master/code/servidor.js)
@@ -407,16 +399,16 @@ usar el servidor.
 Evidentemente, si queremos crear un servidor que haga *algo* tendremos
 que usar las peticiones que se reciban para dar una respuesta variable.
 En el
-[programa](https://github.com/JJ/curso-js/blob/master/code/servidor-var.js)
+[programa a continuación](https://github.com/JJ/curso-js/blob/master/code/servidor-var.js) veremos como hacerlo.
 
-~~~~~javascript
+~~~javascript
 var http=require('http'); 
 http.createServer(function (req, res) {
     res.writeHead(200, {'Content-Type': 'text/plain'}); 
     res.end('Ahí estamos ' + req.url); 
 }).listen(8081, '127.0.0.1'); 
 console.log('Servidor ejecutándose en http://127.0.0.1:8081/');
-~~~~~
+~~~
 
 La principal diferencia entre este programa y el anterior es, aparte del
 puerto usado (8081 en vez de 8080) la línea en la que escribe algo, y en
@@ -435,9 +427,9 @@ A partir de ahí se puede construir un mínimo interfaz [REST](#REST) para
 responder a una serie de peticiones. La idea básica es que las funciones
 a las que tendremos que llamar estarán identificadas por el URL que se
 use para pedirlas. Por ejemplo, el programa
-[rest-minimo.js](https://github.com/JJ/curso-js/blob/master/code/rest-minimo.js)
+[`rest-minimo.js`](https://github.com/JJ/curso-js/blob/master/code/rest-minimo.js)
 
-~~~~~javascript
+~~~javascript
 #!/usr/bin/env node
 
 var http=require('http'); 
@@ -454,10 +446,10 @@ http.createServer(function (req, res) {
     } 
 }).listen(puerto, '127.0.0.1'); 
 console.log('Server running at http://127.0.0.1:'+puerto+'/');
-~~~~~
+~~~
 
 En este programa procesamos, no sólo imprimimos, la variable `req`. Es
-una estructura de datos con un montón de cosas (insertad un console.log
+una estructura de datos con un montón de cosas (insertad un `console.log`
 si queréis verlo), pero de la que vamos a usar solamente el camino. La
 idea es que el URL lo que describe es un recurso, no un fichero, así que
 nosotros procesamos el URL partiéndolo en sus diferentes componentes. Si
