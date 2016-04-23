@@ -96,11 +96,10 @@ Y el resultado, aleatorio por supuesto, será algo así como esto:
     Partido 3: Sevilla - Geta
 
 Añadir métodos de clase se hace más o menos de la misma forma, que no es
-muy ortodoxa, pero es la que hay. Lo veremos en [el siguiente
-programa](https://github.com/JJ/curso-js/tree/master/code/quiniela2.js),
+muy ortodoxa, pero es la que hay. Lo veremos en [el siguiente programa](https://github.com/JJ/curso-js/tree/master/code/quiniela2.js),
 del que sacamos el fragmento más interesante:
 
-~~~~~~javascript
+~~~~~~
 // Definición de la clase Partido
 function Partido(local,visitante) {
   this.local = local;
