@@ -99,7 +99,7 @@ Añadir métodos de clase se hace más o menos de la misma forma, que no es
 muy ortodoxa, pero es la que hay. Lo veremos en [el siguiente programa](https://github.com/JJ/curso-js/tree/master/code/quiniela2.js),
 del que sacamos el fragmento más interesante:
 
-~~~~~~
+~~~
 // Definición de la clase Partido
 function Partido(local,visitante) {
   this.local = local;
@@ -117,7 +117,7 @@ function setResultado( esteResultado ) {
 function toString() {
     return "Partido " + i + ": " + quiniela[i].local + " - " + quiniela[i].visitante + " = "+ this.resultado;
 }
-~~~~~~
+~~~
 
 Añadimos un par de funciones, y para que *pertenezcan* a la clase, hala,
 con un `this` por aquí y un `this` por allá, solucionado. Es de buen
@@ -161,8 +161,7 @@ $matrizAsociativa{'variable'}='Valor'; # { para las claves print $matrizAsociati
 
 devolvería `Valor`.
 
-Las usaremos en el [siguiente
-programa](https://github.com/JJ/curso-js/tree/master/code/liga.js), que
+Las usaremos en el [siguiente programa](https://github.com/JJ/curso-js/tree/master/code/liga.js), que
 genera aleatoriamente diez jornadas de una liga, y asigna puntuación
 según los resultados:
 
@@ -213,8 +212,7 @@ Más adelante se va recorriendo en un bucle doble los partidos de cada
 una de las jornadas, y asignando puntuación dependiendo del resultado de
 la quiniela. Se usa la construcción `if... else if       ... else`, que
 funciona de la forma habitual, aunque también podríamos haber usado
-`switch`, como en [el siguiente
-programa](https://github.com/JJ/curso-js/tree/master/code/liga2.js), que
+`switch`, como en [el siguiente programa](https://github.com/JJ/curso-js/tree/master/code/liga2.js), que
 en lo único que cambia es en estas líneas:
 
 ~~~~~~
@@ -319,7 +317,8 @@ cualquier lenguaje decente escribe y lee ficheros. Es más, es que muchos
 no hacen otra cosa, ¿no? Pues no. El estándar JS no define ningún tipo
 de rutina de E/S. Pero si usamos el intérprete Rhino (en vez de
 SpiderMonkey, que es el que hemos venido usando), podemos usar clases de
-Java directamente, lo que complica terriblemente el programa, pero [ahí está, de todas formas](https://github.com/JJ/curso-js/tree/master/code/lee_quiniela.js):
+Java directamente, lo que complica terriblemente el programa, pero 
+[ahí está, de todas formas](https://github.com/JJ/curso-js/tree/master/code/lee_quiniela.js):
 
 ~~~~~~javascript
 // ejecutar con rhino lee_quiniela.js <argumento>
@@ -394,8 +393,7 @@ más de javascrí.
 
 La otra diferencia es también cómo se ejecuta el fichero:
 `rhino lee_quiniela.js quiniela.datos` para ejecutarlo sobre
-el [fichero
-`quiniela.datos`](https://github.com/JJ/curso-js/tree/master/code/quiniela.datos),
+el [fichero `quiniela.datos`](https://github.com/JJ/curso-js/tree/master/code/quiniela.datos),
 que dará el resultado siguiente:
 
 	Elche: 1
@@ -471,17 +469,13 @@ modificarlas de diferentes formas; algo así hemos visto ya cuando hemos
 definido objetos también, en los que se asignan los nombres de funciones
 a métodos de una clase simplemente usando su nombre (en realidad, un
 puntero a función). Las diferentes formas de definir funciones se
-explican en [este post de StackOverflow (un recurso imprescindible, por
-otro
-lado).](http://stackoverflow.com/questions/1140089/why-do-you-need-to-invoke-an-anonymous-function-on-the-same-line)
+explican en [este post de StackOverflow (un recurso imprescindible, por otro lado).](http://stackoverflow.com/questions/1140089/why-do-you-need-to-invoke-an-anonymous-function-on-the-same-line)
 
 Vamos a verlo a verlo a continuación, usando nuestra conocida quiniela;
 usaremos una función para imprimir el resultado de la quiniela, de forma
-que se pueda ver la salida de varias formas diferentes. En [el siguiente
-módulo hacemos uso de esta
-funcionalidad](https://github.com/JJ/curso-js/tree/master/code/Nuevo_partido.js):
+que se pueda ver la salida de varias formas diferentes. En [el siguiente módulo hacemos uso de esta funcionalidad](https://github.com/JJ/curso-js/tree/master/code/Nuevo_partido.js):
 
-~~~~~~javascript
+~~~javascript
 // Definición de la clase Partido
 function Nuevo_partido(local,visitante, resultado) {
     this.local = local;
@@ -509,7 +503,7 @@ function _toString( local, visitante ) {
 function set_to_string ( impresor ) {
     this.impresor = impresor;
 }
-~~~~~~
+~~~
 
 En esta clase la principal diferencia es que usamos el método `impresor`
 como una variable al cual le podemos asignar diferentes valores, incluso
@@ -520,7 +514,7 @@ asignándole un valor nuevo. De hecho, esto es lo que vamos a hacer en el
 [programa siguiente
 (`liga3.js`)](https://github.com/JJ/curso-js/tree/master/code/liga3.js):
 
-~~~~~~javascript
+~~~javascript
 #!/usr/bin/env js
 
 load('Nuevo_partido.js');
@@ -580,7 +574,7 @@ for ( var i in resultados ) {
   print( i + ": " + resultados[i])
 }
 
-~~~~~~
+~~~
 
 Como en todos los scripts, habrá que tener en cuenta que la primera
 línea, `#!/usr/bin/js`, tendrá que sustituirse por el intérprete de
@@ -617,7 +611,7 @@ cosas hechas a este estándar, por ejemplo, cambiando esto sobre la clase
 `Nuevo_partido.js` creada anteriormente (la llamamos
 [Un_Partido](https://github.com/JJ/curso-js/tree/master/code/Un_Partido.js)).
 
-~~~~~~javascript
+~~~javascript
 // Definición de la clase Nuevo_partido
 exports.Un_Partido = function (local,visitante,resultado) {
     this.local = local;
@@ -646,7 +640,7 @@ function set_to_string ( impresor ) {
     this.impresor = impresor;
 }
 
-~~~~~~
+~~~
 
 El único cambio ha sido que en vez de definir la función directamente,
 se define como un atributo de `exports`. El resto, al ser atributos de
@@ -655,11 +649,11 @@ llamarlo también habrá un pequeño cambio. Mientras que antes teníamos
 que hacer un eval sobre lo cargado, ahora basta con ([programa
 usa\_partido.js](https://github.com/JJ/curso-js/tree/master/codeusa_partido.js)):
 
-~~~~~~javascript
+~~~javascript
 var un_partido = require('./Un_Partido.js');
 var este_partido = new un_partido.Un_Partido( 'este','otro','1');
 console.log('Resultado ' + este_partido.toString());
-~~~~~~
+~~~
 
 Este módulo ya se comporta como el resto de los módulos de Node,
 haciendo falta usar sólo require (con el camino completo) para cargarlo.
@@ -687,11 +681,10 @@ Cualquiera de los recursos que listo ahí abajo pueden resultar útiles
 para ampliar información sobre JavaScript. Quizás también pueda ser
 interesante usar alguna librería que facilite su uso como
 [Mochikit](http://mochi.github.com/mochikit/) o
-[Prototype](http://www.prototypejs.org/). También el [Google Web
-Toolkit](http://www.gwtproject.org/?csw=1) permite desarrollar en Ajax
+[Prototype](http://www.prototypejs.org/). También el [Google Web Toolkit](http://www.gwtproject.org/?csw=1) permite desarrollar en Ajax
 programando sólo en Java, aunque pueda que el JS generado necesite algún
 retoque adicional. Por supuesto, también es conveniente que se
-continúe con el siguiente capítulo.  
+continúe con el siguiente capítulo.
 
 
 ## Bibliografía 
