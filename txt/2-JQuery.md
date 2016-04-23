@@ -22,10 +22,9 @@ programa.
 
 A vista de pájaro, JQuery introduce un objeto, `$`, que permite acceder
 a todas sus funciones. Podemos empezar con la función `ready` en el
-[siguiente
-programa](https://github.com/JJ/curso-js/blob/master/code/ready.html):
+[siguiente programa](https://github.com/JJ/curso-js/blob/master/code/ready.html):
 
-~~~~~HTML
+~~~HTML
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -47,7 +46,7 @@ $(document).ready(function() {
 <!-- hhmts start -->Last modified: Sun Apr  7 19:49:52 CEST 2013 <!-- hhmts end -->
 </body> 
 </html>
-~~~~~
+~~~
 
 En este caso, usamos como se ha indicado antes la copia de JQuery
 proporcionada por Google, que, como cualquier otra librería JS, debe ser
@@ -70,10 +69,9 @@ JQuery también simplifica el uso de selectores para extraer elementos
 del DOM, usando la misma sintaxis que hemos visto arriba:
 `$("selector")` permite extraer una serie de elementos que cumplan esa
 sintaxis que, como hemos visto más arriba, es la misma que se usa en las
-CSS. Lo vemos en el [siguiente
-ejemplo](https://github.com/JJ/curso-js/blob/master/code/selectores.html)
+CSS. Lo vemos en el [siguiente ejemplo](https://github.com/JJ/curso-js/blob/master/code/selectores.html)
 
-~~~~~HTML
+~~~HTML
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -105,7 +103,7 @@ $(function() {
 <div id='cambiando' style='border:dashed'></div>
 </body> 
 </html>
-~~~~~
+~~~
 
 En este ejemplo, primero se recorren los elementos `h2` pero en vez de
 hacerse a partir de un bucle se usa directamente el objeto generado por
