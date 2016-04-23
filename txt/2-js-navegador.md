@@ -38,8 +38,7 @@ del mundo mundial.
 Para empezar, vamos a ver qué pinta tiene el DOM de un documento
 cualquiera. Por ejemplo, usemos esta misma página, que para eso está ya
 en HTML. En Firefox, se ve el DOM completo con la combinación de teclas
-`Ctrl+Shift+I`. Para ésta página, saldría algo así: ![DOM de una
-página](imagenes/AAP-DOM.png) La estructura es la que cabe esperar: hay
+`Ctrl+Shift+I`. Para ésta página, saldría algo así: ![DOM de una página](imagenes/AAP-DOM.png) La estructura es la que cabe esperar: hay
 un nodo raíz, etiquetado como `document`, del que descienden las dos
 partes del documento HTML: `HEAD` y `BODY`. Y de ahí, pues el resto.
 
@@ -49,7 +48,7 @@ un programa JS se ejecuta dentro de un documento, puede alterar su
 estructura. Veámoslo, por ejemplo, en el
 [`docwrite.html`](https://github.com/JJ/curso-js/blob/master/code/docwrite.html):
 
-~~~~~html
+~~~html
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -76,10 +75,9 @@ Last modified: Sun Feb 25 18:57:52 CET 2007
 <!-- hhmts end -->
   </body>
 </html>
-~~~~~
+~~~
 
-que crearía un DOM con el aspecto siguiente: ![Creación de un nodo en el
-DOM con JS](imagenes/nuevonodo.png) Como se ve, el nodo `P` sigue al
+que crearía un DOM con el aspecto siguiente: ![Creación de un nodo en el DOM con JS](imagenes/nuevonodo.png) Como se ve, el nodo `P` sigue al
 nodo `script`, es decir, que el nodo se crea en el DOM justamente
 siguiendo al nodo que incluye el script. En realidad, se crean tantos
 nodos como a uno le interese, pero de esta forma sólo se pueden colocar
@@ -133,11 +131,10 @@ extensión `.user.js` como propios (es decir, los abre cuando se
 descargan desde una web o se abre el fichero), los instala, y permite
 gestionarlos, activarlos, y desactivarlos, desde un icono con un monito
 en la barra inferior del navegador. O sea, que una vez que se vea el
-monito, podemos cargar [este programa
-(`aap-nav.user.js`)](https://github.com/JJ/curso-js/blob/master/code/aap-nav.user.js)
+monito, podemos cargar [este programa (`aap-nav.user.js`)](https://github.com/JJ/curso-js/blob/master/code/aap-nav.user.js)
 que lo usa:
 
-~~~~~~javascript
+~~~javascript
 // ==UserScript==
 // @name                AAP-Nav
 // @namespace           http://geneura.org/projects/greasemonkey
@@ -176,7 +173,7 @@ for ( var secs = 0; secs < h2.length; secs ++ ) {
   }
   a_nodes[secs].parentNode.insertBefore(span,a_nodes[secs]);
 }
-~~~~~~
+~~~
 
 Este programa añade unas flechitas de navegación a una página que
 incluya cabeceras `h2` de forma que se pueda pasar de cada sección a la
@@ -210,7 +207,9 @@ modo de injerto, se van metiendo los elementos unos dentro de otros
 usando `appendChild`. Y, finalmente, se insertan los elementos creados
 en el documento en la penúltima línea:
 
+~~~
     a_nodes[secs].parentNode.insertBefore(span,a_nodes[secs]);
+~~~
 
 que navega desde el *ancla* hasta su padre (`parentNode`) e inserta
 antes del mismo (`insertBefore`) el `span` que hemos creado previamente.
@@ -222,9 +221,7 @@ escribe en la consola de JavaScript. Muy útil para depurarlo, inútil en
 producción; pero si abres la consola de JS verás los mensajes que ha
 usado.
 
-Para usarlo con TamperMonkey, hay que marcar [las opciones de
-compatibilidad con GreaseMonkey y
-Firefox](http://tampermonkey.net/#features), aunque también trata de
+Para usarlo con TamperMonkey, hay que marcar [las opciones de compatibilidad con GreaseMonkey y Firefox](http://tampermonkey.net/#features), aunque también trata de
 detectar las opciones necesarias automáticamente.
 
 ## Trabajando con otras ventanas
@@ -237,8 +234,7 @@ usar desde JavaScript como hacemos en el siguiente programa. No es que
 sea aconsejable, por cierto; debe usarse sólo en caso de que sea
 imprescindible (a veces se usa para autenticación, por ejemplo, o para
 no crear elementos nuevos en el interfaz). Por ejemplo, se hace así en
-[este
-programa](https://github.com/JJ/curso-js/blob/master/code/windowopen.html)
+[este programa](https://github.com/JJ/curso-js/blob/master/code/windowopen.html)
 
 ~~~~~HTML
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -285,9 +281,9 @@ La [sintaxis más general está especificada por la W3](http://www.w3.org/TR/CSS
 cualquier hoja de estilo. De esta, extraemos
 [los 30 selectores que se deben memorizar](http://net.tutsplus.com/tutorials/html-css-techniques/the-30-css-selectors-you-must-memorize/),
 principalmente `#` que se refiere a un id específico (por ejemplo,
-`#ej.1.1` seleccionaría un div declarado como `div id='ej1.1.1'` y `.`
+`#ej.1.1` seleccionaría un `div` declarado como `div id='ej1.1.1'` y `.`
 que se refiere a una clase; `.ej` por ejemplo seleccionaría todos los
-div declarados así: `div class='ej'`.
+`div` declarados así: `div class='ej'`.
 
 ## Eventos
 
@@ -297,9 +293,7 @@ generadas por el mismo, o bien registradas por el usuario (es decir,
 introducidas por el usuario cuando suceda algo determinado). El
 navegador, por ejemplo, genera un evento cuando el ratón entra o sale de
 un elemento, cuando se carga la página, o cuando se pulsa el ratón sobre
-un elemento activo. He [la lista de todos los eventos y de los elementos
-a los que
-afectan](http://www.koderguru.com/tutorials/javascript/javascriptevents.php).
+un elemento activo. He aquí [la lista de todos los eventos y de los elementos a los que afectan](http://www.koderguru.com/tutorials/javascript/javascriptevents.php).
 Los eventos permiten por un lado trabajar con un patrón de programación
 reactiva, en la que se reacciona a lo que va sucediendo en el navegador
 y, a la vez, un cierto grado de concurrencia porque cada evento sucede
@@ -316,12 +310,11 @@ Hay [una docena de eventos](http://101.lv/learn/JSweek/ch5.htm), pero no
 todos se usan con la misma asiduidad. Uno que se usa habitualmente es el
 evento `load`, que ejecuta algo sólo cuando se ha cargado la página
 completa. El comienzo de ejecución de cualquier elemento de JS conviene,
-como buena práctica, que se haga tras el evento onLoad, porque si no se
+como buena práctica, que se haga tras el evento `onLoad`, porque si no se
 ha terminado de cargar puede que el DOM no esté completo o que no lo
 estén las definiciones de algunos elementos que el programa JS pueda
 necesitar. El evento `load` sólo se activa desde el elemento `body`,
-como en [este
-ejemplo](https://github.com/JJ/curso-js/blob/master/code/onload.html)
+como en [este ejemplo](https://github.com/JJ/curso-js/blob/master/code/onload.html)
 
 ~~~~~html
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -404,7 +397,7 @@ cadenas en JavaScript, extrae la información de la expresión regular,
 devolviendo un `array` en el que el primer elemento es la expresión
 regular completa que cumple esa condición y, a partir de ahí, los
 elementos que cumplen las condiciones que están entre paréntesis. En
-este caso, `\w+` sería cualquier caracter alfanumérico que siga al
+este caso, `\w+` sería cualquier carácter alfanumérico que siga al
 signo de interrogación, que es lo que andamos buscando. El signo de
 interrogación, como tiene significado en expresiones regulares, se
 precede de un \ para que en este caso tenga un significado literal.
