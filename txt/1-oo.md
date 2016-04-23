@@ -22,7 +22,7 @@ a objetos*. Las características las veremos en el siguiente
 [programa](https://github.com/JJ/curso-js/tree/master/code/quiniela.js),
 que podría servir para hacer quinielas.
 
-~~~~~javascript
+~~~javascript
 // Definición de la clase Partido
 function Partido(local,visitante) {
   this.local = local;
@@ -44,7 +44,7 @@ for ( i=0; i < midsize ; i++ ) {
 for ( i in quiniela ) {
   print( "Partido " + (parseInt(i)+1)+": " + quiniela[i].local + " - " + quiniela[i].visitante);
 }
-~~~~~
+~~~
 
 Con lo primero que nos enfrentamos es con una nueva forma de definir una
 matriz o `Array`: ya que sabemos que JS es OO, pues usamos una forma OO
@@ -154,10 +154,10 @@ usada para indexarlos, que se suele denominar *clave* (*key*). Casi
 todos los lenguajes de programación tienen alguna forma de usar estas
 matrices asociativas. Por ejemplo, en Perl:
 
-~~~~~perl
+~~~perl
 my %matrizAsociativa; # % para matrices asociativas
 $matrizAsociativa{'variable'}='Valor'; # { para las claves print $matrizAsociativa{'variable'};
-~~~~~
+~~~
 
 devolvería `Valor`.
 
@@ -165,7 +165,7 @@ Las usaremos en el [siguiente programa](https://github.com/JJ/curso-js/tree/mast
 genera aleatoriamente diez jornadas de una liga, y asigna puntuación
 según los resultados:
 
-~~~~~~javascript
+~~~javascript
 load('Partido.js');
 
 var equipos= new Array('Madrid', 'Barça', 'Atleti', 'Geta', 'Betis', 'Depor', 'Sevilla', 'Graná');
@@ -185,7 +185,7 @@ function jornada( estosEquipos ) {
   }
   return quiniela;
 }
-~~~~~~
+~~~
 
 En parte, este programa es similar a los anteriores: la parte que
 generaba cada jornada está ahora en una función, que devuelve un `array`
@@ -215,7 +215,7 @@ funciona de la forma habitual, aunque también podríamos haber usado
 `switch`, como en [el siguiente programa](https://github.com/JJ/curso-js/tree/master/code/liga2.js), que
 en lo único que cambia es en estas líneas:
 
-~~~~~~
+~~~
 switch (resultado) {
     case '1':
       resultados[local]+=3;
@@ -227,7 +227,7 @@ switch (resultado) {
     default:
       resultados[visitante]+=3;
     }
-~~~~~~
+~~~
 
 y que viene a ser como el anterior, pero con `case`s en vez de `if`s.
 Vamos, tres cuartos de lo mismo.
@@ -242,7 +242,7 @@ interactivo para verlo, ejecutando simplemente `rhino`, o `kjs`
 en la línea de comandos. Una vez hecho, tecleamos las siguientes
 órdenes:
 
-~~~~~
+~~~
 js> foo = new Array
 js> foo.cero='Cero' 
 Cero
@@ -256,7 +256,7 @@ js> foo['cero']
 Cero
 js> for ( i in foo) { print(foo[i]);}
 Cero Uno Dos
-~~~~~
+~~~
 
 Hay que teclear lo que se encuentra detrás de `js>`; cada segunda línea
 es la respuesta del intérprete a nuestras órdenes. En la primera,
@@ -272,20 +272,18 @@ Por eso precisamente, hay que tener un poco de cuidado con estos arrays
 asociativos que se comportan un poco como les da la gana. Es conveniente
 usar para ellos `Object`, que es lo que son, en vez de `Array`. De
 hecho, si en lo anterior sustituimos `Array` por `Object` dará
-exactamente el mismo resultado. Por eso [se consideran perniciosas los
-arrays asociativos en
-JS](http://andrewdupont.net/2006/05/18/javascript-associative-arrays-considered-harmful/),
+exactamente el mismo resultado. Por eso [se consideran perniciosas los arrays asociativos en JS](http://andrewdupont.net/2006/05/18/javascript-associative-arrays-considered-harmful/),
 pero es simplemente una cuestión de convención.
 
 No todo va a ser público en un objeto; también pueden tener su intimidad
 guardada en variables privadas:
 
-~~~~~
+~~~
 js> function Foo( bar ) { this.bar = bar; var privada = 7;}
 js> var este_foo = new Foo( 'correquetepillo' );
 js> print(este_foo.bar) correquetepillo
 js> print(este_foo.privada) undefined
-~~~~~
+~~~
 
 Es tan secreta, de hecho, que ni siquiera te dice que no existe:
 simplemente que su valor está indefinido.
@@ -296,16 +294,20 @@ librería estándar de clases) en otros lenguajes. Una de ellas ya la
 hemos visto: la clase `Array`. Otra es la clase `String`, que se usa
 para manejar cadenas alfanuméricas, chorros de 0s y 1s.
 
+~~~
     js> var cadena = new String("1");
     js> print(cadena + 1) 11
-	
+~~~
+
 La clase `String` tiene una serie de métodos que permiten hacer lo
 habitual con las cadenas: encadenarlas, dividirlas, y buscar cosas.
 
+~~~
 	js> var nombres = "Pedro, Lucas, Juan".split(", ");
 	js> print(nombres[0]) Pedro
-	
-En este caso, `split` es un método de la clase String, y lo estamos
+~~~
+
+En este caso, `split` es un método de la clase `String`, y lo estamos
 aplicando directamente sobre la cadena `"Pedro, Lucas, Juan"`, que, de
 por si, es un objeto de esa clase. `split` divide la cadena usando los
 caracteres que le pasamos, y da lugar a un `Array` con tantos
@@ -320,7 +322,7 @@ SpiderMonkey, que es el que hemos venido usando), podemos usar clases de
 Java directamente, lo que complica terriblemente el programa, pero 
 [ahí está, de todas formas](https://github.com/JJ/curso-js/tree/master/code/lee_quiniela.js):
 
-~~~~~~javascript
+~~~javascript
 // ejecutar con rhino lee_quiniela.js <argumento>
 load('Partido.js');
 var FileReader = java.io.FileReader;
@@ -370,7 +372,7 @@ for ( var i in resultados ) {
     print( i + ": " + resultados[i])
 }
 
-~~~~~~
+~~~
 
 El programa es bastante similar al anterior, pero lee de fichero en vez
 de generar los resultados aleatoriamente. Y lo lee aproximadamente de la
@@ -396,6 +398,7 @@ La otra diferencia es también cómo se ejecuta el fichero:
 el [fichero `quiniela.datos`](https://github.com/JJ/curso-js/tree/master/code/quiniela.datos),
 que dará el resultado siguiente:
 
+~~~
 	Elche: 1
 	Atleti: 3
 	Cai: 1
@@ -403,7 +406,8 @@ que dará el resultado siguiente:
 	Bar~a: 1
 	Madrid: 2
 	H~rcules: 1
-	
+~~~
+
 Queda con esto más o menos claro que para ir donde nadie ha ido antes
 con JS, hay que meterse un poco en Java. Pero no siempre. Tenéis alguna
 información más en [este tutorial de Mozilla](https://developer.mozilla.org/en-US/docs/Mozilla/Projects/Rhino/Scripting_Java), que te
@@ -413,7 +417,7 @@ implementar interfaces de Java.
 Últimamente, los módulos de JavaScript se importan en Node usando
 `npm` y en el cliente usando `bower`. Ambos usan GitHub o algún otro
 repositorio para especificar la localización de los fuentes. Eso ha
-hecho que haya muchas liberías populares, tales como [Prototype](http://prototypejs.org/), una
+hecho que haya muchas librerías populares, tales como [Prototype](http://prototypejs.org/), una
 librería que se usa principalmente en conjunción con Ruby on Rails y
 Ajax (que veremos más adelante), pero
 resulta que necesita ejecutarse dentro del navegador, porque usa objetos
@@ -432,29 +436,29 @@ es un objeto en JS, se puede usar esta notación para asignar valores
 prácticamente a cualquier cosa. Vamos a usar una vez más el intérprete
 en modo interactivo para ver un ejemplo:
 
-~~~~~
+~~~
 js> var objeto = { Madrid : 25, Atleti: 33, Ponferradina: 44 };
 js> for (i in objeto) { print( i + " : "+ objeto[i] )}; Madrid : 25 Atleti : 33 Ponferradina : 44
-~~~~~
+~~~
 
 Más fácil no puede ser. Se le asigna valor a un objeto con el formato
 clave : valor (con coma al final), de la misma forma que se haría a un
 array asociativo. Además, se pueden crear objetos sobre la marcha y
 asignárselos a una variable cuyo valor se cree también sobre la marcha:
 
-~~~~~
+~~~
 js> eval("var objeto2 = { Madrid : 25, Atleti: 33, Ponferradina: 44 }");
 js> for (i in objeto2) { print( i + " : "+ objeto[i] )}; Madrid : 25 Atleti : 33 Ponferradina : 44
-~~~~~
+~~~
 
 donde usamos `eval`, que interpreta una expresión en JavaScript como si
 del propio intérprete se tratara. Las expresiones se pueden anidar, para
 dar lugar a objetos más complejos
 
-~~~~~
+~~~
 js> eval("var objeto2 = { Madrid : 25, Atleti: 33, Ponferradina: { casa: 33, fuera: 44} }");
 js> for (i in objeto2) { print( i + " : "+ objeto2[i] )}; Madrid : 25 Atleti : 33 Ponferradina : [object Object]
-~~~~~
+~~~
 
 Que parece más raro de la cuenta, pero que, con un poco de código, se
 podría también imprimir.
@@ -511,8 +515,7 @@ desde fuera. De esta forma se puede modificar el comportamiento de un
 objeto: asignamos un comportamiento por omisión, pero si es necesario
 podemos cambiar *desde fuera* el comportamiento de esa clase simplemente
 asignándole un valor nuevo. De hecho, esto es lo que vamos a hacer en el
-[programa siguiente
-(`liga3.js`)](https://github.com/JJ/curso-js/tree/master/code/liga3.js):
+[programa siguiente (`liga3.js`)](https://github.com/JJ/curso-js/tree/master/code/liga3.js):
 
 ~~~javascript
 #!/usr/bin/env js
@@ -573,7 +576,6 @@ for ( var i = 0; i < quinielas.length; i ++ ) {
 for ( var i in resultados ) {
   print( i + ": " + resultados[i])
 }
-
 ~~~
 
 Como en todos los scripts, habrá que tener en cuenta que la primera
@@ -646,8 +648,7 @@ El único cambio ha sido que en vez de definir la función directamente,
 se define como un atributo de `exports`. El resto, al ser atributos de
 ese objeto, no hace falta que lo definamos de la misma forma. Al
 llamarlo también habrá un pequeño cambio. Mientras que antes teníamos
-que hacer un eval sobre lo cargado, ahora basta con ([programa
-usa\_partido.js](https://github.com/JJ/curso-js/tree/master/codeusa_partido.js)):
+que hacer un `eval` sobre lo cargado, ahora basta con ([programa usa\_partido.js](https://github.com/JJ/curso-js/tree/master/codeusa_partido.js)):
 
 ~~~javascript
 var un_partido = require('./Un_Partido.js');
@@ -656,12 +657,12 @@ console.log('Resultado ' + este_partido.toString());
 ~~~
 
 Este módulo ya se comporta como el resto de los módulos de Node,
-haciendo falta usar sólo require (con el camino completo) para cargarlo.
-Ahora, con require lo que definimos es un objeto, y las funciones son
+haciendo falta usar sólo `require` (con el camino completo) para cargarlo.
+Ahora, con `require` lo que definimos es un objeto, y las funciones son
 atributos de ese objeto; por lo que a la hora de declarar nuevos objetos
 de esa clase tendremos que hacerlo con `new un_partido.Un_Partido`. A
 partir de ahí el objeto generado se comporta exactamente igual que
-cualquier otro objeto, como podemos ver usando console.
+cualquier otro objeto, como podemos ver usando `console`.
 
 A diferencia de casi todos los lenguajes de scripting, no hay un modo
 estándar de instalar módulos JavaScript, aunque algunos intérpretes
@@ -670,8 +671,7 @@ ni siquiera require.js es universal, existiendo otras convenciones que le
 hacen la competencia tales como [AMD](http://requirejs.org/docs/whyamd.html). La
 principal ventaja de common.js es su aceptación por parte de node.js,
 precisamente y su uso en NPM, por eso cabe suponer que el resto
-empezarán, más o menos, a usarlo. En todo caso, [son enfoques
-diferentes](http://requirejs.org/docs/commonjs.html), uno se concentra
+empezarán, más o menos, a usarlo. En todo caso, [son enfoques diferentes](http://requirejs.org/docs/commonjs.html), uno se concentra
 en la forma de cargar el módulo mientras que otro se concentra en la
 forma de empaquetarlo.
 
@@ -681,9 +681,13 @@ Cualquiera de los recursos que listo ahí abajo pueden resultar útiles
 para ampliar información sobre JavaScript. Quizás también pueda ser
 interesante usar alguna librería que facilite su uso como
 [Mochikit](http://mochi.github.com/mochikit/) o
-[Prototype](http://www.prototypejs.org/). También el [Google Web Toolkit](http://www.gwtproject.org/?csw=1) permite desarrollar en Ajax
+[Prototype](http://www.prototypejs.org/). 
+
+Si trabajas en Java y quieres usar JavaScript con poco esfuerzo, el [Google Web Toolkit](http://www.gwtproject.org/?csw=1) permite desarrollar en Ajax
 programando sólo en Java, aunque pueda que el JS generado necesite algún
-retoque adicional. Por supuesto, también es conveniente que se
+retoque adicional. 
+
+Y para saber más, Por supuesto, también es conveniente que se
 continúe con el siguiente capítulo.
 
 
