@@ -4,3 +4,5 @@ txt/html
 txt/pdf
 *.pdf
 *.temp
+code/highlight.css
+intro.html
