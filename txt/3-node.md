@@ -47,8 +47,11 @@ permiten trabajar simultáneamente con diferentes versiones de node y,
 sobre todo, tener la última versión, más allá de la que proporcione la
 distribución.
 
-Como última opción de instalación en una máquina *limpia* que use Linux
+Como última opción de instalación en una máquina *limpia* que use
+Linux
+
 >lo que debería ser obvio, Windows automáticamente ensucia la máquina en la que se instala
+
 se pueden seguir [estas instrucciones](https://gist.github.com/JJ/8459799) para instalar los
 prerrequisitos y la última versión de node. Esto puede ser útil para instalarlo en la nube o alguna otra máquina virtual en la que se vaya a desplegar una aplicación.
 
@@ -112,7 +115,7 @@ escribe en salida estándar y en el segundo en salida de error estándar
 (no se capturaría en una redirección de salida, por ejemplo).
 `console.log` puede usar también [formatos como los usados por la orden `printf` de C](https://nodejs.org/api/stdio.html#stdio_console_log_data), es decir,
 
-~~~
+~~~javascript
 console.log('Respuesta: %s', saludo.hola )
 ~~~
 
@@ -330,7 +333,7 @@ programa con la extensión `.cgi` al directorio que se haya configurado
 para ello. De la forma más simple posible un CGI escrito en node.js
 podría ser el siguiente:
 
-~~~
+~~~javascript
 #!/usr/bin/node
 //cabecera
 console.log('Content-Type: text/plain; charset=UTF-8');
