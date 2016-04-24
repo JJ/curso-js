@@ -22,7 +22,7 @@ todo al poco overhead que añade a las peticiones y a la facilidad de su
 uso, tanto en el cliente como el servidor. También se puede implementar
 directamente sobre servidores web estándar como Apache o
 [nginx](https://es.wikipedia.org/wiki/Nginx) , lo que facilita su
-implantación y desarrollo. Crear un cliente para unAPI REST es
+implantación y desarrollo. Crear un cliente para un API REST es
 tan fácil como crear una cadena; de hecho, se pueden usar desde la línea
 de órdenes
 
@@ -90,7 +90,9 @@ peticiones necesitan autenticación. Así que usaremos [otro interfaz, el de Git
 ejemplo, esta petición te dará todas las *organizaciones* a las que
 pertenece el usuario [JJ](http://github.com/JJ):
 
-    bash$ curl -i https://api.github.com/users/JJ/orgs
+~~~
+bash$ curl -i https://api.github.com/users/JJ/orgs
+~~~
 
 Para llevar a cabo este ejemplo hay que instalar `curl`, un programa que
 en una primera aproximación es simplemente un descargador de páginas web
@@ -98,7 +100,7 @@ pero que en segunda se puede usar como un completo cliente
 REST; en este caso `-i` te incluye las cabeceras en la salida,
 con lo que producirá algo de este estilo
 
-~~~~~
+~~~
 HTTP/1.1 200 OK
 Server: GitHub.com
 Date: Sun, 27 Sep 2015 10:37:52 GMT
@@ -160,12 +162,12 @@ X-Served-By: 065b43cd9674091fec48a221b420fbb3
   }
 ]
 
-~~~~~
+~~~
 
 Casi todos los servicios web incluyen alguna forma de autenticación; una
 de las formas de hacerlo es incluirlo en el propio URL, en la forma
 habitual: `usuario:clave@host`; en este caso no es necesario y en la
-mayoría de losAPI REST se usa ya autenticación OAuth en alguna
+mayoría de los API REST se usa ya autenticación OAuth en alguna
 de sus formas.
 
 Y lo único que hacemos con la respuesta es imprimirla, tal cual, pero lo
@@ -201,13 +203,16 @@ Este programa descarga información de un usuario en JSON y la procesa.
 Toma el usuario que se pase por la línea de órdenes, o bien usa `JJ` por
 defecto, dando un resultado así
 
-    jmerelo@penny:~/txt/docencia/cursos/JavaScript$  node code/github-get.js  Login: JJ Nombre: Juan Julián Merelo Guervós`
+~~~
+jmerelo@penny:~/txt/docencia/cursos/JavaScript$ node code/github-get.js
+Login: JJ
+Nombre: Juan Julián Merelo Guervós`
+~~~
 
 El programa hace una petición GET alAPI de GitHub y del objeto
 en JSON devuelto extrae (tras su conversión en un objeto JS con
 `JSON.parse` un par de variables del mismo y las imprime. El objeto
-contiene muchas más cosas que no nos interesan. El [módulo
-`https`](http://nodejs.org/api/https.html#https_https_request_options_callback)
+contiene muchas más cosas que no nos interesan. El [módulo `https`](http://nodejs.org/api/https.html#https_https_request_options_callback)
 usado es muy similar al `http`, salvo por el protocolo usado. La
 petición que se está usando es la forma más general, pero se puede usar
 directamente `get` [de esta forma](https://github.com/JJ/curso-js/blob/master/code/github-get.js):
@@ -245,14 +250,22 @@ sólo se pueden proponer resultados por parte de un usuario. Se podría
 diseñar el interfaz de la forma siguiente:
 
 -   Quiniela de una jornada:
-    `http://jost.com/quiniela/jornada/[número de jornada]`
+~~~
+http://jost.com/quiniela/jornada/[número de jornada]
+~~~
+
 -   Un partido de una quiniela:
-    `http://jost.com/quiniela/jornada/[número de jornada]/partido/[número de partido]`
+~~~
+http://jost.com/quiniela/jornada/[número de jornada]/partido/[número de partido]
+~~~
+
 -   Para los resultados, habría que sustituir `quiniela` por
     `resultados`. Adicionalmente, añadir `usuario/[nombre de usuario]`,
     para recuperar los resultados propuestos por un usuario determinado.
     Por ejemplo, Resultados:
-    `http://jost.com/resultados/jornada/22/usuario/foobar`
+~~~
+http://jost.com/resultados/jornada/22/usuario/foobar
+~~~
 
 Las operaciones HTTP que se van a usar vienen determinadas por el diseño
 del interfaz. Por ejemplo, para proponer un resultado determinado habría
@@ -307,7 +320,10 @@ sitio para instalarlo (o, en el caso de ubuntu, instalarlo desde
 Synaptic o con apt-get), vamos al directorio en el que vayamos a crear
 el programa y escribimos
 
-`npm install express`
+~~~
+npm install express
+~~~
+
 
 en general, no hace falta tener permiso de administrador, sólo el
 necesario para crear, leer y ejecutar ficheros en el directorio en el
@@ -316,7 +332,7 @@ que se esté trabajando
 Tras la instalación, el programa que hemos visto más arriba se
 transforma en el siguiente:
 
-~~~~~javascript
+~~~javascript
 var puerto=process.argv[2]?process.argv[2]:8080;
 var express=require('express'); 
 var app = express(); 
@@ -329,7 +345,7 @@ app.get('/proc', function (req, res) {
 
 app.listen(puerto); 
 console.log('Servidor en http://127.0.0.1:'+puerto+'/');
-~~~~~
+~~~
 
 Para empezar, `express` nos evita todas las molestias de tener que
 procesar nosotros la línea de órdenes: directamente escribimos una
@@ -348,7 +364,9 @@ se devuelve, encargándose `send` del mismo.
 Con el mismo `express` se pueden generar aplicaciones no tan básicas
 ejecutándolo de la forma siguiente:
 
-    node_modules/express/bin/express prueba-rest
+~~~
+node_modules/express/bin/express prueba-rest
+~~~
 
 Se indica el camino completo a la aplicación binaria, que sería el
 puesto. Con esto se genera un directorio prueba-rest. Cambiándoos al
@@ -363,7 +381,7 @@ definir los parámetros de forma bastante simple, usando marcadores
 precedidos por `:`. Por ejemplo, si queremos tener diferentes contadores
 podríamos usar el [programa siguiente](https://github.com/JJ/curso-js/blob/master/code/express-count.js):
 
-~~~~~javascript
+~~~javascript
 var express=require('express');
 var app = express();
 var contadores = new Array;
@@ -389,7 +407,7 @@ app.post('/contador/:id', function (req, res) {
 
 app.listen(puerto);
 console.log('Server running at http://127.0.0.1:'+puerto+'/');
-~~~~~
+~~~
 
 Este [programa (express-count.js)](https://github.com/JJ/curso-js/tree/master/code/express-count.js%27)
 introduce otras dos órdenes REST: PUT, que, como recordamos, sirve para
@@ -398,7 +416,12 @@ mismo resultado), y además POST. Esa orden la vamos a usar para crear
 contadores a los que posteriormente accederemos con get. PUT no es una
 orden a la que se pueda acceder desde el navegador, así que para usarla
 necesitaremos hacer algo así desde la línea de órdenes:
-`curl -X PUT http://127.0.0.1:8080/contador/primero` para lo que
+
+~~~
+curl -X PUT http://127.0.0.1:8080/contador/primero
+~~~
+
+para lo que
 previamente habrá que haber instalado `curl`, claro. Esta orden llama a
 PUT sobre el programa, y crea un contador que se llama `primero`. Una
 vez creado, podemos acceder a él desde la línea de órdenes o desde el
@@ -415,8 +438,7 @@ misma forma que hemos visto anteriormente con `npm`. Una vez instalada,
 se puede escribir un cliente como este al utilísimo crea-contadores
 anterior.
 
-~~~~~javascript
-
+~~~javascript
 var rest = require('restler'); 
 var url = 'http://127.0.0.1:8080/contador/'; 
 process.argv.forEach(function (val, index, array) { 
@@ -426,7 +448,7 @@ process.argv.forEach(function (val, index, array) {
 	} ); 
     } 
 });
-~~~~~
+~~~
 
 El cliente es bastante simple, y lo que hace es crear tantos contadores
 como argumentos le pasamos por la línea de órdenes. Tras definir un par
