@@ -209,7 +209,7 @@ Login: JJ
 Nombre: Juan Julián Merelo Guervós`
 ~~~
 
-El programa hace una petición GET alAPI de GitHub y del objeto
+El programa hace una petición GET al API de GitHub y del objeto
 en JSON devuelto extrae (tras su conversión en un objeto JS con
 `JSON.parse` un par de variables del mismo y las imprime. El objeto
 contiene muchas más cosas que no nos interesan. El [módulo `https`](http://nodejs.org/api/https.html#https_https_request_options_callback)
@@ -316,7 +316,7 @@ interfaz REST.
 Pero primero hay que instalarlo. Node.js tiene un sistema de gestión de
 módulos bastante simple llamado [npm](http://npmjs.com/) que [hemos
 visto en el tema anterior](#nodejs). Tras seguir las instrucciones en el
-sitio para instalarlo (o, en el caso de ubuntu, instalarlo desde
+sitio para instalarlo (o, en el caso de Ubuntu, instalarlo desde
 Synaptic o con apt-get), vamos al directorio en el que vayamos a crear
 el programa y escribimos
 
@@ -565,7 +565,7 @@ normal sería que entendieran varios formatos (incluyendo texto y HTML),
 pero por lo pronto lo dejaremos así.
 
 También hay que tener en cuenta que este servidor tiene que servir
-*todos* los ficheros, no sólo elAPI REST. Por eso se ha creado
+*todos* los ficheros, no sólo el API REST. Por eso se ha creado
 otro seudo-comando que lee un fichero y lo sirve como JS. Ojo, este tipo
 de órdenes son un potencial hueco de seguridad. Lo dejamos así por
 simplicidad, no porque sea la forma adecuada que debería tener una
