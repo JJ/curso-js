@@ -78,7 +78,9 @@ moleste mientras generamos el resto de la quiniela.
 
 Y el objeto lo creamos mediante una clásica llamada:
 
-    quiniela[i] = new Partido( equipo1, equipo2 );
+~~~javascript
+quiniela[i] = new Partido( equipo1, equipo2 );
+~~~
 
 Más adelante usamos un bucle `in` para escribir los valores de cada uno
 de los partidos; las variables no están encapsuladas, así que se puede
@@ -99,7 +101,7 @@ Añadir métodos de clase se hace más o menos de la misma forma, que no es
 muy ortodoxa, pero es la que hay. Lo veremos en [el siguiente programa](https://github.com/JJ/curso-js/tree/master/code/quiniela2.js),
 del que sacamos el fragmento más interesante:
 
-~~~
+~~~javascript
 // Definición de la clase Partido
 function Partido(local,visitante) {
   this.local = local;
@@ -215,7 +217,7 @@ funciona de la forma habitual, aunque también podríamos haber usado
 `switch`, como en [el siguiente programa](https://github.com/JJ/curso-js/tree/master/code/liga2.js), que
 en lo único que cambia es en estas líneas:
 
-~~~
+~~~javascript
 switch (resultado) {
     case '1':
       resultados[local]+=3;
@@ -438,7 +440,10 @@ en modo interactivo para ver un ejemplo:
 
 ~~~
 js> var objeto = { Madrid : 25, Atleti: 33, Ponferradina: 44 };
-js> for (i in objeto) { print( i + " : "+ objeto[i] )}; Madrid : 25 Atleti : 33 Ponferradina : 44
+js> for (i in objeto) { print( i + " : "+ objeto[i] )};
+Madrid : 25
+Atleti : 33
+Ponferradina : 44
 ~~~
 
 Más fácil no puede ser. Se le asigna valor a un objeto con el formato
@@ -448,7 +453,10 @@ asignárselos a una variable cuyo valor se cree también sobre la marcha:
 
 ~~~
 js> eval("var objeto2 = { Madrid : 25, Atleti: 33, Ponferradina: 44 }");
-js> for (i in objeto2) { print( i + " : "+ objeto[i] )}; Madrid : 25 Atleti : 33 Ponferradina : 44
+js> for (i in objeto2) { print( i + " : "+ objeto[i] )};
+Madrid : 25
+Atleti : 33
+Ponferradina : 44
 ~~~
 
 donde usamos `eval`, que interpreta una expresión en JavaScript como si
@@ -457,7 +465,10 @@ dar lugar a objetos más complejos
 
 ~~~
 js> eval("var objeto2 = { Madrid : 25, Atleti: 33, Ponferradina: { casa: 33, fuera: 44} }");
-js> for (i in objeto2) { print( i + " : "+ objeto2[i] )}; Madrid : 25 Atleti : 33 Ponferradina : [object Object]
+js> for (i in objeto2) { print( i + " : "+ objeto2[i] )};
+Madrid : 25
+Atleti : 33
+Ponferradina : [object Object]
 ~~~
 
 Que parece más raro de la cuenta, pero que, con un poco de código, se
