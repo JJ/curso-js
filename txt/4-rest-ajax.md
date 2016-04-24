@@ -10,10 +10,10 @@
 ## Introducción al interfaz REST
 
 [REST](https://es.wikipedia.org/wiki/REST) es una serie de convenciones
-en la interacción cliente-servidor sobre el protocolo [HTTP](#HTTP). En
+en la interacción cliente-servidor sobre el protocolo HTTP. En
 la práctica, un interfaz REST es un interfaz de programación de
 aplicaciones que usa, para acceder al servidor, el conjunto completo de
-órdenes del protocolo [HTTP](#HTTP) y confía en los mensajes
+órdenes del protocolo HTTP y confía en los mensajes
 informativos y de error del mismo.
 
 Aunque se trate de un *hermano menor* de otros tipos de servicios web
@@ -22,7 +22,7 @@ todo al poco overhead que añade a las peticiones y a la facilidad de su
 uso, tanto en el cliente como el servidor. También se puede implementar
 directamente sobre servidores web estándar como Apache o
 [nginx](https://es.wikipedia.org/wiki/Nginx) , lo que facilita su
-implantación y desarrollo. Crear un cliente para un [API](#API) REST es
+implantación y desarrollo. Crear un cliente para unAPI REST es
 tan fácil como crear una cadena; de hecho, se pueden usar desde la línea
 de órdenes
 
@@ -37,7 +37,7 @@ posibilidades, `PUT` (que envía un recurso determinado al servidor),
 `DELETE` (que borra un recurso del servidor) e incluso `HEAD` (igual que
 `GET`, pero sin el cuerpo de la respuesta).
 
-El protocolo [HTTP](#HTTP) gira alrededor del concepto de *recurso*: un
+El protocolo HTTP gira alrededor del concepto de *recurso*: un
 recurso en un servidor está identificado por un URI, y es la mínima
 acción que un servidor puede realizar. Como características adicionales,
 la acción de algunas peticiones (`GET` y `HEAD`) debe ser *segura*, es
@@ -46,14 +46,13 @@ Otras acciones, como `PUT` y `DELETE`, se denominan *idempotentes*: el
 hacer varias veces la misma petición tiene el mismo efecto que el
 hacerla una sola vez.
 
-[HTTP](#HTTP) funciona puramente como cliente-servidor: se hace una
+HTTP funciona puramente como cliente-servidor: se hace una
 petición, y se espera la respuesta. Lo que no quiere decir que no se
 puedan hacer peticiones concurrentes y asíncronas; sin embargo, esas
 peticiones tendrán que estar dentro del marco de una página web (o sea,
 una aplicación).
 
-A las peticiones el servidor responde con una serie de [códigos
-estándar](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes), que
+A las peticiones el servidor responde con una serie de [códigos estándar](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes), que
 usan la misma presentación que la petición: texto puro y duro. Cuando
 todo va bien, la respuesta es `200 OK`; los códigos `2xx` corresponden,
 en general, a una petición hecha, y fuera de los 2xx existe el caos y el
@@ -65,8 +64,7 @@ de forma adecuada como si se tratara de una llamada a otro
 procedimiento.
 
 Las aplicaciones construidas alrededor del protocolo HTTP y sus
-características se suelen llamar [aplicaciones
-RESTful](http://en.wikipedia.org/wiki/Representational_State_Transfer)
+características se suelen llamar [aplicaciones RESTful](http://en.wikipedia.org/wiki/Representational_State_Transfer)
 (REST == REpresentational State Transfer). La idea de REST es que se
 transfiere el estado del servidor al cliente. Un recurso tiene una
 representación, que se transfiere al cliente por una petición; esa
@@ -79,15 +77,14 @@ ampliaciones, pero sin ningún tipo de validación. En algunos casos se
 usa texto directamente, aunque también se puede usar JSON o cualquier
 otro tipo de capa.
 
-De hecho, las aplicaciones [REST suelen ser más
-populares](http://nordicapis.com/rest-better-than-soap-yes-use-cases/) que otros servicios
+De hecho, las aplicaciones [REST suelen ser más populares](http://nordicapis.com/rest-better-than-soap-yes-use-cases/) que otros servicios
 web, por el simple hecho de que es muy fácil construir el interfaz:
 simplemente creando una cadena determinada. Eso los hace también más
 rápidos, aunque sean menos flexibles.
 
 Vamos a ver un interfaz de este tipo: el de
 [Twitter](https://twitter.com/), cuyo [API](https://dev.twitter.com/overview/documentation) es
-[RESTful](#RESTful), y está bastante bien diseñada. Para usarla es
+RESTful, y está bastante bien diseñada. Para usarla es
 necesario darse de alta; desde la versión 1.1 del interfaz todas las
 peticiones necesitan autenticación. Así que usaremos [otro interfaz, el de GitHub](http://developer.github.com/v3/), para hacer pruebas. Por
 ejemplo, esta petición te dará todas las *organizaciones* a las que
@@ -98,7 +95,7 @@ pertenece el usuario [JJ](http://github.com/JJ):
 Para llevar a cabo este ejemplo hay que instalar `curl`, un programa que
 en una primera aproximación es simplemente un descargador de páginas web
 pero que en segunda se puede usar como un completo cliente
-[REST](#REST); en este caso `-i` te incluye las cabeceras en la salida,
+REST; en este caso `-i` te incluye las cabeceras en la salida,
 con lo que producirá algo de este estilo
 
 ~~~~~
@@ -168,13 +165,13 @@ X-Served-By: 065b43cd9674091fec48a221b420fbb3
 Casi todos los servicios web incluyen alguna forma de autenticación; una
 de las formas de hacerlo es incluirlo en el propio URL, en la forma
 habitual: `usuario:clave@host`; en este caso no es necesario y en la
-mayoría de los [API](#API) REST se usa ya autenticación OAuth en alguna
+mayoría de losAPI REST se usa ya autenticación OAuth en alguna
 de sus formas.
 
 Y lo único que hacemos con la respuesta es imprimirla, tal cual, pero lo
 mejor sería extraer información útil de la misma, como ocurre en [este programa en node.js](https://github.com/JJ/curso-js/blob/13e25e97315e58a84f268349ba61b650e7a097e3/code/github-get.js):
 
-~~~~~javascript
+~~~javascript
 #!/usr/bin/env node
 
 var https = require('https');
@@ -198,7 +195,7 @@ var req = https.get(options, function(res) {
     });
 });
 req.end();
-~~~~~
+~~~
 
 Este programa descarga información de un usuario en JSON y la procesa.
 Toma el usuario que se pase por la línea de órdenes, o bien usa `JJ` por
@@ -206,7 +203,7 @@ defecto, dando un resultado así
 
     jmerelo@penny:~/txt/docencia/cursos/JavaScript$  node code/github-get.js  Login: JJ Nombre: Juan Julián Merelo Guervós`
 
-El programa hace una petición GET al [API](#API) de GitHub y del objeto
+El programa hace una petición GET alAPI de GitHub y del objeto
 en JSON devuelto extrae (tras su conversión en un objeto JS con
 `JSON.parse` un par de variables del mismo y las imprime. El objeto
 contiene muchas más cosas que no nos interesan. El [módulo
@@ -215,22 +212,24 @@ usado es muy similar al `http`, salvo por el protocolo usado. La
 petición que se está usando es la forma más general, pero se puede usar
 directamente `get` [de esta forma](https://github.com/JJ/curso-js/blob/master/code/github-get.js):
 
-    var   req = https.get('https://api.github.com/users/'+user,     function(res) 
+~~~javascript
+var req = https.get('https://api.github.com/users/'+user,
+    function(res) // continúa...
+~~~
 
 con exactamente el mismo resultado.
 
-La idea de [REST](#REST) desde el punto de vista del servidor es usar el
+La idea de REST desde el punto de vista del servidor es usar el
 URL para representar recursos, y las propias órdenes de HTTP para
 ejercitar acciones sobre ese recursos. En general, `GET` servirá para
 transferir la representación de un recurso del cliente al servidor,
 `POST` cambiará el estado de un recurso, `PUT` (que no se suele usar tan
 a menudo) directamente cambiaría la representación del recurso, mientras
 que `DELETE` borraría el recurso; a estas arquitecturas se les suele
-denominar también *arquitecturas orientadas al recurso*
+denominar también *arquitecturas orientadas al recurso*.
 
-Por eso también se suelen proponer una serie de [buenas prácticas para
-diseñar un interfaz
-REST](https://en.wikipedia.org/wiki/Representational_State_Transfer#Guiding_principles_of_the_interface):
+Por eso también se suelen proponer una serie de
+[buenas prácticas para diseñar un interfaz REST](https://en.wikipedia.org/wiki/Representational_State_Transfer#Guiding_principles_of_the_interface):
 
 -   La funcionalidad está divida en recursos
 -   Se usa una sintaxis universal basada en URL
@@ -246,9 +245,9 @@ sólo se pueden proponer resultados por parte de un usuario. Se podría
 diseñar el interfaz de la forma siguiente:
 
 -   Quiniela de una jornada:
-    `http://jost.com/quiniela/jornada/[número de       jornada]`
+    `http://jost.com/quiniela/jornada/[número de jornada]`
 -   Un partido de una quiniela:
-    `http://jost.com/quiniela/jornada/[número de       jornada]/partido/[número de partido]`
+    `http://jost.com/quiniela/jornada/[número de jornada]/partido/[número de partido]`
 -   Para los resultados, habría que sustituir `quiniela` por
     `resultados`. Adicionalmente, añadir `usuario/[nombre de usuario]`,
     para recuperar los resultados propuestos por un usuario determinado.
@@ -262,7 +261,7 @@ el resultado propuesto. El servidor responderá con un mensaje estándar
 HTTP y un fichero XML si se ha podido hacer correctamente, y con un
 error HTTP si no.
 
-El principal problema con este diseño [RESTful](#RESTful) es hacerlo en
+El principal problema con este diseño RESTful es hacerlo en
 la práctica. Como se ha visto a la hora de programar [CGIs](#CGI), en
 general el camino a un recurso es tortuoso, y la forma como se pasan los
 parámetros tiene un montón de & e signos =. Así que hay que *limpiar* el
@@ -275,10 +274,13 @@ directamente el URL. Pero otra forma de hacerlo es usar
 que permite reescribir los URLs, de forma que la petición cambia de
 forma antes de servirse la petición. Estos *cambios* toman la forma de
 directivas del servidor; por ejemplo, en Apache podríamos usar la
-siguiente (dentro del fichero `httpd.conf` o el fichero de configuración
+siguiente dentro del fichero `httpd.conf` o el fichero de configuración
 de un directorio en particular, `.htaccess`:
 
-    RewriteRule \^quiniela/(\\w+)/(\\d+)/(\\w+)/(\\d+)\$ /\~jmerelo/REST/quiniela.cgi?\$1=\$2&\$3=\$4 [L]
+~~~
+RewriteRule \^quiniela/(\\w+)/(\\d+)/(\\w+)/(\\d+)\$
+    /\~jmerelo/REST/quiniela.cgi?\$1=\$2&\$3=\$4 [L]
+~~~
 
 Parece un poco complicada, pero no lo es. Para empezar, se cambiará la
 expresión regular de la izquierda por la de la derecha. La de la
@@ -333,13 +335,12 @@ Para empezar, `express` nos evita todas las molestias de tener que
 procesar nosotros la línea de órdenes: directamente escribimos una
 función para cada respuesta que queramos tener, lo que facilita mucho la
 programación. Las órdenes reflejan directamente las órdenes de
-[HTTP](#HTTP) a las que queremos responder, en este caso `get` y por
+HTTP a las que queremos responder, en este caso `get` y por
 otro lado se pone directamente la función para cada una de ellas. Dentro
 de cada función de respuesta podemos procesar las órdenes que queramos.
 
 Por otro lado, se usa `send` en vez de `end` para enviar el resultado.
-Lo que viene a ser lo mismo, `s` más o menos, aunque [send es más
-flexible](http://expressjs.com/api.html#res.send), admitiendo todo
+Lo que viene a ser lo mismo, `s` más o menos, aunque [`send` es más flexible](http://expressjs.com/api.html#res.send), admitiendo todo
 tipo de datos que son procesados para enviar al cliente la respuesta
 correcta. Tampoco hace falta establecer explícitamente el tipo MIME que
 se devuelve, encargándose `send` del mismo.
@@ -486,11 +487,11 @@ hacer peticiones al mismo dominio desde el que se ha descargado la
 página en la que se haya inserto. Es decir, sólo puedes hacer peticiones
 a `dominio.com` desde páginas que te hayas descargado desde
 `dominio.com`. Por eso es importante que el sistema que tenga el
-[API](#API) REST sea capaz también de servir las páginas; es lo que
+API REST sea capaz también de servir las páginas; es lo que
 vamos a hacer en el siguiente ejemplo. Necesitaremos tres ficheros para
 ejecutar el programa. El primero es el [servidor en node.js](https://github.com/JJ/curso-js/tree/master/code/count-server.js):
 
-~~~~~javascript
+~~~javascript
 var fs = require('fs');
 var express=require('express');
 var app = express();
@@ -531,7 +532,7 @@ app.get('/suma/:id1/:id2', function (req, res) {
 
 app.listen(8080);
 console.log('Server running at http://127.0.0.1:8080/');
-~~~~~
+~~~
 
 Este código es similar al que hemos usado anteriormente, salvo que
 respondemos a más comandos REST: GET, PUT y POST. PUT crea el contador,
@@ -542,14 +543,13 @@ normal sería que entendieran varios formatos (incluyendo texto y HTML),
 pero por lo pronto lo dejaremos así.
 
 También hay que tener en cuenta que este servidor tiene que servir
-*todos* los ficheros, no sólo el [API](#API) REST. Por eso se ha creado
+*todos* los ficheros, no sólo elAPI REST. Por eso se ha creado
 otro seudo-comando que lee un fichero y lo sirve como JS. Ojo, este tipo
 de órdenes son un potencial hueco de seguridad. Lo dejamos así por
 simplicidad, no porque sea la forma adecuada que debería tener una
 aplicación en producción.
 
-La [página
-web](https://github.com/JJ/curso-js/tree/master/code/sumar_formulario.html)
+La [página web](https://github.com/JJ/curso-js/tree/master/code/sumar_formulario.html)
 incluye lo mínimo necesario: el script JS incluido y un formulario para
 solicitar el nombre del contador que se va a incrementar. El URL del
 formulario incluye el "camino" ficticio al que responderá el servidor
@@ -595,26 +595,22 @@ escribe en un `div`.
 Para hacer funcionar este programa tendremos que crear previamente los
 contadores usando cualquier otro programa
 
-En realidad, es mucho más fácil hacerlo con JQuery. En [esta web de
-Codeko](http://codeko.com/docs/oslgr/intro_jquery/ajax2.php) muestran
-como funcionan las órdenes básicas. El [formulario sería bastante
-similar](https://github.com/JJ/curso-js/tree/master/code/formulario-jquery.html),
-aunque hemos tenido que [modificar el servidor para que muestre
-diferentes páginas
-principales](https://github.com/JJ/curso-js/tree/master/code/count-server-var.js).
+En realidad, es mucho más fácil hacerlo con JQuery. En [esta web de Codeko](http://codeko.com/docs/oslgr/intro_jquery/ajax2.php) muestran
+como funcionan las órdenes básicas. El [formulario sería bastante similar](https://github.com/JJ/curso-js/tree/master/code/formulario-jquery.html),
+aunque hemos tenido que
+[modificar el servidor para que muestre diferentes páginas principales](https://github.com/JJ/curso-js/tree/master/code/count-server-var.js).
 El principal cambio será, obviamente, en el código usado para la
-solicitud Ajax, que usará jQuery en vez de JS puro. [Helo
-aquí](https://github.com/JJ/curso-js/tree/master/code/cuenta-jquery.js):
+solicitud Ajax, que usará jQuery en vez de JS puro. [Helo aquí](https://github.com/JJ/curso-js/tree/master/code/cuenta-jquery.js):
 
-~~~~~javascript
+~~~javascript
 $(document).ready(function() {
 	$("#formulario").change(function(){
 		$.get('/contador/'+$('#contador').val(), function( data) {
 			  $('#Resultado').html('Resultado '+ data.resultado);
 		      });
 	});
-} );  	      
-~~~~~
+} );
+~~~
 
 
 Este pequeño programa tiene todo lo compacto y críptico a lo que nos
@@ -665,19 +661,15 @@ Para usarlo ya se puede probar con librerías como
 facilidades de WebSocket mediante la conexión que esté disponible en el
 navegador.
 
-Un ejemplo de como usar estas librerías está en [este
-tutorial](http://project70.com/nodejs/node-js-comet-real-time-chat-a-great-first-project/)
+Un ejemplo de como usar estas librerías está en [este tutorial](http://project70.com/nodejs/node-js-comet-real-time-chat-a-great-first-project/)
 que muestra como llevar a cabo un chat en tiempo real usando node.js.
 
 ## A dónde ir desde aquí
 
-Se puede ir a [aprender el uso de un sistema de almacenamiento de
-objetos llamado
-CouchDB](http://geneura.ugr.es/%7Ejmerelo/asignaturas/AAP/AAP-CouchDB.mhtml),
+Se puede ir a
+[aprender el uso de un sistema de almacenamiento de objetos llamado CouchDB](http://geneura.ugr.es/%7Ejmerelo/asignaturas/AAP/AAP-CouchDB.mhtml),
 pero el tema de diseño de sistemas con node.js y JQuery en el cliente
-puede ir mucho más allá, usando, por ejemplo [marcos MVC para node.js
-como Sails.js](http://sailsjs.org) o [cualquier otro de los
-recomendados.](http://nodeframework.com/)
+puede ir mucho más allá, usando, por ejemplo [marcos MVC para node.js como Sails.js](http://sailsjs.org) o [cualquier otro de los recomendados.](http://nodeframework.com/)
 
 jQuery también admite todo tipo de plugins, y muchos de ellos se pueden
 usar con [formularios](http://malsup.com/jquery/form/) haciendo su
@@ -689,12 +681,10 @@ hacer las cosas y posiblemente hay software libre para solucionarlo.
 En general, REST se considera, de forma amplia, dentro de los servicios
 Web, por eso los libros que trabajan con él, en general, también
 incluyen capítulos que tratan con REST. Sin embargo, si quieres usar un
-lenguaje de programación determinado, te puede venir bien [Programming
-Web Services with Perl, de Ray y
-Kuchenko](http://www.amazon.com/gp/product/0596002068?ie=UTF8&tag=perltutobyjjmere&link_code=as3&camp=211189&creative=373489&creativeASIN=0596002068).
+lenguaje de programación determinado, te puede venir bien
+[Programming Web Services with Perl, de Ray y Kuchenko](http://www.amazon.com/gp/product/0596002068?ie=UTF8&tag=perltutobyjjmere&link_code=as3&camp=211189&creative=373489&creativeASIN=0596002068).
 Es quizás un poco más prolijo en el apartado XML de la cuenta, y está un
 tanto atrasado, pero vienen todos los módulos de Perl bien detallados y
-explicados. El [RESTful Web Services
-Cookbook](https://www.amazon.es/dp/B0043D2ESQ/ref=as_li_ss_til?tag=atalaya-21&camp=3634&creative=24822&linkCode=as4&creativeASIN=B0043D2ESQ&adid=1V5KDS1RVBZAE2W5B2PR&)
+explicados. El [RESTful Web Services Cookbook](https://www.amazon.es/dp/B0043D2ESQ/ref=as_li_ss_til?tag=atalaya-21&camp=3634&creative=24822&linkCode=as4&creativeASIN=B0043D2ESQ&adid=1V5KDS1RVBZAE2W5B2PR&)
 también es bastante útil en este sentido.
 
