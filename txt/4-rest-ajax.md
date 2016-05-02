@@ -761,3 +761,7 @@ tanto atrasado, pero vienen todos los módulos de Perl bien detallados y
 explicados. El [RESTful Web Services Cookbook](https://www.amazon.es/dp/B0043D2ESQ/ref=as_li_ss_til?tag=atalaya-21&camp=3634&creative=24822&linkCode=as4&creativeASIN=B0043D2ESQ&adid=1V5KDS1RVBZAE2W5B2PR&)
 también es bastante útil en este sentido.
 
+En
+[la página de express listan una serie de libros que lo usan](http://expressjs.com/es/resources/books-blogs.html),
+incluyendo algunos centrados en la denominada pila MEAN (Mongo,
+Express, Angular and Node). 
