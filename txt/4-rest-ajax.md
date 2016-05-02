@@ -1,4 +1,4 @@
-#Trabajando con REST y AJAX
+#Trabajando con REST y Ajax
 
 ##Objetivos de este capítulo
 
@@ -9,37 +9,59 @@
 
 ## Introducción al interfaz REST
 
-[REST](https://es.wikipedia.org/wiki/REST) es una serie de convenciones
-en la interacción cliente-servidor sobre el protocolo HTTP. En
-la práctica, un interfaz REST es un interfaz de programación de
+El *protocolo*
+[REST, o Representational State Transfer](https://es.wikipedia.org/wiki/REST)
+consiste en una serie de convenciones
+en la interacción cliente-servidor basadas en el protocolo HTTP. En
+la práctica, un API REST es un interfaz de programación de
 aplicaciones que usa, para acceder al servidor, el conjunto completo de
 órdenes del protocolo HTTP y confía en los mensajes
-informativos y de error del mismo.
+informativos y de error del mismo para interaccionar con él.
 
 Aunque se trate de un *hermano menor* de otros tipos de servicios web
-(que se verán más adelante en este curso), su popularidad se debe sobre
-todo al poco overhead que añade a las peticiones y a la facilidad de su
+como SOAP, su popularidad se debe sobre
+todo al poco *overhead* que añade a las peticiones, aunque esto
+dependerá de la forma de codificación que se elija, y a la facilidad de su
 uso, tanto en el cliente como el servidor. También se puede implementar
 directamente sobre servidores web estándar como Apache o
-[nginx](https://es.wikipedia.org/wiki/Nginx) , lo que facilita su
-implantación y desarrollo. Crear un cliente para un API REST es
-tan fácil como crear una cadena; de hecho, se pueden usar desde la línea
-de órdenes
+[nginx](https://es.wikipedia.org/wiki/Nginx),
+
+>En este caso no tan directamente, porque se trata de un servidor web
+>estático. Hay que programar un puente a otro servicio que se encargue
+>de generar contenido dinámicamente.
+
+lo que facilita su
+implantación y desarrollo.
+
+
+Por otro lado, crear un cliente para un API REST es
+tan fácil como crear una cadena y hacer una petición HTTP; de hecho, se pueden usar desde la línea
+de órdenes o desde el navegador. Esa facilidad de uso explica su
+popularidad en la creación de aplicaciones cliente-servidor hoy en
+día.
+
+Como REST se basa sobre HTTP, veremos a continuación cómo funciona
+este protocolo y qué se puede usar de él para construir aplicaciones.
 
 ## El protocolo HTTP y sus múltiples posibilidades
 
 El protocolo [HTTP](https://es.wikipedia.org/wiki/HTTP) es uno de los
 protocolos más infrautilizados de la historia. A pesar de que ofrece
 múltiples posibilidades y versiones, se usa simplemente para enviar y
-recibir información de un servidor. Para recibir información se usa la
+recibir información de un servidor de la forma más simple.
+
+En
+realidad, HTTP premite transmitir información de muchas formas: Para recibir información se usa la
 orden `GET`, y para enviar, la orden `POST`. Pero también hay otras
-posibilidades, `PUT` (que envía un recurso determinado al servidor),
-`DELETE` (que borra un recurso del servidor) e incluso `HEAD` (igual que
-`GET`, pero sin el cuerpo de la respuesta).
+posibilidades, `PUT`, que envía un recurso determinado al servidor,
+`DELETE`, que borra un recurso del servidor, e incluso `HEAD` igual que
+`GET`, pero sin el cuerpo de la respuesta, sólo con la cabecera.
 
 El protocolo HTTP gira alrededor del concepto de *recurso*: un
-recurso en un servidor está identificado por un URI, y es la mínima
-acción que un servidor puede realizar. Como características adicionales,
+recurso en un servidor está identificado por un URI, *Universal
+Resource Identifier*. Trabajar con un URI es la unidad de
+acción que un servidor puede realizar; los recursos se agrupan en
+colecciones, que son homogéneas y tienen un solo tipo de recurso. Como características adicionales,
 la acción de algunas peticiones (`GET` y `HEAD`) debe ser *segura*, es
 decir, dejar al servidor en el mismo estado que antes de la petición.
 Otras acciones, como `PUT` y `DELETE`, se denominan *idempotentes*: el
@@ -52,7 +74,9 @@ puedan hacer peticiones concurrentes y asíncronas; sin embargo, esas
 peticiones tendrán que estar dentro del marco de una página web (o sea,
 una aplicación).
 
-A las peticiones el servidor responde con una serie de [códigos estándar](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes), que
+A las peticiones el servidor responde con una serie de
+[códigos estándar](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes),
+que 
 usan la misma presentación que la petición: texto puro y duro. Cuando
 todo va bien, la respuesta es `200 OK`; los códigos `2xx` corresponden,
 en general, a una petición hecha, y fuera de los 2xx existe el caos y el
@@ -64,8 +88,9 @@ de forma adecuada como si se tratara de una llamada a otro
 procedimiento.
 
 Las aplicaciones construidas alrededor del protocolo HTTP y sus
-características se suelen llamar [aplicaciones RESTful](http://en.wikipedia.org/wiki/Representational_State_Transfer)
-(REST == REpresentational State Transfer). La idea de REST es que se
+características se suelen llamar
+[aplicaciones RESTful](http://en.wikipedia.org/wiki/Representational_State_Transfer). La
+idea de REST es que se 
 transfiere el estado del servidor al cliente. Un recurso tiene una
 representación, que se transfiere al cliente por una petición; esa
 representación se puede cambiar con diferentes operaciones. Sin embargo,
@@ -77,12 +102,17 @@ ampliaciones, pero sin ningún tipo de validación. En algunos casos se
 usa texto directamente, aunque también se puede usar JSON o cualquier
 otro tipo de capa.
 
-De hecho, las aplicaciones [REST suelen ser más populares](http://nordicapis.com/rest-better-than-soap-yes-use-cases/) que otros servicios
+De hecho, las aplicaciones
+[REST suelen ser más populares](http://nordicapis.com/rest-better-than-soap-yes-use-cases/)
+que otros servicios 
 web, por el simple hecho de que es muy fácil construir el interfaz:
 simplemente creando una cadena determinada. Eso los hace también más
 rápidos, aunque sean menos flexibles.
 
-Vamos a ver un interfaz de este tipo: el de
+
+## Creando clientes REST
+
+Vamos a ver un ejemplo de uso de un interfaz de este tipo: el de
 [Twitter](https://twitter.com/), cuyo [API](https://dev.twitter.com/overview/documentation) es
 RESTful, y está bastante bien diseñada. Para usarla es
 necesario darse de alta; desde la versión 1.1 del interfaz todas las
@@ -97,7 +127,7 @@ bash$ curl -i https://api.github.com/users/JJ/orgs
 Para llevar a cabo este ejemplo hay que instalar `curl`, un programa que
 en una primera aproximación es simplemente un descargador de páginas web
 pero que en segunda se puede usar como un completo cliente
-REST; en este caso `-i` te incluye las cabeceras en la salida,
+REST; en este caso `-i` te incluye las cabeceras en la salida que se imprime,
 con lo que producirá algo de este estilo
 
 ~~~
@@ -164,14 +194,19 @@ X-Served-By: 065b43cd9674091fec48a221b420fbb3
 
 ~~~
 
-Casi todos los servicios web incluyen alguna forma de autenticación; una
+Sin embargo, no siempre se puede acceder a un interfaz REST en
+abierto; casi todos los servicios web incluyen alguna forma de autenticación; una
 de las formas de hacerlo es incluirlo en el propio URL, en la forma
 habitual: `usuario:clave@host`; en este caso no es necesario y en la
 mayoría de los API REST se usa ya autenticación OAuth en alguna
 de sus formas.
 
-Y lo único que hacemos con la respuesta es imprimirla, tal cual, pero lo
-mejor sería extraer información útil de la misma, como ocurre en [este programa en node.js](https://github.com/JJ/curso-js/blob/13e25e97315e58a84f268349ba61b650e7a097e3/code/github-get.js):
+En el ejemplo anterior lo único que hacemos con la respuesta es
+imprimirla, tal cual, pero lo 
+mejor sería extraer información útil de la misma, como vamos a hacer
+en
+[este programa en node.js](https://github.com/JJ/curso-js/blob/13e25e97315e58a84f268349ba61b650e7a097e3/code/github-get.js)
+que actúa como cliente de un interfaz REST: 
 
 ~~~javascript
 #!/usr/bin/env node
@@ -191,7 +226,6 @@ var options = {
 var req = https.get(options, function(res) {
     res.setEncoding('utf8');
     res.on('data', function (datos_JSON) {
-	console.log(datos_JSON);
 	var datos=JSON.parse(datos_JSON);
 	console.log('Login: ' + datos.login+ "\nNombre: " + datos.name + "\n");
     });
@@ -199,17 +233,20 @@ var req = https.get(options, function(res) {
 req.end();
 ~~~
 
-Este programa descarga información de un usuario en JSON y la procesa.
+Este programa descarga información de un usuario en JSON y la procesa,
+usando la forma habitual de las funciones en node, que incluyen una
+serie de parámetros y una función *callback* a la que se llama cuando
+se completa la petición.
 Toma el usuario que se pase por la línea de órdenes, o bien usa `JJ` por
 defecto, dando un resultado así
 
 ~~~
 jmerelo@penny:~/txt/docencia/cursos/JavaScript$ node code/github-get.js
 Login: JJ
-Nombre: Juan Julián Merelo Guervós`
+Nombre: Juan Julián Merelo Guervós
 ~~~
 
-El programa hace una petición GET al API de GitHub y del objeto
+El programa hace una petición GET sin autentificar al API de GitHub y del objeto
 en JSON devuelto extrae (tras su conversión en un objeto JS con
 `JSON.parse` un par de variables del mismo y las imprime. El objeto
 contiene muchas más cosas que no nos interesan. El [módulo `https`](http://nodejs.org/api/https.html#https_https_request_options_callback)
@@ -223,6 +260,8 @@ var req = https.get('https://api.github.com/users/'+user,
 ~~~
 
 con exactamente el mismo resultado.
+
+## Diseñando un interfaz REST
 
 La idea de REST desde el punto de vista del servidor es usar el
 URL para representar recursos, y las propias órdenes de HTTP para
@@ -477,7 +516,7 @@ sido la respuesta y la imprime.
 
 ## Usando Ajax
 
-Aunque inicialmente [AJAX](https://es.wikipedia.org/wiki/AJAX) era un
+Aunque inicialmente [Ajax](https://es.wikipedia.org/wiki/Ajax) era un
 acrónimo de *Asynchronous JavaScript and XML*, hoy en día se ha dejado
 de usar como tal y viene a abarcar todas las tecnologías asíncronas de
 interacción cliente servidor, usando cualquier formato de serialización
@@ -492,14 +531,14 @@ servidor, que sería la X, y nos falta la A. A se refiere a Asíncrono, y
 se trata de que las peticiones desde el cliente (el navegador) no lo
 bloqueen mientras el servidor contesta (si lo hiciera, para el caso se
 podría generar una página nueva cada vez que se hiciera cualquier
-interacción). En la práctica, el AJAX se basa en una clase de
+interacción). En la práctica, el Ajax se basa en una clase de
 JavaScript, `XMLHttpRequest`, que hace una petición al servidor, y crea
 un evento que se dispara en el navegador cuando se produce la respuesta.
 Puede haber varias peticiones de este estilo funcionando
 simultáneamente, de forma que el navegador se comporta, en realidad,
 como si se tratara de un interfaz de usuario.
 
-Un programa AJAX, por tanto, tiene dos partes. La parte servidor se
+Un programa Ajax, por tanto, tiene dos partes. La parte servidor se
 suele programar habitualmente para que responda a un interfaz REST, pero
 esto es simplemente una convención. Podíamos, por ejemplo, usar los
 programas que hemos visto anteriormente
