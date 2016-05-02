@@ -51,7 +51,7 @@ múltiples posibilidades y versiones, se usa simplemente para enviar y
 recibir información de un servidor de la forma más simple.
 
 En
-realidad, HTTP premite transmitir información de muchas formas: Para recibir información se usa la
+realidad, HTTP permite transmitir información de muchas formas: Para recibir información se usa la
 orden `GET`, y para enviar, la orden `POST`. Pero también hay otras
 posibilidades, `PUT`, que envía un recurso determinado al servidor,
 `DELETE`, que borra un recurso del servidor, e incluso `HEAD` igual que
@@ -314,13 +314,13 @@ HTTP y un fichero XML si se ha podido hacer correctamente, y con un
 error HTTP si no.
 
 El principal problema con este diseño RESTful es hacerlo en
-la práctica. Como se ha visto a la hora de programar [CGIs](#CGI), en
+la práctica. Como se ha visto a la hora de programar CGIs, en
 general el camino a un recurso es tortuoso, y la forma como se pasan los
 parámetros tiene un montón de & e signos =. Así que hay que *limpiar* el
 URL de alguna forma. Dependiendo de la implementación del servidor,
 quizás se puede hacer directamente; por ejemplo, en caso de que se trate
 de un `.war` en un contenedor de servlets, ya se encarga directamente;
-sin embargo. Algunos [CGIs](#CGI) también permiten interpretar
+sin embargo. Algunos CGIs también permiten interpretar
 directamente el URL. Pero otra forma de hacerlo es usar
 [`mod_rewrite`](http://httpd.apache.org/docs/2.2/mod/mod_rewrite.html),
 que permite reescribir los URLs, de forma que la petición cambia de
@@ -337,36 +337,40 @@ RewriteRule \^quiniela/(\\w+)/(\\d+)/(\\w+)/(\\d+)\$
 Parece un poco complicada, pero no lo es. Para empezar, se cambiará la
 expresión regular de la izquierda por la de la derecha. La de la
 izquierda incluye palabras (\\w+) y números (\\d+), y en la expresión de
-la derecha aparecen, por orden, representados por `$n`.
+la derecha aparecen, por orden, representados por `$n`. Este tipo de
+ficheros de configuración tendrán que usarse si, por ejemplo, se ha
+creado una aplicación en PHP y se quiere que use rutas REST. 
 
 El hecho de que sea tan complicado diseñar interfaces REST con recursos,
-como los [CGIs](#CGI), que no están preparados para ello hace que
+como los CGIs, que no están preparados para ello hace que
 existan marcos de aplicaciones, como los que veremos a continuación, en
 los que todo esto se hace de una forma mucho más simple, trabajando
 directamente con las rutas REST.
 
-## Interfaces REST simples con express
+## Interfaces REST simples con `express`
 
 Para diseñar interfaces REST de forma bastante simple, hay un [módulo de
-node.js llamado express](http://expressjs.com/). La idea de este módulo
+node.js llamado `express`](http://expressjs.com/). La idea de este módulo
 es reflejar en el código, de la forma más natural posible, el diseño del
 interfaz REST.
 
 Pero primero hay que instalarlo. Node.js tiene un sistema de gestión de
-módulos bastante simple llamado [npm](http://npmjs.com/) que [hemos
-visto en el tema anterior](#nodejs). Tras seguir las instrucciones en el
+módulos estándar llamado [npm](http://npmjs.com/) que se ha visto
+anteriormente. Si se está trabajando con `nvm`, la `npm` estará ya
+instalado, si no habrá que seguir las instrucciones en el 
 sitio para instalarlo (o, en el caso de Ubuntu, instalarlo desde
-Synaptic o con apt-get), vamos al directorio en el que vayamos a crear
-el programa y escribimos
+Synaptic o con `apt-get`). A continuación,  en el directorio en el que vayamos a crear
+el programa, se escribe
 
 ~~~
 npm install express
 ~~~
 
-
-en general, no hace falta tener permiso de administrador, sólo el
+En general, no hace falta tener permiso de administrador, sólo el
 necesario para crear, leer y ejecutar ficheros en el directorio en el
-que se esté trabajando
+que se esté trabajando. La política de node con los módulos que se usa
+en una aplicación es tenerlos instalados localmente, de forma que el
+despliegue sea mucho más fácil. 
 
 Tras la instalación, el programa que hemos visto más arriba se
 transforma en el siguiente:
