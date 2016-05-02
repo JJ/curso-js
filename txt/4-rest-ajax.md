@@ -398,8 +398,10 @@ HTTP a las que queremos responder, en este caso `get` y por
 otro lado se pone directamente la función para cada una de ellas. Dentro
 de cada función de respuesta podemos procesar las órdenes que queramos.
 
-Por otro lado, se usa `send` en vez de `end` para enviar el resultado.
-Lo que viene a ser lo mismo, `s` más o menos, aunque [`send` es más flexible](http://expressjs.com/api.html#res.send), admitiendo todo
+Por otro lado, se usa `send` en vez de otra orden + `end` para enviar el resultado.
+Lo que viene a ser lo mismo, `s` más o menos, aunque
+[`send` es más flexible](http://expressjs.com/api.html#res.send),
+admitiendo todo 
 tipo de datos que son procesados para enviar al cliente la respuesta
 correcta. Tampoco hace falta establecer explícitamente el tipo MIME que
 se devuelve, encargándose `send` del mismo.
@@ -422,7 +424,8 @@ El acceso a los parámetros de la llamada y la realización de diferentes
 actividades según el mismo se denomina enrutado. En express se pueden
 definir los parámetros de forma bastante simple, usando marcadores
 precedidos por `:`. Por ejemplo, si queremos tener diferentes contadores
-podríamos usar el [programa siguiente](https://github.com/JJ/curso-js/blob/master/code/express-count.js):
+podríamos usar el
+[programa siguiente](https://github.com/JJ/curso-js/blob/master/code/express-count.js): 
 
 ~~~javascript
 var express=require('express');
@@ -452,10 +455,11 @@ app.listen(puerto);
 console.log('Server running at http://127.0.0.1:'+puerto+'/');
 ~~~
 
-Este [programa (express-count.js)](https://github.com/JJ/curso-js/tree/master/code/express-count.js%27)
-introduce otras dos órdenes REST: PUT, que, como recordamos, sirve para
-crear nuevos recurso y es idempotente (se puede usar varias veces con el
-mismo resultado), y además POST. Esa orden la vamos a usar para crear
+Este
+[programa (express-count.js)](https://github.com/JJ/curso-js/tree/master/code/express-count.js%27) 
+introduce otras dos órdenes REST: `PUT`, que, como recordamos, sirve para
+crear nuevos recursos y es idempotente (se puede usar varias veces con el
+mismo resultado), y además POST. Esa última la vamos a usar para crear
 contadores a los que posteriormente accederemos con get. PUT no es una
 orden a la que se pueda acceder desde el navegador, así que para usarla
 necesitaremos hacer algo así desde la línea de órdenes:
@@ -471,11 +475,11 @@ vez creado, podemos acceder a él desde la línea de órdenes o desde el
 navegador (desde el navegador se generan peticiones GET y POST
 solamente).
 
-## Clientes REST
+## Usando Restler para construir clientes REST
 
 Tampoco es complicado escribir con node.js un cliente REST. Se puede
 hacer mediante peticiones HTTP, pero por supuesto es más fácil escribir
-un cliente usando la librería
+un cliente usando la biblioteca
 [restler](https://github.com/danwrong/restler), que se instala de la
 misma forma que hemos visto anteriormente con `npm`. Una vez instalada,
 se puede escribir un cliente como este al utilísimo crea-contadores
@@ -518,7 +522,7 @@ hacemos con esa orden es crear un callback cuando (*on*) la petición se
 haya completado (*complete*). Ese callback simplemente te dice cual ha
 sido la respuesta y la imprime.
 
-## Usando Ajax
+## Aplicaciones cliente-servidor usando Ajax
 
 Aunque inicialmente [Ajax](https://es.wikipedia.org/wiki/Ajax) era un
 acrónimo de *Asynchronous JavaScript and XML*, hoy en día se ha dejado
@@ -615,7 +619,7 @@ simplicidad, no porque sea la forma adecuada que debería tener una
 aplicación en producción.
 
 La [página web](https://github.com/JJ/curso-js/tree/master/code/sumar_formulario.html)
-incluye lo mínimo necesario: el script JS incluido y un formulario para
+incluye lo mínimo necesario: el *script* JS incluido y un formulario para
 solicitar el nombre del contador que se va a incrementar. El URL del
 formulario incluye el "camino" ficticio al que responderá el servidor
 REST, que incluye `js`. Ese fichero, precisamente, es el que vemos aquí:
@@ -660,8 +664,11 @@ escribe en un `div`.
 Para hacer funcionar este programa tendremos que crear previamente los
 contadores usando cualquier otro programa
 
-En realidad, es mucho más fácil hacerlo con JQuery. En [esta web de Codeko](http://codeko.com/docs/oslgr/intro_jquery/ajax2.php) muestran
-como funcionan las órdenes básicas. El [formulario sería bastante similar](https://github.com/JJ/curso-js/tree/master/code/formulario-jquery.html),
+En realidad, es mucho más fácil hacerlo con JQuery. En
+[esta web de Codeko](http://codeko.com/docs/oslgr/intro_jquery/ajax2.php)
+muestran 
+como funcionan las órdenes básicas. El
+[formulario sería bastante similar](https://github.com/JJ/curso-js/tree/master/code/formulario-jquery.html), 
 aunque hemos tenido que
 [modificar el servidor para que muestre diferentes páginas principales](https://github.com/JJ/curso-js/tree/master/code/count-server-var.js).
 El principal cambio será, obviamente, en el código usado para la
@@ -687,8 +694,8 @@ que hace es que crea un evento sobre el formulario tal que al cambiar
 llame a una función anónima.
 
 Esa función, en un par de líneas, hace lo mismo que previamente con unas
-cuantas líneas en JS: hace una petición `get` (en la que usa también los
-selectores jQuery para extraer el valor, contenido en \$val()\$, del
+cuantas líneas en JS: hace una petición `GET` (en la que usa también los
+selectores jQuery para extraer el valor, contenido en `val()`, del
 elemento del formulario) y una vez obtenido el resultado usa el selector
 del elemento correspondiente, `#Resultado`, para insertarlo.
 Adicionalmente, jQuery esconde el mecanismo subyacente de llamada
@@ -721,13 +728,14 @@ en el navegador de un Socket tradicional. Actualmente no todos los
 navegadores admiten todos los tipos de conexión propuestos; se trata de
 un estándar en evolución que se ha implementado a partir de 2012.
 
-Para usarlo ya se puede probar con librerías como
+Para usarlo ya se puede probar con bibliotecas como
 [socket.io](http://socket.io/), que proporcionan todas las
 facilidades de WebSocket mediante la conexión que esté disponible en el
 navegador.
 
-Un ejemplo de como usar estas librerías está en [este tutorial](http://project70.com/nodejs/node-js-comet-real-time-chat-a-great-first-project/)
-que muestra como llevar a cabo un chat en tiempo real usando node.js.
+Un ejemplo de como usar estas bibliotecas está en
+[este tutorial](http://project70.com/nodejs/node-js-comet-real-time-chat-a-great-first-project/) 
+que muestra como llevar a cabo un chat en tiempo real usando node.js. 
 
 ## A dónde ir desde aquí
 
