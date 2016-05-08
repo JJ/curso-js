@@ -1,4 +1,4 @@
-#JavaScript en el navegador y JQuery 
+#JQuery, simplificando el uso de JavaScript 
 
 
 ##Objetivos de este capítulo
@@ -8,7 +8,7 @@
 
 ## JQuery: Introducción 
 
-[JQuery](http://jquery.com) es una librería en JavaScript que está
+[JQuery](http://jquery.com) es una biblioteca en JavaScript que está
 diseñada principalmente para simplificar la creación de programas y
 permitir crear interfaces ricos de usuario.
 [JQuery](https://es.wikipedia.org/wiki/JQuery) se ha popularizado desde
@@ -49,7 +49,7 @@ $(document).ready(function() {
 ~~~
 
 En este caso, usamos como se ha indicado antes la copia de JQuery
-proporcionada por Google, que, como cualquier otra librería JS, debe ser
+proporcionada por Google, que, como cualquier otra biblioteca JS, debe ser
 incluida en nuestra página para ser usada. Por otro lado, la única
 función que usamos de JQuery está tras el párrafo: cuando el documento
 está *listo* (`ready`), escribimos en la consola que estamos listos.
