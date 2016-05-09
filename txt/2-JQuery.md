@@ -120,7 +120,7 @@ $().ready( function() {
 ~~~
 
 que, a diferencia de la primera, obvia el uso del objeto
-`document`; se eligirá una u otra simplemente por cuestiones de
+`document`; se elegirá una u otra simplemente por cuestiones de
 legibilidad.
 
 ## Seleccionando contenido
@@ -161,6 +161,7 @@ $(function() {
 <H2>Y este, lo adivinaste, otro</H2>
 
 <div id='cambiando' style='border:dashed'></div>
+
 </body> 
 </html>
 ~~~
@@ -177,7 +178,48 @@ equivalente a un elemento con el id `#cambiando`.
 Conviene recordar que `console.log` se usa aquí principalmente por
 cuestiones de depuración. En producción se debe tratar de evitar,
 porque al usuario no le sirve de nada más que una cierta ralentización
-por hacer una operación de entrada salida. 
+por hacer una operación de entrada salida.
+
+## Y mucho más
+
+JQuery también simplifica el trabajo con peticiones Ajax, por
+ejemplo. En
+[esta web de Codeko](http://codeko.com/docs/oslgr/intro_jquery/ajax2.php)
+muestran 
+como funcionan las órdenes básicas. El
+[formulario sería bastante similar](https://github.com/JJ/curso-js/tree/master/code/formulario-jquery.html), 
+aunque hemos tenido que
+[modificar el servidor para que muestre diferentes páginas principales](https://github.com/JJ/curso-js/tree/master/code/count-server-var.js).
+El principal cambio será, obviamente, en el código usado para la
+solicitud Ajax, que usará jQuery en vez de JS puro. [Helo aquí](https://github.com/JJ/curso-js/tree/master/code/cuenta-jquery.js):
+
+~~~javascript
+$(document).ready(function() {
+	$("#formulario").change(function(){
+		$.get('/contador/'+$('#contador').val(), function( data) {
+			  $('#Resultado').html('Resultado '+ data.resultado);
+		      });
+	});
+} );
+~~~
+
+
+Este pequeño programa tiene todo lo compacto y críptico a lo que nos
+tiene acostumbrados jQuery. Como es habitual, se ejecuta sólo cuando se
+ha cargado la página y usa el programa para añadir funcionalidad,
+eventos, al HTML en vez de tener el propio evento definido en el mismo;
+lo clásico en JS (y jQuery) es dividir el código de la funcionalidad. Lo
+que hace es que crea un evento sobre el formulario tal que al cambiar
+llame a una función anónima.
+
+Esa función, en un par de líneas, hace lo mismo que previamente con unas
+cuantas líneas en JS: hace una petición `GET` (en la que usa también los
+selectores jQuery para extraer el valor, contenido en `val()`, del
+elemento del formulario) y una vez obtenido el resultado usa el selector
+del elemento correspondiente, `#Resultado`, para insertarlo.
+Adicionalmente, jQuery esconde el mecanismo subyacente de llamada
+haciéndolo independiente del navegador. Si XMLHttpRequest funciona, lo
+usa; si no, usa el mecanismo nativo.
 
 ## Bibliografía
 
