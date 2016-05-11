@@ -65,7 +65,7 @@ por ejemplo, para instalar el primero habrá que ejecutar desde
 la consola de administrador o superusuario:
 
 ~~~~~~
-	bash% sudo apt-get install nodejs
+	sudo apt-get install nodejs
 ~~~~~~
 
 > En otros sistemas operativos o versiones de linux habrá primero que
@@ -75,13 +75,13 @@ la consola de administrador o superusuario:
 O, si se quiere instalar
 
 ~~~~~~
-	bash% sudo apt-get install rhino
+	sudo apt-get install rhino
 ~~~~~~
 
 o
 
 ~~~~~~
-	bash% sudo apt-get install libmozjs-24-bin
+	sudo apt-get install libmozjs-24-bin
 ~~~~~~
 
 que instalará SpiderMonkey en el fichero ejecutable `js24`.
