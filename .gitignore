@@ -7,3 +7,5 @@ txt/pdf
 code/highlight.css
 intro.html
 .idea
+code/node_modules/
+code-es6/node_modules/
