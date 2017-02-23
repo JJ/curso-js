@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 var fs = require('fs');
-fs.readFile('quiniela.datos', 'utf8', 
+fs.readFile('quiniela.datos', 'utf8',
 	    function(err,datos) {
 		if (err) {
 		    return console.log(err);
