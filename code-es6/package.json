@@ -3,6 +3,8 @@
   "version": "0.0.1",
   "dependencies": {
     "express": "^4.14.1",
-    "http": "0.0.0"
+    "fs": "0.0.1-security",
+    "http": "0.0.0",
+    "https": "^1.0.0"
   }
 }
