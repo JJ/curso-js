@@ -166,11 +166,11 @@ Además, este programa es bastante característico de las
 características únicas de JS y se puede ejecutar sin variación en
 *node*
 ![órdenes ejecutadas en node](imagenes/node-consola.png)
-en *gjs* que se instala en tu sistema si usas Gnome:
+o en *gjs* que se instala en tu sistema si usas Gnome:
 ![órdenes ejecutadas en gjs](imagenes/gjs-consola.png)
-en Chromium (la versión libre de Chrome, tendría que ser similar en
-él)
-![órdenes ejecutadas en gjs](imagenes/chromium-consola.png)
+También en Chromium (la versión libre de Chrome, tendría que ser
+similar en ese navegador)
+![órdenes ejecutadas en Chromium](imagenes/chromium-consola.png)
 y en el navegador libre Firefox
 ![órdenes ejecutadas en Firefox](imagenes/firefox-consola.png).
 
@@ -186,8 +186,10 @@ valor estático al tipo de la variable. `var zipi` es todo lo que se
 necesita para usar la variable `zipi`, aunque si aparece `zipi` por
 primera vez en la orden `zipi=0` nadie va a protestar.
 
-La asignación equivale a una sentencia `if-then-else`. Pregunta por el
-tipo (`typeof`) la variable `console`. También aquí podemos ver que
+La asignación usando `?:`, que se suele llamar *operador ternario*,
+equivale a una sentencia `if-then-else`. Para empezar, el primer
+tercio pregunta por el
+tipo (`typeof`) de la variable `console`. También aquí podemos ver que
 los paréntesis son opcionales: `typeof console` es igual que
 `typeof(console)`. Si no existe `console`, su tipo será `undefined`,
 `console` es un objeto que permite acceder a escribir cosas en el
@@ -227,7 +229,8 @@ línea.
 ## Primer programa en JavaScript
 
 Tras ver cómo funcionan los intérpretes y tenerlos a mano por si
-hubiera que probar alguna orden aislada, vamos a hacer un programa
+hubiera que probar alguna orden aislada, así como convencernos de que
+JS es un lenguaje funcional, vamos a hacer un programa
 completo, el clásico. Nuestro primer programa tiene dos versiones, al
 menos. Empecemos por una de ellas
 ~~~~~~
@@ -245,6 +248,9 @@ resto del fichero.
 >Si tienes instalado `node` `/usr/bin/js` será el intérprete de
 >node. Si no lo tienes instalado, puede ser algún otro intérprete,
 >como rhino o SpiderMonkey (en versiones más antiguas de Linux). 
+>También puedes usar la variable `do_print` como antes, con la
+>salvedad de que la mayoría de los intérpretes van a entender este
+>programa tal como está. 
 
 Este programa producirá (siempre que lo hagamos ejecutable con
 `chmod +x hola.js` previamente):
@@ -299,6 +305,7 @@ resultado algo así:
 
 En navegadores modernos la consola también completará automáticamente
 las órdenes mostrándote todas las opciones posibles.
+
 >En Chromium y Chrome se puede escribir directamente sobre la ventana,
 >no en la línea inferior *de interacción* como en Firefox.
 
