@@ -15,7 +15,7 @@ a objetos, solo tiene los objetos, e incluso estos son un tanto
 peculiares.
 
 >Esto está cambiando en las últimas versiones del lenguaje, empezando
->por ES6
+>por ES6.
 
 Por eso no es exactamente *dirigido a objetos* u *orientado
 a objetos*. Las características las veremos en el siguiente
@@ -342,30 +342,30 @@ while ((line = br.readLine()) != null) {
  
     switch (resultado[2]) {
     case '1':
-	if ( resultados[resultado[0]] ) {
+	  if ( resultados[resultado[0]] ) {
 	    resultados[resultado[0]]+=3;
-	} else {
+	  } else {
 	    resultados[resultado[0]]=3;
-	}
-	break;
+	  }
+	  break;
     case 'x':
-	if ( resultados[resultado[0]] ) {
+	  if ( resultados[resultado[0]] ) {
 	    resultados[resultado[0]]+=1;
-	} else {
+	  } else {
 	    resultados[resultado[0]]=1;
-	}
-	if ( resultados[resultado[1]] ) {
+	  }
+	  if ( resultados[resultado[1]] ) {
 	    resultados[resultado[1]]+=1;
-	} else {
+	  } else {
 	    resultados[resultado[1]]=1;
-	}
+	  }
 	break;
     default:
-	if ( resultados[resultado[1]] ) {
+	  if ( resultados[resultado[1]] ) {
 	    resultados[resultado[1]]+=3;
-	} else {
+	  } else {
 	    resultados[resultado[1]]=3;
-	}
+	  }
 	break
     }
 }
@@ -571,15 +571,15 @@ for ( var i = 0; i < quinielas.length; i ++ ) {
       var visitante = quinielas[i][j].visitante;
       var resultado = quinielas[i][j].resultado;
       switch (resultado) {
-      case '1':
-	  resultados[local]+=3;
-	  break;
+        case '1':
+	    resultados[local]+=3;
+	    break;
       case 'x':
-	  resultados[local]+=1;
-	  resultados[visitante]+=1;
-	  break;
+	    resultados[local]+=1;
+	    resultados[visitante]+=1;
+	    break;
       default:
-	  resultados[visitante]+=3;
+	    resultados[visitante]+=3;
       }
     }
 }
