@@ -52,10 +52,10 @@ de definirlo, mediante la orden `new`, que, como en Java y en C++, crea
 un nuevo objeto llamando al *constructor* del mismo. En este caso le
 pasamos directamente los elementos que constituyen el vector o *array*,
 pero podríamos haberle pasado el tamaño de esta forma:
-`var myArray = new Array(33);` Los objetos así creados son
+`var my_array = new Array(33);` Los objetos así creados son
 objetos de pleno derecho, y se puede acceder a sus propiedades con
 métodos usando también una sintaxis clásica: el puntito `.` tras el
-nombre de la variable. Por ejemplo, `myArray.length` devolvería el
+nombre de la variable. Por ejemplo, `my_array.length` devolvería el
 tamaño de la matriz
 
 Pero como lo que se trata en este programa es de definir nosotros una
@@ -107,16 +107,16 @@ function Partido(local,visitante) {
   this.local = local;
   this.visitante=visitante;
   this.resultado=null;
-  this.setResultado = setResultado;
-  this.toString = toString;
+  this.set_resultado = set_resultado;
+  this.to_string = to_string;
 }
 
-function setResultado( esteResultado ) {
+function set_resultado( esteResultado ) {
   if ( esteResultado == '1' || esteResultado=='x' || esteResultado=='2' ) 
     this.resultado = esteResultado;
 }
 
-function toString() {
+function to_string() {
     return "Partido " + i + ": " + quiniela[i].local + " - " + quiniela[i].visitante + " = "+ this.resultado;
 }
 ~~~
@@ -174,16 +174,16 @@ var equipos= new Array('Madrid', 'Barça', 'Atleti', 'Geta', 'Betis', 'Depor', '
 
 function jornada( estosEquipos ) {
 
-  var equiposAqui = new Array;
-  equiposAqui = equiposAqui.concat(estosEquipos);
-  var midsize = equiposAqui.length/2;
+  var equipos_aqui = new Array;
+  equipos_aqui = equipos_aqui.concat(estosEquipos);
+  var midsize = equipos_aqui.length/2;
   var quiniela = new Array( midsize );
   var unox2 = new Array( '1','x','2');
   for ( var i=0; i < midsize ; i++ ) {
-    var equipo1 = equiposAqui.splice(Math.floor( equiposAqui.length*Math.random()) , 1);
-    var equipo2 = equiposAqui.splice(Math.floor( equiposAqui.length*Math.random()), 1);
+    var equipo1 = equipos_aqui.splice(Math.floor( equipos_aqui.length*Math.random()) , 1);
+    var equipo2 = equipos_aqui.splice(Math.floor( equipos_aqui.length*Math.random()), 1);
     quiniela[i] = new Partido( equipo1, equipo2 );
-    quiniela[i].setResultado( unox2[Math.floor( 3*Math.random()) ]);
+    quiniela[i].set_resultado( unox2[Math.floor( 3*Math.random()) ]);
   }
   return quiniela;
 }
@@ -195,7 +195,7 @@ de resultados, que se guardan en el array `quinielas`. Hemos sacado,
 además, la definición de la clase `Partido` a un fichero externo, que
 cargamos con `load`. Por otro lado, como a la función `jornada` se le
 pasa una referencia al vector con los equipos, tenemos que copiarlo a
-una variable local, definiéndola (`equiposAqui`), y concatenándole
+una variable local, definiéndola (`equipos_aqui`), y concatenándole
 (`concat`) el vector que se le pasa por valor, que es igual que
 copiarlo, pero seo hace en una sola orden.
 
@@ -496,22 +496,22 @@ function Nuevo_partido(local,visitante, resultado) {
     this.local = local;
     this.visitante=visitante;
     this.resultado=resultado;
-    this.setResultado = setResultado;
-    this.toString = toString;
+    this.set_resultado = set_resultado;
+    this.to_string = to_string;
     this.set_to_string = set_to_string;
-    this.impresor = _toString;
+    this.impresor = _to_string;
 }
 
-function setResultado( esteResultado ) {
+function set_resultado( esteResultado ) {
     if ( esteResultado == '1' || esteResultado=='x' || esteResultado=='2' ) 
 	this.resultado = esteResultado;
 }
 
-function toString() {
+function to_string() {
     return this.impresor(this.local, this.visitante, this.resultado);
 }
 
-function _toString( local, visitante ) {
+function _to_string( local, visitante ) {
     return ": " + this.local + " - " + this.visitante + " = "+ this.resultado;
 }
 
@@ -536,20 +536,20 @@ load('Nuevo_partido.js');
 var equipos= new Array('Madrid', 'Barça', 'Atleti', 'Geta', 'Betis', 'Depor', 'Sevilla', 'Graná');
 
 function jornada( estosEquipos ) {
-    var equiposAqui = new Array;
+    var equipos_aqui = new Array;
     var imprime = function( local, visitante, resultado ) { 
 	print("Imprimiendo \n");
 	return  "- " + local + " vs. " + visitante + " resultado  "+ resultado;
     };
-    equiposAqui = equiposAqui.concat(estosEquipos);
-    var midsize = equiposAqui.length/2;
+    equipos_aqui = equipos_aqui.concat(estosEquipos);
+    var midsize = equipos_aqui.length/2;
     var quiniela = new Array( midsize );
     var unox2 = new Array( '1','x','2');
     for ( var i=0; i < midsize ; i++ ) {
-	var equipo1 = equiposAqui.splice(Math.floor( equiposAqui.length*Math.random()) , 1);
-	var equipo2 = equiposAqui.splice(Math.floor( equiposAqui.length*Math.random()), 1);
+	var equipo1 = equipos_aqui.splice(Math.floor( equipos_aqui.length*Math.random()) , 1);
+	var equipo2 = equipos_aqui.splice(Math.floor( equipos_aqui.length*Math.random()), 1);
 	quiniela[i] = new Nuevo_partido( equipo1, equipo2 );
-	quiniela[i].setResultado( unox2[Math.floor( 3*Math.random()) ]);
+	quiniela[i].set_resultado( unox2[Math.floor( 3*Math.random()) ]);
 	quiniela[i].set_to_string( imprime );
     }
     return quiniela;
@@ -630,22 +630,22 @@ exports.Un_Partido = function (local,visitante,resultado) {
     this.local = local;
     this.visitante=visitante;
     this.resultado=resultado;
-    this.setResultado = setResultado;
-    this.toString = toString;
+    this.set_resultado = set_resultado;
+    this.to_string = to_string;
     this.set_to_string = set_to_string;
-    this.impresor = _toString;
+    this.impresor = _to_string;
 }
 
-function setResultado( esteResultado ) {
+function set_resultado( esteResultado ) {
     if ( esteResultado == '1' || esteResultado=='x' || esteResultado=='2' ) 
 	this.resultado = esteResultado;
 }
 
-function toString() {
+function to_string() {
     return this.impresor(this.local, this.visitante, this.resultado);
 }
 
-function _toString( local, visitante, resultado ) {
+function _to_string( local, visitante, resultado ) {
     return ": " + local + " - " + visitante + " = " + resultado;
 }
 
@@ -664,7 +664,7 @@ que hacer un `eval` sobre lo cargado, ahora basta con ([programa usa\_partido.js
 ~~~javascript
 var un_partido = require('./Un_Partido.js');
 var este_partido = new un_partido.Un_Partido( 'este','otro','1');
-console.log('Resultado ' + este_partido.toString());
+console.log('Resultado ' + este_partido.to_string());
 ~~~
 
 Este módulo ya se comporta como el resto de los módulos de Node,

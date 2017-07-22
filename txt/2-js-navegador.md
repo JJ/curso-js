@@ -147,9 +147,9 @@ var h2 = document.getElementsByTagName('h2');
 var a_nodes = new Array;
 var anchors = new Array;
 for ( var secs = 0; secs < h2.length; secs ++ ) {
-  var thisA = h2[secs].getElementsByTagName('a');
-  a_nodes[secs] = thisA[0];
-  anchors[secs] = thisA[0].getAttribute('name');
+  var this_a = h2[secs].getElementsByTagName('a');
+  a_nodes[secs] = this_a[0];
+  anchors[secs] = this_a[0].getAttribute('name');
   GM_log('Anchor ' + secs + " " + anchors[secs]);
 }
 
@@ -157,19 +157,19 @@ for ( var secs = 0; secs < h2.length; secs ++ ) {
   var span = document.createElement('span');
   span.setAttribute('style','background:lightblue');
   if ( secs > 0 ) {
-    var ahref = document.createElement('a');
-    ahref.setAttribute('href','#'+anchors[secs-1]);
+    var a_href = document.createElement('a');
+    a_href.setAttribute('href','#'+anchors[secs-1]);
     var txt=document.createTextNode('^');
-    ahref.appendChild(txt);
-    span.appendChild(ahref);
+    a_href.appendChild(txt);
+    span.appendChild(a_href);
   }
   if ( secs < h2.length -1  ) {
     span.appendChild(document.createTextNode(' | '));
-    var ahref = document.createElement('a');
-    ahref.setAttribute('href','#'+anchors[secs+1]);
+    var a_href = document.createElement('a');
+    a_href.setAttribute('href','#'+anchors[secs+1]);
     var txt=document.createTextNode('v');
-    ahref.appendChild(txt);
-    span.appendChild(ahref);
+    a_href.appendChild(txt);
+    span.appendChild(a_href);
   }
   a_nodes[secs].parentNode.insertBefore(span,a_nodes[secs]);
 }
@@ -244,9 +244,9 @@ no crear elementos nuevos en el interfaz). Por ejemplo, se hace así en
 <title>Probando window.open</title>
 <script type='application/javascript'>
 var contenido = "<html><head><title>Mi ventanita</title></head><body><h1>Mi ventanita</h1></body></html";
-newwindow=window.open();
-newdocument=newwindow.document;
-newdocument.write(contenido);
+new_window=window.open();
+new_document=new_window.document;
+new_document.write(contenido);
 </script>
 </head>
 <body>
