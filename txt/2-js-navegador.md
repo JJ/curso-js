@@ -1,7 +1,7 @@
-#JavaScript en el navegador y JQuery 
+# JavaScript en el navegador y JQuery 
 
 
-##Objetivos de este capítulo
+## Objetivos de este capítulo
 
 -   Trabajar con JavaScript en el navegador
 -   Usar librerías populares de JavaScript en ese contexto
@@ -222,7 +222,7 @@ producción; pero si abres la consola de JS verás los mensajes que ha
 usado.
 
 Para usarlo con TamperMonkey, hay que marcar [las opciones de compatibilidad con GreaseMonkey y Firefox](http://tampermonkey.net/#features), aunque también trata de
-detectar las opciones necesarias automáticamente.
+detectar las opciones necesarias automáticamente. 
 
 ## Trabajando con otras ventanas
 

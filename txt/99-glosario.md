@@ -23,6 +23,15 @@ estándar. El servidor web ejecuta el programa, definiendo variables de
 entorno y proporcionándole la entrada, y recibe la salida que envía al
 quien ha solicitado el URL.
 
+## DOM
+
+*Document object model*, o modelo de objetos de un documento. Es la
+interpretación de la descripción de una página web usando HTML, un
+árbol en el que están todos los elementos de dicha página. Cuando se
+trabaja en JavaScript, los cambios en la estructura y contenido de la
+página web trabajarán sobre este DOM, y se trasladarán a una versión
+visible por parte del navegador. 
+
 ## HTTP 
 
 [HTTP o Hypertext Transfer Protocol, protocolo de transferencia hipertexto](http://es.wikipedia.org/wiki/Http), es el protocolo usado en
