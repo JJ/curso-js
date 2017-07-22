@@ -47,11 +47,12 @@ ejemplo, una aplicación node.js o Django.
 ## REST 
 
 [REST](http://es.wikipedia.org/wiki/Representational_State_Transfer)
-significa transferencia de estado que representa algo (por no traducir
+significa transferencia de estado que representa algo (por no
+traducirlo como
 representacional, que suena fatal). Es una convención para el diseño de
 APIs que consiste en usar los verbos del protocolo HTTP
-y su significado estricto para llevar a cabo todas las operaciones de un
-programa.
+y su significado estricto, así como sus códigos de estado, para llevar
+a cabo todas las operaciones entre un cliente y un servidor. 
 
 ## RESTful 
 
