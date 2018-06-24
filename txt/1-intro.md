@@ -116,8 +116,7 @@ correctamente en `js` o `rhino`.
 > tendrás que instalar todos los binarios de KDE con `sudo apt-get install kdelibs-bin`.
 
 En cuanto a los navegadores, puede que haga falta activar JavaScript
-para que lo entiendan. Por ejemplo, en Firefox hay que activarlo usando
-Edit → Preferencias → Contenido → Activar JavaScript. Normalmente
+para que lo entiendan. Por ejemplo, en Firefox hay que activarlo escribiendo `about:config` en la barra de direcciones y activar la opción `javascript.enabled`. Normalmente
 está activado por omisión. Por otro lado, veremos ejemplos
 principalmente de programas que se pueden usar desde el intérprete, y
 merece la pena instalarse uno.
