@@ -531,7 +531,7 @@ antes. El también clásico `return` devuelve un valor.
 El ámbito de las variables es el bloque donde aparecen o se declaran,
 pero hay que tener en cuenta que, a efectos de JS, una página web es un
 *programa*. Se pueden declarar variables en la cabecera del documento
-HTML, y estarán accesibles en cualquier otro sitio, siempre que esté ms
+HTML, y estarán accesibles en cualquier otro sitio, siempre que esté más
 adelante en el documento. También habrá que tener en cuenta, en caso de
 que esté incluido en una página web, que aunque la declaración de una
 subrutina afecte a todo el programa, puede que esa parte de la página no
